@@ -1,0 +1,50 @@
+
+```{r}
+# Prepare data for bar chart
+# Number of cases per year
+cases_year <- cases_allnephu %>% 
+  f_barchart_dataprep_year(condition_name = conditions_list[i])
+```
+
+
+```{r}
+# Create and format bar chart
+chart_year <- cases_year %>% 
+  f_barchart_format_year(ymax       = chart_ymax[i],
+                         yexpand    = chart_yexpand[i],
+                         charttitle = charttitle_list[i])
+```
+
+
+```{r}
+# Prepare data for ribbon chart
+# Number of cases per month
+results_count <- cases_allnephu %>%
+  dplyr::filter(condition_label == conditions_list[i]) %>%
+  #
+  f_ribbon_dataprep_count(variable = NULL)
+
+# Mean and upper/lower limits for each month
+results_mean <- results_count %>% 
+  f_ribbon_dataprep_mean_lowvolume(variable = NULL)
+
+# Join count and mean data
+results_toplot <- results_count %>%
+  dplyr::left_join(results_mean, by = "event_month") %>%
+  #
+  dplyr::filter(event_yearmonth >= ribbon_start)
+```
+
+
+```{r}
+# Create and format ribbon chart
+chart_month <- f_ribbon_format_historical_yes(results_toplot,
+                                              charttitle = charttitle_list[i])
+```
+
+
+```{r}
+# Display charts side-by-side
+chart_year + chart_month
+```
+

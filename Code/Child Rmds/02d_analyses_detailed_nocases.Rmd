@@ -1,0 +1,4 @@
+
+### `r conditions_list[i]`
+
+There have been no cases of `r conditionstext_list[i]` notified in NEPHU residents between `r format(ribbon_start, format = "%B %Y")` and `r format(epimonth_current, format = "%B %Y")`.

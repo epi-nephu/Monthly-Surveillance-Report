@@ -1,0 +1,1013 @@
+---
+title: 'NEPHU Monthly Surveillance Report - Internal - September 2025'
+output: 
+  html_document: 
+    code_folding: none
+    toc: true
+    toc_depth: 2
+    toc_float: true
+    self_contained: true
+knit: (function(input, ...) {
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2025 09 Internal", output_dir = "../Reports") })
+  
+---
+
+```{css, echo = FALSE}
+/* */ 
+.main-container {
+    max-width: 100% !important;
+    margin: auto;
+}
+
+h1.title {
+  font-weight: bold;
+  font-size: 20px;
+  color: #191d43;
+}
+
+h1 {
+  font-weight: bold;
+  font-size: 20px;
+  color: #5bc788;
+}
+
+h2 {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5bc788;
+}
+
+h3 {
+  font-weight: bold;
+  font-size: 16px;
+  color: #5bc788;
+}
+
+body {
+  font-size: 14px;
+}
+
+blockquote {
+  font-style: italic;
+  font-size: 14px;
+}
+```
+
+
+```{r, echo = FALSE, message = FALSE}
+#
+knitr::opts_chunk$set(echo    = FALSE, 
+                      warning = FALSE, 
+                      message = FALSE,
+                      #
+                      fig.width  = 12,
+                      fig.height = 4)
+
+options(width          = 1500,
+        knitr.kable.NA = '--')
+
+here::i_am("Code/02_monthly_surveillance_report_internal.Rmd")
+```
+
+
+```{r, message = FALSE}
+#
+source(paste0(here::here(), "/Code", "/01_data_prep_monthly.R"))
+
+source(paste0(here::here(), "/Code", "/Functions", "/f_create_table.R"))
+source(paste0(here::here(), "/Code", "/Functions", "/f_create_bar.R"))
+source(paste0(here::here(), "/Code", "/Functions", "/f_create_ribbon.R"))
+source(paste0(here::here(), "/Code", "/Functions", "/f_create_pyramid.R"))
+source(paste0(here::here(), "/Code", "/Functions", "/f_create_map.R"))
+```
+
+# Enteric Diseases
+
+```{r}
+# Reporting group
+conditions <- "Enteric Diseases"
+```
+
+
+```{r, child = here::here("Code", "Child Rmds", "02a_analyses_dataprep.Rmd")}
+
+
+```
+
+## Summary table
+
+```{r, child = here::here("Code", "Child Rmds", "02b_analyses_table.Rmd")}
+
+
+```
+
+***
+
+## Summary charts
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+***
+
+## Detailed analyses {.tabset .tabset-pills}
+
+### >
+
+Click on the relevant tab for detailed age, sex, and LGA analyses
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nocases.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+## {.unlisted .unnumbered}
+
+***
+
+# Respiratory Diseases (excluding COVID)
+
+```{r}
+# Reporting group
+conditions <- "Respiratory Diseases"
+```
+
+
+```{r, child = here::here("Code", "Child Rmds", "02a_analyses_dataprep.Rmd")}
+
+
+```
+
+## Summary table
+
+```{r, child = here::here("Code", "Child Rmds", "02b_analyses_table.Rmd")}
+
+
+```
+
+***
+
+## Summary charts
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+***
+
+## Detailed analyses {.tabset .tabset-pills}
+
+### >
+
+Click on the relevant tab for detailed age, sex, and LGA analyses
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nocases.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+## {.unlisted .unnumbered}
+
+***
+
+# Bloodborne Viruses
+
+```{r}
+# Reporting group
+conditions <- "Bloodborne Viruses"
+```
+
+
+```{r, child = here::here("Code", "Child Rmds", "02a_analyses_dataprep.Rmd")}
+
+
+```
+
+## Summary table
+
+```{r, child = here::here("Code", "Child Rmds", "02b_analyses_table.Rmd")}
+
+
+```
+
+***
+
+## Summary charts
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+***
+
+## Detailed analyses {.tabset .tabset-pills}
+
+### >
+
+Click on the relevant tab for detailed age, sex, and LGA analyses
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nocases.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+## {.unlisted .unnumbered}
+
+***
+
+# Sexually Transmissible Infections
+
+```{r}
+# Reporting group
+conditions <- "Sexually Transmissible Infections"
+```
+
+
+```{r, child = here::here("Code", "Child Rmds", "02a_analyses_dataprep.Rmd")}
+
+
+```
+
+## Summary table
+
+```{r, child = here::here("Code", "Child Rmds", "02b_analyses_table.Rmd")}
+
+
+```
+
+***
+
+## Summary charts
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+***
+
+## Detailed analyses {.tabset .tabset-pills}
+
+### >
+
+Click on the relevant tab for detailed age, sex, and LGA analyses
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nocases.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+## {.unlisted .unnumbered}
+
+***
+
+# Vaccine Preventable Diseases
+
+```{r}
+# Reporting group
+conditions <- "Vaccine Preventable Diseases"
+```
+
+
+```{r, child = here::here("Code", "Child Rmds", "02a_analyses_dataprep.Rmd")}
+
+
+```
+
+## Summary table
+
+```{r, child = here::here("Code", "Child Rmds", "02b_analyses_table.Rmd")}
+
+
+```
+
+***
+
+## Summary charts
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+***
+
+## Detailed analyses {.tabset .tabset-pills}
+
+### >
+
+Click on the relevant tab for detailed age, sex, and LGA analyses
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nocases.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+## {.unlisted .unnumbered}
+
+***
+
+# Vectorborne Diseases
+
+```{r}
+# Reporting group
+conditions <- "Vectorborne Diseases"
+```
+
+
+```{r, child = here::here("Code", "Child Rmds", "02a_analyses_dataprep.Rmd")}
+
+
+```
+
+## Summary table
+
+```{r, child = here::here("Code", "Child Rmds", "02b_analyses_table.Rmd")}
+
+
+```
+
+***
+
+## Summary charts
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+***
+
+## Detailed analyses {.tabset .tabset-pills}
+
+### >
+
+Click on the relevant tab for detailed age, sex, and LGA analyses
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nocases.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+## {.unlisted .unnumbered}
+
+***
+
+# Zoonotic Diseases
+
+```{r}
+# Reporting group
+conditions <- "Zoonotic Diseases"
+```
+
+
+```{r, child = here::here("Code", "Child Rmds", "02a_analyses_dataprep.Rmd")}
+
+
+```
+
+## Summary table
+
+```{r, child = here::here("Code", "Child Rmds", "02b_analyses_table.Rmd")}
+
+
+```
+
+***
+
+## Summary charts
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+***
+
+## Detailed analyses {.tabset .tabset-pills}
+
+### >
+
+Click on the relevant tab for detailed age, sex, and LGA analyses
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nocases.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+## {.unlisted .unnumbered}
+
+***
+
+# Antimicrobial Resistant Organisms
+
+```{r}
+# Reporting group
+conditions <- "Antimicrobial Resistant Organisms"
+```
+
+
+```{r, child = here::here("Code", "Child Rmds", "02a_analyses_dataprep.Rmd")}
+
+
+```
+
+## Summary table
+
+```{r, child = here::here("Code", "Child Rmds", "02b_analyses_table.Rmd")}
+
+
+```
+
+***
+
+## Summary charts
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+***
+
+## Detailed analyses {.tabset .tabset-pills}
+
+### >
+
+Click on the relevant tab for detailed age, sex, and LGA analyses
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nocases.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+## {.unlisted .unnumbered}
+
+***
+
+# Other Conditions
+
+```{r}
+# Reporting group
+conditions <- "Other Conditions"
+```
+
+
+```{r, child = here::here("Code", "Child Rmds", "02a_analyses_dataprep.Rmd")}
+
+
+```
+
+## Summary table
+
+```{r, child = here::here("Code", "Child Rmds", "02b_analyses_table.Rmd")}
+
+
+```
+
+***
+
+## Summary charts
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+***
+
+## Detailed analyses {.tabset .tabset-pills}
+
+### >
+
+Click on the relevant tab for detailed age, sex, and LGA analyses
+
+```{r, echo = FALSE, results = 'asis'}
+#
+results <- list()
+
+for(i in seq_along(conditions_list)) {
+  
+  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+
+  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  } else {
+    
+    results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nocases.Rmd"), 
+                                      quiet = TRUE, envir = environment())
+    
+  }
+  
+}
+
+cat(unlist(results), sep = '\n')
+```
+
+## {.unlisted .unnumbered}
+
+***
+
+# Technical Notes
+
+* The North Eastern Public Health Unit (NEPHU) was established in 2021 and is one of nine local public health units (LPHUs) across metropolitan and regional Victoria. Led and coordinated by Austin Health, NEPHU is funded by the Victorian Government and works closely with the Victorian Department of Health to protect and promote the health of our communities. 
+
+* NEPHU serves a population of approximately 1.8 million people across 12 local government areas: the Cities of Banyule, Boroondara, Darebin, Hume (excluding Melbourne Airport), Knox, Manningham, Maroondah, Whitehorse, Whittlesea, Yarra, Yarra Ranges Shire, and Nillumbik Shire. 
+
+* Counts and rates are based on the date that the Victorian Department of Health was first notified of a case by a laboratory or medical practitioner and includes all data entered into the Public Health Event Surveillance System (PHESS) as of `r format(as.Date(extract_date), format = "%d %B %Y")`. Notifications are received by the central team at the Victorian Department of Health and tasked to the relevant LPHU for follow-up.
+
+* Counts and rates are likely to be an underestimate of true disease incidence, are accurate only at the time the data were extracted from PHESS, and are subject to change due to reporting delays and exclusions following further case investigation.
+
+* A list of conditions notifiable in Victoria under the *Public Health and Wellbeing Act 2008* can be found on the [Victorian Department of Health website](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms).
+
+    * Anaphylaxis, elevated blood lead, and tuberculosis are excluded as these conditions are managed centrally by the Victorian Department of Health.
+
+    * COVID is currently excluded due to technical and data limitations, however there are plans to include COVID in future reports.
+    
+    * Potential food-borne and water-borne illness is currently excluded due to data limitations, however the feasibility of reporting on viral gastroenteritis outbreaks is being investigated for future reports.
+
+* Case definitions for each notifiable condition included in this report can be found on the [Communicable Diseases Network Australia website](https://www.health.gov.au/resources/collections/cdna-surveillance-case-definitions).
+
+* Monthly and year-to-date notifications are compared to a historical three year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+
+    * A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the three-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause variation.
+    
+    * Sporadic notifications where the condition has not been notified in NEPHU for at least 12 months are noted.
+
+* For high-volume conditions (`r high_volume` or more cases per year during the historical three year period) a [modified historical limits method](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4313630/) is used to compare the count for each month with the rolling mean of the counts for each of nine baseline periods corresponding to the same month, one prior month, and one subsequent month during the previous three years.
+    
+    * The baseline periods for `r reporting_month` are: `r format(hlm_baseline[9], format = "%B %Y")`, `r format(hlm_baseline[8], format = "%B %Y")`, `r format(hlm_baseline[7], format = "%B %Y")`, `r format(hlm_baseline[6], format = "%B %Y")`, `r format(hlm_baseline[5], format = "%B %Y")`, `r format(hlm_baseline[4], format = "%B %Y")`, `r format(hlm_baseline[3], format = "%B %Y")`, `r format(hlm_baseline[2], format = "%B %Y")`, and `r format(hlm_baseline[1], format = "%B %Y")`.
+
+* For low-volume conditions (fewer than `r high_volume` cases per year during the historical three year period the count for each month is compared with the mean monthly count for the full historical three year period.
+
+    * For `r reporting_month` the full historical period is `r format(epimonth_current - months(36), format = "%B %Y")` to `r format(epimonth_current - months(1), format = "%B %Y")`.
+
+* For conditions where complete historical data are not available (notifiable for less than three years) the pattern of notifications over time since the condition was made notifiable is assessed.
+    
+* Changes in the number of notifications per month over time are also assessed using a series of [control charts](https://cran.r-project.org/web/packages/qicharts2/vignettes/qicharts2.html) to detect potential special cause (non-random) variation. In addition to the overall number of notifications, subgroup analyses by sex, age group, and local government area of residence are used to identify potential high risk groups.
+
+* Additional notes on interpreting the summary tables:
+
+    * The trend columns indicate whether the monthly or YTD counts were higher (&#x2191;) or lower (&#x2193;) than in the previous month or year.
+
+    * Monthly and YTD counts are compared to a historical three year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+
+    * The mean YTD column shows the average number of cases reported for the year to date across the past three years.
+
+    * The comparison column indicates whether the monthly rate in NEPHU was higher (&#x2191;) or lower (&#x2193;) than for Victoria overall.
+
+    * Conditions highlighted with <span style="color: red;">red</span> text indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
+
+    * Conditions with *italic* text have not been notifiable for at least three years, and therefore do not have sufficient historical data available for comparison.
+
+<br/>
+<br/>
+<br/>
+
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>

@@ -1,0 +1,151 @@
+
+### `r conditions_list[i]`
+
+```{r}
+# Create and format age and sex pyramid plot
+chart_agesex <- cases_allnephu %>%
+  dplyr::filter(condition_label == conditions_list[i]) %>%
+  dplyr::filter(event_yearmonth > epimonth_current - months(36)) %>% 
+  #
+  dplyr::mutate(sex = factor(sex,
+                             levels = c("Male",
+                                        "Female"))) %>% 
+  #
+  f_pyramid_format(charttitle = charttitle_list[i])
+```
+
+
+```{r}
+# Prepare data for notification rate map
+cases_rate <- cases_allnephu %>%
+  dplyr::filter(condition_label == conditions_list[i]) %>%
+  #
+  f_map_dataprep(data_reference = reference_population)
+```
+
+
+```{r}
+# Create and format map
+chart_map <- nephu_lga.sf %>%
+  dplyr::left_join(cases_rate, by = c("lga" = "local_government_area")) %>% 
+  #
+  f_map_format(data_shape = nephu_lga.sf,
+               charttitle = charttitle_list[i])
+```
+
+
+```{r}
+# Display charts side-by-side
+# Don't display LGA charts for AMR conditions
+if (conditions == "Antimicrobial Resistant Organisms") {
+  
+  chart_agesex + plot_spacer() 
+  
+  } else {
+    
+  chart_agesex + chart_map
+
+}
+```
+
+
+```{r, fig.width = 8}
+# Ribbon charts: cases per month by sex
+# Prepare data for ribbon chart
+# Number of cases per month
+results_count <- cases_allnephu %>%
+  dplyr::filter(condition_label == conditions_list[i]) %>%
+  #
+  dplyr::mutate(sex = factor(sex,
+                             levels = c("Male",
+                                        "Female"))) %>%
+  #
+  dplyr::filter(!is.na(sex)) %>%
+  #
+  f_ribbon_dataprep_count(variable = sex)
+
+# Mean and upper/lower limits for each month
+results_mean <- results_count %>% 
+  f_ribbon_dataprep_mean_lowvolume(variable = sex)
+
+# Join count and mean data
+results_toplot <- results_count %>%
+  dplyr::left_join(results_mean, by = c("sex", "event_month")) %>%
+  #
+  dplyr::filter(event_yearmonth >= ribbon_start)
+
+# Create and format ribbon chart
+f_ribbon_format_historical_yes(results_toplot,
+                               charttitle = charttitle_list[i]) +
+  #
+  facet_wrap(~sex,
+             axes = "all")
+```
+
+
+```{r, fig.height = 6}
+# Ribbon charts: cases per month by age group
+# Prepare data for ribbon chart
+# Number of cases per month
+results_count <- cases_allnephu %>%
+  dplyr::filter(condition_label == conditions_list[i]) %>%
+  #
+  dplyr::filter(!is.na(age_group)) %>%
+  #
+  f_ribbon_dataprep_count(variable = age_group)
+
+# Mean and upper/lower limits for each month
+results_mean <- results_count %>% 
+  f_ribbon_dataprep_mean_lowvolume(variable = age_group)
+
+# Join count and mean data
+results_toplot <- results_count %>%
+  dplyr::left_join(results_mean, by = c("age_group" ,"event_month")) %>%
+  #
+  dplyr::filter(event_yearmonth >= ribbon_start)
+
+# Create and format ribbon chart
+f_ribbon_format_historical_yes(results_toplot,
+                               charttitle = charttitle_list[i]) +
+  #
+  facet_wrap(~age_group,
+             ncol = 3,
+             axes = "all")
+```
+
+
+```{r, fig.height = 12}
+# Ribbon charts: cases per month by LGA
+# Ribbon charts: cases per month by age group
+# Prepare data for ribbon chart
+results_count <- cases_allnephu %>%
+  dplyr::filter(condition_label == conditions_list[i]) %>%
+  #
+  dplyr::filter(!is.na(local_government_area)) %>%
+  #
+  f_ribbon_dataprep_count(variable = local_government_area)
+
+# Mean and upper/lower limits for each month
+results_mean <- results_count %>% 
+  f_ribbon_dataprep_mean_lowvolume(variable = local_government_area)
+
+# Join count and mean data
+results_toplot <- results_count %>%
+  dplyr::left_join(results_mean, by = c("local_government_area", "event_month")) %>%
+  #
+  dplyr::filter(event_yearmonth >= ribbon_start)
+
+# Create and format ribbon chart
+# Don't display LGA charts for AMR conditions
+if (conditions != "Antimicrobial Resistant Organisms") {
+  
+  f_ribbon_format_historical_yes(results_toplot,
+                                 charttitle = charttitle_list[i]) +
+  #
+  facet_wrap(~local_government_area,
+             ncol = 3,
+             axes = "all")
+ 
+}
+```
+

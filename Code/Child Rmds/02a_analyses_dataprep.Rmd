@@ -1,0 +1,172 @@
+
+```{r}
+# Conditions to include
+conditions_list <- reference_conditions %>% 
+  dplyr::filter(condition_label != "COVID") %>% 
+  dplyr::filter(reporting_group == conditions) %>% 
+  dplyr::arrange(condition_label) %>% 
+  dplyr::distinct(condition_label) %>% 
+  pull(condition_label)
+
+# Tidied up formatting for chart titles
+charttitle_list <- reference_conditions %>% 
+  dplyr::filter(condition_label != "COVID") %>% 
+  dplyr::filter(reporting_group == conditions) %>% 
+  dplyr::arrange(condition_label) %>% 
+  dplyr::distinct(chart_label) %>% 
+  pull(chart_label)
+
+# Tidied up formatting for narrative text
+conditionstext_list <- reference_conditions %>% 
+  dplyr::filter(condition_label != "COVID") %>% 
+  dplyr::filter(reporting_group == conditions) %>% 
+  dplyr::arrange(condition_label) %>% 
+  dplyr::distinct(text_label) %>% 
+  pull(text_label)
+
+# Are there three years of historical data available?
+historical_data <- reference_conditions %>% 
+  dplyr::filter(condition_label != "COVID") %>% 
+  dplyr::filter(reporting_group == conditions) %>% 
+  dplyr::arrange(condition_label) %>% 
+  pull(three_years_data)
+```
+
+
+```{r}
+# Total number of cases during ribbon chart lookback period
+total_n_ribbon <- cases_allnephu %>% 
+  dplyr::mutate(condition_label = factor(condition_label,
+                                         levels = conditions_list)) %>%
+  #
+  dplyr::filter(condition_label %in% conditions_list) %>% 
+  #
+  dplyr::group_by(condition_label) %>% 
+  dplyr::summarise(n = n()) %>%
+  dplyr::ungroup() %>% 
+  #
+  tidyr::complete(condition_label,
+                  fill = list(n = 0)) %>% 
+  #
+  pull(n)
+
+# Total number of cases during three-year post-COVID lookback period
+total_n_three_year <- cases_allnephu %>% 
+  dplyr::mutate(condition_label = factor(condition_label,
+                                         levels = conditions_list)) %>%
+  #
+  dplyr::filter(condition_label %in% conditions_list) %>% 
+  dplyr::filter(event_yearmonth > epimonth_current - months(36) & event_yearmonth <= epimonth_current) %>% 
+  #
+  dplyr::group_by(condition_label) %>% 
+  dplyr::summarise(n = n()) %>%
+  dplyr::ungroup() %>% 
+  #
+  tidyr::complete(condition_label,
+                  fill = list(n = 0)) %>% 
+  #
+  pull(n)
+
+# Mean cases per calendar year during three-year post-COVID lookback period
+mean_three_year <- cases_allnephu %>% 
+  dplyr::mutate(condition_label = factor(condition_label,
+                                         levels = conditions_list)) %>%
+  #
+  dplyr::filter(condition_label %in% conditions_list) %>%
+  dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>% 
+  #
+  dplyr::group_by(condition_label) %>% 
+  dplyr::summarise(n = n()) %>%
+  dplyr::ungroup() %>% 
+  #
+  tidyr::complete(condition_label,
+                  fill = list(n = 0)) %>% 
+  #
+  dplyr::mutate(mean = n / 3) %>% 
+  #
+  pull(mean)
+
+# High vs. low volume conditions during three-year post-COVID lookback period
+volume_high <- cases_allnephu %>% 
+  dplyr::mutate(condition_label = factor(condition_label,
+                                         levels = conditions_list)) %>%
+  #
+  dplyr::filter(condition_label %in% conditions_list) %>%
+  dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>% 
+  #
+  dplyr::group_by(condition_label) %>% 
+  dplyr::summarise(n = n()) %>%
+  dplyr::ungroup() %>% 
+  #
+  tidyr::complete(condition_label,
+                  fill = list(n = 0)) %>% 
+  #
+  dplyr::mutate(mean = n / 3,
+                #
+                condition_label = as.character(condition_label)) %>% 
+  #
+  dplyr::filter(mean >= high_volume) %>% 
+  #
+  pull(condition_label)
+
+volume_low <- cases_allnephu %>% 
+  dplyr::mutate(condition_label = factor(condition_label,
+                                         levels = conditions_list)) %>%
+  #
+  dplyr::filter(condition_label %in% conditions_list) %>%
+  dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>% 
+  #
+  dplyr::group_by(condition_label) %>% 
+  dplyr::summarise(n = n()) %>%
+  dplyr::ungroup() %>% 
+  #
+  tidyr::complete(condition_label,
+                  fill = list(n = 0)) %>% 
+  #
+  dplyr::mutate(mean = n / 3,
+                #
+                condition_label = as.character(condition_label)) %>% 
+  #
+  dplyr::filter(mean < high_volume) %>% 
+  #
+  pull(condition_label)
+```
+
+
+```{r}
+# Bar charts: maximum annual counts
+chart_max_n <- cases_allnephu %>% 
+  dplyr::mutate(event_year = factor(event_year,
+                                    levels = c(ytd_ribbon)),
+                #
+                condition_label = factor(condition_label,
+                                         levels = conditions_list)) %>%
+  #
+  dplyr::filter(condition_label %in% conditions_list) %>% 
+  #
+  dplyr::group_by(condition_label, event_year) %>% 
+  dplyr::summarise(n = n()) %>%
+  dplyr::ungroup() %>% 
+  #
+  tidyr::complete(event_year, condition_label,
+                  fill = list(n = 0)) %>% 
+  #
+  dplyr::arrange(condition_label, desc(n)) %>%
+  #
+  dplyr::group_by(condition_label) %>% 
+  dplyr::slice(1) %>% 
+  dplyr::ungroup() %>%  
+  #
+  pull(n)
+
+# Bar charts: y-axis maximum limits
+chart_ymax <- dplyr::case_when(
+  chart_max_n <= 5 ~ 5,
+  TRUE ~ chart_max_n)
+
+# Bar charts: y-axis expansion
+chart_yexpand <- dplyr::case_when(
+  chart_max_n <= 5 ~ 0.5,
+  TRUE ~ chart_max_n * 0.2)
+```
+

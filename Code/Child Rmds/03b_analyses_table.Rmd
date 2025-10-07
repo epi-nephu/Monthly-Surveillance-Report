@@ -1,0 +1,101 @@
+
+```{r}
+# Current and previous month counts
+results_month <- cases_allnephu %>%
+#  dplyr::filter(reporting_group == conditions) %>%
+  dplyr::filter(condition_label %in% conditions_list) %>%
+  #
+  f_table_dataprep_count(conditions = conditions_list)
+
+# Monthly means and SDs for three-year lookback period
+# High volume conditions
+results_mean_high <- cases_allnephu %>% 
+  dplyr::filter(condition_label %in% volume_high) %>%
+  dplyr::filter(event_yearmonth %in% hlm_baseline) %>%
+  #
+  f_table_dataprep_mean_highvolume(conditions = volume_high)
+
+# Low volume conditions
+results_mean_low <- cases_allnephu %>%
+  dplyr::filter(condition_label %in% volume_low) %>%
+  #
+  f_table_dataprep_mean_lowvolume(conditions = volume_low)
+  
+# Bind high volume and low volume data
+results_mean <- results_mean_high %>% 
+  dplyr::bind_rows(results_mean_low) %>%
+  #
+  dplyr::left_join(
+    dplyr::select(reference_conditions, 
+                  condition_label, 
+                  three_years_data),
+    by = "condition_label") %>%
+  #
+  dplyr::mutate(
+    mean_month = dplyr::case_when(three_years_data == "No" ~ NA_integer_,
+                                  TRUE ~ mean_month),
+    #
+    sd_month = dplyr::case_when(three_years_data == "No" ~ NA_integer_,
+                                TRUE ~ sd_month),
+    #
+    limit_sd_upper = mean_month + (sd_month * 2),
+    limit_sd_lower = mean_month - (sd_month * 2))
+
+# Join monthly counts and means
+results_month <- results_month %>% 
+  dplyr::left_join(results_mean, by = "condition_label") %>% 
+  #
+  dplyr::distinct(condition_label, .keep_all = TRUE) %>% 
+  #
+  dplyr::mutate(
+    sig_month = dplyr::case_when(
+      three_years_data == "No" ~ "**",
+      #
+      n_total_baseline > 0 & n_month_current >= limit_sd_upper ~ "Higher than expected",
+      n_total_baseline > 0 & n_month_current <= limit_sd_lower ~ "Lower than expected",
+      #
+      TRUE ~ "Baseline")) %>% 
+  #
+  dplyr::select(condition_label,
+                trend_month,
+                n_month_current,
+                n_month_minus1,
+                mean_month,
+                sig_month)
+```
+
+
+```{r}
+# NEPHU and Victorian rates for current month
+results_rate <- cases_allnephu %>% 
+#  dplyr::filter(reporting_group == conditions) %>%
+  dplyr::filter(condition_label %in% conditions_list) %>%
+  #
+  f_table_dataprep_rate(conditions = conditions_list)
+```
+
+
+```{r}
+# YTD and yearly average counts
+results_ytd <- cases_allnephu %>%
+#  dplyr::filter(reporting_group == conditions) %>%
+  dplyr::filter(condition_label %in% conditions_list) %>%
+  #
+  f_table_dataprep_ytd(conditions = conditions_list)
+```
+
+
+```{r}
+# Create and format summary table
+results_month %>% 
+  dplyr::left_join(results_rate, by = "condition_label") %>% 
+  dplyr::left_join(results_ytd, by = "condition_label") %>%
+  #
+  dplyr::distinct(condition_label, .keep_all = TRUE) %>% 
+  #
+  f_table_format(data_count = results_month) %>% 
+  #
+  kableExtra::pack_rows(conditions, 1, last_row, 
+                        label_row_css = "background-color: #FAF8F6; color: #191D43") 
+```
+
