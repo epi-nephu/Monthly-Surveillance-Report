@@ -2,7 +2,6 @@
 ```{r}
 # Conditions to include
 conditions_list <- reference_conditions %>% 
-  dplyr::filter(condition_label != "COVID") %>% 
   dplyr::filter(reporting_group == conditions) %>% 
   dplyr::arrange(condition_label) %>% 
   dplyr::distinct(condition_label) %>% 
@@ -10,7 +9,6 @@ conditions_list <- reference_conditions %>%
 
 # Tidied up formatting for chart titles
 charttitle_list <- reference_conditions %>% 
-  dplyr::filter(condition_label != "COVID") %>% 
   dplyr::filter(reporting_group == conditions) %>% 
   dplyr::arrange(condition_label) %>% 
   dplyr::distinct(chart_label) %>% 
@@ -18,7 +16,6 @@ charttitle_list <- reference_conditions %>%
 
 # Tidied up formatting for narrative text
 conditionstext_list <- reference_conditions %>% 
-  dplyr::filter(condition_label != "COVID") %>% 
   dplyr::filter(reporting_group == conditions) %>% 
   dplyr::arrange(condition_label) %>% 
   dplyr::distinct(text_label) %>% 
@@ -26,7 +23,6 @@ conditionstext_list <- reference_conditions %>%
 
 # Are there three years of historical data available?
 historical_data <- reference_conditions %>% 
-  dplyr::filter(condition_label != "COVID") %>% 
   dplyr::filter(reporting_group == conditions) %>% 
   dplyr::arrange(condition_label) %>% 
   pull(three_years_data)
