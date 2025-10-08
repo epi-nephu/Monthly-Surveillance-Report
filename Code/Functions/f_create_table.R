@@ -99,7 +99,7 @@ f_table_dataprep_mean_lowvolume <- function(data, conditions) {
 }
 
 # NEPHU and Victorian rates for current month ----------------------------------
-f_table_dataprep_rate <- function(data, conditions) {
+f_table_dataprep_rate <- function(data, data_vic, conditions) {
   
   data_rate <- data %>% 
     dplyr::mutate(condition_label = factor(condition_label,
@@ -114,7 +114,7 @@ f_table_dataprep_rate <- function(data, conditions) {
     #
     dplyr::mutate(rate_nephu = n_nephu / population_nephu_month * 100000) %>% 
     #
-    dplyr::left_join(cases_allvic %>% 
+    dplyr::left_join(data_vic %>% 
                        dplyr::group_by(condition_label) %>% 
                        dplyr::summarise(n_vic = n()) %>% 
                        dplyr::ungroup() %>% 
