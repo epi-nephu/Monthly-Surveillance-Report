@@ -72,13 +72,52 @@ here::i_am("Code/02_monthly_surveillance_report_internal.Rmd")
 
 ```{r, message = FALSE}
 #
-source(paste0(here::here(), "/Code", "/01_data_prep_monthly.R"))
+source(paste0(here::here(), "/Code", "/01_data_prep_monthly_setup.R"))
 
 source(paste0(here::here(), "/Code", "/Functions", "/f_create_table.R"))
 source(paste0(here::here(), "/Code", "/Functions", "/f_create_bar.R"))
 source(paste0(here::here(), "/Code", "/Functions", "/f_create_ribbon.R"))
 source(paste0(here::here(), "/Code", "/Functions", "/f_create_pyramid.R"))
 source(paste0(here::here(), "/Code", "/Functions", "/f_create_map.R"))
+```
+
+
+```{r}
+# Read in data extracts
+# Have you run 01_data_prep_monthly_extract.R yet?
+cases_allnephu <- readxl::read_xlsx(paste0(here::here(), "/Data", "/NEPHU_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"),
+                                    sheet     = 1,
+                                    guess_max = min(100000, Inf)) %>%
+  #
+  janitor::clean_names() %>% 
+  #
+  dplyr::mutate(event_date      = lubridate::ymd(event_date),
+                event_month     = lubridate::month(event_date, label = TRUE, abbr = TRUE),
+                event_year      = lubridate::year(event_date),
+                event_yearmonth = lubridate::floor_date(event_date, unit = "month"),
+                #
+                age_10year = factor(age_10year,
+                                    levels = c("00-09 years", "10-19 years", "20-29 years", "30-39 years", 
+                                               "40-49 years", "50-59 years", "60-69 years", "70-79 years", 
+                                               "80-89 years", "90+ years", "Not stated")),
+                age_group = factor(age_group,
+                                   levels = c("Less than 05 years", "05-14 years", "15-24 years",
+                                              "25-44 years", "45-64 years", "65+ years")),
+                #
+                sex = factor(sex, levels = c("Male", "Female", "Other", "Not stated")),
+                #
+                local_government_area = factor(local_government_area, levels = lga_name_long))
+
+cases_allvic <- readxl::read_xlsx(paste0(here::here(), "/Data", "/VIC_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"),
+                                  sheet     = 1,
+                                  guess_max = min(100000, Inf)) %>%
+  #
+  janitor::clean_names() %>% 
+  #
+  dplyr::mutate(event_date      = lubridate::ymd(event_date),
+                event_month     = lubridate::month(event_date, label = TRUE, abbr = TRUE),
+                event_year      = lubridate::year(event_date),
+                event_yearmonth = lubridate::floor_date(event_date, unit = "month"))
 ```
 
 # Enteric Diseases
@@ -178,7 +217,7 @@ cat(unlist(results), sep = '\n')
 
 ***
 
-# Respiratory Diseases (excluding COVID)
+# Respiratory Diseases
 
 ```{r}
 # Reporting group
@@ -968,8 +1007,6 @@ cat(unlist(results), sep = '\n')
 
     * Anaphylaxis, elevated blood lead, and tuberculosis are excluded as these conditions are managed centrally by the Victorian Department of Health.
 
-    * COVID is currently excluded due to technical and data limitations, however there are plans to include COVID in future reports.
-    
     * Potential food-borne and water-borne illness is currently excluded due to data limitations, however the feasibility of reporting on viral gastroenteritis outbreaks is being investigated for future reports.
 
 * Case definitions for each notifiable condition included in this report can be found on the [Communicable Diseases Network Australia website](https://www.health.gov.au/resources/collections/cdna-surveillance-case-definitions).
@@ -988,7 +1025,7 @@ cat(unlist(results), sep = '\n')
 
     * For `r reporting_month` the full historical period is `r format(epimonth_current - months(36), format = "%B %Y")` to `r format(epimonth_current - months(1), format = "%B %Y")`.
 
-* For conditions where complete historical data are not available (notifiable for less than three years) the pattern of notifications over time since the condition was made notifiable is assessed.
+* For conditions where complete historical data are not available (e.g. conditions that have been notifiable for less than three years) the pattern of notifications over time since the condition was made notifiable is assessed.
     
 * Changes in the number of notifications per month over time are also assessed using a series of [control charts](https://cran.r-project.org/web/packages/qicharts2/vignettes/qicharts2.html) to detect potential special cause (non-random) variation. In addition to the overall number of notifications, subgroup analyses by sex, age group, and local government area of residence are used to identify potential high risk groups.
 
