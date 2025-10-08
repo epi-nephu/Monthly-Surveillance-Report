@@ -71,7 +71,8 @@ results_month <- results_month %>%
 results_rate <- cases_allnephu %>% 
   dplyr::filter(reporting_group == conditions) %>%
   #
-  f_table_dataprep_rate(conditions = conditions_list)
+  f_table_dataprep_rate(conditions = conditions_list,
+                        data_vic   = cases_allvic)
 ```
 
 
