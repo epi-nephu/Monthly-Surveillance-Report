@@ -1,10 +1,10 @@
 ---
-title: 'NEPHU Monthly Surveillance Report - External - August 2025'
+title: 'NEPHU Monthly Surveillance Report - External - September 2025'
 output: 
   html_document:
     self_contained: true
 knit: (function(input, ...) {
-  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2025 08 External", output_dir = "../Reports") })
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2025 09 External", output_dir = "../Reports") })
 ---
 
 ```{css, echo = FALSE}
@@ -60,17 +60,18 @@ ul, li > ul {
 }
 
 .infobox {
-  padding: 5px;
+  padding: 10px;
   background: white;
   color: black;
-  border: 1px solid #5BC788;
-  border-radius: 5px;
+  border: 2px solid #5BC788;
+  border-radius: 10px;
 }
 
 .center {
   text-align: center;
 }
 ```
+
 
 ```{r, echo = FALSE, message = FALSE}
 #
@@ -87,12 +88,52 @@ options(knitr.kable.NA = '--')
 here::i_am("Code/03_monthly_surveillance_report_external.Rmd")
 ```
 
+
 ```{r}
 #
-source(paste0(here::here(), "/Code", "/01_data_prep_monthly.R"))
+source(paste0(here::here(), "/Code", "/01_data_prep_monthly_setup.R"))
 
 source(paste0(here::here(), "/Code", "/Functions", "/f_create_bar.R"))
 source(paste0(here::here(), "/Code", "/Functions", "/f_create_table.R"))
+```
+
+
+```{r}
+# Read in data extracts
+# Have you run 01_data_prep_monthly_extract.R yet?
+cases_allnephu <- readxl::read_xlsx(paste0(here::here(), "/Data", "/NEPHU_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"),
+                                    sheet     = 1,
+                                    guess_max = min(100000, Inf)) %>%
+  #
+  janitor::clean_names() %>% 
+  #
+  dplyr::mutate(event_date      = lubridate::ymd(event_date),
+                event_month     = lubridate::month(event_date, label = TRUE, abbr = TRUE),
+                event_year      = lubridate::year(event_date),
+                event_yearmonth = lubridate::floor_date(event_date, unit = "month"),
+                #
+                age_10year = factor(age_10year,
+                                    levels = c("00-09 years", "10-19 years", "20-29 years", "30-39 years", 
+                                               "40-49 years", "50-59 years", "60-69 years", "70-79 years", 
+                                               "80-89 years", "90+ years", "Not stated")),
+                age_group = factor(age_group,
+                                   levels = c("Less than 05 years", "05-14 years", "15-24 years",
+                                              "25-44 years", "45-64 years", "65+ years")),
+                #
+                sex = factor(sex, levels = c("Male", "Female", "Other", "Not stated")),
+                #
+                local_government_area = factor(local_government_area, levels = lga_name_long))
+
+cases_allvic <- readxl::read_xlsx(paste0(here::here(), "/Data", "/VIC_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"),
+                                  sheet     = 1,
+                                  guess_max = min(100000, Inf)) %>%
+  #
+  janitor::clean_names() %>% 
+  #
+  dplyr::mutate(event_date      = lubridate::ymd(event_date),
+                event_month     = lubridate::month(event_date, label = TRUE, abbr = TRUE),
+                event_year      = lubridate::year(event_date),
+                event_yearmonth = lubridate::floor_date(event_date, unit = "month"))
 ```
 
 <br/>
@@ -107,187 +148,125 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 ### Contents
 
-- [**Chief Health Officer Alerts and Advisories**](#cho_alerts)
+* [**Chief Health Officer Alerts and Advisories**](#cho_alerts)
 
-- [**Clinical Feature**](#clinical_feature)
+* [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)  
 
-- [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)  
+  * [Shigellosis](#shigellosis)
+  
+* [**Other Conditions of Note: `r reporting_month`**](#other_tonote)
 
-    - [**Legionella longbeachae**](#L.longbeachae)  
-    - [**Influenza**](#Influenza)
-    
-    
-- [**Notifications Summary Table: `r reporting_month`**](#summary_table)
+* [**Notifications Summary Table: `r reporting_month`**](#summary_table)
 
-- [**Technical Notes**](#technical_notes)
+* [**Technical Notes**](#technical_notes)
 
-
-------------------------------------------------------------------------
+***
 
 ### Chief Health Officer Alerts and Advisories {#cho_alerts}
 
-This section includes all Chief Health Officer Alerts and Advisories issued between `r format(as.Date(epimonth_current), format = "%d %B %Y")` and 11 September 2025. Surveillance data for Alerts and Advisories issued after this date will be included in next month's report.
+This section includes all Chief Health Officer Alerts and Advisories issued between `r format(as.Date(epimonth_current), format = "%d %B %Y")` and `r format(as.Date(Sys.Date()), format = "%d %B %Y")`. Surveillance data for Alerts and Advisories issued after `r format(as.Date(epimonth_enddate), format = "%d %B %Y")` will be included in next month's report.
 
--   3 September: [New measles case in Victoria](https://www.health.vic.gov.au/health-alerts/new-measles-case-in-victoria-4)
+- 03 September: [New measles case in Victoria](https://www.health.vic.gov.au/health-alerts/new-measles-case-in-victoria-4)
 
-
-------------------------------------------------------------------------
-
-::: {.infobox style="border-width: 3px;"}
-### NEPHU NEWS: Text message to people diagnosed with pertussis {#clinical_feature}
-
-The North Eastern Public Health Unit (NEPHU) is developing a range of communication tools to improve the effectiveness and reach of public health advice and control measures to the community in North East Melbourne.
-
-The project will use communication methods such as text messages and online questionnaires to expand the reach and depth of public health investigations, provide timely public health advice and where relevant, advise the individual to seek advice from their doctor.
-
-To explore the utility, feasibility and acceptability of this approach, NEPHU has collaborated with local general practitioners and community members to develop a text message for people diagnosed with pertussis.
-
-The text message will be sent to patients who have received a positive pertussis test result.  Clinicians are advised to let their patients know that they are being tested for pertussis and that they may receive a text message from NEPHU if the result is positive.
-
-More information can be found on [the NEPHU website](https://nephu.org.au/news-and-events/protecting-babies-from-whooping-cough/)
-
-:::
+***
 
 ### Epidemiological Highlights: `r reporting_month` {#epi_highlights}
 
-#### *Legionella longbeachae* {#L.longbeachae}
+#### Shigellosis {#shigellosis}
 
 ```{r}
 # Create and format bar chart
 results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = "Legionella longbeachae")
+  f_barchart_dataprep_month_count(condition_name = "Shigellosis")
 
 results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = "Legionella longbeachae",
-                                 data_count     = results_count)
-
-results_mean %>% 
-  f_barchart_format_month(ymax    = 6,
-                          ybreaks = 1,
-                          yexpand = 1,
-                          #
-                          figure_number = "Figure 1. ",
-                          figure_title  = "*Legionella longbeachae*")
-```
-
--   Higher than expected notifications of *Legionella longbeachae* (n = 4 vs. mean = 1.2) were received in August 2025. 
-
--   The notification rate in NEPHU was lower than the rest of Victoria (2.6 vs. 6.6 per 100,000).
-
--   *Legionella* species are gram-negative bacilli. There are currently more than 45 known species of *Legionella*; *Legionella longbeachae* is one that is known to cause disease in Australia, and is often transmitted from potting mix (as opposed to *Legionella pneumophilia* which is often associated with cooling towers) 
-
--  *Legionella longbeachae *generally causes infection of the lung (pneumonia) with symptoms including:
-      - fever
-      - cough
-      - chest pain
-      - breathlessness
-      - diarrhoea
-
--  *Legionella longbeachae* can be found in potting mixes, compost heaps and composted animal manure. It is thought to cause infection when breathed in or spread from hand to mouth, for example during gardening.  
-
--  To minimize risk of exposure when handling gardening products, the following precautions can be taken:
-      - avoid hand-to-mouth contact
-      - thoroughly wash hands after gardening
-      - open bagged mixes in a well-ventilated area
-      - store bagged mixes in a cool, dry place
-      - consider wearing a face mask and gloves when handling potting mix
-
-- People of any age may be infected but the disease is more common in older people, males, and individuals with a weakened immune system. 
-
-- Antibiotic treatment may be prescribed and some cases may require admission to hospital. 
-
-- For more information on *Legionella longbeachae* refer to:
-
-    -   Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Legionella longbeachae](https://www.health.vic.gov.au/infectious-diseases/legionellosis-legionnaires-disease)
-    
-    -  SA Health: [Legionella longbeachae infection - including symptoms, treatment and prevention](https://www.sahealth.sa.gov.au/wps/wcm/connect/public+content/sa+health+internet/conditions/infectious+diseases/legionella+longbeachae+infection/legionella+longbeachae+infection+-+including+symptoms+treatment+and+prevention)
-    
-    -  Better Health Channel: [Legionnaires' disease](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/legionnaires-disease)
-
-
-------------------------------------------------------------------------
-
-#### Influenza {#Influenza}
-
-```{r}
-# Create and format bar chart
-results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = "Influenza")
-
-results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = "Influenza",
+  f_barchart_dataprep_month_mean(condition_name = "Shigellosis",
                                  data_count     = results_count)
 
 results_mean %>% 
   f_barchart_format_month(ymax    = NA,
-                          ybreaks = 1000,
-                          yexpand = 500,
+                          ybreaks = 5,
+                          yexpand = 3.5,
                           #
-                          figure_number = "Figure 2. ",
-                          figure_title  = "Influenza")
+                          figure_number = "Figure 1. ",
+                          figure_title  = "Shigellosis")
 ```
 
--   The number of influenza notifications received in August was lower than in July (n = 4177 vs. n = 6097). The notification rate in NEPHU was lower than the rest of Victoria (2765 vs. 13,699 per 100,000).
+* Higher than expected notifications for shigellosis (n = 22 vs. mean = 13) were received in September 2025 and the number of notifications was higher than in August (n = 18). The notification rate in NEPHU was higher than for the rest of Victoria (15 vs. 9.7 per 100,000).
 
--   The number of influenza notifications was lower in all age groups and across all NEPHU LGAs in August compared to July. 
+* Shigellosis is generally a self-limiting bacterial infection caused by *Shigella spp.* but is highly contagious and can be potentially serious.
 
--   Not all individuals with influenza are tested which means that notified cases are an underestimate of total cases. Notified cases can still be used to monitor overall trends. 
+* Shigellosis is spread through consuming food or water contaminated with the bacteria, touching objects or surfaces contaminated with the bacteria and then touching your mouth, and/or sexual contact with a person who has shigellosis.
 
--   Influenza has a seasonal pattern with a peak in cases occurring during the winter months. The decline from July to August may reflect the tapering off of influenza activity for the season. 
+  * People who have traveled to countries where shigellosis is common, men who have sex with men, children, the elderly, and people with immunocompromising conditions are at an increased risk of infection.
 
--   Symptoms of influenza include cough, headache, myalgia, lethargy, coryza, sore throat and cough. Symptoms mostly resolve within 2 to 7 days.
+  * The majority of notifications received in September (14/22, 64%) were for people who had recently traveled overseas.
 
-    - Exclusion from primary school and childcare is required until symptoms resolve.
+* People with shigellosis should maintain good hygiene, practice handwashing, avoid preparing food for others, and practice safe sex practices until 48 hours after symptoms resolve.
 
--   Annual influenza vaccination is recommended for everyone above 6 months of age and is free for high-risk groups.
+  * People with shigellosis who work in high-risk settings such as food handlers, childcare workers, health care workers, or workers in a residential facility should not return to work until advised by the Local Public Health Unit.
 
-      - See [The Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/influenza-flu-vaccine) for eligibility criteria for free influenza vaccination.
+  * High-risk workers are generally excluded until they have had two consecutive negative faecal specimens, collected a minimum of 24 hours apart and no sooner than 48 hours after cessation of antibiotics (if applicable).
 
--   If you require more information on influenza to:
+* Increasing antibiotic resistance is being detected in *Shigella spp.* bacteria. Include a stool culture when testing patients for shigellosis to allow for antibiotic sensitivities to be determined and reserve the use of antibiotic treatment for severe cases.
 
-    -   Victorian Department of Health: [Infectious Disease Guidelines and Advice - Influenza](https://www.health.vic.gov.au/infectious-diseases/influenza)
+* If you require more information on shigellosis refer to:
 
-    -   Better Health Channel: [Influenza](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/flu-influenza)
+  * Victorian Department of Health: [Control Guidelines and Advice - Shigellosis](https://www.health.vic.gov.au/infectious-diseases/shigellosis)
 
-    -   Australian Immunization Handbook: [Influenza](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/influenza-flu)
+  * Better Health Channel: [Gastroenteritis - Shigellosis](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/gastroenteritis-shigella)
 
-------------------------------------------------------------------------
- 
-------------------------------------------------------------------------
+***
+
+### Other Conditions of Note: `r reporting_month` {#other_tonote}
+
+* **Influenza**, **Respiratory Syncytial Virus (RSV)**, and **COVID** notifications have continued to decrease in September 2025 after peaking in July.
+
+  * Influenza notifications decreased from 4,688 in August to 3,559 in September, but remain above the expected number for this time of year (n = 1,175).
+  
+  * RSV notifications decreased from 1,744 in August to 932 in September, but remain above the expected number for this time of year (n = 448).
+  
+  * COVID notifications decreased from 1,000 in August to 643 in September. Due to changes in the reporting systems used for COVID data in Victoria, historical data for COVID are not available to calculate the expected number of notifications.
+  
+* One notification of ***Haemophilus influenzae*** **Type B (HiB)** was received in September 2025, for a female aged >65 years. This was the first HiB notification for a resident of the NEPHU catchment since 2017.
+
+* One notification of ***Candida auris*** was received in September 2025, for a male aged >65 years with multiple comorbidities and a history of receiving medical care overseas.
+
+***
 
 ### Notifications Summary Table: `r reporting_month` {#summary_table}
 
 This table shows the monthly and year-to-date (YTD) counts and means in NEPHU and a comparison of notification rates between NEPHU and Victoria during `r reporting_month` for [conditions notifiable in Victoria](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms) under the *Public Health and Wellbeing Act 2008*.
 
--   Conditions are included in the table if there has been at least one notification in NEPHU between `r format(epimonth_current - months(35), format = "%B %Y")` and `r reporting_month`.
+* Conditions are included in the table if there has been at least one notification in NEPHU between `r format(epimonth_current - months(35), format = "%B %Y")` and `r reporting_month`.
 
--   Anaphylaxis, elevated blood lead, and tuberculosis are excluded as these conditions are managed centrally by the Victorian Department of Health.
-
--   COVID is currently excluded due to technical and data limitations, however there are plans to include COVID in future reports.
+* Anaphylaxis, elevated blood lead, and tuberculosis are excluded as these conditions are managed centrally by the Victorian Department of Health.
 
 Notes on interpreting this table:
 
--   The trend columns indicate whether the monthly or YTD counts were higher (↑) or lower (↓) than in the previous month or year.
+* The trend columns indicate whether the monthly or YTD counts were higher (↑) or lower (↓) than in the previous month or year.
 
--   Monthly and YTD counts are compared to a historical three year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+* Monthly and YTD counts are compared to a historical three year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
 
--   The mean YTD column shows the average number of cases reported for the year to date across the past three years.
+* The mean YTD column shows the average number of cases reported for the year to date across the past three years.
 
--   The comparison column indicates whether the monthly rate in NEPHU was higher (↑) or lower (↓) than for Victoria overall.
+* The comparison column indicates whether the monthly rate in NEPHU was higher (↑) or lower (↓) than for Victoria overall.
 
--   Conditions highlighted with [red text]{style="color: red;"} indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
+* Conditions highlighted with [red text]{style="color: red;"} indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
 
--   Conditions with *italic text* have not been notifiable for at least three years, and therefore do not have sufficient historical data available for comparison.
+* Conditions with *italic text* have not been notifiable for at least three years, and therefore do not have sufficient historical data available for comparison.
 
 ```{r}
 # Enteric Diseases
 conditions <- "Enteric Diseases"
 ```
 
+
 ```{r, child = here::here("Code", "Child Rmds", "03a_analyses_dataprep.Rmd")}
 
 
 ```
+
 
 ```{r, child = here::here("Code", "Child Rmds", "03b_analyses_table.Rmd")}
 
@@ -301,10 +280,12 @@ conditions <- "Enteric Diseases"
 conditions <- "Respiratory Diseases"
 ```
 
+
 ```{r, child = here::here("Code", "Child Rmds", "03a_analyses_dataprep.Rmd")}
 
 
 ```
+
 
 ```{r, child = here::here("Code", "Child Rmds", "03b_analyses_table.Rmd")}
 
@@ -318,10 +299,12 @@ conditions <- "Respiratory Diseases"
 conditions <- "Bloodborne Viruses"
 ```
 
+
 ```{r, child = here::here("Code", "Child Rmds", "03a_analyses_dataprep.Rmd")}
 
 
 ```
+
 
 ```{r, child = here::here("Code", "Child Rmds", "03b_analyses_table.Rmd")}
 
@@ -335,10 +318,12 @@ conditions <- "Bloodborne Viruses"
 conditions <- "Sexually Transmissible Infections"
 ```
 
+
 ```{r, child = here::here("Code", "Child Rmds", "03a_analyses_dataprep.Rmd")}
 
 
 ```
+
 
 ```{r, child = here::here("Code", "Child Rmds", "03b_analyses_table.Rmd")}
 
@@ -352,10 +337,12 @@ conditions <- "Sexually Transmissible Infections"
 conditions <- "Vaccine Preventable Diseases"
 ```
 
+
 ```{r, child = here::here("Code", "Child Rmds", "03a_analyses_dataprep.Rmd")}
 
 
 ```
+
 
 ```{r, child = here::here("Code", "Child Rmds", "03b_analyses_table.Rmd")}
 
@@ -369,10 +356,12 @@ conditions <- "Vaccine Preventable Diseases"
 conditions <- "Vectorborne Diseases"
 ```
 
+
 ```{r, child = here::here("Code", "Child Rmds", "03a_analyses_dataprep.Rmd")}
 
 
 ```
+
 
 ```{r, child = here::here("Code", "Child Rmds", "03b_analyses_table.Rmd")}
 
@@ -386,10 +375,12 @@ conditions <- "Vectorborne Diseases"
 conditions <- "Zoonotic Diseases"
 ```
 
+
 ```{r, child = here::here("Code", "Child Rmds", "03a_analyses_dataprep.Rmd")}
 
 
 ```
+
 
 ```{r, child = here::here("Code", "Child Rmds", "03b_analyses_table.Rmd")}
 
@@ -403,10 +394,12 @@ conditions <- "Zoonotic Diseases"
 conditions <- "Antimicrobial Resistant Organisms"
 ```
 
+
 ```{r, child = here::here("Code", "Child Rmds", "03a_analyses_dataprep.Rmd")}
 
 
 ```
+
 
 ```{r, child = here::here("Code", "Child Rmds", "03b_analyses_table.Rmd")}
 
@@ -420,57 +413,71 @@ conditions <- "Antimicrobial Resistant Organisms"
 conditions <- "Other Conditions"
 ```
 
+
 ```{r, child = here::here("Code", "Child Rmds", "03a_analyses_dataprep.Rmd")}
 
 
 ```
+
 
 ```{r, child = here::here("Code", "Child Rmds", "03b_analyses_table.Rmd")}
 
 
 ```
 
-------------------------------------------------------------------------
+***
 
 ### Technical Notes {#technical_notes}
 
--   The North Eastern Public Health Unit (NEPHU) was established in 2021 and is one of nine local public health units (LPHUs) across metropolitan and regional Victoria. Led and coordinated by Austin Health, NEPHU is funded by the Victorian Government and works closely with the Victorian Department of Health to protect and promote the health of our communities.
+* The North Eastern Public Health Unit (NEPHU) was established in 2021 and is one of nine local public health units (LPHUs) across metropolitan and regional Victoria. Led and coordinated by Austin Health, NEPHU is funded by the Victorian Government and works closely with the Victorian Department of Health to protect and promote the health of our communities. 
 
--   NEPHU serves a population of approximately 1.8 million people across 12 local government areas: the Cities of Banyule, Boroondara, Darebin, Hume (excluding Melbourne Airport), Knox, Manningham, Maroondah, Whitehorse, Whittlesea, Yarra, Yarra Ranges Shire, and Nillumbik Shire.
+* NEPHU serves a population of approximately 1.8 million people across 12 local government areas: the Cities of Banyule, Boroondara, Darebin, Hume (excluding Melbourne Airport), Knox, Manningham, Maroondah, Whitehorse, Whittlesea, Yarra, Yarra Ranges Shire, and Nillumbik Shire. 
 
--   Counts and rates are based on the date that the Victorian Department of Health was first notified of a case by a laboratory or medical practitioner and includes all data entered into the Public Health Event Surveillance System (PHESS) as of `r format(as.Date(extract_date), format = "%d %B %Y")`. Notifications are received by the central team at the Victorian Department of Health and tasked to the relevant LPHU for follow-up.
+* Counts and rates are based on the date that the Victorian Department of Health was first notified of a case by a laboratory or medical practitioner and includes all data entered into the Public Health Event Surveillance System (PHESS) as of `r format(as.Date(extract_date), format = "%d %B %Y")`. Notifications are received by the central team at the Victorian Department of Health and tasked to the relevant LPHU for follow-up.
 
--   Counts and rates are likely to be an underestimate of true disease incidence, are accurate only at the time the data were extracted from PHESS, and are subject to change due to reporting delays and exclusions following further case investigation.
+* Counts and rates are likely to be an underestimate of true disease incidence, are accurate only at the time the data were extracted from PHESS, and are subject to change due to reporting delays and exclusions following further case investigation.
 
--   A list of conditions notifiable in Victoria under the *Public Health and Wellbeing Act 2008* can be found on the [Victorian Department of Health website](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms).
+* A list of conditions notifiable in Victoria under the *Public Health and Wellbeing Act 2008* can be found on the [Victorian Department of Health website](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms).
 
-    -   Anaphylaxis, elevated blood lead, and tuberculosis are excluded as these conditions are managed centrally by the Victorian Department of Health.
+  * Anaphylaxis, elevated blood lead, and tuberculosis are excluded as these conditions are managed centrally by the Victorian Department of Health.
 
-    -   COVID is currently excluded due to technical and data limitations, however there are plans to include COVID in future reports.
+  * Potential food-borne and water-borne illness is currently excluded due to data limitations, however the feasibility of reporting on viral gastroenteritis outbreaks is being investigated for future reports.
 
-    -   Potential food-borne and water-borne illness is currently excluded due to data limitations, however the feasibility of reporting on viral gastroenteritis outbreaks is being investigated for future reports.
+* Case definitions for each notifiable condition included in this report can be found on the [Communicable Diseases Network Australia website](https://www.health.gov.au/resources/collections/cdna-surveillance-case-definitions).
 
--   Case definitions for each notifiable condition included in this report can be found on the [Communicable Diseases Network Australia website](https://www.health.gov.au/resources/collections/cdna-surveillance-case-definitions).
+* Monthly and year-to-date notifications are compared to a historical three year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
 
--   Monthly and year-to-date notifications are compared to a historical three year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+  * A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the three-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause variation.
+    
+  * Sporadic notifications where the condition has not been notified in NEPHU for at least 12 months are noted.
 
-    -   A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the three-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause (non-random) variation.
+* For high-volume conditions (`r high_volume` or more cases per year during the historical three year period) a [modified historical limits method](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4313630/) is used to compare the count for each month with the rolling mean of the counts for each of nine baseline periods corresponding to the same month, one prior month, and one subsequent month during the previous three years.
+    
+  * The baseline periods for `r reporting_month` are: `r format(hlm_baseline[9], format = "%B %Y")`, `r format(hlm_baseline[8], format = "%B %Y")`, `r format(hlm_baseline[7], format = "%B %Y")`, `r format(hlm_baseline[6], format = "%B %Y")`, `r format(hlm_baseline[5], format = "%B %Y")`, `r format(hlm_baseline[4], format = "%B %Y")`, `r format(hlm_baseline[3], format = "%B %Y")`, `r format(hlm_baseline[2], format = "%B %Y")`, and `r format(hlm_baseline[1], format = "%B %Y")`.
 
-    -   Sporadic notifications where the condition has not been notified in NEPHU for at least six months are noted.
+* For low-volume conditions (fewer than `r high_volume` cases per year during the historical three year period the count for each month is compared with the mean monthly count for the full historical three year period.
 
--   For high-volume conditions (`r high_volume` or more cases per year during the historical three year period) a [modified historical limits method](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4313630/) is used to compare the count for each month with the rolling mean of the counts for each of nine baseline periods corresponding to the same month, one prior month, and one subsequent month during the previous three years.
+  * For `r reporting_month` the full historical period is `r format(epimonth_current - months(36), format = "%B %Y")` to `r format(epimonth_current - months(1), format = "%B %Y")`.
 
-    -   The baseline periods for `r reporting_month` are: `r format(hlm_baseline[9], format = "%B %Y")`, `r format(hlm_baseline[8], format = "%B %Y")`, `r format(hlm_baseline[7], format = "%B %Y")`, `r format(hlm_baseline[6], format = "%B %Y")`, `r format(hlm_baseline[5], format = "%B %Y")`, `r format(hlm_baseline[4], format = "%B %Y")`, `r format(hlm_baseline[3], format = "%B %Y")`, `r format(hlm_baseline[2], format = "%B %Y")`, and `r format(hlm_baseline[1], format = "%B %Y")`.
+* For conditions where complete historical data are not available (e.g. conditions that have been notifiable for less than three years) the pattern of notifications over time since the condition was made notifiable is assessed.
+    
+* Changes in the number of notifications per month over time are also assessed using a series of [control charts](https://cran.r-project.org/web/packages/qicharts2/vignettes/qicharts2.html) to detect potential special cause (non-random) variation. In addition to the overall number of notifications, subgroup analyses by sex, age group, and local government area of residence are used to identify potential high risk groups.
 
--   For low-volume conditions (fewer than `r high_volume` cases per year during the historical three year period the count for each month is compared with the mean monthly count for the full historical three year period.
+* Additional notes on interpreting the summary tables:
 
-    -   For `r reporting_month` the full historical period is `r format(epimonth_current - months(36), format = "%B %Y")` to `r format(epimonth_current - months(1), format = "%B %Y")`.
+  * The trend columns indicate whether the monthly or YTD counts were higher (&#x2191;) or lower (&#x2193;) than in the previous month or year.
 
--   For conditions where complete historical data are not available (notifiable for less than three years) the pattern of notifications over time since the condition was made notifiable is assessed.
+  * Monthly and YTD counts are compared to a historical three year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
 
--   Changes in the number of notifications per month over time are also assessed using a series of [control charts](https://cran.r-project.org/web/packages/qicharts2/vignettes/qicharts2.html) to detect potential special cause variation. In addition to the overall number of notifications, subgroup analyses by sex, age group, and local government area of residence are used to identify potential high risk groups.
+  * The mean YTD column shows the average number of cases reported for the year to date across the past three years.
+
+  * The comparison column indicates whether the monthly rate in NEPHU was higher (&#x2191;) or lower (&#x2193;) than for Victoria overall.
+
+  * Conditions highlighted with <span style="color: red;">red</span> text indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
+
+  * Conditions with *italic* text have not been notifiable for at least three years, and therefore do not have sufficient historical data available for comparison.
 
 <br/>
 
-::: {.tocify-extend-page data-unique="tocify-extend-page" style="height: 0;"}
-:::
+<div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
+
