@@ -2,7 +2,6 @@
 ```{r}
 # Current and previous month counts
 results_month <- cases_allnephu %>%
-#  dplyr::filter(reporting_group == conditions) %>%
   dplyr::filter(condition_label %in% conditions_list) %>%
   #
   f_table_dataprep_count(conditions = conditions_list)
@@ -68,17 +67,16 @@ results_month <- results_month %>%
 ```{r}
 # NEPHU and Victorian rates for current month
 results_rate <- cases_allnephu %>% 
-#  dplyr::filter(reporting_group == conditions) %>%
   dplyr::filter(condition_label %in% conditions_list) %>%
   #
-  f_table_dataprep_rate(conditions = conditions_list)
+  f_table_dataprep_rate(conditions = conditions_list,
+                        data_vic   = cases_allvic)
 ```
 
 
 ```{r}
 # YTD and yearly average counts
 results_ytd <- cases_allnephu %>%
-#  dplyr::filter(reporting_group == conditions) %>%
   dplyr::filter(condition_label %in% conditions_list) %>%
   #
   f_table_dataprep_ytd(conditions = conditions_list)
