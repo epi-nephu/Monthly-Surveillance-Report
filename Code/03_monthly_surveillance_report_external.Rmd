@@ -2,7 +2,7 @@
 title: 'NEPHU Monthly Surveillance Report - External - September 2025'
 output: 
   html_document:
-    self_contained: true
+    self_contained: false
 knit: (function(input, ...) {
   rmarkdown::render(input, output_file = "Monthly Surveillance Report 2025 09 External", output_dir = "../Reports") })
 ---
