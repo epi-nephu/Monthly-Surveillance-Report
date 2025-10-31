@@ -247,9 +247,17 @@ cases_allvic <- cases_allvic %>%
 ################################################################################
 # Save data extracts for further analyses
 ################################################################################
-writexl::write_xlsx(cases_allnephu,
-                    paste0(here::here(), "/Data", "/NEPHU_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"))
+if (!file.exists(paste0(here::here(), "/Data", "/NEPHU_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"))) {
+  
+  writexl::write_xlsx(cases_allnephu,
+                      paste0(here::here(), "/Data", "/NEPHU_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"))
 
-writexl::write_xlsx(cases_allvic,
-                    paste0(here::here(), "/Data", "/VIC_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"))
+}
+
+if (!file.exists(paste0(here::here(), "/Data", "/VIC_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"))) {
+  
+  writexl::write_xlsx(cases_allvic,
+                      paste0(here::here(), "/Data", "/VIC_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"))
+  
+}
 
