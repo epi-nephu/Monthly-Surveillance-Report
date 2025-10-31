@@ -1,7 +1,7 @@
 ---
 title: 'NEPHU Monthly Surveillance Report - How-To Guide'
 author_details: "Alana Little, NEPHU (alana.little@austin.org.au)"
-version_details: "v1.0, 11/04/2024"
+version_details: "v2.0, 31/10/2025"
 output: 
   html_document:
     code_folding: none
@@ -53,6 +53,7 @@ li > ul {
 ```{r, echo = FALSE}
 # Change log
 # v1.0: First version
+# v2.0: Updated to reflect sourcing data directly from PHAR
 ```
 
 
@@ -91,7 +92,7 @@ knitr::include_graphics(here::here("Screenshots", "title_banner.PNG"))
     
     * Identify potential special-cause variation.
     
-* Reporting is restricted to confirmed and/or probable cases (except for AMR).
+* Reporting is restricted to confirmed and/or probable cases.
 
 * The number of notifications for a condition will fluctuate from month to month and from year to year – this is known as **normal variation**. We can expect, predict, and quantify this variation.
 
@@ -123,7 +124,7 @@ knitr::include_graphics(here::here("Screenshots", "title_banner.PNG"))
 
 # A Step-by-Step Guide to Running the NEPHU Monthly Surveillance Report
 
-## Part 1: Getting the Data
+## Part 1: Setup and Data Prep
 
 ### Getting started
 
@@ -136,119 +137,118 @@ knitr::include_graphics(here::here("Screenshots", "folder_shareddrive.PNG"))
 
 <br/>
 
-Download the required PHESS extracts for the month and save them in the **../Data subfolder**. YYYYMMDD is the last day of the previous calendar month.
+Open the R Project file **Monthly Surveillance Report.Rproj** from Windows Explorer.
 
 ```{r, out.width = '800px'}
 #
-knitr::include_graphics(here::here("Screenshots", "folder_data.PNG"))
+knitr::include_graphics(here::here("Screenshots", "folder_rproject.PNG"))
 ```
 
 <br/>
+
+Open **01_data_prep_monthly_setup.R** using the Files tab in RStudio.
+
+```{r, out.width = '600px'}
+#
+knitr::include_graphics(here::here("Screenshots", "code_dataprepsetup.PNG"))
+```
+
+<br/>
+
+### What does this code do?
+
+* Installs and loads the R packages required to run the Internal and External Reports
+
+* Defines the reporting month and year
+
+* Calculates all of the month and year related variables required for the Internal and External Reports
+
+* Reads in and wrangles the reference datasets (see Part 2) required for the Internal and External Reports
+
+<br/>
+
+### Updating the data prep code
+
+Update the following parameters in the code:
+
+* epimonth_current = First day of the previous calendar month in the format YYYY-MM-DD
+
+* extract_date = Date you extracted the data from PHAR in the format YYYY-MM-DD
+
+```{r, out.width = '600px'}
+#
+knitr::include_graphics(here::here("Screenshots", "code_epimonthcurrent.PNG"))
+```
+
+<br/>
+
+The code is clever enough to do all of the other date calculations you need. Nifty!
+
+Save your changes to **01_data_prep_monthly_setup.R**
+
+```{r, out.width = '600px'}
+#
+knitr::include_graphics(here::here("Screenshots", "code_savechanges.PNG"))
+```
+
+<br/>
+
+Open **01_data_prep_monthly_extract.R** using the Files tab in RStudio.
+
+```{r, out.width = '600px'}
+#
+knitr::include_graphics(here::here("Screenshots", "code_dataprepextract.PNG"))
+```
+
+<br/>
+
+### What does this code do?
+
+* Runs the 01_data_prep_monthly_setup.R script
+
+* Connects to PHAR, runs queries, and wrangles the NEPHU and Victorian data required for the Internal and External Reports
+
+* Saves two snapshop datasets (one for NEPHU and one for Victoria) in the Data folder that will be read in by the Internal and External Report Rmds.
+
+<br/>
+
+Run **01_data_prep_monthly_extract.R**
+
+I **strongly** recommend running this code line-by-line until you are familiar with it. 
+
+You will need to have a PHAR token and the R-PHAR connection set up, and your .Renviron file configured appropriately (with the proxy switched on in the Austin offices or switched off when working from home).
+
+Your .Renviron file should be in your Documents folder, and the http_proxy, https_proxy, and ftp_proxy lines should be commented/uncommented accordingly.
+
+```{r, out.width = '600px'}
+#
+knitr::include_graphics(here::here("Screenshots", "code_renviron.PNG"))
+```
+
+<br/>
+
+The only line that may need changing in 01_data_prep_monthly_extract.R relates to, you guessed it, the proxy server.
+
+```{r, out.width = '600px'}
+#
+knitr::include_graphics(here::here("Screenshots", "code_useproxy.PNG"))
+```
+
+<br/>
+
+You only need to run 01_data_prep_monthly_extract.R once per month. The Internal and External Report Rmds will give you a friendly reminder (by telling you the file you are trying to read in doesn't exist) if you've forgotten to run this script.
+
+***
+
+## Part 2: A Quick Overview of Data Sources
 
 ### Notifiable diseases data
 
-***AMR notifications (year to date)***
-
-* Maven Reporting > NEPHU Reports > AMR case linelist
-
-* Report period start date: 01 January of current calendar year
-
-* Report period end date: Last day of previous calendar month
-
-* Output type: Excel
-
-* Rename file to **AMRCaseLinelist_YYYYMMDD**
-    
-At the start of each calendar year a new historical dataset will need to be prepared. Refer to Appendix 1 for more information about how to do this.
-
-```{r, out.width = '400px'}
-#
-knitr::include_graphics(here::here("Screenshots", "phess_amr.PNG"))
-```
-
-<br/>
-
-***NEPHU cases (year to date)***
-
-* Maven Reporting > NEPHU Reports > NEPHU Case Linelist
-
-* Report period start date: 01 January of current calendar year
-
-* Report period end date: Last day of previous calendar month
-
-* Output type: Excel
-
-* Rename file to **NEPHUCaseLinelist_YYYYMMDD**
-    
-At the start of each calendar year a new historical dataset will need to be prepared. Refer to Appendix 1 for more information about how to do this.
-
-```{r, out.width = '400px'}
-#
-knitr::include_graphics(here::here("Screenshots", "phess_nephu.PNG"))
-```
-
-<br/>
-
-***Victorian influenza cases (previous calendar month)***
-
-* Maven Reporting > NEPHU Reports > VictoriaLinelist1
-
-* Report period start date: First day of previous calendar month
-
-* Report period end date: Last day of previous calendar month
-
-* Output type: Excel
-
-* Rename file to **VictoriaLinelist1_YYYYMMDD**
-
-```{r, out.width = '400px'}
-#
-knitr::include_graphics(here::here("Screenshots", "phess_victoria1.PNG"))
-```
-
-<br/>
-
-***Victorian cases of other conditions (previous calendar month)***
-
-* Maven Reporting > NEPHU Reports > VictoriaLinelist2
-
-* Report period start date: First day of previous calendar month
-
-* Report period end date: Last day of previous calendar month
-
-* Output type: Excel
-
-* Rename file to **VictoriaLinelist2_YYYYMMDD**
-
-```{r, out.width = '400px'}
-#
-knitr::include_graphics(here::here("Screenshots", "phess_victoria2.PNG"))
-```
-
-<br/>
-
-***Victorian cases of selected high-volume conditions (previous calendar month)***
-
-* Maven Reporting > NEPHU Reports > VictoriaLinelist3
-
-* Report period start date: First day of previous calendar month
-
-* Report period end date: Last day of previous calendar month
-
-* Output type: Excel
-
-* Rename file to **VictoriaLinelist3_YYYYMMDD**
-
-```{r, out.width = '400px'}
-#
-knitr::include_graphics(here::here("Screenshots", "phess_victoria3.PNG"))
-```
-
-<br/>
+Prior to September 2025, we would download a series of PHESS extracts each month along with historical PHESS extracts at the start of each calendar year. The report has now been cleverly modified to pull the data we need directly from PHAR and save snapshot data extracts every month.
 
 ### Reference data
 
-In addition to the PHESS extracts, there are also three reference documents/files required. These don't need to be updated each month.
+In addition to the PHESS data, there are also three reference documents/files required. These don't need to be updated each month.
 
 ```{r, out.width = '800px'}
 #
@@ -307,94 +307,6 @@ knitr::include_graphics(here::here("Screenshots", "data_shapefile.PNG"))
 <br/>
 
 ***
-    
-## Part 2: Monthly Data Prep
-
-### Getting started
-
-Using Windows Explorer, navigate to the **Monthly Surveillance Report folder** on the shared drive.
-
-```{r, out.width = '800px'}
-#
-knitr::include_graphics(here::here("Screenshots", "folder_shareddrive.PNG"))
-```
-
-<br/>
-
-Open the R Project file **Monthly Surveillance Report.Rproj** from Windows Explorer.
-
-```{r, out.width = '800px'}
-#
-knitr::include_graphics(here::here("Screenshots", "folder_rproject.PNG"))
-```
-
-<br/>
-
-Open **01.data_prep_monthly.R** using the Files tab in RStudio.
-
-```{r, out.width = '600px'}
-#
-knitr::include_graphics(here::here("Screenshots", "code_dataprep.PNG"))
-```
-
-<br/>
-
-### What does this code do?
-
-* Installs and loads the R packages required to run the Internal and External Reports
-
-* Defines the reporting month and year
-
-* Calculates all of the month and year related variables required for the Internal and External Reports
-
-* Reads in and wrangles all of the datasets required for the Internal and External Reports
-
-<br/>
-
-### Updating the data prep code
-
-Update the following parameters in the code:
-
-* epimonth_current = First day of the previous calendar month in the format YYYY-MM-DD
-
-* extract_date = Date you extracted the data from PHESS in the format YYYY-MM-DD
-
-```{r, out.width = '600px'}
-#
-knitr::include_graphics(here::here("Screenshots", "code_epimonthcurrent.PNG"))
-```
-
-<br/>
-
-What year is it? Is it still 2025? If so, you don't need to do anything else. The code is smart enough to calculate everything else you need.
-
-If you're reading this in the future, update the following parameters in the code:
-
-* filedate_ytd = The year range for the historical datasets created at the start of the year in the format YYYY_YYYY
-
-* ytd_current = The current year in the format YYYY
-
-You will also need to update the historical datasets when a new year starts. Refer to Appendix 1 for details on how to do this.
-
-```{r, out.width = '600px'}
-#
-knitr::include_graphics(here::here("Screenshots", "code_ytdcurrent.PNG"))
-```
-
-<br/>
-
-Again, the code is clever enough to do all of the other date calculations you need. Nifty!
-
-Save your changes to **01.data_prep_monthly.R**
-
-```{r, out.width = '600px'}
-#
-knitr::include_graphics(here::here("Screenshots", "code_savechanges.PNG"))
-```
-
-<br/>
-
-***
 
 ## Part 3: Running the Internal Report
 
@@ -431,7 +343,9 @@ knitr::include_graphics(here::here("Screenshots", "folder_internal.PNG"))
 
 * Quite a lot honestly!
 
-* Reads in and runs 01_data_prep_monthly.R
+* Reads in and runs 01_data_prep_monthly_setup.R
+
+* Reads in the NEPHU and Victorian data snapshots you created in Part 1
 
 * Runs a standard set of analyses for every condition, and displays the results in a html document
 
@@ -630,7 +544,9 @@ knitr::include_graphics(here::here("Screenshots", "folder_external.PNG"))
 
 ### What does this code do?
 
-* Reads in and runs 01_data_prep_monthly.R
+* Reads in and runs 01_data_prep_monthly_setup.R
+
+* Reads in the NEPHU and Victorian data snapshots you created in Part 1
 
 * Uses child documents to create standard bar charts for the conditions in the Epidemiological Highlights section and standard tables for each reporting group in the Notifications Summary Table section
 
@@ -799,7 +715,7 @@ knitr::include_graphics(here::here("Screenshots", "external_other.PNG"))
 
 * The content will come through as a Word document. Use Markdown syntax to add the content from the Word document into the report - see the existing examples in previous reports for inspiration
 
-* The Clinical Feature is wrapped in an infobox - content beween the **::: infobox** and **:::** will be inside a green bordered box in the external report html
+* The Clinical Feature is wrapped in an infobox - content between the **::: infobox** and **:::** will be inside a green bordered box in the external report html
 
 ```{r, out.width = '600px'}
 #
@@ -964,7 +880,7 @@ knitr::include_graphics(here::here("Screenshots", "review_approval.PNG"))
 
 ### Sending the report to Comms
 
-We're almost there! The external report has now been approved and can be sent out to our stakeholders and published on the NEPHU website. The NEPHU Comms team handle this part of the process for us - we just need to give them a file they can work with.
+We're almost there! The External Report has now been approved and can be sent out to our stakeholders and published on the NEPHU website. The NEPHU Comms team handle this part of the process for us - we just need to give them files they can work with.
 
 * Previously Comms used a program called Vision6 for newsletter mailouts, they now use a program called Mailchimp
 
@@ -972,30 +888,18 @@ We're almost there! The external report has now been approved and can be sent ou
 
 * Mailchimp (and Vision6) emails cannot contain attachments - any information we send out needs to be within the content of the external report (narrative text, charts, tables, hyperlinks)
 
-<br/>
+There have been some recent (August/September 2025) changes to how Mailchimp handles images (in summary, it no longer renders them directly from a .txt file), so we now need to send Comms the External Report html along with the .png files for each chart we want to include in the report. Comms will build the report in Mailchimp.
 
-The report needs to be sent to Comms as a .txt file for Mailchimp (or Vision6) to interpret and format it correctly. Fun fact - a .html file is just a very fancy .txt file!
-
-* Right-click on **Monthly Surveillance Report YYYY MM External.html** and select Open With > Notepad
-
-* Select File > Save As
-
-* Change the File Name to **Monthly Surveillance Report YYYY MM External Mailchimp**
-
-* Make sure that the File Type is Text Document (*.txt) - this should be the default
-
-* Make sure that the Encoding is UTF-8 - this should be the default
-
-* Save the file in the **Sent to Comms subfolder**
+The .pngs can be found in the figure-html subfolder that is created when you knit the report. Each chart is outputted as a separate .png into this folder.
 
 ```{r, out.width = '600px'}
 #
-knitr::include_graphics(here::here("Screenshots", "comms_txtfile.PNG"))
+knitr::include_graphics(here::here("Screenshots", "comms_charts.PNG"))
 ```
 
 <br/>
 
-The txt version of the report is sent as an attachment via email to the NEPHU Comms Team.
+The html and png files are sent as attachments via email to the NEPHU Comms Team.
 
 ```{r, out.width = '600px'}
 #
@@ -1013,13 +917,7 @@ The final step is to wait for the report to arrive in your inbox, open it, have 
 knitr::include_graphics(here::here("Screenshots", "comms_finalreport.PNG"))
 ```
 
-<!-- # Appendix 1: Historical Data Prep -->
-
-<!-- > Add content here -->
-
-<!-- *** -->
-
-<!-- # Appendix 2: Conditional Logic Flowcharts -->
+<!-- # Appendix 1: Conditional Logic Flowcharts -->
 
 <!-- > Add content here -->
 
