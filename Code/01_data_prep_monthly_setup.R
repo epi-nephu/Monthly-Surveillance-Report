@@ -47,7 +47,7 @@ nephu_yellow <- "#fff694"
 ################################################################################
 # Start and end dates for current reporting month
 epimonth_current <- as.Date("2025-09-01")
-epimonth_enddate  <-  as.Date("2025-09-30")
+epimonth_enddate <- ceiling_date(epimonth_current, "month") - days(1)
 
 reporting_month <- format(epimonth_current, format = "%B %Y")
 
@@ -69,7 +69,7 @@ hlm_baseline <- epimonth_current + months(-c(11:13, 23:25, 35:37))
 lookback_start <- hlm_baseline[9] - years(3) - months(1)
 
 # Current and most recent years
-ytd_current <- 2025
+ytd_current <- year(epimonth_current)
 
 ytd_minus1 <- ytd_current - 1
 
