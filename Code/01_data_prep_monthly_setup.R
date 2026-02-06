@@ -46,13 +46,13 @@ nephu_yellow <- "#fff694"
 # Definitions and constants
 ################################################################################
 # Start and end dates for current reporting month
-epimonth_current <- as.Date("2025-09-01")
+epimonth_current <- as.Date("2025-12-01")
 epimonth_enddate <- ceiling_date(epimonth_current, "month") - days(1)
 
 reporting_month <- format(epimonth_current, format = "%B %Y")
 
 # Date of PHAR data extract
-extract_date <- as.Date("2025-10-08")
+extract_date <- as.Date("2026-01-05")
 
 # Year to date
 month_number <- month(epimonth_current)

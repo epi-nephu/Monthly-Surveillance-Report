@@ -1,10 +1,10 @@
 ---
-title: 'NEPHU Monthly Surveillance Report - External - September 2025'
+title: 'NEPHU Monthly Surveillance Report - External - December 2025'
 output: 
   html_document:
     self_contained: false
 knit: (function(input, ...) {
-  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2025 09 External", output_dir = "../Reports") })
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2025 12 External", output_dir = "../Reports") })
 ---
 
 ```{css, echo = FALSE}
@@ -150,10 +150,16 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 * [**Chief Health Officer Alerts and Advisories**](#cho_alerts)
 
-* [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)  
+* [**Clinical Feature**](#clinicalfeature)
 
-  * [Shigellosis](#shigellosis)
+
+* [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)  
   
+  * [Influenza](#Influenza)
+  
+  * [Respiratory Syncytial Virus (RSV)](#RSV)
+  
+
 * [**Other Conditions of Note: `r reporting_month`**](#other_tonote)
 
 * [**Notifications Summary Table: `r reporting_month`**](#summary_table)
@@ -166,71 +172,206 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 This section includes all Chief Health Officer Alerts and Advisories issued between `r format(as.Date(epimonth_current), format = "%d %B %Y")` and `r format(as.Date(Sys.Date()), format = "%d %B %Y")`. Surveillance data for Alerts and Advisories issued after `r format(as.Date(epimonth_enddate), format = "%d %B %Y")` will be included in next month's report.
 
-- 15 September: [New measles case in Victoria](https://www.health.vic.gov.au/health-alerts/new-measles-case-in-victoria-4)
+- 23 December: [New measles case in Victoria](https://www.health.vic.gov.au/health-alerts/new-measles-case-in-victoria-4)
+
+- 23 December: [Counterfeit batches of rabies vaccine (Abhayrab) reported in India](https://www.health.vic.gov.au/health-alerts/counterfeit-rabies-vaccine-abhayrab-in-india)
+
+<br/>
+
+:::: {.infobox}
+### Clinical Feature {#clinicalfeature}
+
+**Pre-travel consult? Make measles immunity a priority**
+
+Measles is increasing globally with outbreaks occurring in many popular travel destinations such as Indonesia, Vietnam, New Zealand, UK, USA, Canada, Thailand and surrounding countries. 
+
+Vaccination is the best way to protect against measles, and two doses of a measles-containing vaccine are required to be protected. Under-vaccinated travellers risk both contracting measles and spreading the virus internationally and within Australia. 
+
+Clinicians are encouraged to check the measles immune status of any patient travelling overseas, regardless of the travel destination.  Unlike other travel vaccines, the measles vaccine is provided free by the Victorian state government for: 
+
+- **All adults born on or after 1966 who are missing two doses of a measles-containing vaccine or are unsure of immunity**. It is safe to give another MMR vaccine if a person’s childhood vaccination record is lost. 
+
+- **Infants aged 6 to 12 months** if they are going to a country where measles is circulating.  They will still need their routine 12- and 18-month doses under the National Immunisation Program (NIP) to ensure lifelong immunity.
+
+Primary care practitioners can support pre-travel measles vaccination by: 
+
+- Assessing and offering catch-up MMR vaccination to [eligible adults](https://www.health.vic.gov.au/infectious-diseases/measles#control-measures-for-measles), especially before travel overseas. 
+
+- Offering early MMR vaccine for infants aged 6 to 12 months if traveling to an area with measles circulating.
+
+- Adding state-funded MMR vaccine to your next fortnightly OneLink order. 
+
+- Downloading or printing promotional resources [here](https://nephu.org.au/news-and-events/measles-immunisation-program-launched/) to display at your practice. Free poster printing and delivery is available to practices located within the NEPHU catchment by ordering [here](https://forms.office.com/r/sMY1c3jtW4). 
+
+There is no need to check measles serology prior to vaccination.  
+
+The live-attenuated MMR vaccine is not recommended during pregnancy or for individuals with severe immunocompromise. 
+
+This program supplements the National Immunisation Program (NIP) which offers free Commonwealth funded catch up MMR to people aged less than 20 years and refugees and humanitarian entrants of any age who are not fully immunised. 
+
+<br>
+
+Need more information?
+
+* Visit: [The NEPHU website](https://nephu.org.au/news-and-events/measles-immunisation-program-launched/) 
+
+* Watch: [Response to measles outbreak: Adult measles immunisation program webinar](https://www.youtube.com/watch?v=ng5IxVUD7JA), hosted by EMPHN. The [slideset](https://nephu.org.au/wp-content/uploads/2025/11/Measles_Immunisation_Program-slides.pdf) is also available.
+
+* Read: [Information sheet](https://nephu.org.au/wp-content/uploads/2025/11/NEPHU_Measles_Info.pdf) and [FAQs](https://nephu.org.au/wp-content/uploads/2025/11/NEPHU_Measles_FAQ1.pdf) for clinicians.
+
+* Email: healthprotection.nephu@austin.org.au 
+
+::::
 
 ***
 
 ### Epidemiological Highlights: `r reporting_month` {#epi_highlights}
 
-#### Shigellosis {#shigellosis}
+#### Influenza {#Influenza}
 
 ```{r}
 # Create and format bar chart
 results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = "Shigellosis")
+  f_barchart_dataprep_month_count(condition_name = "Influenza")
 
 results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = "Shigellosis",
+  f_barchart_dataprep_month_mean(condition_name = "Influenza",
                                  data_count     = results_count)
 
 results_mean %>% 
   f_barchart_format_month(ymax    = NA,
-                          ybreaks = 5,
-                          yexpand = 3.5,
+                          ybreaks = 1000,
+                          yexpand = 200,
                           #
                           figure_number = "Figure 1. ",
-                          figure_title  = "Shigellosis")
+                          figure_title  = "Influenza")
 ```
 
-* Higher than expected notifications for shigellosis (n = 22 vs. mean = 13) were received in September 2025 and the number of notifications was higher than in August (n = 18). The notification rate in NEPHU was higher than for the rest of Victoria (15 vs. 9.7 per 100,000).
 
-* Shigellosis is generally a self-limiting bacterial infection caused by *Shigella spp.* but is highly contagious and can be potentially serious.
+* Higher than expected notifications of influenza (n = 2,750 vs. mean = 582) were received in December 2025. The number of notifications was however lower than in November 2025 (n = 3,051).
 
-* Shigellosis is spread through consuming food or water contaminated with the bacteria, touching objects or surfaces contaminated with the bacteria and then touching your mouth, and/or sexual contact with a person who has shigellosis.
+* The notification rate in NEPHU was slightly higher than for the rest of Victoria (1,821 vs. 1,608 per 100,000).
 
-  * People who have travelled to countries where shigellosis is common, men who have sex with men, children, the elderly, and people with immunocompromising conditions are at an increased risk of infection.
+* In Victoria, the number of influenza notifications remains significantly higher than observed at the same time in the previous two years. 
 
-  * The majority of notifications received in September (14/22, 64%) were for people who had recently travelled overseas.
+* Symptoms of influenza include cough, headache, myalgia, lethargy, coryza, sore throat, and fever. Symptoms mostly resolve within 2 to 7 days. 
+  
+    * Work from home and exclusion from school and childcare is recommended until symptoms resolve.
+    
+    * Practicing good hygiene such as frequent handwashing, covering coughs and sneezes, and avoiding close contact with sick individuals can help reduce the spread of influenza.
+    
+* Annual influenza vaccination is recommended for everyone above 6 months of age and is free for high-risk groups.
 
-* People with shigellosis should maintain good hygiene, practice handwashing, avoid preparing food for others, and practice safe sex practices until 48 hours after symptoms resolve.
+  *	See [the Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/influenza-flu-vaccine) for eligibility criteria and recommendations for influenza vaccination
 
-  * People with shigellosis who work in high-risk settings such as food handlers, childcare workers, health care workers, or workers in a residential facility should not return to work until advised by the Local Public Health Unit.
+  *	While protection from influenza vaccination is generally expected to last throughout the year, the highest level of protection occurs in the first 3 to 4 months after vaccination
 
-  * High-risk workers are generally excluded until clearance is obtained via negative faecal specimens, collected no sooner than 48 hours after cessation of antibiotics (if applicable).
+  *	For people who are planning international travel, depending on individual circumstances, a southern hemisphere vaccine administered prior to travel or northern hemisphere influenza vaccine administered overseas should be considered for optimal protection while travelling.
+  
+  * See [ATAGI statement on the administration of seasonal influenza vaccines in 2025](https://www.health.gov.au/sites/default/files/2025-03/atagi-statement-on-the-administration-of-seasonal-influenza-vaccines-in-2025_0.pdf) for more information on influenza vaccination
 
-* Increasing antibiotic resistance is being detected in *Shigella spp.* bacteria. Include a stool culture when testing patients for shigellosis to allow for antibiotic sensitivities to be determined and reserve the use of antibiotic treatment for severe cases.
 
-* If you require more information on shigellosis refer to:
+* For more information on influenza refer to:
 
-  * Victorian Department of Health: [Control Guidelines and Advice - Shigellosis](https://www.health.vic.gov.au/infectious-diseases/shigellosis)
+  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Influenza](https://www.health.vic.gov.au/infectious-diseases/influenza)
 
-  * Better Health Channel: [Gastroenteritis - Shigellosis](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/gastroenteritis-shigella)
+  * Better Health Channel: [Influenza (flu)](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/flu-influenza)
 
+  * Australian Immunisation Handbook: [Influenza (flu)](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/influenza-flu)
+
+***
+
+#### Respiratory Syncytial Virus (RSV) {#RSV}
+
+```{r}
+# Create and format bar chart
+results_count <- cases_allnephu %>%
+  f_barchart_dataprep_month_count(condition_name = "Respiratory Syncytial Virus")
+
+results_mean <- cases_allnephu %>% 
+  f_barchart_dataprep_month_mean(condition_name = "Respiratory Syncytial Virus",
+                                 data_count     = results_count)
+
+results_mean %>% 
+  f_barchart_format_month(ymax    = 3000,
+                          ybreaks = 1000,
+                          yexpand = 200,
+                          #
+                          figure_number = "Figure 2. ",
+                          figure_title  = "Respiratory Syncytial Virus")
+```
+
+
+* Higher than expected notifications of RSV (n = 234 vs. mean = 125) were received in December 2025. The number of notifications was however lower than in November 2025 (n = 258).
+
+* The notification rate in NEPHU was slightly higher than for the rest of Victoria (154.9 vs. 138.6 per 100,000).
+
+*	Most RSV infections are mild and can be treated with symptom relief and rest at home.
+
+* Symptoms of RSV are similar to a common cold and include cough, headache, myalgia, sneezing, sore throat, and runny nose. Symptoms mostly resolve within 1 to 2 weeks. 
+
+	- More severe disease (pneumonia, bronchiolitis) can occur in children aged less than one year and older adults, especially those with underlying health conditions.
+	
+	- RSV infection can exacerbate asthma symptoms.
+
+*	RSV is highly contagious and spreads through airborne droplets when an infected person coughs, sneezes, or talks. It can also spread by touching surfaces contaminated with the virus.
+
+  - People with respiratory symptoms should work from home where possible and stay away from school and public gatherings to prevent spreading the virus to others.
+  
+  - Practicing good hygiene such as frequent handwashing, covering coughs and sneezes, and avoiding close contact with sick individuals can help reduce the spread of RSV.
+
+
+* RSV vaccination is recommended for: 
+  - Pregnant women at 28-36 weeks of pregnancy (available free under the National Immunisation Program (NIP))
+  - People aged 75 years and older and Aboriginal and Torres Strait Islander people aged 60 years and older
+  - People with medical risk factors for severe RSV disease aged 60 years and older.
+
+  *	See [The Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/respiratory-syncytial-virus-rsv-vaccine) for eligibility criteria and recommendations for RSV vaccination
+
+
+* For more information on RSV refer to:
+
+  * Victorian Department of Health: [Respiratory syncytial virus (RSV)](https://www.healthtranslations.vic.gov.au/resources/respiratory-syncytial-virus-rsv)
+
+  * Better Health Channel: [Respiratory syncytial virus (RSV)](https://www.betterhealth.vic.gov.au/respiratory-syncytial-virus-rsv)
+  
+  * Kids Health Information: [Respiratory syncytial virus (RSV)](https://www.rch.org.au/kidsinfo/fact_sheets/Respiratory_syncytial_virus_RSV/)
+
+  * Australian Immunisation Handbook: [Respiratory syncytial virus (RSV)](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/respiratory-syncytial-virus-rsv)
+  
+  
 ***
 
 ### Other Conditions of Note: `r reporting_month` {#other_tonote}
 
-* **Influenza**, **Respiratory Syncytial Virus (RSV)**, and **COVID-19** notifications have continued to decrease in September 2025 after peaking in July.
+* A higher number of notifications for **invasive Group A *Streptococcus* (iGAS)** (n = 12) were received this month compared to November (n = 6). An increase in the number of notifications were reported in people aged 45 years and above.
 
-  * Influenza notifications decreased from 4,688 in August to 3,559 in September, but remain above the expected number for this time of year (n = 1,175).
-  
-  * RSV notifications decreased from 1,744 in August to 932 in September, but remain above the expected number for this time of year (n = 448).
-  
-  * COVID-19 notifications decreased from 1,000 in August to 643 in September. Due to changes in the reporting systems used for COVID-19 data in Victoria, historical data for COVID-19 are not available to calculate the expected number of notifications for this report.
-  
-* One notification of ***Haemophilus influenzae*** **Type B (HiB)** was received in September 2025, for a female aged >65 years. This was the first HiB notification for a resident of the NEPHU catchment since 2017. HiB cases are now rare in Australia since the addition of the HiB vaccine to the [routine immunisation schedule](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/haemophilus-influenzae-type-b-hib) in 1993.
+  - Early detection and treatment of non-invasive GAS infections such as throat and skin infections may help prevent against the development of severe invasive disease. 
 
-* One notification of ***Candida auris*** was received in September 2025, for a male aged >65 years with multiple comorbidities and a history of receiving medical care overseas. *C. auris* is a fungus that can cause serious infections such as bloodstream and wound infections, particularly in those who are [immunocompromised or have other underlying medical conditions](https://pmc.ncbi.nlm.nih.gov/articles/PMC10532978/). Although uncommon in Australia, *C. auris* is considered an emerging multi-drug resistant organism that is a significant public health threat.
+  - Residential and institutional settings may reduce the risk of infections and spread by following infection prevention and control practices and encouraging good hygiene practices in clients, staff and visitors. 
+
+  - For more information on iGAS refer to: 
+
+    - [Victorian Department of Health: Invasive Group A streptococcal disease](https://www.health.vic.gov.au/infectious-diseases/invasive-group-a-streptococcal-disease-igas)  
+
+    - [Better Health Channel: Streptococcal infection](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/streptococcal-infection-group-a) 
+
+* One **diphtheria** notification in a female aged 60-65 years was received in December 2025 which was overseas acquired.  The last notification of diphtheria in NEPHU was in 2017. The best prevention against diphtheria is immunisation. 
+  - This is provided free as routine vaccination for infants, children and adolescents under the National Immunisation Program (NIP). 
+  
+  - A course of diphtheria-containing vaccines is recommended for adults who have never been vaccinated against diphtheria. 
+  
+  - Adults who have been fully vaccinated in the past are recommended to receive a booster dose at the age of 50 years unless a booster dose has been documented in the previous 10 years. Adults should receive this dose as the combined diphtheria-tetanus-pertussis (DTP) vaccine which also protects against pertussis (whooping cough) and tetanus. 
+  
+  - For more information on diphtheria refer to: 
+  
+    - [Better Health Channel: Diphtheria](https://www.betterhealth.vic.gov.au/health/healthyliving/diphtheria)
+  
+    - [Victorian Department of Health: Diphtheria](https://www.health.vic.gov.au/infectious-diseases/diphtheria)
+  
+    - [Australian Immunisation Handbook: Diphtheria](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/diphtheria)
+
+* One notification of **measles** was received in December 2025 after two months of no measles notifications in NEPHU. The case reported travel to Indonesia. (See [Clinical Feature](#clinicalfeature) above for information on pre-travel advice for measles vaccination)
 
 ***
 
