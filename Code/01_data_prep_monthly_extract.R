@@ -1,6 +1,6 @@
 # NEPHU Monthly Surveillance Report
 # Author: Alana Little, NEPHU (alana.little@austin.org.au)
-# Version 3.0 08/10/2025
+# Version 4.0 04/02/2025
 
 # PHAR data extraction for internal (full) and external (summary) versions of monthly surveillance report
 
@@ -14,7 +14,7 @@ source(paste0(here::here(), "/Code", "/01_data_prep_monthly_setup.R"))
 ################################################################################
 # Connect to PHAR
 # Note: useProxy = 1 when in Austin offices, useProxy = 0 when WFH
-con <- DBI::dbConnect(odbc::odbc(), "PHAR", useProxy = 1, EnableQueryResultDownload = 0)
+con <- DBI::dbConnect(odbc::odbc(), "PHAR", useProxy = 0, EnableQueryResultDownload = 0)
 
 # NEPHU cases for entire lookback period
 phar_nephu <- DBI::dbGetQuery(con,
@@ -61,7 +61,10 @@ reference_conditions <- readxl::read_xlsx(paste0(here::here(), "/Data", "/Refere
                                                   TRUE ~ "No"),
                 #
                 three_years_data = dplyr::case_when(epimonth_enddate > date_made_notifiable + years(3) ~ "Yes",
-                                                    TRUE ~ "No"))
+                                                    TRUE ~ "No"),
+                #
+                four_years_data = dplyr::case_when(epimonth_enddate > date_made_notifiable + years(4) ~ "Yes",
+                                                   TRUE ~ "No"))
 
 ################################################################################
 # Data wrangling - NEPHU cases
@@ -73,7 +76,7 @@ cases_allnephu <- phar_nephu %>%
     condition = dplyr::case_when(
       organism_cause == "Legionella longbeachae" ~ "Legionella longbeachae",
       condition == "Legionellosis"               ~ "Legionella pneumophila",
-      TRUE                                       ~ condition)) %>%
+      TRUE ~ condition)) %>%
   #
   dplyr::left_join(phar_risk, by = "event_id") %>% 
   #
@@ -187,7 +190,8 @@ cases_allnephu <- cases_allnephu %>%
                 reporting_group,
                 one_years_data,
                 two_years_data,
-                three_years_data)
+                three_years_data,
+                four_years_data)
 
 ################################################################################
 # Data wrangling - VIC cases
@@ -199,7 +203,7 @@ cases_allvic <- phar_vic %>%
     condition = dplyr::case_when(
       organism_cause == "Legionella longbeachae" ~ "Legionella longbeachae",
       condition == "Legionellosis"               ~ "Legionella pneumophila",
-      TRUE                                       ~ condition)) %>%
+      TRUE ~ condition)) %>%
   #
   dplyr::distinct(event_id, .keep_all = TRUE) %>% 
   #
@@ -242,7 +246,8 @@ cases_allvic <- cases_allvic %>%
                 reporting_group,
                 one_years_data,
                 two_years_data,
-                three_years_data)
+                three_years_data,
+                four_years_data)
 
 ################################################################################
 # Save data extracts for further analyses

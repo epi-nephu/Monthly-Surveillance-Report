@@ -1,6 +1,6 @@
 # NEPHU Monthly Surveillance Report
 # Author: Alana Little, NEPHU (alana.little@austin.org.au)
-# Version 2.0 13/01/2025
+# Version 4.0 04/02/2025
 
 # Code to prepare data for and format summary tables
 
@@ -37,7 +37,7 @@ f_table_dataprep_count <- function(data, conditions) {
 
 }
 
-# Monthly means and SDs for three-year lookback period -------------------------
+# Monthly means and SDs for four-year lookback period -------------------------
 # High volume conditions
 f_table_dataprep_mean_highvolume <- function(data, conditions) {
   
@@ -70,10 +70,10 @@ f_table_dataprep_mean_highvolume <- function(data, conditions) {
 f_table_dataprep_mean_lowvolume <- function(data, conditions) {
   
   data_mean <- data %>% 
-    dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>%
+    dplyr::filter(event_yearmonth >= epimonth_current - months(48) & event_yearmonth < epimonth_current) %>%
     #
     dplyr::mutate(event_year = factor(event_year,
-                                      levels = c(ytd_three_year)),
+                                      levels = c(ytd_four_year)),
                   #
                   event_month = factor(event_month,
                                        levels = c("Jan", "Feb", "Mar", "Apr", "May", "Jun",
@@ -159,8 +159,8 @@ f_table_dataprep_ytd <- function(data, conditions) {
     dplyr::summarise(
       n_ytd_current = sum(event_year == ytd_current & event_month %in% epimonth_ytd),
       n_ytd_minus1  = sum(event_year == ytd_minus1 & event_month %in% epimonth_ytd),
-      n_ytd_allyr   = sum(event_year %in% ytd_three_year & event_month %in% epimonth_ytd),
-      mean_ytd      = n_ytd_allyr / 3) %>% 
+      n_ytd_allyr   = sum(event_year %in% ytd_four_year & event_month %in% epimonth_ytd),
+      mean_ytd      = n_ytd_allyr / 4) %>% 
     dplyr::ungroup() %>% 
     #
     tidyr::complete(condition_label,
@@ -178,7 +178,7 @@ f_table_dataprep_ytd <- function(data, conditions) {
       dplyr::select(reference_conditions, 
                     condition_label, 
                     one_years_data, 
-                    three_years_data),
+                    four_years_data),
       by = "condition_label") %>%
     #
     replace(is.na(.), 0) %>%
@@ -187,7 +187,7 @@ f_table_dataprep_ytd <- function(data, conditions) {
       n_ytd_minus1 = dplyr::case_when(one_years_data == "No" ~ NA_integer_,
                                       TRUE ~ n_ytd_minus1),
       #
-      mean_ytd = dplyr::case_when(three_years_data == "No" ~ NA_integer_,
+      mean_ytd = dplyr::case_when(four_years_data == "No" ~ NA_integer_,
                                   TRUE ~ mean_ytd)) %>% 
     #
     dplyr::select(condition_label,

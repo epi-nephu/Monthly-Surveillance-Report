@@ -1,11 +1,11 @@
 # NEPHU Monthly Surveillance Report
 # Author: Alana Little, NEPHU (alana.little@austin.org.au)
-# Version 2.0 13/01/2025
+# Version 4.0 04/02/2025
 
 # Code to prepare data for and format age pyramids
 
 # Create and format age pyramid ------------------------------------------------
-f_pyramid_format <- function(data, charttitle) {
+f_pyramid_format <- function(data, chart_title) {
   
   figure <- data %>% 
     apyramid::age_pyramid(age_group     = age_10year,
@@ -13,7 +13,7 @@ f_pyramid_format <- function(data, charttitle) {
                           show_midpoint = FALSE,
                           pal           = c(nephu_blue, nephu_peach)) +
     #
-    labs(title = paste0(charttitle, " age and sex distribution, ", "NEPHU, ",
+    labs(title = paste0(chart_title, " age and sex distribution, ", "NEPHU, ",
                         format(ribbon_start, format = "%b %Y"),
                         " to ",
                         format(epimonth_current, format = "%b %Y")),

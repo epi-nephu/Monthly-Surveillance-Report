@@ -21,11 +21,11 @@ conditionstext_list <- reference_conditions %>%
   dplyr::distinct(text_label) %>% 
   pull(text_label)
 
-# Are there three years of historical data available?
+# Are there four years of historical data available?
 historical_data <- reference_conditions %>% 
   dplyr::filter(reporting_group == conditions) %>% 
   dplyr::arrange(condition_label) %>% 
-  pull(three_years_data)
+  pull(four_years_data)
 ```
 
 
@@ -46,13 +46,13 @@ total_n_ribbon <- cases_allnephu %>%
   #
   pull(n)
 
-# Total number of cases during three-year post-COVID lookback period
-total_n_three_year <- cases_allnephu %>% 
+# Total number of cases during four-year post-COVID lookback period
+total_n_four_year <- cases_allnephu %>% 
   dplyr::mutate(condition_label = factor(condition_label,
                                          levels = conditions_list)) %>%
   #
   dplyr::filter(condition_label %in% conditions_list) %>% 
-  dplyr::filter(event_yearmonth > epimonth_current - months(36) & event_yearmonth <= epimonth_current) %>% 
+  dplyr::filter(event_yearmonth > epimonth_current - months(48) & event_yearmonth <= epimonth_current) %>% 
   #
   dplyr::group_by(condition_label) %>% 
   dplyr::summarise(n = n()) %>%
@@ -63,13 +63,13 @@ total_n_three_year <- cases_allnephu %>%
   #
   pull(n)
 
-# Mean cases per calendar year during three-year post-COVID lookback period
-mean_three_year <- cases_allnephu %>% 
+# Mean cases per calendar year during four-year post-COVID lookback period
+mean_four_year <- cases_allnephu %>% 
   dplyr::mutate(condition_label = factor(condition_label,
                                          levels = conditions_list)) %>%
   #
   dplyr::filter(condition_label %in% conditions_list) %>%
-  dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>% 
+  dplyr::filter(event_yearmonth >= epimonth_current - months(48) & event_yearmonth < epimonth_current) %>% 
   #
   dplyr::group_by(condition_label) %>% 
   dplyr::summarise(n = n()) %>%
@@ -78,17 +78,17 @@ mean_three_year <- cases_allnephu %>%
   tidyr::complete(condition_label,
                   fill = list(n = 0)) %>% 
   #
-  dplyr::mutate(mean = n / 3) %>% 
+  dplyr::mutate(mean = n / 4) %>% 
   #
   pull(mean)
 
-# High vs. low volume conditions during three-year post-COVID lookback period
+# High vs. low volume conditions during four-year post-COVID lookback period
 volume_high <- cases_allnephu %>% 
   dplyr::mutate(condition_label = factor(condition_label,
                                          levels = conditions_list)) %>%
   #
   dplyr::filter(condition_label %in% conditions_list) %>%
-  dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>% 
+  dplyr::filter(event_yearmonth >= epimonth_current - months(48) & event_yearmonth < epimonth_current) %>% 
   #
   dplyr::group_by(condition_label) %>% 
   dplyr::summarise(n = n()) %>%
@@ -97,7 +97,7 @@ volume_high <- cases_allnephu %>%
   tidyr::complete(condition_label,
                   fill = list(n = 0)) %>% 
   #
-  dplyr::mutate(mean = n / 3,
+  dplyr::mutate(mean = n / 4,
                 #
                 condition_label = as.character(condition_label)) %>% 
   #
@@ -110,7 +110,7 @@ volume_low <- cases_allnephu %>%
                                          levels = conditions_list)) %>%
   #
   dplyr::filter(condition_label %in% conditions_list) %>%
-  dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>% 
+  dplyr::filter(event_yearmonth >= epimonth_current - months(48) & event_yearmonth < epimonth_current) %>% 
   #
   dplyr::group_by(condition_label) %>% 
   dplyr::summarise(n = n()) %>%
@@ -119,7 +119,7 @@ volume_low <- cases_allnephu %>%
   tidyr::complete(condition_label,
                   fill = list(n = 0)) %>% 
   #
-  dplyr::mutate(mean = n / 3,
+  dplyr::mutate(mean = n / 4,
                 #
                 condition_label = as.character(condition_label)) %>% 
   #
@@ -155,14 +155,33 @@ chart_max_n <- cases_allnephu %>%
   #
   pull(n)
 
-# Bar charts: y-axis maximum limits
-chart_ymax <- dplyr::case_when(
-  chart_max_n <= 5 ~ 5,
-  TRUE ~ chart_max_n)
-
-# Bar charts: y-axis expansion
-chart_yexpand <- dplyr::case_when(
-  chart_max_n <= 5 ~ 0.5,
-  TRUE ~ chart_max_n * 0.2)
+# # Bar charts: y-axis maximum limits
+# chart_ymax <- dplyr::case_when(
+#   chart_max_n <= 5   ~ 5.125,
+#   chart_max_n <= 10  ~ (ceiling(chart_max_n / 1) * 1) + (chart_max_n * 0.05),
+#   chart_max_n <= 50  ~ (ceiling(chart_max_n / 5) * 5) + (chart_max_n * 0.05),
+#   chart_max_n <= 100 ~ (ceiling(chart_max_n / 10) * 10) + (chart_max_n * 0.05),
+#   chart_max_n <= 200 ~ (ceiling(chart_max_n / 20) * 20) + (chart_max_n * 0.05),
+#   chart_max_n <= 500 ~ (ceiling(chart_max_n / 50) * 50) + (chart_max_n * 0.05),
+#   chart_max_n <= 1000 ~ (ceiling(chart_max_n / 100) * 100) + (chart_max_n * 0.05),
+#   chart_max_n <= 5000 ~ (ceiling(chart_max_n / 500) * 500) + (chart_max_n * 0.05),
+#   chart_max_n <= 10000 ~ (ceiling(chart_max_n / 1000) * 1000) + (chart_max_n * 0.05),
+#   chart_max_n <= 20000 ~ (ceiling(chart_max_n / 2000) * 2000) + (chart_max_n * 0.05),
+#   chart_max_n <= 50000 ~ (ceiling(chart_max_n / 5000) * 5000) + (chart_max_n * 0.05),
+#   TRUE ~ NA)
+# 
+# # Bar charts: y-axis breaks
+# chart_ybreaks <- dplyr::case_when(
+#   chart_max_n <= 10  ~ 1,
+#   chart_max_n <= 50  ~ 5,
+#   chart_max_n <= 100 ~ 10,
+#   chart_max_n <= 200 ~ 20,
+#   chart_max_n <= 500 ~ 50,
+#   chart_max_n <= 1000 ~ 100,
+#   chart_max_n <= 5000 ~ 500,
+#   chart_max_n <= 10000 ~ 1000,
+#   chart_max_n <= 20000 ~ 2000,
+#   chart_max_n <= 50000 ~ 5000,
+#   TRUE ~ NA)
 ```
 

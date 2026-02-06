@@ -1,6 +1,6 @@
 # NEPHU Monthly Surveillance Report
 # Author: Alana Little, NEPHU (alana.little@austin.org.au)
-# Version 2.0 13/01/2025
+# Version 4.0 04/02/2025
 
 # Code to prepare data for and format bar charts
 
@@ -10,9 +10,10 @@ f_barchart_dataprep_year <- function(data,
   
   data_year <- data %>%
     dplyr::filter(condition_label == condition_name) %>%
+    dplyr::filter(event_year %in% ytd_bar) %>% 
     #
     dplyr::mutate(event_year = factor(event_year,
-                                      levels = c(ytd_ribbon))) %>% 
+                                      levels = c(ytd_bar))) %>% 
     #
     dplyr::group_by(event_year) %>% 
     dplyr::summarise(n = n()) %>% 
@@ -26,19 +27,48 @@ f_barchart_dataprep_year <- function(data,
 }
 
 # Create and format bar chart - cases per year ---------------------------------
-f_barchart_format_year <- function(data, ymax, yexpand, charttitle) {
+f_barchart_format_year <- function(data, chart_max_n, chart_title) {
   
   figure <- data %>%
     ggplot(aes(x = event_year, y = n)) +
     #
     geom_col(fill = nephu_green) +
     #
-    scale_y_continuous(limits = c(0, ymax),
-                       expand = expansion(add = c(0, yexpand)),
-                       breaks = scales::breaks_extended(n = 5)) +
+    # scale_y_continuous(limits = c(0, chart_ymax),
+    #                    breaks = scales::breaks_width(chart_ybreaks),
+    #                    expand = expansion(add = c(0, 0))) +
     #
-    labs(title = paste0(charttitle, " in NEPHU, ",
-                        format(as.Date(paste0(ytd_ribbon[1], "-01", "-01")), format = "%b %Y"),
+    scale_y_continuous(limits = c(0, dplyr::case_when(chart_max_n <= 5     ~ 5.125,
+                                                      chart_max_n <= 10    ~ (ceiling(chart_max_n / 1) * 1) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 50    ~ (ceiling(chart_max_n / 5) * 5) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 100   ~ (ceiling(chart_max_n / 10) * 10) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 200   ~ (ceiling(chart_max_n / 20) * 20) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 500   ~ (ceiling(chart_max_n / 50) * 50) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 1000  ~ (ceiling(chart_max_n / 100) * 100) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 2500  ~ (ceiling(chart_max_n / 250) * 250) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 5000  ~ (ceiling(chart_max_n / 500) * 500) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 10000 ~ (ceiling(chart_max_n / 1000) * 1000) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 20000 ~ (ceiling(chart_max_n / 2000) * 2000) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 50000 ~ (ceiling(chart_max_n / 5000) * 5000) + (chart_max_n * 0.05),
+                                                      TRUE ~ NA)),
+                       #
+                       breaks = scales::breaks_width(dplyr::case_when(chart_max_n <= 10    ~ 1,
+                                                                      chart_max_n <= 50    ~ 5,
+                                                                      chart_max_n <= 100   ~ 10,
+                                                                      chart_max_n <= 200   ~ 20,
+                                                                      chart_max_n <= 500   ~ 50,
+                                                                      chart_max_n <= 1000  ~ 100,
+                                                                      chart_max_n <= 2500  ~ 250,
+                                                                      chart_max_n <= 5000  ~ 500,
+                                                                      chart_max_n <= 10000 ~ 1000,
+                                                                      chart_max_n <= 20000 ~ 2000,
+                                                                      chart_max_n <= 50000 ~ 5000,
+                                                                      TRUE ~ NA)),
+                       #
+                       expand = expansion(add = c(0, 0))) +
+    #
+    labs(title = paste0(chart_title, " in NEPHU, ",
+                        format(as.Date(paste0(ytd_bar[1], "-01", "-01")), format = "%b %Y"),
                         " to ",
                         format(epimonth_current, format = "%b %Y")),
          #
@@ -52,7 +82,7 @@ f_barchart_format_year <- function(data, ymax, yexpand, charttitle) {
                                              face  = "bold",
                                              hjust = 0),
           #
-          plot.margin  = margin(5, 5, 0, 5),
+          plot.margin = margin(5, 5, 0, 5),
           #
           axis.title   = element_text(size = 9),
           axis.title.y = element_text(margin = margin(0, 10, 0, 0)),
@@ -85,18 +115,18 @@ f_barchart_dataprep_month_count <- function(data, condition_name) {
 # Mean number of cases per month -----------------------------------------------
 f_barchart_dataprep_month_mean <- function(data, data_count, condition_name) {
   
-  three_years_data <- data %>% 
+  four_years_data <- data %>% 
     dplyr::filter(condition_label == condition_name) %>% 
-    dplyr::select(three_years_data) %>% 
+    dplyr::select(four_years_data) %>% 
     unique()
   
   volume <- data %>% 
     dplyr::filter(condition_label == condition_name) %>% 
-    dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>% 
+    dplyr::filter(event_yearmonth >= epimonth_current - months(48) & event_yearmonth < epimonth_current) %>% 
     #
     dplyr::summarise(n = n()) %>%
     #
-    dplyr::mutate(mean = n / 3) %>% 
+    dplyr::mutate(mean = n / 4) %>% 
     #
     dplyr::mutate(volume = dplyr::case_when(
       mean < high_volume ~ "Low volume",
@@ -114,7 +144,7 @@ f_barchart_dataprep_month_mean <- function(data, data_count, condition_name) {
       dplyr::mutate(
         mean = sapply(seq_along(event_yearmonth), function(i) {
           #
-          rolling_months <- event_yearmonth[i] + months(-c(11:13, 23:25, 35:37))
+          rolling_months <- event_yearmonth[i] + months(-c(11:13, 23:25, 35:37, 47:49))
           #
           rolling_values <- data_count$n[data_count$event_yearmonth %in% rolling_months]
           mean(rolling_values, na.rm = TRUE)
@@ -124,7 +154,7 @@ f_barchart_dataprep_month_mean <- function(data, data_count, condition_name) {
       dplyr::ungroup() %>%
       #
       dplyr::mutate(mean = dplyr::case_when(
-        three_years_data == "No" ~ NA_integer_,
+        four_years_data == "No" ~ NA_integer_,
         TRUE ~ mean)) %>% 
       #
       dplyr::slice_tail(n = 12)
@@ -132,7 +162,7 @@ f_barchart_dataprep_month_mean <- function(data, data_count, condition_name) {
   } else {
     
     data_mean <- data_count %>% 
-      dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>%
+      dplyr::filter(event_yearmonth >= epimonth_current - months(48) & event_yearmonth < epimonth_current) %>%
       #
       dplyr::mutate(mean = mean(n, na.rm = TRUE)) %>%
       #

@@ -1,6 +1,6 @@
 # NEPHU Monthly Surveillance Report
 # Author: Alana Little, NEPHU (alana.little@austin.org.au)
-# Version 2.0 13/01/2025
+# Version 4.0 04/02/2025
 
 # Code to prepare data for and format notification rate maps
 
@@ -23,7 +23,7 @@ f_map_dataprep <- function(data, data_reference) {
 }
 
 # Create and format map --------------------------------------------------------
-f_map_format <- function(data, data_shape, charttitle) {
+f_map_format <- function(data, data_shape, chart_title) {
   
   figure <- ggplot(data) +
     geom_sf(aes(fill = rate), color = "black") +
@@ -58,7 +58,7 @@ f_map_format <- function(data, data_shape, charttitle) {
                  nudge_x = 0.03, 
                  nudge_y = -0.01) + 
     #
-    labs(title = paste0(charttitle, " notification rate by LGA, ", "NEPHU, ",
+    labs(title = paste0(chart_title, " notification rate by LGA, ", "NEPHU, ",
                         format(ribbon_start, format = "%b %Y"),
                         " to ",
                         format(epimonth_current, format = "%b %Y"))) +

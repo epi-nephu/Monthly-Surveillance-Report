@@ -1,6 +1,6 @@
 # NEPHU Monthly Surveillance Report
 # Author: Alana Little, NEPHU (alana.little@austin.org.au)
-# Version 2.0 13/01/2025
+# Version 4.0 04/02/2025
 
 # Code to prepare data for and format ribbon plots
 
@@ -90,7 +90,7 @@ f_ribbon_dataprep_mean_highvolume <- function(data, variable) {
         #
         #current_var    <- data[[var_name]][i]
         current_month  <- event_yearmonth[i]
-        rolling_months <- event_yearmonth[i] + months(-c(11:13, 23:25, 35:37))
+        rolling_months <- event_yearmonth[i] + months(-c(11:13, 23:25, 35:37, 47:49))
         # 
         rolling_values <- n[event_yearmonth %in% rolling_months]
         mean(rolling_values, na.rm = TRUE)
@@ -101,7 +101,7 @@ f_ribbon_dataprep_mean_highvolume <- function(data, variable) {
         # 
         #current_var    <- data[[var_name]][i]
         current_month  <- event_yearmonth[i]
-        rolling_months <- event_yearmonth[i] + months(-c(11:13, 23:25, 35:37))
+        rolling_months <- event_yearmonth[i] + months(-c(11:13, 23:25, 35:37, 47:49))
         #
         rolling_values <- n[event_yearmonth %in% rolling_months]
         sd(rolling_values, na.rm = TRUE)
@@ -126,7 +126,7 @@ f_ribbon_dataprep_mean_lowvolume <- function(data, variable) {
   variable <- rlang::enquo(variable)
   
   data_mean <- data %>% 
-    dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>%
+    dplyr::filter(event_yearmonth >= epimonth_current - months(48) & event_yearmonth < epimonth_current) %>%
     #
     dplyr::group_by(!!variable) %>% 
     dplyr::mutate(mean = mean(n, na.rm = TRUE),
@@ -148,7 +148,20 @@ f_ribbon_dataprep_mean_lowvolume <- function(data, variable) {
 
 # Create and format ribbon chart -----------------------------------------------
 # Historical data available
-f_ribbon_format_historical_yes <- function(data, charttitle) {
+f_ribbon_format_historical_yes <- function(data, chart_title) {
+  
+  max_sd <- max(data$limit_sd_upper)
+  
+  max_n <- data %>% 
+    dplyr::filter(event_yearmonth < epimonth_current) %>%
+    #
+    dplyr::arrange(desc(n)) %>%
+    #
+    dplyr::slice(1) %>%
+    #
+    pull(n)
+  
+  chart_max_n <- max(max_n, max_sd)
   
   figure <- ggplot(data = data,
                    aes(x = event_yearmonth)) +
@@ -172,6 +185,37 @@ f_ribbon_format_historical_yes <- function(data, charttitle) {
                  date_labels = "%b %Y", 
                  breaks      = "3 month") +
     #
+    scale_y_continuous(limits = c(0, dplyr::case_when(chart_max_n <= 1   ~ 1.005,
+                                                      chart_max_n <= 2.5 ~ 2.5625,
+                                                      chart_max_n <= 5   ~ 5.125,
+                                                      chart_max_n <= 10  ~ (ceiling(chart_max_n / 1) * 1) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 50  ~ (ceiling(chart_max_n / 5) * 5) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 100 ~ (ceiling(chart_max_n / 10) * 10) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 200 ~ (ceiling(chart_max_n / 20) * 20) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 500 ~ (ceiling(chart_max_n / 50) * 50) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 1000 ~ (ceiling(chart_max_n / 100) * 100) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 2500 ~ (ceiling(chart_max_n / 250) * 250) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 5000 ~ (ceiling(chart_max_n / 500) * 500) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 10000 ~ (ceiling(chart_max_n / 1000) * 1000) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 20000 ~ (ceiling(chart_max_n / 2000) * 2000) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 50000 ~ (ceiling(chart_max_n / 5000) * 5000) + (chart_max_n * 0.05),
+                                                      TRUE ~ NA)),
+                       #
+                       breaks = scales::breaks_width(dplyr::case_when(chart_max_n <= 1   ~ 0.25,
+                                                                      chart_max_n <= 2.5 ~ 0.5,
+                                                                      chart_max_n <= 10  ~ 1,
+                                                                      chart_max_n <= 50  ~ 5,
+                                                                      chart_max_n <= 100 ~ 10,
+                                                                      chart_max_n <= 200 ~ 20,
+                                                                      chart_max_n <= 500 ~ 50,
+                                                                      chart_max_n <= 1000 ~ 100,
+                                                                      chart_max_n <= 2500 ~ 250,
+                                                                      chart_max_n <= 5000 ~ 500,
+                                                                      chart_max_n <= 10000 ~ 1000,
+                                                                      chart_max_n <= 20000 ~ 2000,
+                                                                      chart_max_n <= 50000 ~ 5000,
+                                                                      TRUE ~ NA))) +
+    #
     scale_colour_manual(values = c("Mean number of cases"     = nephu_blue,
                                    "Observed number of cases" = nephu_green),
                         breaks = c("Observed number of cases", "Mean number of cases")) +
@@ -182,7 +226,7 @@ f_ribbon_format_historical_yes <- function(data, charttitle) {
     guides(colour = guide_legend(order = 1),
            fill   = guide_legend(order = 2)) +
     #
-    labs(title = paste0(charttitle, " in NEPHU, ",
+    labs(title = paste0(chart_title, " in NEPHU, ",
                         format(ribbon_start, format = "%b %Y"),
                         " to ",
                         format(epimonth_current, format = "%b %Y")),
@@ -215,7 +259,16 @@ f_ribbon_format_historical_yes <- function(data, charttitle) {
 
 # Create and format ribbon chart -----------------------------------------------
 # Historical data not available
-f_ribbon_format_historical_no <- function(data, charttitle) {
+f_ribbon_format_historical_no <- function(data, chart_title) {
+  
+  chart_max_n <- data %>% 
+    dplyr::filter(event_yearmonth < epimonth_current) %>%
+    #
+    dplyr::arrange(desc(n)) %>%
+    #
+    dplyr::slice(1) %>%
+    #
+    pull(n)
   
   figure <- data %>%
     dplyr::filter(event_yearmonth >= ribbon_start) %>% 
@@ -230,9 +283,40 @@ f_ribbon_format_historical_no <- function(data, charttitle) {
                  date_labels = "%b %Y", 
                  breaks      = "3 month") +
     #
+    scale_y_continuous(limits = c(0, dplyr::case_when(chart_max_n <= 1   ~ 1.005,
+                                                      chart_max_n <= 2.5 ~ 2.5625,
+                                                      chart_max_n <= 5   ~ 5.125,
+                                                      chart_max_n <= 10  ~ (ceiling(chart_max_n / 1) * 1) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 50  ~ (ceiling(chart_max_n / 5) * 5) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 100 ~ (ceiling(chart_max_n / 10) * 10) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 200 ~ (ceiling(chart_max_n / 20) * 20) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 500 ~ (ceiling(chart_max_n / 50) * 50) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 1000 ~ (ceiling(chart_max_n / 100) * 100) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 2500 ~ (ceiling(chart_max_n / 250) * 250) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 5000 ~ (ceiling(chart_max_n / 500) * 500) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 10000 ~ (ceiling(chart_max_n / 1000) * 1000) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 20000 ~ (ceiling(chart_max_n / 2000) * 2000) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 50000 ~ (ceiling(chart_max_n / 5000) * 5000) + (chart_max_n * 0.05),
+                                                      TRUE ~ NA)),
+                       #
+                       breaks = scales::breaks_width(dplyr::case_when(chart_max_n <= 1   ~ 0.25,
+                                                                      chart_max_n <= 2.5 ~ 0.5,
+                                                                      chart_max_n <= 10  ~ 1,
+                                                                      chart_max_n <= 50  ~ 5,
+                                                                      chart_max_n <= 100 ~ 10,
+                                                                      chart_max_n <= 200 ~ 20,
+                                                                      chart_max_n <= 500 ~ 50,
+                                                                      chart_max_n <= 1000 ~ 100,
+                                                                      chart_max_n <= 2500 ~ 250,
+                                                                      chart_max_n <= 5000 ~ 500,
+                                                                      chart_max_n <= 10000 ~ 1000,
+                                                                      chart_max_n <= 20000 ~ 2000,
+                                                                      chart_max_n <= 50000 ~ 5000,
+                                                                      TRUE ~ NA))) +
+    #
     scale_colour_manual(values = c("Observed number of cases" = nephu_green)) +
     #
-    labs(title = paste0(charttitle, " in NEPHU, ",
+    labs(title = paste0(chart_title, " in NEPHU, ",
                         format(ribbon_start, format = "%b %Y"),
                         " to ",
                         format(epimonth_current, format = "%b %Y")),

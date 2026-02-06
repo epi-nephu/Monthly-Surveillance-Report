@@ -1,5 +1,5 @@
 ---
-title: 'NEPHU Monthly Surveillance Report - Internal - December 2025'
+title: 'NEPHU Monthly Surveillance Report - Internal - January 2026'
 output: 
   html_document: 
     code_folding: none
@@ -8,7 +8,7 @@ output:
     toc_float: true
     self_contained: true
 knit: (function(input, ...) {
-  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2025 12 Internal", output_dir = "../Reports") })
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 01 Internal", output_dir = "../Reports") })
   
 ---
 
@@ -150,12 +150,12 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
     
-  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -186,17 +186,17 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
 
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "No") {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -247,12 +247,12 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
     
-  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -283,17 +283,17 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
 
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "No") {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -344,12 +344,12 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
     
-  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -380,17 +380,17 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
 
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "No") {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -441,12 +441,12 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
     
-  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -477,17 +477,17 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
 
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "No") {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -538,12 +538,12 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
     
-  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -574,17 +574,17 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
 
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "No") {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -635,12 +635,12 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
     
-  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -671,17 +671,17 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
 
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "No") {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -732,12 +732,12 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
     
-  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -768,17 +768,17 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
 
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "No") {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -829,12 +829,12 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
     
-  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -865,17 +865,17 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
 
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "No") {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -926,12 +926,12 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
     
-  } else if (historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02c_analyses_summary_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -962,17 +962,17 @@ results <- list()
 
 for(i in seq_along(conditions_list)) {
   
-  if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] >= high_volume) {
+  if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] >= high_volume) {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_highvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "Yes" & mean_three_year[i] < high_volume) {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "Yes" & mean_four_year[i] < high_volume) {
 
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_lowvolume.Rmd"), 
                                       quiet = TRUE, envir = environment())
 
-  } else if (total_n_three_year[i] > 0 & historical_data[i] == "No") {
+  } else if (total_n_four_year[i] > 0 & historical_data[i] == "No") {
     
     results[[i]] <- knitr::knit_child(here::here("Code", "Child Rmds", "02d_analyses_detailed_nohistorical.Rmd"), 
                                       quiet = TRUE, envir = environment())
@@ -1011,21 +1011,21 @@ cat(unlist(results), sep = '\n')
 
 * Case definitions for each notifiable condition included in this report can be found on the [Communicable Diseases Network Australia website](https://www.health.gov.au/resources/collections/cdna-surveillance-case-definitions).
 
-* Monthly and year-to-date notifications are compared to a historical three year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+* Monthly and year-to-date notifications are compared to a historical four year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
 
     * A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the three-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause variation.
     
     * Sporadic notifications where the condition has not been notified in NEPHU for at least 12 months are noted.
 
-* For high-volume conditions (`r high_volume` or more cases per year during the historical three year period) a [modified historical limits method](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4313630/) is used to compare the count for each month with the rolling mean of the counts for each of nine baseline periods corresponding to the same month, one prior month, and one subsequent month during the previous three years.
+* For high-volume conditions (`r high_volume` or more cases per year during the historical four year period) a [modified historical limits method](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4313630/) is used to compare the count for each month with the rolling mean of the counts for each of twelve baseline periods corresponding to the same month, one prior month, and one subsequent month during the previous four years.
     
-    * The baseline periods for `r reporting_month` are: `r format(hlm_baseline[9], format = "%B %Y")`, `r format(hlm_baseline[8], format = "%B %Y")`, `r format(hlm_baseline[7], format = "%B %Y")`, `r format(hlm_baseline[6], format = "%B %Y")`, `r format(hlm_baseline[5], format = "%B %Y")`, `r format(hlm_baseline[4], format = "%B %Y")`, `r format(hlm_baseline[3], format = "%B %Y")`, `r format(hlm_baseline[2], format = "%B %Y")`, and `r format(hlm_baseline[1], format = "%B %Y")`.
+    * The baseline periods for `r reporting_month` are: `r format(hlm_baseline[12], format = "%B %Y")`, `r format(hlm_baseline[11], format = "%B %Y")`, `r format(hlm_baseline[10], format = "%B %Y")`, `r format(hlm_baseline[9], format = "%B %Y")`, `r format(hlm_baseline[8], format = "%B %Y")`, `r format(hlm_baseline[7], format = "%B %Y")`, `r format(hlm_baseline[6], format = "%B %Y")`, `r format(hlm_baseline[5], format = "%B %Y")`, `r format(hlm_baseline[4], format = "%B %Y")`, `r format(hlm_baseline[3], format = "%B %Y")`, `r format(hlm_baseline[2], format = "%B %Y")`, and `r format(hlm_baseline[1], format = "%B %Y")`.
 
-* For low-volume conditions (fewer than `r high_volume` cases per year during the historical three year period the count for each month is compared with the mean monthly count for the full historical three year period.
+* For low-volume conditions (fewer than `r high_volume` cases per year during the historical four year period the count for each month is compared with the mean monthly count for the full historical four year period.
 
-    * For `r reporting_month` the full historical period is `r format(epimonth_current - months(36), format = "%B %Y")` to `r format(epimonth_current - months(1), format = "%B %Y")`.
+    * For `r reporting_month` the full historical period is `r format(epimonth_current - months(48), format = "%B %Y")` to `r format(epimonth_current - months(1), format = "%B %Y")`.
 
-* For conditions where complete historical data are not available (e.g. conditions that have been notifiable for less than three years) the pattern of notifications over time since the condition was made notifiable is assessed.
+* For conditions where complete historical data are not available (e.g. conditions that have been notifiable for less than four years) the pattern of notifications over time since the condition was made notifiable is assessed.
     
 * Changes in the number of notifications per month over time are also assessed using a series of [control charts](https://cran.r-project.org/web/packages/qicharts2/vignettes/qicharts2.html) to detect potential special cause (non-random) variation. In addition to the overall number of notifications, subgroup analyses by sex, age group, and local government area of residence are used to identify potential high risk groups.
 
@@ -1033,15 +1033,15 @@ cat(unlist(results), sep = '\n')
 
     * The trend columns indicate whether the monthly or YTD counts were higher (&#x2191;) or lower (&#x2193;) than in the previous month or year.
 
-    * Monthly and YTD counts are compared to a historical three year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+    * Monthly and YTD counts are compared to a historical four year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
 
-    * The mean YTD column shows the average number of cases reported for the year to date across the past three years.
+    * The mean YTD column shows the average number of cases reported for the year to date across the past four years.
 
     * The comparison column indicates whether the monthly rate in NEPHU was higher (&#x2191;) or lower (&#x2193;) than for Victoria overall.
 
     * Conditions highlighted with <span style="color: red;">red</span> text indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
 
-    * Conditions with *italic* text have not been notifiable for at least three years, and therefore do not have sufficient historical data available for comparison.
+    * Conditions with *italic* text have not been notifiable for at least four years, and therefore do not have sufficient historical data available for comparison.
 
 <br/>
 <br/>

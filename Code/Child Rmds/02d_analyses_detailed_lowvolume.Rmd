@@ -5,13 +5,13 @@
 # Create and format age and sex pyramid plot
 chart_agesex <- cases_allnephu %>%
   dplyr::filter(condition_label == conditions_list[i]) %>%
-  dplyr::filter(event_yearmonth > epimonth_current - months(36)) %>% 
+  dplyr::filter(event_yearmonth > epimonth_current - months(48)) %>% 
   #
   dplyr::mutate(sex = factor(sex,
                              levels = c("Male",
                                         "Female"))) %>% 
   #
-  f_pyramid_format(charttitle = charttitle_list[i])
+  f_pyramid_format(chart_title = charttitle_list[i])
 ```
 
 
@@ -30,7 +30,7 @@ chart_map <- nephu_lga.sf %>%
   dplyr::left_join(cases_rate, by = c("lga" = "local_government_area")) %>% 
   #
   f_map_format(data_shape = nephu_lga.sf,
-               charttitle = charttitle_list[i])
+               chart_title = charttitle_list[i])
 ```
 
 
@@ -76,7 +76,7 @@ results_toplot <- results_count %>%
 
 # Create and format ribbon chart
 f_ribbon_format_historical_yes(results_toplot,
-                               charttitle = charttitle_list[i]) +
+                               chart_title = charttitle_list[i]) +
   #
   facet_wrap(~sex,
              axes = "all")
@@ -106,7 +106,7 @@ results_toplot <- results_count %>%
 
 # Create and format ribbon chart
 f_ribbon_format_historical_yes(results_toplot,
-                               charttitle = charttitle_list[i]) +
+                               chart_title = charttitle_list[i]) +
   #
   facet_wrap(~age_group,
              ncol = 3,
@@ -140,7 +140,7 @@ results_toplot <- results_count %>%
 if (conditions != "Antimicrobial Resistant Organisms") {
   
   f_ribbon_format_historical_yes(results_toplot,
-                                 charttitle = charttitle_list[i]) +
+                                 chart_title = charttitle_list[i]) +
   #
   facet_wrap(~local_government_area,
              ncol = 3,

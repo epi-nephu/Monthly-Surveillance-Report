@@ -1,6 +1,6 @@
 # NEPHU Monthly Surveillance Report
 # Author: Alana Little, NEPHU (alana.little@austin.org.au)
-# Version 3.0 08/10/2025
+# Version 4.0 04/02/2025
 
 # Setup for internal (full) and external (summary) versions of monthly surveillance report
 
@@ -46,13 +46,13 @@ nephu_yellow <- "#fff694"
 # Definitions and constants
 ################################################################################
 # Start and end dates for current reporting month
-epimonth_current <- as.Date("2025-12-01")
+epimonth_current <- as.Date("2026-01-01")
 epimonth_enddate <- ceiling_date(epimonth_current, "month") - days(1)
 
 reporting_month <- format(epimonth_current, format = "%B %Y")
 
 # Date of PHAR data extract
-extract_date <- as.Date("2026-01-05")
+extract_date <- as.Date("2026-02-06")
 
 # Year to date
 month_number <- month(epimonth_current)
@@ -62,23 +62,26 @@ epimonth_ytd <- as.character(month(1:month_number, label = TRUE))
 # Previous reporting month
 epimonth_minus1 <- epimonth_current - months(1)
 
-# Historical limits baseline periods - three-year lookback
-hlm_baseline <- epimonth_current + months(-c(11:13, 23:25, 35:37))
+# Historical limits baseline periods - four-year lookback
+hlm_baseline <- epimonth_current + months(-c(11:13, 23:25, 35:37, 47:49))
 
-# Start date for PHAR data extracts (3 years prior to the start of the HLM baseline period)
-lookback_start <- hlm_baseline[9] - years(3) - months(1)
+# Start date for PHAR data extracts (4 years prior to the start of the HLM baseline period)
+lookback_start <- hlm_baseline[12] - years(4) - months(1)
 
 # Current and most recent years
 ytd_current <- year(epimonth_current)
 
 ytd_minus1 <- ytd_current - 1
 
-# Three-year lookback period for comparisons
-ytd_three_year <- (ytd_current - 3):(ytd_current - 1)
+# Four-year lookback period for comparisons
+ytd_four_year <- (ytd_current - 4):(ytd_current - 1)
+
+# Year range for bar charts
+ytd_bar <- (ytd_current - 8):ytd_current
 
 # Date ranges for ribbon charts
-ytd_ribbon   <- (ytd_current - 6):ytd_current
-ribbon_start <- epimonth_current - months(35)
+ytd_ribbon   <- (ytd_current - 9):ytd_current
+ribbon_start <- epimonth_current - months(47)
 
 # High-volume conditions
 high_volume <- 10
@@ -131,7 +134,10 @@ reference_conditions <- readxl::read_xlsx(paste0(here::here(), "/Data", "/Refere
                                                   TRUE ~ "No"),
                 #
                 three_years_data = dplyr::case_when(epimonth_enddate > date_made_notifiable + years(3) ~ "Yes",
-                                                    TRUE ~ "No"))
+                                                    TRUE ~ "No"),
+                #
+                four_years_data = dplyr::case_when(epimonth_enddate > date_made_notifiable + years(4) ~ "Yes",
+                                                   TRUE ~ "No"))
 
 ################################################################################
 # Load and wrangle population data
