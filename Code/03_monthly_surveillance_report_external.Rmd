@@ -1,10 +1,11 @@
 ---
-title: 'NEPHU Monthly Surveillance Report - External - December 2025'
+title: 'NEPHU Monthly Surveillance Report - External - January 2026'
 output: 
   html_document:
-    self_contained: false
+    self-contained: false
+    keep_md: yes
 knit: (function(input, ...) {
-  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2025 12 External", output_dir = "../Reports") })
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 01 External", output_dir = "../Reports") })
 ---
 
 ```{css, echo = FALSE}
@@ -54,9 +55,13 @@ body {
   font-size: 14px;
 }
 
-ul, li > ul {
-  margin-top: 10px;
-  margin-bottom: 10px;
+li > ul {
+  margin-top: 2pt;
+  margin-bottom: 5pt;
+}
+
+.red-text {
+  color: red;
 }
 
 .infobox {
@@ -150,19 +155,26 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 * [**Chief Health Officer Alerts and Advisories**](#cho_alerts)
 
+<div style="height: 0.1em;"></div>
+
 * [**Clinical Feature**](#clinicalfeature)
 
+<div style="height: 0.1em;"></div>
 
-* [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)  
-  
-  * [Influenza](#Influenza)
-  
-  * [Respiratory Syncytial Virus (RSV)](#RSV)
-  
+* [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)
+  * [Invasive Pneumococcal Disease (IPD)](#ipd)
+  * [Shigellosis](#shigella)
+  * [VanA Vancomycin Resistant *Enterococcus* (VRE)](#vre)
+
+<div style="height: 0.1em;"></div>
 
 * [**Other Conditions of Note: `r reporting_month`**](#other_tonote)
 
+<div style="height: 0.1em;"></div>
+
 * [**Notifications Summary Table: `r reporting_month`**](#summary_table)
+
+<div style="height: 0.1em;"></div>
 
 * [**Technical Notes**](#technical_notes)
 
@@ -172,54 +184,16 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 This section includes all Chief Health Officer Alerts and Advisories issued between `r format(as.Date(epimonth_current), format = "%d %B %Y")` and `r format(as.Date(Sys.Date()), format = "%d %B %Y")`. Surveillance data for Alerts and Advisories issued after `r format(as.Date(epimonth_enddate), format = "%d %B %Y")` will be included in next month's report.
 
-- 23 December: [New measles case in Victoria](https://www.health.vic.gov.au/health-alerts/new-measles-case-in-victoria-4)
+* 27 January: [Increased heat-related health risks](https://www.health.vic.gov.au/health-advisories/increased-heat-related-health-risks)
 
-- 23 December: [Counterfeit batches of rabies vaccine (Abhayrab) reported in India](https://www.health.vic.gov.au/health-alerts/counterfeit-rabies-vaccine-abhayrab-in-india)
+* 10 February: [Increased travel-related measles cases in Victoria](https://www.health.vic.gov.au/health-alerts/new-measles-case-in-victoria-4)
 
 <br/>
 
 :::: {.infobox}
 ### Clinical Feature {#clinicalfeature}
 
-**Pre-travel consult? Make measles immunity a priority**
-
-Measles is increasing globally with outbreaks occurring in many popular travel destinations such as Indonesia, Vietnam, New Zealand, UK, USA, Canada, Thailand and surrounding countries. 
-
-Vaccination is the best way to protect against measles, and two doses of a measles-containing vaccine are required to be protected. Under-vaccinated travellers risk both contracting measles and spreading the virus internationally and within Australia. 
-
-Clinicians are encouraged to check the measles immune status of any patient travelling overseas, regardless of the travel destination.  Unlike other travel vaccines, the measles vaccine is provided free by the Victorian state government for: 
-
-- **All adults born on or after 1966 who are missing two doses of a measles-containing vaccine or are unsure of immunity**. It is safe to give another MMR vaccine if a person’s childhood vaccination record is lost. 
-
-- **Infants aged 6 to 12 months** if they are going to a country where measles is circulating.  They will still need their routine 12- and 18-month doses under the National Immunisation Program (NIP) to ensure lifelong immunity.
-
-Primary care practitioners can support pre-travel measles vaccination by: 
-
-- Assessing and offering catch-up MMR vaccination to [eligible adults](https://www.health.vic.gov.au/infectious-diseases/measles#control-measures-for-measles), especially before travel overseas. 
-
-- Offering early MMR vaccine for infants aged 6 to 12 months if traveling to an area with measles circulating.
-
-- Adding state-funded MMR vaccine to your next fortnightly OneLink order. 
-
-- Downloading or printing promotional resources [here](https://nephu.org.au/news-and-events/measles-immunisation-program-launched/) to display at your practice. Free poster printing and delivery is available to practices located within the NEPHU catchment by ordering [here](https://forms.office.com/r/sMY1c3jtW4). 
-
-There is no need to check measles serology prior to vaccination.  
-
-The live-attenuated MMR vaccine is not recommended during pregnancy or for individuals with severe immunocompromise. 
-
-This program supplements the National Immunisation Program (NIP) which offers free Commonwealth funded catch up MMR to people aged less than 20 years and refugees and humanitarian entrants of any age who are not fully immunised. 
-
-<br>
-
-Need more information?
-
-* Visit: [The NEPHU website](https://nephu.org.au/news-and-events/measles-immunisation-program-launched/) 
-
-* Watch: [Response to measles outbreak: Adult measles immunisation program webinar](https://www.youtube.com/watch?v=ng5IxVUD7JA), hosted by EMPHN. The [slideset](https://nephu.org.au/wp-content/uploads/2025/11/Measles_Immunisation_Program-slides.pdf) is also available.
-
-* Read: [Information sheet](https://nephu.org.au/wp-content/uploads/2025/11/NEPHU_Measles_Info.pdf) and [FAQs](https://nephu.org.au/wp-content/uploads/2025/11/NEPHU_Measles_FAQ1.pdf) for clinicians.
-
-* Email: healthprotection.nephu@austin.org.au 
+**Nipah Virus**
 
 ::::
 
@@ -227,151 +201,181 @@ Need more information?
 
 ### Epidemiological Highlights: `r reporting_month` {#epi_highlights}
 
-#### Influenza {#Influenza}
+#### Invasive Pneumococcal Disease (IPD) {#ipd}
 
 ```{r}
 # Create and format bar chart
 results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = "Influenza")
+  f_barchart_dataprep_month_count(condition_name = "Invasive Pneumococcal Disease")
 
 results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = "Influenza",
+  f_barchart_dataprep_month_mean(condition_name = "Invasive Pneumococcal Disease",
                                  data_count     = results_count)
 
 results_mean %>% 
-  f_barchart_format_month(ymax    = NA,
-                          ybreaks = 1000,
-                          yexpand = 200,
-                          #
-                          figure_number = "Figure 1. ",
-                          figure_title  = "Influenza")
+  f_barchart_format_month(figure_number = "Figure 1. ",
+                          figure_title  = "IPD")
 ```
 
+* Higher than expected notifications of invasive pneumococcal disease (n = 13 vs. mean = 5.9) were received in January 2026. The number of notifications was the same as for December 2025 (n = 13).
 
-* Higher than expected notifications of influenza (n = 2,750 vs. mean = 582) were received in December 2025. The number of notifications was however lower than in November 2025 (n = 3,051).
+<div style="height: 0.1em;"></div>
 
-* The notification rate in NEPHU was slightly higher than for the rest of Victoria (1,821 vs. 1,608 per 100,000).
+* The notification rate in NEPHU was higher than for the rest of Victoria (8.6 vs. 5.9 per 100,000).
 
-* In Victoria, the number of influenza notifications remains significantly higher than observed at the same time in the previous two years. 
+<div style="height: 0.1em;"></div>
 
-* Symptoms of influenza include cough, headache, myalgia, lethargy, coryza, sore throat, and fever. Symptoms mostly resolve within 2 to 7 days. 
-  
-    * Work from home and exclusion from school and childcare is recommended until symptoms resolve.
-    
-    * Practicing good hygiene such as frequent handwashing, covering coughs and sneezes, and avoiding close contact with sick individuals can help reduce the spread of influenza.
-    
-* Annual influenza vaccination is recommended for everyone above 6 months of age and is free for high-risk groups.
+* There were higher than expected notifications for people aged 65+ years and for people residing in Boroondara, Knox, and Yarra Ranges LGAs.
 
-  *	See [the Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/influenza-flu-vaccine) for eligibility criteria and recommendations for influenza vaccination
+<div style="height: 0.1em;"></div>
 
-  *	While protection from influenza vaccination is generally expected to last throughout the year, the highest level of protection occurs in the first 3 to 4 months after vaccination
+* IPD is caused by the bacterium *Streptococcus pneumoniae* and high-risk groups include children aged under 5 years and adults aged over 65 years. The disease becomes invasive when the bacteria invade sterile areas of the body such as blood, joint fluid, or cerebrospinal fluid leading to severe complications such as meningitis, pneumonia, and bacteraemia.
 
-  *	For people who are planning international travel, depending on individual circumstances, a southern hemisphere vaccine administered prior to travel or northern hemisphere influenza vaccine administered overseas should be considered for optimal protection while travelling.
-  
-  * See [ATAGI statement on the administration of seasonal influenza vaccines in 2025](https://www.health.gov.au/sites/default/files/2025-03/atagi-statement-on-the-administration-of-seasonal-influenza-vaccines-in-2025_0.pdf) for more information on influenza vaccination
+<div style="height: 0.1em;"></div>
 
+* There are more than 95 recognised strains of *S. pneumoniae* but no vaccine is available that can protect against all of them. Two vaccines (Prevenar 13 and Pneumovax 23) are available under the National Immunisation Program (NIP) for eligible individuals to help prevent against the most common strains.
+  * Prevenar 13 is available under the NIP for infants at 2, 4, and 12 months of age. In addition, extra pneumococcal vaccine is given to children with certain medical risk factors at 6 months, and at 4 to 5 years of age.
+  * Adolescents and adults with specified medical conditions can get additional pneumococcal vaccines as specified in the NIP.
+  * Aboriginal and/or Torres Strait Islander adults aged 50 years and over and non-Indigenous adults aged 70 years and over are also eligible for pneumococcal vaccines funded under the NIP.
+  * See the [Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/pneumococcal-immunisation-service) for eligibility criteria and recommendations for pneumococcal vaccination.
 
-* For more information on influenza refer to:
+<div style="height: 0.1em;"></div>
 
-  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Influenza](https://www.health.vic.gov.au/infectious-diseases/influenza)
-
-  * Better Health Channel: [Influenza (flu)](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/flu-influenza)
-
-  * Australian Immunisation Handbook: [Influenza (flu)](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/influenza-flu)
+* For more information about IPD refer to:
+  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Invasive Pneumococcal Disease](https://www.health.vic.gov.au/infectious-diseases/invasive-pneumococcal-disease)
+  * Better Health Channel: [Pneumococcal Disease](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/pneumococcal-disease)
+  * Australian Immunisation Handbook: [Pneumococcal Disease](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/pneumococcal-disease)
 
 ***
 
-#### Respiratory Syncytial Virus (RSV) {#RSV}
+#### Shigellosis {#shigellosis}
 
 ```{r}
 # Create and format bar chart
 results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = "Respiratory Syncytial Virus")
+  f_barchart_dataprep_month_count(condition_name = "Shigellosis")
 
 results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = "Respiratory Syncytial Virus",
+  f_barchart_dataprep_month_mean(condition_name = "Shigellosis",
                                  data_count     = results_count)
 
 results_mean %>% 
-  f_barchart_format_month(ymax    = 3000,
-                          ybreaks = 1000,
-                          yexpand = 200,
-                          #
-                          figure_number = "Figure 2. ",
-                          figure_title  = "Respiratory Syncytial Virus")
+  f_barchart_format_month(figure_number = "Figure 2. ",
+                          figure_title  = "Shigellosis")
 ```
 
+* While the number of notifications for January 2026 was within the expected range, the number of shigellosis notifications per month has steadily remained above the mean for the past six months. There were 21 shigellosis notifications received in January 2026 compared to a mean of 11.8 for the same time of year over the past four years.
 
-* Higher than expected notifications of RSV (n = 234 vs. mean = 125) were received in December 2025. The number of notifications was however lower than in November 2025 (n = 258).
+<div style="height: 0.1em;"></div>
 
-* The notification rate in NEPHU was slightly higher than for the rest of Victoria (154.9 vs. 138.6 per 100,000).
+* The notification rate in NEPHU was slightly higher than for the rest of Victoria (13.9 vs. 11.4 per 100,000).
 
-*	Most RSV infections are mild and can be treated with symptom relief and rest at home.
+<div style="height: 0.1em;"></div>
 
-* Symptoms of RSV are similar to a common cold and include cough, headache, myalgia, sneezing, sore throat, and runny nose. Symptoms mostly resolve within 1 to 2 weeks. 
+*	Shigellosis is a type of gastroenteritis caused by bacteria in the genus *Shigella spp.*, and is a [leading cause of infectious diarrhoea worldwide](https://www.ncbi.nlm.nih.gov/books/NBK482337/).
 
-	- More severe disease (pneumonia, bronchiolitis) can occur in children aged less than one year and older adults, especially those with underlying health conditions.
-	
-	- RSV infection can exacerbate asthma symptoms.
+<div style="height: 0.1em;"></div>
 
-*	RSV is highly contagious and spreads through airborne droplets when an infected person coughs, sneezes, or talks. It can also spread by touching surfaces contaminated with the virus.
+* There are four serotypes of *Shigella*: *S. dysenteriae*, *S. flexneri*, *S. boydii*, and *S. sonnei*.
+  * *S. flexneri* is more common in developing countries and *S. sonnei* is more common in developed countries.
+  * In developed countries, shigellosis is generally a self-limiting infection but is highly contagious and can be potentially serious.
 
-  - People with respiratory symptoms should work from home where possible and stay away from school and public gatherings to prevent spreading the virus to others.
-  
-  - Practicing good hygiene such as frequent handwashing, covering coughs and sneezes, and avoiding close contact with sick individuals can help reduce the spread of RSV.
+<div style="height: 0.1em;"></div>
 
+* Shigellosis is spread through consuming food or water contaminated with the bacteria, touching objects or surfaces contaminated with the bacteria and then touching your mouth, and/or sexual contact with a person who has shigellosis.
+  * People who have travelled to countries where shigellosis is common, men who have sex with men, children, the elderly, and people with immunocompromising conditions are at an increased risk of infection.
 
-* RSV vaccination is recommended for: 
-  - Pregnant women at 28-36 weeks of pregnancy (available free under the National Immunisation Program (NIP))
-  - People aged 75 years and older and Aboriginal and Torres Strait Islander people aged 60 years and older
-  - People with medical risk factors for severe RSV disease aged 60 years and older.
+<div style="height: 0.1em;"></div>
 
-  *	See [The Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/respiratory-syncytial-virus-rsv-vaccine) for eligibility criteria and recommendations for RSV vaccination
+* People with shigellosis should maintain good hygiene, practice handwashing, avoid preparing food for others, and practice safer sex practices until 48 hours after symptoms resolve.
+  * People with shigellosis who work as food handlers, childcare workers, health care workers, or workers in a residential facility should not return to work until advised by the Local Public Health Unit.
+  * Workers are generally excluded until they have had two consecutive negative faecal specimens, collected a minimum of 24 hours apart and no sooner than 48 hours after cessation of antibiotics (if applicable).
 
+<div style="height: 0.1em;"></div>
 
-* For more information on RSV refer to:
+* [Increasing antibiotic resistance is being detected](https://pubmed.ncbi.nlm.nih.gov/39455321/) in *Shigella spp.* bacteria. Include a stool culture when testing patients for shigellosis to allow for antibiotic sensitivities to be determined, and reserve the use of antibiotic treatment for severe cases.
 
-  * Victorian Department of Health: [Respiratory syncytial virus (RSV)](https://www.healthtranslations.vic.gov.au/resources/respiratory-syncytial-virus-rsv)
+<div style="height: 0.1em;"></div>
 
-  * Better Health Channel: [Respiratory syncytial virus (RSV)](https://www.betterhealth.vic.gov.au/respiratory-syncytial-virus-rsv)
-  
-  * Kids Health Information: [Respiratory syncytial virus (RSV)](https://www.rch.org.au/kidsinfo/fact_sheets/Respiratory_syncytial_virus_RSV/)
+* For more information about shigellosis refer to:
+  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Shigellosis](https://www.health.vic.gov.au/infectious-diseases/shigellosis)
+  * Better Health Channel: [Gastroenteritis - Shigellosis](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/gastroenteritis-shigella)
 
-  * Australian Immunisation Handbook: [Respiratory syncytial virus (RSV)](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/respiratory-syncytial-virus-rsv)
-  
-  
+***
+
+#### VanA Vancomycin Resistant *Enterococcus* (VRE) {#vre}
+
+```{r}
+# Create and format bar chart
+results_count <- cases_allnephu %>%
+  f_barchart_dataprep_month_count(condition_name = "Vancomycin Resistant Enterococcus - VanA")
+
+results_mean <- cases_allnephu %>% 
+  f_barchart_dataprep_month_mean(condition_name = "Vancomycin Resistant Enterococcus - VanA",
+                                 data_count     = results_count)
+
+results_mean %>% 
+  f_barchart_format_month(figure_number = "Figure 3. ",
+                          figure_title  = "VanA VRE")
+```
+
+* Higher than expected notifications for VanA VRE (n = 14 vs. mean = 4.2) were received in January 2026. The number of notifications was nearly three times higher than for December 2025 (n = 5).
+
+<div style="height: 0.1em;"></div>
+
+* The notification rate in NEPHU was higher than for the rest of Victoria (9.3 vs. 5.7 per 100,000).
+
+<div style="height: 0.1em;"></div>
+
+* There were higher than expected notifications for both males and females and for people aged 45-64 years.
+
+<div style="height: 0.1em;"></div>
+
+* *Enterococcus spp.* are bacteria that form a [component of normal human microbial flora](https://www.ncbi.nlm.nih.gov/books/NBK567759/), primarily in the gastrointestinal tract for both males and females and the female genital tract.
+  * VRE are strains of *Enterococcus spp.* that have developed resistance to the antibiotic vancomycin.
+  * In Victoria, only the VanA genotype of VRE (high level resistance to both vancomycin and teicoplanin) is notifiable.
+
+<div style="height: 0.1em;"></div>
+
+* VRE colonisation and infections can occur in healthcare settings such as hospitals and residential care facilities.
+  * Colonisation occurs when VRE are present on body surfaces, usually the gastrointestinal tract, without causing symptoms or an immune response.
+  * Colonisation often precedes infection, which occurs when VRE invades deeper tissues and causes symptoms such as fever, pain, or sepsis.
+
+<div style="height: 0.1em;"></div>
+
+* Most notifications of VanA VRE are [associated with invasive device use, long-term antibiotic use](https://pubmed.ncbi.nlm.nih.gov/33359937/), and/or [previous hospitalisations](https://pmc.ncbi.nlm.nih.gov/articles/PMC9495008/), including in overseas facilities.
+  * Consider the possibility of VanA VRE colonisation for patients who have a history of prolonged antibiotic use, invasive device use, or prolonged/recurrent hospitalisations.
+
+<div style="height: 0.1em;"></div>
+
+* For more information about VanA VRE refer to:
+  * Victorian Department of Health: [Infection Control Guidelines](https://www.health.vic.gov.au/site-4/infectious-diseases/infection-control-guidelines)
+  * Better Health Channel: [Preventing Healthcare Associated Infection](https://www.betterhealth.vic.gov.au/health/ConditionsAndTreatments/infections-in-hospital-reduce-the-risk)
+  * Better Health Channel: [Antimicrobial Resistant Bacteria](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/antibiotic-resistant-bacteria)
+  * Australian Commission on Safety and Quality in Health Care: [Vancomycin Resistant Enterococci (VRE)](https://www.safetyandquality.gov.au/our-work/infection-prevention-and-control/australian-guidelines-prevention-and-control-infection-healthcare/vancomycin-resistant-enterococci-vre)
+
 ***
 
 ### Other Conditions of Note: `r reporting_month` {#other_tonote}
 
-* A higher number of notifications for **invasive Group A *Streptococcus* (iGAS)** (n = 12) were received this month compared to November (n = 6). An increase in the number of notifications were reported in people aged 45 years and above.
+* The number of **influenza** and **COVID** notifications continued to decrease in January 2026 after remaining at high levels throughout the second half of 2025.
+  * Influenza notifications decreased from 2,869 in December 2025 to 845 in January 2026, and are within the expected range for this time of year for the first time since September 2025.
+  * COVID-19 notifications decreased from 596 in December 2025 to 300 in January 2026. Due to changes in the reporting systems used for COVID-19 data in Victoria, historical data for COVID-19 are not available to calculate the expected number of notifications for this report.
 
-  - Early detection and treatment of non-invasive GAS infections such as throat and skin infections may help prevent against the development of severe invasive disease. 
+<div style="height: 0.1em;"></div>
 
-  - Residential and institutional settings may reduce the risk of infections and spread by following infection prevention and control practices and encouraging good hygiene practices in clients, staff and visitors. 
+* The number of **infectious syphilis** and **total syphilis** (including infectious, late, congenital, and unspecified) notifications have been steadily trending downwards and have remained below the mean for the past several months.
+  * There were 13 infectious syphilis notifications in January 2026, compared to 21 in December 2025 and a mean of 32.4 for the same time of year over the past four years. This decreasing pattern is seen for males, people aged 25-44 years, and people residing in Yarra LGA. The notification rate in NEPHU was lower than for the rest of Victoria (8.6 vs. 12.6 per 100,000).
+  * There were 38 total syphilis notifications in January 2026, compared to 43 in December 2025 and a mean of 50.3 for the same time of year over the past four years. The notification rate in NEPHU was lower than for the rest of Victoria (25.2 vs. 30.2 per 100,000). 
 
-  - For more information on iGAS refer to: 
+<div style="height: 0.1em;"></div>
 
-    - [Victorian Department of Health: Invasive Group A streptococcal disease](https://www.health.vic.gov.au/infectious-diseases/invasive-group-a-streptococcal-disease-igas)  
+* While the number of notifications for January 2026 was within the expected range, the number of **dengue** notifications has remained above the mean for the past several months. There were 14 notifications in January 2026, compared to 9 in December 2025 and a mean of 6.7 for the same time of year over the past four years.
+  * All NEPHU cases with risk history information available had reported recent international travel, mostly to countries in South-East Asia and the South Pacific, including Indonesia and the Cook Islands.
 
-    - [Better Health Channel: Streptococcal infection](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/streptococcal-infection-group-a) 
+<div style="height: 0.1em;"></div>
 
-* One **diphtheria** notification in a female aged 60-65 years was received in December 2025 which was overseas acquired.  The last notification of diphtheria in NEPHU was in 2017. The best prevention against diphtheria is immunisation. 
-  - This is provided free as routine vaccination for infants, children and adolescents under the National Immunisation Program (NIP). 
-  
-  - A course of diphtheria-containing vaccines is recommended for adults who have never been vaccinated against diphtheria. 
-  
-  - Adults who have been fully vaccinated in the past are recommended to receive a booster dose at the age of 50 years unless a booster dose has been documented in the previous 10 years. Adults should receive this dose as the combined diphtheria-tetanus-pertussis (DTP) vaccine which also protects against pertussis (whooping cough) and tetanus. 
-  
-  - For more information on diphtheria refer to: 
-  
-    - [Better Health Channel: Diphtheria](https://www.betterhealth.vic.gov.au/health/healthyliving/diphtheria)
-  
-    - [Victorian Department of Health: Diphtheria](https://www.health.vic.gov.au/infectious-diseases/diphtheria)
-  
-    - [Australian Immunisation Handbook: Diphtheria](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/diphtheria)
-
-* One notification of **measles** was received in December 2025 after two months of no measles notifications in NEPHU. The case reported travel to Indonesia. (See [Clinical Feature](#clinicalfeature) above for information on pre-travel advice for measles vaccination)
+* One notification of **Carbapenemase Producing *Pseudomonas* (CPP)** was received in January 2026. The case was a male aged 65+ years with a recent history of hospital admission overseas. This is the first notification of CPP in NEPHU since April 2025.
 
 ***
 
@@ -379,7 +383,7 @@ results_mean %>%
 
 This table shows the monthly and year-to-date (YTD) counts and means in NEPHU and a comparison of notification rates between NEPHU and Victoria during `r reporting_month` for [conditions notifiable in Victoria](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms) under the *Public Health and Wellbeing Act 2008*.
 
-* Conditions are included in the table if there has been at least one notification in NEPHU between `r format(epimonth_current - months(35), format = "%B %Y")` and `r reporting_month`.
+* Conditions are included in the table if there has been at least one notification in NEPHU between `r format(epimonth_current - months(47), format = "%B %Y")` and `r reporting_month`.
 
 * Anaphylaxis, elevated blood lead, and tuberculosis are excluded as these conditions are managed centrally by the Victorian Department of Health.
 
@@ -387,15 +391,15 @@ Notes on interpreting this table:
 
 * The trend columns indicate whether the monthly or YTD counts were higher (↑) or lower (↓) than in the previous month or year.
 
-* Monthly and YTD counts are compared to a historical three year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+* Monthly and YTD counts are compared to a historical four year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
 
-* The mean YTD column shows the average number of cases reported for the year to date across the past three years.
+* The mean YTD column shows the average number of cases reported for the year to date across the past four years.
 
 * The comparison column indicates whether the monthly rate in NEPHU was higher (↑) or lower (↓) than for Victoria overall.
 
-* Conditions highlighted with [red text]{style="color: red;"} indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
+* Conditions highlighted with [red text]{.red-text} indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
 
-* Conditions with *italic text* have not been notifiable for at least three years, and therefore do not have sufficient historical data available for comparison.
+* Conditions with *italic text* have not been notifiable for at least four years, and therefore do not have sufficient historical data available for comparison.
 
 ```{r}
 # Enteric Diseases
@@ -572,51 +576,61 @@ conditions <- "Other Conditions"
 
 * The North Eastern Public Health Unit (NEPHU) was established in 2021 and is one of nine local public health units (LPHUs) across metropolitan and regional Victoria. Led and coordinated by Austin Health, NEPHU is funded by the Victorian Government and works closely with the Victorian Department of Health to protect and promote the health of our communities. 
 
+<div style="height: 0.1em;"></div>
+
 * NEPHU serves a population of approximately 1.8 million people across 12 local government areas: the Cities of Banyule, Boroondara, Darebin, Hume (excluding Melbourne Airport), Knox, Manningham, Maroondah, Whitehorse, Whittlesea, Yarra, Yarra Ranges Shire, and Nillumbik Shire. 
+
+<div style="height: 0.1em;"></div>
 
 * Counts and rates are based on the date that the Victorian Department of Health was first notified of a case by a laboratory or medical practitioner and includes all data entered into the Public Health Event Surveillance System (PHESS) as of `r format(as.Date(extract_date), format = "%d %B %Y")`. Notifications are received by the central team at the Victorian Department of Health and tasked to the relevant LPHU for follow-up.
 
+<div style="height: 0.1em;"></div>
+
 * Counts and rates are likely to be an underestimate of true disease incidence, are accurate only at the time the data were extracted from PHESS, and are subject to change due to reporting delays and exclusions following further case investigation.
 
+<div style="height: 0.1em;"></div>
+
 * A list of conditions notifiable in Victoria under the *Public Health and Wellbeing Act 2008* can be found on the [Victorian Department of Health website](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms).
-
   * Anaphylaxis, elevated blood lead, and tuberculosis are excluded as these conditions are managed centrally by the Victorian Department of Health.
-
   * Potential food-borne and water-borne illness is currently excluded due to data limitations, however the feasibility of reporting on viral gastroenteritis outbreaks is being investigated for future reports.
+
+<div style="height: 0.1em;"></div>
 
 * Case definitions for each notifiable condition included in this report can be found on the [Communicable Diseases Network Australia website](https://www.health.gov.au/resources/collections/cdna-surveillance-case-definitions).
 
-* Monthly and year-to-date notifications are compared to a historical three year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+<div style="height: 0.1em;"></div>
 
-  * A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the three-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause variation.
-    
-  * Sporadic notifications where the condition has not been notified in NEPHU for at least 12 months are noted.
+* Monthly and year-to-date notifications are compared to a historical four year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+  * A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the four-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause variation.
+  * Sporadic notifications where the condition has not been notified in NEPHU for at least six months are noted.
 
-* For high-volume conditions (`r high_volume` or more cases per year during the historical three year period) a [modified historical limits method](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4313630/) is used to compare the count for each month with the rolling mean of the counts for each of nine baseline periods corresponding to the same month, one prior month, and one subsequent month during the previous three years.
-    
-  * The baseline periods for `r reporting_month` are: `r format(hlm_baseline[9], format = "%B %Y")`, `r format(hlm_baseline[8], format = "%B %Y")`, `r format(hlm_baseline[7], format = "%B %Y")`, `r format(hlm_baseline[6], format = "%B %Y")`, `r format(hlm_baseline[5], format = "%B %Y")`, `r format(hlm_baseline[4], format = "%B %Y")`, `r format(hlm_baseline[3], format = "%B %Y")`, `r format(hlm_baseline[2], format = "%B %Y")`, and `r format(hlm_baseline[1], format = "%B %Y")`.
+<div style="height: 0.1em;"></div>
 
-* For low-volume conditions (fewer than `r high_volume` cases per year during the historical three year period the count for each month is compared with the mean monthly count for the full historical three year period.
+* For high-volume conditions (`r high_volume` or more cases per year during the historical four year period) a [modified historical limits method](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4313630/) is used to compare the count for each month with the rolling mean of the counts for each of twelve baseline periods corresponding to the same month, one prior month, and one subsequent month during the previous four years.
+  * The baseline periods for `r reporting_month` are: `r format(hlm_baseline[12], format = "%B %Y")`, `r format(hlm_baseline[11], format = "%B %Y")`, `r format(hlm_baseline[10], format = "%B %Y")`, `r format(hlm_baseline[9], format = "%B %Y")`, `r format(hlm_baseline[8], format = "%B %Y")`, `r format(hlm_baseline[7], format = "%B %Y")`, `r format(hlm_baseline[6], format = "%B %Y")`, `r format(hlm_baseline[5], format = "%B %Y")`, `r format(hlm_baseline[4], format = "%B %Y")`, `r format(hlm_baseline[3], format = "%B %Y")`, `r format(hlm_baseline[2], format = "%B %Y")`, and `r format(hlm_baseline[1], format = "%B %Y")`.
 
-  * For `r reporting_month` the full historical period is `r format(epimonth_current - months(36), format = "%B %Y")` to `r format(epimonth_current - months(1), format = "%B %Y")`.
+<div style="height: 0.1em;"></div>
 
-* For conditions where complete historical data are not available (e.g. conditions that have been notifiable for less than three years) the pattern of notifications over time since the condition was made notifiable is assessed.
+* For low-volume conditions (fewer than `r high_volume` cases per year during the historical four year period the count for each month is compared with the mean monthly count for the full historical four year period.
+  * For `r reporting_month` the full historical period is `r format(epimonth_current - months(48), format = "%B %Y")` to `r format(epimonth_current - months(1), format = "%B %Y")`.
+
+<div style="height: 0.1em;"></div>
+
+* For conditions where complete historical data are not available (e.g. conditions that have been notifiable for less than four years) the pattern of notifications over time since the condition was made notifiable is assessed.
+
+<div style="height: 0.1em;"></div>
     
 * Changes in the number of notifications per month over time are also assessed using a series of [control charts](https://cran.r-project.org/web/packages/qicharts2/vignettes/qicharts2.html) to detect potential special cause (non-random) variation. In addition to the overall number of notifications, subgroup analyses by sex, age group, and local government area of residence are used to identify potential high risk groups.
 
+<div style="height: 0.1em;"></div>
+
 * Additional notes on interpreting the summary tables:
-
-  * The trend columns indicate whether the monthly or YTD counts were higher (&#x2191;) or lower (&#x2193;) than in the previous month or year.
-
-  * Monthly and YTD counts are compared to a historical three year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
-
-  * The mean YTD column shows the average number of cases reported for the year to date across the past three years.
-
-  * The comparison column indicates whether the monthly rate in NEPHU was higher (&#x2191;) or lower (&#x2193;) than for Victoria overall.
-
-  * Conditions highlighted with <span style="color: red;">red</span> text indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
-
-  * Conditions with *italic* text have not been notifiable for at least three years, and therefore do not have sufficient historical data available for comparison.
+  * The trend columns indicate whether the monthly or YTD counts were higher (↑) or lower (↓) than in the previous month or year.
+  * Monthly and YTD counts are compared to a historical four year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+  * The mean YTD column shows the average number of cases reported for the year to date across the past four years.
+  * The comparison column indicates whether the monthly rate in NEPHU was higher (↑) or lower (↓) than for Victoria overall.
+  * Conditions highlighted with [red text]{.red-text} indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
+  * Conditions with *italic* text have not been notifiable for at least four years, and therefore do not have sufficient historical data available for comparison.
 
 <br/>
 
