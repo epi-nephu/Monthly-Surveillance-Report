@@ -6,7 +6,7 @@ output:
     toc: true
     toc_depth: 2
     toc_float: true
-    self_contained: true
+    embed_resources: true
 knit: (function(input, ...) {
   rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 01 Internal", output_dir = "../Reports") })
   
