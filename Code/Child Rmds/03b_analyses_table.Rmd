@@ -6,7 +6,7 @@ results_month <- cases_allnephu %>%
   #
   f_table_dataprep_count(conditions = conditions_list)
 
-# Monthly means and SDs for three-year lookback period
+# Monthly means and SDs for four-year lookback period
 # High volume conditions
 results_mean_high <- cases_allnephu %>% 
   dplyr::filter(condition_label %in% volume_high) %>%
@@ -27,14 +27,14 @@ results_mean <- results_mean_high %>%
   dplyr::left_join(
     dplyr::select(reference_conditions, 
                   condition_label, 
-                  three_years_data),
+                  four_years_data),
     by = "condition_label") %>%
   #
   dplyr::mutate(
-    mean_month = dplyr::case_when(three_years_data == "No" ~ NA_integer_,
+    mean_month = dplyr::case_when(four_years_data == "No" ~ NA_integer_,
                                   TRUE ~ mean_month),
     #
-    sd_month = dplyr::case_when(three_years_data == "No" ~ NA_integer_,
+    sd_month = dplyr::case_when(four_years_data == "No" ~ NA_integer_,
                                 TRUE ~ sd_month),
     #
     limit_sd_upper = mean_month + (sd_month * 2),
@@ -48,7 +48,7 @@ results_month <- results_month %>%
   #
   dplyr::mutate(
     sig_month = dplyr::case_when(
-      three_years_data == "No" ~ "**",
+      four_years_data == "No" ~ "**",
       #
       n_total_baseline > 0 & n_month_current >= limit_sd_upper ~ "Higher than expected",
       n_total_baseline > 0 & n_month_current <= limit_sd_lower ~ "Lower than expected",

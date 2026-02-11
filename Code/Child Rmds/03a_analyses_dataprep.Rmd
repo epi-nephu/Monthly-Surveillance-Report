@@ -1,9 +1,9 @@
 
 ```{r}
-# Conditions with at least one notification during three-year post-COVID lookback period
+# Conditions with at least one notification during four-year post-COVID lookback period
 conditions_list <- cases_allnephu %>%
   dplyr::filter(reporting_group == conditions) %>%
-  dplyr::filter(event_yearmonth >= epimonth_current - months(35)) %>% 
+  dplyr::filter(event_yearmonth >= epimonth_current - months(47)) %>% 
   #
   dplyr::group_by(condition_label) %>%
   dplyr::summarise(n = n()) %>%
@@ -16,13 +16,13 @@ last_row <- length(conditions_list)
 
 
 ```{r}
-# High vs. low volume conditions during three-year post-COVID lookback period
-volume_high <- cases_allnephu %>% 
+# High vs. low volume conditions during four-year post-COVID lookback period
+cases_total <- cases_allnephu %>% 
   dplyr::mutate(condition_label = factor(condition_label,
                                          levels = conditions_list)) %>%
   #
   dplyr::filter(condition_label %in% conditions_list) %>%
-  dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>% 
+  dplyr::filter(event_yearmonth >= epimonth_current - months(48) & event_yearmonth < epimonth_current) %>% 
   #
   dplyr::group_by(condition_label) %>% 
   dplyr::summarise(n = n()) %>%
@@ -31,31 +31,50 @@ volume_high <- cases_allnephu %>%
   tidyr::complete(condition_label,
                   fill = list(n = 0)) %>% 
   #
-  dplyr::mutate(mean = n / 3,
+  dplyr::mutate(mean = n / 4,
                 #
-                condition_label = as.character(condition_label)) %>% 
+                condition_label = as.character(condition_label))
+
+
+volume_high <- cases_total %>% 
+  # dplyr::mutate(condition_label = factor(condition_label,
+  #                                        levels = conditions_list)) %>%
+  # #
+  # dplyr::filter(condition_label %in% conditions_list) %>%
+  # dplyr::filter(event_yearmonth >= epimonth_current - months(48) & event_yearmonth < epimonth_current) %>% 
+  # #
+  # dplyr::group_by(condition_label) %>% 
+  # dplyr::summarise(n = n()) %>%
+  # dplyr::ungroup() %>% 
+  # #
+  # tidyr::complete(condition_label,
+  #                 fill = list(n = 0)) %>% 
+  # #
+  # dplyr::mutate(mean = n / 4,
+  #               #
+  #               condition_label = as.character(condition_label)) %>% 
   #
   dplyr::filter(mean >= high_volume) %>% 
   #
   pull(condition_label)
 
-volume_low <- cases_allnephu %>% 
-  dplyr::mutate(condition_label = factor(condition_label,
-                                         levels = conditions_list)) %>%
-  #
-  dplyr::filter(condition_label %in% conditions_list) %>%
-  dplyr::filter(event_yearmonth >= epimonth_current - months(36) & event_yearmonth < epimonth_current) %>% 
-  #
-  dplyr::group_by(condition_label) %>% 
-  dplyr::summarise(n = n()) %>%
-  dplyr::ungroup() %>% 
-  #
-  tidyr::complete(condition_label,
-                  fill = list(n = 0)) %>% 
-  #
-  dplyr::mutate(mean = n / 3,
-                #
-                condition_label = as.character(condition_label)) %>% 
+volume_low <- cases_total %>% 
+  # dplyr::mutate(condition_label = factor(condition_label,
+  #                                        levels = conditions_list)) %>%
+  # #
+  # dplyr::filter(condition_label %in% conditions_list) %>%
+  # dplyr::filter(event_yearmonth >= epimonth_current - months(48) & event_yearmonth < epimonth_current) %>% 
+  # #
+  # dplyr::group_by(condition_label) %>% 
+  # dplyr::summarise(n = n()) %>%
+  # dplyr::ungroup() %>% 
+  # #
+  # tidyr::complete(condition_label,
+  #                 fill = list(n = 0)) %>% 
+  # #
+  # dplyr::mutate(mean = n / 4,
+  #               #
+  #               condition_label = as.character(condition_label)) %>% 
   #
   dplyr::filter(mean < high_volume) %>% 
   #

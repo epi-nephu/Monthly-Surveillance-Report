@@ -183,7 +183,9 @@ f_barchart_dataprep_month_mean <- function(data, data_count, condition_name) {
 }
 
 # Create and format bar chart - cases per month --------------------------------
-f_barchart_format_month <- function(data, ymax, ybreaks, yexpand, figure_number, figure_title) {
+f_barchart_format_month <- function(data, figure_number, figure_title) {
+  
+  chart_max_n <- max(data$n)
   
   figure <- data %>%
     ggplot(aes(x = event_yearmonth)) +
@@ -202,9 +204,38 @@ f_barchart_format_month <- function(data, ymax, ybreaks, yexpand, figure_number,
                  date_labels = "%b %Y", 
                  breaks      = "1 month") +
     #
-    scale_y_continuous(limits = c(0, ymax),
-                       breaks = scales::breaks_width(ybreaks),
-                       expand = expansion(add = c(0, yexpand))) +
+    # scale_y_continuous(limits = c(0, ymax),
+    #                    breaks = scales::breaks_width(ybreaks),
+    #                    expand = expansion(add = c(0, yexpand))) +
+    #
+    scale_y_continuous(limits = c(0, dplyr::case_when(chart_max_n <= 5     ~ 5.125,
+                                                      chart_max_n <= 10    ~ (ceiling(chart_max_n / 1) * 1) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 50    ~ (ceiling(chart_max_n / 5) * 5) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 100   ~ (ceiling(chart_max_n / 10) * 10) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 200   ~ (ceiling(chart_max_n / 20) * 20) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 500   ~ (ceiling(chart_max_n / 50) * 50) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 1000  ~ (ceiling(chart_max_n / 100) * 100) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 2500  ~ (ceiling(chart_max_n / 250) * 250) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 5000  ~ (ceiling(chart_max_n / 500) * 500) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 10000 ~ (ceiling(chart_max_n / 1000) * 1000) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 20000 ~ (ceiling(chart_max_n / 2000) * 2000) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 50000 ~ (ceiling(chart_max_n / 5000) * 5000) + (chart_max_n * 0.05),
+                                                      TRUE ~ NA)),
+                       #
+                       breaks = scales::breaks_width(dplyr::case_when(chart_max_n <= 10    ~ 1,
+                                                                      chart_max_n <= 50    ~ 5,
+                                                                      chart_max_n <= 100   ~ 10,
+                                                                      chart_max_n <= 200   ~ 20,
+                                                                      chart_max_n <= 500   ~ 50,
+                                                                      chart_max_n <= 1000  ~ 100,
+                                                                      chart_max_n <= 2500  ~ 250,
+                                                                      chart_max_n <= 5000  ~ 500,
+                                                                      chart_max_n <= 10000 ~ 1000,
+                                                                      chart_max_n <= 20000 ~ 2000,
+                                                                      chart_max_n <= 50000 ~ 5000,
+                                                                      TRUE ~ NA)),
+                       #
+                       expand = expansion(add = c(0, 0))) +
     #
     labs(title = paste0(figure_number,
                         figure_title,
