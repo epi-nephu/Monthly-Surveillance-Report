@@ -27,7 +27,7 @@ f_table_dataprep_count <- function(data, conditions) {
     #
     dplyr::mutate(trend_month = dplyr::case_when(n_month_current > n_month_minus1 * 1.1 ~ "↑",
                                                  n_month_current < n_month_minus1 * 0.9 ~ "↓",
-                                                 TRUE ~ "--")) 
+                                                 TRUE ~ "--"))
     # Alternate option if up/down arrows not displaying correctly
     # dplyr::mutate(trend_month = dplyr::case_when(n_month_current > n_month_minus1 * 1.1 ~ "&#x2191",
     #                                              n_month_current < n_month_minus1 * 0.9 ~ "&#x2193",
@@ -212,7 +212,8 @@ f_table_format <- function(data, data_count) {
                   rate_vic   = round(rate_vic, digits = 1))
   
   table <- data %>% 
-    knitr::kable(table.attr = "style = \"color: black;\"",
+    knitr::kable(format     = "html",
+                 table.attr = "style = \"color: black;\"",
                  align      = "lcrrrcrrcrrr",
                  col.names  = tables_colnames,
                  escape     = FALSE) %>%

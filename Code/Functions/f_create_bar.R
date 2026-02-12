@@ -237,7 +237,7 @@ f_barchart_format_month <- function(data, figure_number, figure_title) {
                        #
                        expand = expansion(add = c(0, 0))) +
     #
-    labs(title = paste0(figure_number,
+    labs(title = paste0("Figure ", figure_number, ". ",
                         figure_title,
                         " in NEPHU, ",
                         format(epimonth_current - months(11), format = "%b %Y"), 

@@ -2,8 +2,7 @@
 title: 'NEPHU Monthly Surveillance Report - External - January 2026'
 output: 
   html_document:
-    self-contained: false
-    keep_md: yes
+    self-contained: true
 knit: (function(input, ...) {
   rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 01 External", output_dir = "../Reports") })
 ---
@@ -84,8 +83,8 @@ knitr::opts_chunk$set(echo    = FALSE,
                       warning = FALSE, 
                       message = FALSE,
                       #
-                      fig.width  = 5,
-                      fig.height = 3,
+                      fig.width  = 8,
+                      fig.height = 3.5,
                       fig.align  = 'center')
 
 options(knitr.kable.NA = '--')
@@ -157,7 +156,7 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 <div style="height: 0.1em;"></div>
 
-* [**Clinical Feature**](#clinicalfeature)
+* [**Clinical Feature: Nipah Virus**](#clinical_feature)
 
 <div style="height: 0.1em;"></div>
 
@@ -188,14 +187,73 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 
 * 10 February: [Increased travel-related measles cases in Victoria](https://www.health.vic.gov.au/health-alerts/new-measles-case-in-victoria-4)
 
-<br/>
+***
 
-:::: {.infobox}
-### Clinical Feature {#clinicalfeature}
+### Clinical Feature: Nipah Virus in West Bengal, India - What the Headlines Miss {#clinical_feature}
 
-**Nipah Virus**
+::: {.infobox}
+**Current Situation**
 
-::::
+* Two linked cases were [reported in West Bengal](https://www.cdc.gov.au/resources/publications/nipah-virus-infection-situation-update-1-west-bengal-india-30-january-2026), India on 27 January 2026. Close contacts have been traced and tested, and no further cases have been detected.
+
+<div style="height: 0.1em;"></div>
+
+* These cases do not represent a change in the epidemiology of Nipah virus, as cases occur almost annually in India and Bangladesh.
+
+<div style="height: 0.1em;"></div>
+
+* The risk of spread to other Indian states or internationally is considered to be very low.
+
+**Interesting Facts**
+
+* Nipah virus was first identified and named after the 1998-1999 outbreak amongst pig farmers and pigs in Kampung Sungai Nipah village in Malaysia.
+  * This outbreak resulted in the culling of over 900,000 pigs in affected areas between 28 February 1999 to 26 April 1999 to eradicate the disease.
+  * Cases and outbreaks have since occurred in Bangladesh, India, Philippines, and Singapore.
+
+<div style="height: 0.1em;"></div>
+
+* There is no evidence that Nipah virus has ever circulated in Australian bat populations. However, Hendra virus, a related Henipavirus, is found in Australia.
+
+**Key Messages**
+
+* Nipah virus is transmitted through:
+  * Contact with fruit bats or pigs (including bodily fluids and excreta).
+  * Consumption of raw date palm sap or fruit products potentially contaminated by affected bats.
+  * Close contact with an affected person in an outbreak area, particularly in household and healthcare settings.
+
+<div style="height: 0.1em;"></div>
+
+* Travelers to areas where Nipah virus has been found are advised to: 
+  * Avoid contact with animals 
+  * Avoid fruits that may have been in contact with an animal or their bodily fluids - clean and peel fruit yourself before eating it
+  * Avoid drinking raw or fermented date palm juice or sap
+  * Practice good hand hygiene 
+  * Avoid contact with anybody who is unwell with Nipah virus symptoms
+
+<div style="height: 0.1em;"></div>
+
+* Symptoms can vary from mild flu-like illness to encephalitis and severe respiratory illness, and often, death. Some individuals may be asymptomatic.
+
+<div style="height: 0.1em;"></div>
+
+* The incubation period of Nipah virus is usually 4 to 14 days, but rarely can be up to 45 days.
+
+<div style="height: 0.1em;"></div>
+
+* Consider Nipah virus infection in patients with a compatible travel and exposure history PLUS:
+  * Neurological symptoms (e.g. headache, confusion, seizures) OR
+  * Respiratory symptoms (e.g. dyspnoea, cough).
+
+<div style="height: 0.1em;"></div>
+
+* Clinicians are advised to notify suspected cases to NEPHU on 1300 651 160.  
+  * NEPHU will undertake a risk assessment and discuss with the Department of Health any request for testing, as part of the testing approval process, and coordinate transfer of samples to Victorian Infectious Diseases Reference Laboratory (VIDRL) for testing using reverse transcription polymerase chain reaction (RT-PCR). 
+  * Further information on recommended specimens is available [here](https://www.health.vic.gov.au/infectious-diseases/nipah-virus-infection).
+
+<div style="height: 0.1em;"></div>
+
+* Although Nipah virus is not currently considered to be airborne, cases should be isolated and managed in a negative pressure room (where available) under standard, contact, droplet, and airborne precautions.
+:::
 
 ***
 
@@ -204,6 +262,9 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 #### Invasive Pneumococcal Disease (IPD) {#ipd}
 
 ```{r}
+# Define the figure number (e.g. Figure 1, Figure 2)
+figure_number <- 1
+
 # Create and format bar chart
 results_count <- cases_allnephu %>%
   f_barchart_dataprep_month_count(condition_name = "Invasive Pneumococcal Disease")
@@ -212,9 +273,19 @@ results_mean <- cases_allnephu %>%
   f_barchart_dataprep_month_mean(condition_name = "Invasive Pneumococcal Disease",
                                  data_count     = results_count)
 
-results_mean %>% 
-  f_barchart_format_month(figure_number = "Figure 1. ",
+figure <- results_mean %>% 
+  f_barchart_format_month(figure_number = figure_number,
                           figure_title  = "IPD")
+
+# Display figure in html
+figure
+
+# Save .png to send to Comms team
+ggsave(paste0("../Reports/Images for Comms/",
+              format(epimonth_current, format = "%Y-%m"),
+              " Figure ", figure_number,
+              ".png"),
+       plot = figure)
 ```
 
 * Higher than expected notifications of invasive pneumococcal disease (n = 13 vs. mean = 5.9) were received in January 2026. The number of notifications was the same as for December 2025 (n = 13).
@@ -251,17 +322,30 @@ results_mean %>%
 #### Shigellosis {#shigellosis}
 
 ```{r}
+# Define the figure number (e.g. Figure 1, Figure 2)
+figure_number <- 2
+
 # Create and format bar chart
 results_count <- cases_allnephu %>%
   f_barchart_dataprep_month_count(condition_name = "Shigellosis")
 
-results_mean <- cases_allnephu %>% 
+results_mean <- cases_allnephu %>%
   f_barchart_dataprep_month_mean(condition_name = "Shigellosis",
                                  data_count     = results_count)
 
-results_mean %>% 
-  f_barchart_format_month(figure_number = "Figure 2. ",
+figure <- results_mean %>%
+  f_barchart_format_month(figure_number = figure_number,
                           figure_title  = "Shigellosis")
+
+# Display figure in html
+figure
+
+# Save .png to send to Comms team
+ggsave(paste0("../Reports/Images for Comms/",
+              format(epimonth_current, format = "%Y-%m"),
+              " Figure ", figure_number,
+              ".png"),
+       plot = figure)
 ```
 
 * While the number of notifications for January 2026 was within the expected range, the number of shigellosis notifications per month has steadily remained above the mean for the past six months. There were 21 shigellosis notifications received in January 2026 compared to a mean of 11.8 for the same time of year over the past four years.
@@ -306,17 +390,30 @@ results_mean %>%
 #### VanA Vancomycin Resistant *Enterococcus* (VRE) {#vre}
 
 ```{r}
+# Define the figure number (e.g. Figure 1, Figure 2)
+figure_number <- 3
+
 # Create and format bar chart
 results_count <- cases_allnephu %>%
   f_barchart_dataprep_month_count(condition_name = "Vancomycin Resistant Enterococcus - VanA")
 
-results_mean <- cases_allnephu %>% 
+results_mean <- cases_allnephu %>%
   f_barchart_dataprep_month_mean(condition_name = "Vancomycin Resistant Enterococcus - VanA",
                                  data_count     = results_count)
 
-results_mean %>% 
-  f_barchart_format_month(figure_number = "Figure 3. ",
+figure <- results_mean %>%
+  f_barchart_format_month(figure_number = figure_number,
                           figure_title  = "VanA VRE")
+
+# Display figure in html
+figure
+
+# Save .png to send to Comms team
+ggsave(paste0("../Reports/Images for Comms/",
+              format(epimonth_current, format = "%Y-%m"),
+              " Figure ", figure_number,
+              ".png"),
+       plot = figure)
 ```
 
 * Higher than expected notifications for VanA VRE (n = 14 vs. mean = 4.2) were received in January 2026. The number of notifications was nearly three times higher than for December 2025 (n = 5).

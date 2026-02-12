@@ -29,7 +29,9 @@ pacman::p_load(tidyverse,
                apyramid,
                sf,
                ggthemes,
-               ggtext)
+               ggtext,
+               gt,
+               webshot2)
 
 ################################################################################
 # Colours
