@@ -6,14 +6,13 @@ output:
     toc: true
     toc_depth: 2
     toc_float: true
-    embed_resources: true
+    self_contained: true
 knit: (function(input, ...) {
   rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 01 Internal", output_dir = "../Reports") })
-  
 ---
 
 ```{css, echo = FALSE}
-/* */ 
+/* */
 .main-container {
     max-width: 100% !important;
     margin: auto;
@@ -47,9 +46,13 @@ body {
   font-size: 14px;
 }
 
-blockquote {
-  font-style: italic;
-  font-size: 14px;
+li > ul {
+  margin-top: 2pt;
+  margin-bottom: 5pt;
+}
+
+.red-text {
+  color: red;
 }
 ```
 
@@ -995,52 +998,62 @@ cat(unlist(results), sep = '\n')
 
 # Technical Notes
 
-* The North Eastern Public Health Unit (NEPHU) was established in 2021 and is one of nine local public health units (LPHUs) across metropolitan and regional Victoria. Led and coordinated by Austin Health, NEPHU is funded by the Victorian Government and works closely with the Victorian Department of Health to protect and promote the health of our communities. 
+* The North Eastern Public Health Unit (NEPHU) was established in 2021 and is one of nine local public health units (LPHUs) across metropolitan and regional Victoria. Led and coordinated by Austin Health, NEPHU is funded by the Victorian Government and works closely with the Victorian Department of Health to protect and promote the health of our communities.
 
-* NEPHU serves a population of approximately 1.8 million people across 12 local government areas: the Cities of Banyule, Boroondara, Darebin, Hume (excluding Melbourne Airport), Knox, Manningham, Maroondah, Whitehorse, Whittlesea, Yarra, Yarra Ranges Shire, and Nillumbik Shire. 
+<div style="height: 0.1em;"></div>
+
+* NEPHU serves a population of approximately 1.8 million people across 12 local government areas: the Cities of Banyule, Boroondara, Darebin, Hume (excluding Melbourne Airport), Knox, Manningham, Maroondah, Whitehorse, Whittlesea, Yarra, Yarra Ranges Shire, and Nillumbik Shire.
+
+<div style="height: 0.1em;"></div>
 
 * Counts and rates are based on the date that the Victorian Department of Health was first notified of a case by a laboratory or medical practitioner and includes all data entered into the Public Health Event Surveillance System (PHESS) as of `r format(as.Date(extract_date), format = "%d %B %Y")`. Notifications are received by the central team at the Victorian Department of Health and tasked to the relevant LPHU for follow-up.
 
+<div style="height: 0.1em;"></div>
+
 * Counts and rates are likely to be an underestimate of true disease incidence, are accurate only at the time the data were extracted from PHESS, and are subject to change due to reporting delays and exclusions following further case investigation.
 
+<div style="height: 0.1em;"></div>
+
 * A list of conditions notifiable in Victoria under the *Public Health and Wellbeing Act 2008* can be found on the [Victorian Department of Health website](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms).
-
     * Anaphylaxis, elevated blood lead, and tuberculosis are excluded as these conditions are managed centrally by the Victorian Department of Health.
-
     * Potential food-borne and water-borne illness is currently excluded due to data limitations, however the feasibility of reporting on viral gastroenteritis outbreaks is being investigated for future reports.
+
+<div style="height: 0.1em;"></div>
 
 * Case definitions for each notifiable condition included in this report can be found on the [Communicable Diseases Network Australia website](https://www.health.gov.au/resources/collections/cdna-surveillance-case-definitions).
 
-* Monthly and year-to-date notifications are compared to a historical four year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+<div style="height: 0.1em;"></div>
 
+* Monthly and year-to-date notifications are compared to a historical four year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
     * A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the three-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause variation.
-    
-    * Sporadic notifications where the condition has not been notified in NEPHU for at least 12 months are noted.
+    * Sporadic notifications where the condition has not been notified in NEPHU for at least six months are noted.
+
+<div style="height: 0.1em;"></div>
 
 * For high-volume conditions (`r high_volume` or more cases per year during the historical four year period) a [modified historical limits method](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4313630/) is used to compare the count for each month with the rolling mean of the counts for each of twelve baseline periods corresponding to the same month, one prior month, and one subsequent month during the previous four years.
-    
     * The baseline periods for `r reporting_month` are: `r format(hlm_baseline[12], format = "%B %Y")`, `r format(hlm_baseline[11], format = "%B %Y")`, `r format(hlm_baseline[10], format = "%B %Y")`, `r format(hlm_baseline[9], format = "%B %Y")`, `r format(hlm_baseline[8], format = "%B %Y")`, `r format(hlm_baseline[7], format = "%B %Y")`, `r format(hlm_baseline[6], format = "%B %Y")`, `r format(hlm_baseline[5], format = "%B %Y")`, `r format(hlm_baseline[4], format = "%B %Y")`, `r format(hlm_baseline[3], format = "%B %Y")`, `r format(hlm_baseline[2], format = "%B %Y")`, and `r format(hlm_baseline[1], format = "%B %Y")`.
 
-* For low-volume conditions (fewer than `r high_volume` cases per year during the historical four year period the count for each month is compared with the mean monthly count for the full historical four year period.
+<div style="height: 0.1em;"></div>
 
+* For low-volume conditions (fewer than `r high_volume` cases per year during the historical four year period the count for each month is compared with the mean monthly count for the full historical four year period.
     * For `r reporting_month` the full historical period is `r format(epimonth_current - months(48), format = "%B %Y")` to `r format(epimonth_current - months(1), format = "%B %Y")`.
 
+<div style="height: 0.1em;"></div>
+
 * For conditions where complete historical data are not available (e.g. conditions that have been notifiable for less than four years) the pattern of notifications over time since the condition was made notifiable is assessed.
+
+<div style="height: 0.1em;"></div>
     
 * Changes in the number of notifications per month over time are also assessed using a series of [control charts](https://cran.r-project.org/web/packages/qicharts2/vignettes/qicharts2.html) to detect potential special cause (non-random) variation. In addition to the overall number of notifications, subgroup analyses by sex, age group, and local government area of residence are used to identify potential high risk groups.
 
+<div style="height: 0.1em;"></div>
+
 * Additional notes on interpreting the summary tables:
-
-    * The trend columns indicate whether the monthly or YTD counts were higher (&#x2191;) or lower (&#x2193;) than in the previous month or year.
-
+    * The trend columns indicate whether the monthly or YTD counts were higher (↑) or lower (↓) than in the previous month or year.
     * Monthly and YTD counts are compared to a historical four year post-COVID period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
-
     * The mean YTD column shows the average number of cases reported for the year to date across the past four years.
-
-    * The comparison column indicates whether the monthly rate in NEPHU was higher (&#x2191;) or lower (&#x2193;) than for Victoria overall.
-
-    * Conditions highlighted with <span style="color: red;">red</span> text indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
-
+    * The comparison column indicates whether the monthly rate in NEPHU was higher higher (↑) or lower (↓) than for Victoria overall.
+    * Conditions highlighted with [red text]{.red-text} indicate that the number of notifications in `r reporting_month` was higher than expected compared to historical trends.
     * Conditions with *italic* text have not been notifiable for at least four years, and therefore do not have sufficient historical data available for comparison.
 
 <br/>

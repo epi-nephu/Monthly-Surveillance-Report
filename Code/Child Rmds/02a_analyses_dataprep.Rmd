@@ -154,34 +154,5 @@ chart_max_n <- cases_allnephu %>%
   dplyr::ungroup() %>%  
   #
   pull(n)
-
-# # Bar charts: y-axis maximum limits
-# chart_ymax <- dplyr::case_when(
-#   chart_max_n <= 5   ~ 5.125,
-#   chart_max_n <= 10  ~ (ceiling(chart_max_n / 1) * 1) + (chart_max_n * 0.05),
-#   chart_max_n <= 50  ~ (ceiling(chart_max_n / 5) * 5) + (chart_max_n * 0.05),
-#   chart_max_n <= 100 ~ (ceiling(chart_max_n / 10) * 10) + (chart_max_n * 0.05),
-#   chart_max_n <= 200 ~ (ceiling(chart_max_n / 20) * 20) + (chart_max_n * 0.05),
-#   chart_max_n <= 500 ~ (ceiling(chart_max_n / 50) * 50) + (chart_max_n * 0.05),
-#   chart_max_n <= 1000 ~ (ceiling(chart_max_n / 100) * 100) + (chart_max_n * 0.05),
-#   chart_max_n <= 5000 ~ (ceiling(chart_max_n / 500) * 500) + (chart_max_n * 0.05),
-#   chart_max_n <= 10000 ~ (ceiling(chart_max_n / 1000) * 1000) + (chart_max_n * 0.05),
-#   chart_max_n <= 20000 ~ (ceiling(chart_max_n / 2000) * 2000) + (chart_max_n * 0.05),
-#   chart_max_n <= 50000 ~ (ceiling(chart_max_n / 5000) * 5000) + (chart_max_n * 0.05),
-#   TRUE ~ NA)
-# 
-# # Bar charts: y-axis breaks
-# chart_ybreaks <- dplyr::case_when(
-#   chart_max_n <= 10  ~ 1,
-#   chart_max_n <= 50  ~ 5,
-#   chart_max_n <= 100 ~ 10,
-#   chart_max_n <= 200 ~ 20,
-#   chart_max_n <= 500 ~ 50,
-#   chart_max_n <= 1000 ~ 100,
-#   chart_max_n <= 5000 ~ 500,
-#   chart_max_n <= 10000 ~ 1000,
-#   chart_max_n <= 20000 ~ 2000,
-#   chart_max_n <= 50000 ~ 5000,
-#   TRUE ~ NA)
 ```
 
