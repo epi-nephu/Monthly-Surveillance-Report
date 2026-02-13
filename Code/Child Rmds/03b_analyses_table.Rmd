@@ -85,141 +85,37 @@ results_ytd <- cases_allnephu %>%
 
 ```{r, results = 'asis'}
 # Create, format, and display summary table in html
-results_month %>%
+# results_month %>%
+#   dplyr::left_join(results_rate, by = "condition_label") %>%
+#   dplyr::left_join(results_ytd, by = "condition_label") %>%
+#   #
+#   dplyr::distinct(condition_label, .keep_all = TRUE) %>%
+#   #
+#   f_table_format(data_count = results_month) %>%
+#   #
+#   kableExtra::pack_rows(conditions, 1, last_row,
+#                         label_row_css = "background-color: #FAF8F6; color: #191D43")
+
+# Create and format summary table
+table_data <- results_month %>%
   dplyr::left_join(results_rate, by = "condition_label") %>%
   dplyr::left_join(results_ytd, by = "condition_label") %>%
   #
-  dplyr::distinct(condition_label, .keep_all = TRUE) %>%
-  #
-  f_table_format(data_count = results_month) %>%
-  #
-  kableExtra::pack_rows(conditions, 1, last_row,
-                        label_row_css = "background-color: #FAF8F6; color: #191D43")
+  dplyr::distinct(condition_label, .keep_all = TRUE)
 
-# Create and format version to save in images subfolder and send to Comms
-data <- results_month %>%
-  dplyr::left_join(results_rate, by = "condition_label") %>%
-  dplyr::left_join(results_ytd, by = "condition_label") %>%
-  #
-  dplyr::distinct(condition_label, .keep_all = TRUE) %>%
-  
-  select(-sig_month) %>%
-    mutate(
-      mean_month = round(mean_month, 1),
-      mean_ytd   = round(mean_ytd, 1),
-      rate_nephu = round(rate_nephu, 1),
-      rate_vic   = round(rate_vic, 1))
+table <- table_data %>%
+  f_table_format_comms(data_count = results_month,
+                       conditions = conditions,
+                       last_row   = last_row)
 
-original_names <- colnames(data)
-  
-table <- data %>%
-    gt() %>%
-  
-  cols_label(.list = setNames(tables_colnames, original_names)) %>%
-  
-    # Replace NAs with a dash
-  sub_missing(
-    missing_text = "-"
-  ) %>%
-    
-    # Column alignment
-    cols_align(
-      align = "left",
-      columns = 1
-    ) %>%
-    cols_align(
-      align = "center",
-      columns = -1
-    ) %>%
-    
-    # Column widths
-    cols_width(
-      1 ~ px(250),
-      2:12 ~ px(90)
-    ) %>%
-    
-    # Shade Monthly rates section (cols 6:8)
-    tab_style(
-      style = cell_fill(color = "seashell"),
-      locations = cells_body(columns = 6:8)
-    ) %>%
-    
-    # Bold header
-    tab_style(
-      style = cell_text(weight = "bold"),
-      locations = cells_column_labels(everything())
-    ) %>%
-    
-    # Bold + red where Higher than expected
-    tab_style(
-      style = list(
-        cell_text(weight = "bold", color = "red")
-      ),
-      locations = cells_body(
-        rows = results_month$sig_month == "Higher than expected"
-      )
-    ) %>%
-    
-    # Italic where "**"
-    tab_style(
-      style = cell_text(style = "italic"),
-      locations = cells_body(
-        rows = results_month$sig_month == "**"
-      )
-    ) %>%
-    
-    # Multi-level column headers
-    tab_spanner(
-      label = "Monthly counts",
-      columns = 2:5
-    ) %>%
-    tab_spanner(
-      label = "Monthly rates",
-      columns = 6:8
-    ) %>%
-    tab_spanner(
-      label = "YTD counts",
-      columns = 9:12
-    ) %>%
-  
-  tab_style(
-  style = cell_text(weight = "bold"),
-  locations = cells_column_spanners(everything())
-) %>% 
-  
-  tab_row_group(
-  label = conditions,
-  rows = 1:last_row
-) %>% 
-  
-  tab_style(
-  style = list(
-    cell_fill(color = "#FAF8F6"),
-    cell_text(color = "#191D43", weight = "bold")
-  ),
-  locations = cells_row_groups()
-) %>% 
-    
-    # Font + general styling
-    opt_table_font(
-      font = list(
-        gt::google_font("Arial"),
-        default_fonts()
-      )
-    ) %>%
-    tab_options(
-      table.font.size = px(12),
-      table.width = "auto"
-    )
+# Display table in html
+table
 
-output_base <- paste0(
-  "../../Reports/Images for Comms/",
-  format(epimonth_current, "%Y-%m"),
-  " Table ",
-  conditions
-)
-
-html_file <- paste0(output_base, ".html")
-gtsave(table, filename = html_file)
+# Save .png in images subfolder for Comms
+gtsave(table,
+       paste0("../../Reports/Images for Comms/",
+              format(epimonth_current, "%Y-%m"),
+              table_number,
+              conditions, ".png"))
 ```
 

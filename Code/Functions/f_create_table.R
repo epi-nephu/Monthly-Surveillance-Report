@@ -199,52 +199,131 @@ f_table_dataprep_ytd <- function(data, conditions) {
 
 }
 
-# Create and format summary table ----------------------------------------------
-f_table_format <- function(data, data_count) {
+# Create and format summary table to display in html ---------------------------
+# f_table_format <- function(data, data_count) {
+#   
+#   data <- data %>%
+#     dplyr::select(-sig_month) %>%
+#     #
+#     dplyr::mutate(mean_month = round(mean_month, digits = 1),
+#                   mean_ytd   = round(mean_ytd, digits = 1),
+#                   #
+#                   rate_nephu = round(rate_nephu, digits = 1),
+#                   rate_vic   = round(rate_vic, digits = 1))
+#   
+#   table <- data %>% 
+#     knitr::kable(format     = "html",
+#                  table.attr = "style = \"color: black;\"",
+#                  align      = "lcrrrcrrcrrr",
+#                  col.names  = tables_colnames,
+#                  escape     = FALSE) %>%
+#     #
+#     kableExtra::kable_styling(full_width = FALSE,
+#                               position   = "left",
+#                               html_font  = "Arial",
+#                               font_size  = 12) %>%
+#     #
+#     kableExtra::column_spec(1,
+#                             width = "2.5in") %>% 
+#     #
+#     kableExtra::column_spec(2:12,
+#                             width = "0.75in") %>%
+#     #
+#     kableExtra::column_spec(6:8,
+#                             background = "seashell") %>% 
+#     #
+#     kableExtra::row_spec(row  = 0,
+#                          bold = TRUE) %>%
+#     #
+#     kableExtra::row_spec(which(data_count$sig_month == "Higher than expected"), bold = TRUE, color = "red") %>% 
+#     #
+#     kableExtra::row_spec(which(data_count$sig_month == "**"), italic = TRUE) %>% 
+#     #
+#     kableExtra::add_header_above(c(" "              = 1, 
+#                                    "Monthly counts" = 4,
+#                                    "Monthly rates"  = 3,
+#                                    "YTD counts"     = 4))
+#   
+#   return(table)
+# 
+# }
+
+# Create and format summary table to save as .png ------------------------------
+f_table_format_comms <- function(data, data_count, conditions, last_row) {
   
   data <- data %>%
     dplyr::select(-sig_month) %>%
     #
     dplyr::mutate(mean_month = round(mean_month, digits = 1),
                   mean_ytd   = round(mean_ytd, digits = 1),
-                  #
                   rate_nephu = round(rate_nephu, digits = 1),
                   rate_vic   = round(rate_vic, digits = 1))
   
-  table <- data %>% 
-    knitr::kable(format     = "html",
-                 table.attr = "style = \"color: black;\"",
-                 align      = "lcrrrcrrcrrr",
-                 col.names  = tables_colnames,
-                 escape     = FALSE) %>%
+  original_names <- colnames(data)
+  
+  table <- data %>%
+    gt::gt() %>%
     #
-    kableExtra::kable_styling(full_width = FALSE,
-                              position   = "left",
-                              html_font  = "Arial",
-                              font_size  = 12) %>%
+    gt::cols_label(.list = setNames(tables_colnames, original_names)) %>%
     #
-    kableExtra::column_spec(1,
-                            width = "2.5in") %>% 
+    gt::sub_missing(missing_text = "-") %>%
     #
-    kableExtra::column_spec(2:12,
-                            width = "0.75in") %>%
+    gt::cols_align(align   = "left",
+                   columns = 1) %>%
     #
-    kableExtra::column_spec(6:8,
-                            background = "seashell") %>% 
+    gt::cols_align(align   = "center",
+                   columns = -1) %>%
     #
-    kableExtra::row_spec(row  = 0,
-                         bold = TRUE) %>%
+    gt::cols_width(1    ~ px(225),
+                   2:5  ~ px(65),
+                   6    ~ px(75),
+                   7:12 ~ px(65)) %>%
     #
-    kableExtra::row_spec(which(data_count$sig_month == "Higher than expected"), bold = TRUE, color = "red") %>% 
+    gt::tab_style(style     = cell_fill(color = "seashell"),
+                  locations = cells_body(columns = 6:8)) %>%
     #
-    kableExtra::row_spec(which(data_count$sig_month == "**"), italic = TRUE) %>% 
+    gt::tab_style(style     = cell_text(weight = "bold"),
+                  locations = cells_column_labels(everything())) %>%
     #
-    kableExtra::add_header_above(c(" "              = 1, 
-                                   "Monthly counts" = 4,
-                                   "Monthly rates"  = 3,
-                                   "YTD counts"     = 4))
+    gt::tab_style(style     = list(cell_text(weight = "bold", 
+                                             color  = "red")),
+                  locations = cells_body(rows = data_count$sig_month == "Higher than expected")) %>%
+    #
+    gt::tab_style(style     = cell_text(style = "italic"),
+                  locations = cells_body(rows = data_count$sig_month == "**")) %>%
+    #
+    gt::tab_spanner(label   = "Monthly counts",
+                    columns = 2:5) %>%
+    #
+    gt::tab_spanner(label   = "Monthly rates",
+                    columns = 6:8) %>%
+    #
+    gt::tab_spanner(label   = "YTD counts",
+                    columns = 9:12) %>%
+    #
+    gt::tab_style(style     = cell_text(weight = "bold"),
+                  locations = cells_column_spanners(everything())) %>% 
+    #
+    gt::opt_table_font(font = list("Arial",
+                                   default_fonts())) %>%
+    #
+    gt::tab_options(table.font.size = px(12),
+                    table.width     = "auto")
+  
+  if (!is.null(last_row)) {
+    
+    table <- table %>%
+      gt::tab_row_group(label = conditions,
+                        rows  = 1:last_row) %>%
+      #
+      gt::tab_style(style     = list(cell_fill(color  = "#FAF8F6"),
+                                     cell_text(color  = "#191D43",
+                                               weight = "bold")),
+                    locations = cells_row_groups())
+
+  }
   
   return(table)
-
+  
 }
 

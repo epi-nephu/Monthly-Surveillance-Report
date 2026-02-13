@@ -2,7 +2,8 @@
 title: 'NEPHU Monthly Surveillance Report - External - January 2026'
 output: 
   html_document:
-    self-contained: true
+    self_contained: true
+    lib_dir: null
 knit: (function(input, ...) {
   rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 01 External", output_dir = "../Reports") })
 ---
@@ -10,7 +11,7 @@ knit: (function(input, ...) {
 ```{css, echo = FALSE}
 /* */ 
 .main-container {
-    max-width: 850px;
+    max-width: 1000px;
 }
 
 h1.title {
@@ -501,6 +502,8 @@ Notes on interpreting this table:
 ```{r}
 # Enteric Diseases
 conditions <- "Enteric Diseases"
+
+table_number <- " Table 1 "
 ```
 
 
@@ -520,6 +523,8 @@ conditions <- "Enteric Diseases"
 ```{r}
 # Respiratory Diseases
 conditions <- "Respiratory Diseases"
+
+table_number <- " Table 2 "
 ```
 
 
@@ -539,6 +544,8 @@ conditions <- "Respiratory Diseases"
 ```{r}
 # Bloodborne Viruses
 conditions <- "Bloodborne Viruses"
+
+table_number <- " Table 3 "
 ```
 
 
@@ -558,6 +565,8 @@ conditions <- "Bloodborne Viruses"
 ```{r}
 # Sexually Transmissible Infections
 conditions <- "Sexually Transmissible Infections"
+
+table_number <- " Table 4 "
 ```
 
 
@@ -577,6 +586,8 @@ conditions <- "Sexually Transmissible Infections"
 ```{r}
 # Vaccine Preventable Diseases
 conditions <- "Vaccine Preventable Diseases"
+
+table_number <- " Table 5 "
 ```
 
 
@@ -596,6 +607,8 @@ conditions <- "Vaccine Preventable Diseases"
 ```{r}
 # Vectorborne Diseases
 conditions <- "Vectorborne Diseases"
+
+table_number <- " Table 6 "
 ```
 
 
@@ -615,6 +628,8 @@ conditions <- "Vectorborne Diseases"
 ```{r}
 # Zoonotic Diseases
 conditions <- "Zoonotic Diseases"
+
+table_number <- " Table 7 "
 ```
 
 
@@ -634,6 +649,8 @@ conditions <- "Zoonotic Diseases"
 ```{r}
 # Antimicrobial Resistant Organisms
 conditions <- "Antimicrobial Resistant Organisms"
+
+table_number <- " Table 8 "
 ```
 
 
@@ -653,6 +670,8 @@ conditions <- "Antimicrobial Resistant Organisms"
 ```{r}
 # Other Conditions
 conditions <- "Other Conditions"
+
+table_number <- " Table 9 "
 ```
 
 
