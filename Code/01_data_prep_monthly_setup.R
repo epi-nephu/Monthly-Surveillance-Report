@@ -34,23 +34,6 @@ pacman::p_load(tidyverse,
                webshot2)
 
 ################################################################################
-# Settings for converting External Report figures and tables to .png for Comms
-################################################################################
-# Check if Chrome is installed
-chromote::find_chrome()
-
-# Uncomment and edit these two lines if Chrome is not found using chromate::find_chrome()
-#Sys.setenv(CHROMOTE_CHROME = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
-#chromote::find_chrome()
-
-# When saving tables as PNG files, R temporarily uses Chrome in the background. The Austin proxy blocks 
-# this internal Chrome connection. These settings tell Chrome to ignore the proxy for local communication 
-# so that image saving works correctly
-Sys.setenv(NO_PROXY = "localhost,127.0.0.1")
-
-options(chromote.args = c("--proxy-bypass-list=<-loopback>"))
-
-################################################################################
 # Colours
 ################################################################################
 # NEPHU colour palette
