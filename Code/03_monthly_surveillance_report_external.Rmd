@@ -103,6 +103,26 @@ source(paste0(here::here(), "/Code", "/Functions", "/f_create_table.R"))
 ```
 
 
+```{r, include = FALSE}
+################################################################################
+# Settings for converting External Report figures and tables to .png for Comms
+################################################################################
+# Check if Chrome is installed
+chromote::find_chrome()
+
+# Uncomment and edit these two lines if Chrome is not found using chromate::find_chrome()
+#Sys.setenv(CHROMOTE_CHROME = "C:/Program Files (x86)/Google/Chrome/Application/chrome.exe")
+#chromote::find_chrome()
+
+# When saving tables as PNG files, R temporarily uses Chrome in the background. The Austin proxy blocks 
+# this internal Chrome connection. These settings tell Chrome to ignore the proxy for local communication 
+# so that image saving works correctly
+Sys.setenv(NO_PROXY = "localhost,127.0.0.1")
+
+options(chromote.args = c("--proxy-bypass-list=<-loopback>"))
+```
+
+
 ```{r}
 # Read in data extracts
 # Have you run 01_data_prep_monthly_extract.R yet?
@@ -195,7 +215,7 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 ::: {.infobox}
 **Current Situation**
 
-* Two linked cases were [reported in West Bengal](https://www.cdc.gov.au/resources/publications/nipah-virus-infection-situation-update-1-west-bengal-india-30-january-2026), India on 27 January 2026. Close contacts have been traced and tested, and no further cases have been detected.
+* Two linked cases of Nipah virus were [reported in West Bengal](https://www.cdc.gov.au/resources/publications/nipah-virus-infection-situation-update-1-west-bengal-india-30-january-2026), India on 27 January 2026. Close contacts have been traced and tested, and no further cases have been detected.
 
 <div style="height: 0.1em;"></div>
 
@@ -209,18 +229,22 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 
 * Nipah virus was first identified and named after the 1998-1999 outbreak amongst pig farmers and pigs in Kampung Sungai Nipah village in Malaysia.
   * This outbreak resulted in the culling of over 900,000 pigs in affected areas between 28 February 1999 to 26 April 1999 to eradicate the disease.
-  * Cases and outbreaks have since occurred in Bangladesh, India, Philippines, and Singapore.
+  * Cases and outbreaks have since occurred in Bangladesh, India, the Philippines, and Singapore.
 
 <div style="height: 0.1em;"></div>
 
-* There is no evidence that Nipah virus has ever circulated in Australian bat populations. However, Hendra virus, a related Henipavirus, is found in Australia.
+* There is no evidence that Nipah virus has ever circulated in Australian bat populations. However, Hendra virus, a related *Henipavirus*, is found in Australia.
 
 **Key Messages**
 
+* Nipah virus is a severe disease, however the disease is not new and there is no recent change to the level of risk in Australia, which remains very low.
+
+<div style="height: 0.1em;"></div>
+
 * Nipah virus is transmitted through:
-  * Contact with fruit bats or pigs (including bodily fluids and excreta).
-  * Consumption of raw date palm sap or fruit products potentially contaminated by affected bats.
-  * Close contact with an affected person in an outbreak area, particularly in household and healthcare settings.
+  * Contact with fruit bats or pigs (including bodily fluids and excreta)
+  * Consumption of raw date palm sap or fruit products potentially contaminated by affected bats
+  * Close contact with an affected person in an outbreak area, particularly in household and healthcare settings
 
 <div style="height: 0.1em;"></div>
 
@@ -233,7 +257,7 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 
 <div style="height: 0.1em;"></div>
 
-* Symptoms can vary from mild flu-like illness to encephalitis and severe respiratory illness, and often, death. Some individuals may be asymptomatic.
+* Symptoms vary from mild flu-like illness to encephalitis, severe respiratory, and neurological illness and can result in death. Some individuals may be asymptomatic.
 
 <div style="height: 0.1em;"></div>
 
@@ -243,17 +267,24 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 
 * Consider Nipah virus infection in patients with a compatible travel and exposure history PLUS:
   * Neurological symptoms (e.g. headache, confusion, seizures) OR
-  * Respiratory symptoms (e.g. dyspnoea, cough).
+  * Respiratory symptoms (e.g. dyspnoea, cough)
 
 <div style="height: 0.1em;"></div>
 
 * Clinicians are advised to notify suspected cases to NEPHU on 1300 651 160.  
-  * NEPHU will undertake a risk assessment and discuss with the Department of Health any request for testing, as part of the testing approval process, and coordinate transfer of samples to Victorian Infectious Diseases Reference Laboratory (VIDRL) for testing using reverse transcription polymerase chain reaction (RT-PCR). 
+  * NEPHU will undertake a risk assessment and discuss with the Department of Health any request for testing as part of the testing approval process, and coordinate transfer of samples to Victorian Infectious Diseases Reference Laboratory (VIDRL) for testing using reverse transcription polymerase chain reaction (RT-PCR). 
   * Further information on recommended specimens is available [here](https://www.health.vic.gov.au/infectious-diseases/nipah-virus-infection).
 
 <div style="height: 0.1em;"></div>
 
 * Although Nipah virus is not currently considered to be airborne, cases should be isolated and managed in a negative pressure room (where available) under standard, contact, droplet, and airborne precautions.
+
+<div style="height: 0.1em;"></div>
+
+* For more information about Nipah virus refer to:
+  * Victorian Department of Health: [Nipah Virus Infection](https://www.health.vic.gov.au/infectious-diseases/nipah-virus-infection)
+  * Better Health Channel: [Nipah Virus Infection](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/nipah-virus-infection)
+
 :::
 
 ***
@@ -266,25 +297,48 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 1
 
+# Condition name (from the condition field in PHESS)
+condition_select <- "Pneumococcal infection (IPD)"
+
+# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
+# No additional tweaks required!
+
+# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
+# You don't need to do this when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
+
+# Condition information for chart and title
+condition_name <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>%
+  dplyr::distinct(condition_label) %>% 
+  pull(condition_label)
+
+condition_title <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>% 
+  dplyr::distinct(chart_label) %>% 
+  pull(chart_label)
+
 # Create and format bar chart
 results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = "Invasive Pneumococcal Disease")
+  f_barchart_dataprep_month_count(condition_name = condition_name)
 
 results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = "Invasive Pneumococcal Disease",
+  f_barchart_dataprep_month_mean(condition_name = condition_name,
                                  data_count     = results_count)
 
 figure <- results_mean %>% 
   f_barchart_format_month(figure_number = figure_number,
-                          figure_title  = "IPD")
+                          figure_title  = condition_title)
 
 # Display figure in html
 figure
 
 # Save .png to send to Comms team
+# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
+# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
 ggsave(paste0("../Reports/Images for Comms/",
               format(epimonth_current, format = "%Y-%m"),
-              " Figure ", figure_number,
+              " Figure ", figure_number, " ",
+              condition_title,
               ".png"),
        plot = figure)
 ```
@@ -297,16 +351,16 @@ ggsave(paste0("../Reports/Images for Comms/",
 
 <div style="height: 0.1em;"></div>
 
-* There were higher than expected notifications for people aged 65+ years and for people residing in Boroondara, Knox, and Yarra Ranges LGAs.
+* Cases ranged in age from 1 to 81 years, with more than half of the notifications in January being for older people (median age 55 years). There were higher than expected notifications for people aged 65+ years and for people residing in Boroondara, Knox, and Yarra Ranges LGAs.
 
 <div style="height: 0.1em;"></div>
 
-* IPD is caused by the bacterium *Streptococcus pneumoniae* and high-risk groups include children aged under 5 years and adults aged over 65 years. The disease becomes invasive when the bacteria invade sterile areas of the body such as blood, joint fluid, or cerebrospinal fluid leading to severe complications such as meningitis, pneumonia, and bacteraemia.
+* IPD is caused by the bacterium *Streptococcus pneumoniae* and high-risk groups include children aged under 5 years and adults aged over 65 years. The disease becomes invasive when bacteria invade sterile areas of the body such as blood, joint fluid, or cerebrospinal fluid leading to severe complications such as meningitis, pneumonia, and bacteraemia.
 
 <div style="height: 0.1em;"></div>
 
 * There are more than 95 recognised strains of *S. pneumoniae* but no vaccine is available that can protect against all of them. Two vaccines (Prevenar 13 and Pneumovax 23) are available under the National Immunisation Program (NIP) for eligible individuals to help prevent against the most common strains.
-  * Prevenar 13 is available under the NIP for infants at 2, 4, and 12 months of age. In addition, extra pneumococcal vaccine is given to children with certain medical risk factors at 6 months, and at 4 to 5 years of age.
+  * Prevenar 13 is available under the NIP for infants at 2, 4, and 12 months of age. In addition, an extra pneumococcal vaccine dose is given to children with certain medical risk factors at 6 months, and at 4 to 5 years of age.
   * Adolescents and adults with specified medical conditions can get additional pneumococcal vaccines as specified in the NIP.
   * Aboriginal and/or Torres Strait Islander adults aged 50 years and over and non-Indigenous adults aged 70 years and over are also eligible for pneumococcal vaccines funded under the NIP.
   * See the [Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/pneumococcal-immunisation-service) for eligibility criteria and recommendations for pneumococcal vaccination.
@@ -326,25 +380,48 @@ ggsave(paste0("../Reports/Images for Comms/",
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 2
 
+# Condition name (from the condition field in PHESS)
+condition_select <- "Shigellosis"
+
+# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
+# No additional tweaks required!
+
+# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
+# You don't need to do this when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
+
+# Condition information for chart and title
+condition_name <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>%
+  dplyr::distinct(condition_label) %>% 
+  pull(condition_label)
+
+condition_title <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>% 
+  dplyr::distinct(chart_label) %>% 
+  pull(chart_label)
+
 # Create and format bar chart
 results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = "Shigellosis")
+  f_barchart_dataprep_month_count(condition_name = condition_name)
 
-results_mean <- cases_allnephu %>%
-  f_barchart_dataprep_month_mean(condition_name = "Shigellosis",
+results_mean <- cases_allnephu %>% 
+  f_barchart_dataprep_month_mean(condition_name = condition_name,
                                  data_count     = results_count)
 
-figure <- results_mean %>%
+figure <- results_mean %>% 
   f_barchart_format_month(figure_number = figure_number,
-                          figure_title  = "Shigellosis")
+                          figure_title  = condition_title)
 
 # Display figure in html
 figure
 
 # Save .png to send to Comms team
+# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
+# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
 ggsave(paste0("../Reports/Images for Comms/",
               format(epimonth_current, format = "%Y-%m"),
-              " Figure ", figure_number,
+              " Figure ", figure_number, " ",
+              condition_title,
               ".png"),
        plot = figure)
 ```
@@ -353,17 +430,19 @@ ggsave(paste0("../Reports/Images for Comms/",
 
 <div style="height: 0.1em;"></div>
 
+* Nearly half of the notifications received in January were associated with travel overseas or contact with a recently returned traveller (9/21, 43%), mostly related to countries in South-East Asia and Central America. Male to male sexual contact was a reported risk factor for a third of notifications (7/21, 33%). 
+
 * The notification rate in NEPHU was slightly higher than for the rest of Victoria (13.9 vs. 11.4 per 100,000).
 
 <div style="height: 0.1em;"></div>
 
-*	Shigellosis is a type of gastroenteritis caused by bacteria in the genus *Shigella spp.*, and is a [leading cause of infectious diarrhoea worldwide](https://www.ncbi.nlm.nih.gov/books/NBK482337/).
+*	Shigellosis is a type of gastroenteritis caused by bacteria in the genus *Shigella spp.* and is a [leading cause of infectious diarrhoea worldwide](https://www.ncbi.nlm.nih.gov/books/NBK482337/).
 
 <div style="height: 0.1em;"></div>
 
-* There are four serotypes of *Shigella*: *S. dysenteriae*, *S. flexneri*, *S. boydii*, and *S. sonnei*.
-  * *S. flexneri* is more common in developing countries and *S. sonnei* is more common in developed countries.
-  * In developed countries, shigellosis is generally a self-limiting infection but is highly contagious and can be potentially serious.
+* There are four serotypes of *Shigella spp.*: *S. dysenteriae*, *S. flexneri*, *S. boydii*, and *S. sonnei*.
+  * *S. flexneri* can cause more severe disease and is more common in low- and middle-income countries while *S. sonnei* causes milder disease and is more common in higher-income countries.
+  * In higher-income countries, shigellosis is generally a self-limiting infection but is highly contagious and can be potentially serious.
 
 <div style="height: 0.1em;"></div>
 
@@ -394,25 +473,48 @@ ggsave(paste0("../Reports/Images for Comms/",
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 3
 
+# Condition name (from the condition field in PHESS)
+condition_select <- "VanA Vancomycin resistant enterococcus"
+
+# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
+# No additional tweaks required!
+
+# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
+# You don't need to do this when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
+
+# Condition information for chart and title
+condition_name <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>%
+  dplyr::distinct(condition_label) %>% 
+  pull(condition_label)
+
+condition_title <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>% 
+  dplyr::distinct(chart_label) %>% 
+  pull(chart_label)
+
 # Create and format bar chart
 results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = "Vancomycin Resistant Enterococcus - VanA")
+  f_barchart_dataprep_month_count(condition_name = condition_name)
 
-results_mean <- cases_allnephu %>%
-  f_barchart_dataprep_month_mean(condition_name = "Vancomycin Resistant Enterococcus - VanA",
+results_mean <- cases_allnephu %>% 
+  f_barchart_dataprep_month_mean(condition_name = condition_name,
                                  data_count     = results_count)
 
-figure <- results_mean %>%
+figure <- results_mean %>% 
   f_barchart_format_month(figure_number = figure_number,
-                          figure_title  = "VanA VRE")
+                          figure_title  = condition_title)
 
 # Display figure in html
 figure
 
 # Save .png to send to Comms team
+# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
+# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
 ggsave(paste0("../Reports/Images for Comms/",
               format(epimonth_current, format = "%Y-%m"),
-              " Figure ", figure_number,
+              " Figure ", figure_number, " ",
+              condition_title,
               ".png"),
        plot = figure)
 ```
@@ -456,6 +558,107 @@ ggsave(paste0("../Reports/Images for Comms/",
 
 ### Other Conditions of Note: `r reporting_month` {#other_tonote}
 
+```{r}
+# Define the figure number (e.g. Figure 1, Figure 2)
+figure_number <- 4
+
+# Condition name (from the condition field in PHESS)
+condition_select <- "Influenza"
+
+# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
+# No additional tweaks required!
+
+# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
+# You don't need to do this when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
+
+# Condition information for chart and title
+condition_name <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>%
+  dplyr::distinct(condition_label) %>% 
+  pull(condition_label)
+
+condition_title <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>% 
+  dplyr::distinct(chart_label) %>% 
+  pull(chart_label)
+
+# Create and format bar chart
+results_count <- cases_allnephu %>%
+  f_barchart_dataprep_month_count(condition_name = condition_name)
+
+results_mean <- cases_allnephu %>% 
+  f_barchart_dataprep_month_mean(condition_name = condition_name,
+                                 data_count     = results_count)
+
+figure <- results_mean %>% 
+  f_barchart_format_month(figure_number = figure_number,
+                          figure_title  = condition_title)
+
+# Display figure in html
+figure
+
+# Save .png to send to Comms team
+# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
+# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
+ggsave(paste0("../Reports/Images for Comms/",
+              format(epimonth_current, format = "%Y-%m"),
+              " Figure ", figure_number, " ",
+              condition_title,
+              ".png"),
+       plot = figure)
+```
+
+
+```{r}
+# Define the figure number (e.g. Figure 1, Figure 2)
+figure_number <- 5
+
+# Condition name (from the condition field in PHESS)
+condition_select <- "Novel Coronavirus (2019-nCoV)"
+
+# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
+# No additional tweaks required!
+
+# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
+# You don't need to do this when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
+
+# Condition information for chart and title
+condition_name <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>%
+  dplyr::distinct(condition_label) %>% 
+  pull(condition_label)
+
+condition_title <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>% 
+  dplyr::distinct(chart_label) %>% 
+  pull(chart_label)
+
+# Create and format bar chart
+results_count <- cases_allnephu %>%
+  f_barchart_dataprep_month_count(condition_name = condition_name)
+
+results_mean <- cases_allnephu %>% 
+  f_barchart_dataprep_month_mean(condition_name = condition_name,
+                                 data_count     = results_count)
+
+figure <- results_mean %>% 
+  f_barchart_format_month(figure_number = figure_number,
+                          figure_title  = condition_title)
+
+# Display figure in html
+figure
+
+# Save .png to send to Comms team
+# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
+# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
+ggsave(paste0("../Reports/Images for Comms/",
+              format(epimonth_current, format = "%Y-%m"),
+              " Figure ", figure_number, " ",
+              condition_title,
+              ".png"),
+       plot = figure)
+```
+
 * The number of **influenza** and **COVID** notifications continued to decrease in January 2026 after remaining at high levels throughout the second half of 2025.
   * Influenza notifications decreased from 2,869 in December 2025 to 845 in January 2026, and are within the expected range for this time of year for the first time since September 2025.
   * COVID-19 notifications decreased from 596 in December 2025 to 300 in January 2026. Due to changes in the reporting systems used for COVID-19 data in Victoria, historical data for COVID-19 are not available to calculate the expected number of notifications for this report.
@@ -473,7 +676,7 @@ ggsave(paste0("../Reports/Images for Comms/",
 
 <div style="height: 0.1em;"></div>
 
-* One notification of **Carbapenemase Producing *Pseudomonas* (CPP)** was received in January 2026. The case was a male aged 65+ years with a recent history of hospital admission overseas. This is the first notification of CPP in NEPHU since April 2025.
+* One notification of **Carbapenemase Producing *Pseudomonas* (CPP)** was received in January 2026. The case had a recent history of hospital admission overseas. This is the first notification of CPP in NEPHU since April 2025.
 
 ***
 
@@ -503,7 +706,7 @@ Notes on interpreting this table:
 # Enteric Diseases
 conditions <- "Enteric Diseases"
 
-table_number <- " Table 1 "
+table_number <- " Table A "
 ```
 
 
@@ -524,7 +727,7 @@ table_number <- " Table 1 "
 # Respiratory Diseases
 conditions <- "Respiratory Diseases"
 
-table_number <- " Table 2 "
+table_number <- " Table B "
 ```
 
 
@@ -545,7 +748,7 @@ table_number <- " Table 2 "
 # Bloodborne Viruses
 conditions <- "Bloodborne Viruses"
 
-table_number <- " Table 3 "
+table_number <- " Table C "
 ```
 
 
@@ -566,7 +769,7 @@ table_number <- " Table 3 "
 # Sexually Transmissible Infections
 conditions <- "Sexually Transmissible Infections"
 
-table_number <- " Table 4 "
+table_number <- " Table D "
 ```
 
 
@@ -587,7 +790,7 @@ table_number <- " Table 4 "
 # Vaccine Preventable Diseases
 conditions <- "Vaccine Preventable Diseases"
 
-table_number <- " Table 5 "
+table_number <- " Table E "
 ```
 
 
@@ -608,7 +811,7 @@ table_number <- " Table 5 "
 # Vectorborne Diseases
 conditions <- "Vectorborne Diseases"
 
-table_number <- " Table 6 "
+table_number <- " Table F "
 ```
 
 
@@ -629,7 +832,7 @@ table_number <- " Table 6 "
 # Zoonotic Diseases
 conditions <- "Zoonotic Diseases"
 
-table_number <- " Table 7 "
+table_number <- " Table G "
 ```
 
 
@@ -650,7 +853,7 @@ table_number <- " Table 7 "
 # Antimicrobial Resistant Organisms
 conditions <- "Antimicrobial Resistant Organisms"
 
-table_number <- " Table 8 "
+table_number <- " Table H "
 ```
 
 
@@ -671,7 +874,7 @@ table_number <- " Table 8 "
 # Other Conditions
 conditions <- "Other Conditions"
 
-table_number <- " Table 9 "
+table_number <- " Table I "
 ```
 
 
@@ -717,7 +920,7 @@ table_number <- " Table 9 "
 <div style="height: 0.1em;"></div>
 
 * Monthly and year-to-date notifications are compared to a historical four year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
-  * A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the four-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause variation.
+  * A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the four-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause (non-random) variation.
   * Sporadic notifications where the condition has not been notified in NEPHU for at least six months are noted.
 
 <div style="height: 0.1em;"></div>

@@ -1025,7 +1025,7 @@ cat(unlist(results), sep = '\n')
 <div style="height: 0.1em;"></div>
 
 * Monthly and year-to-date notifications are compared to a historical four year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
-    * A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the three-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause variation.
+    * A single count outside of the 2 standard deviation control line, prolonged runs (six or more consecutive months) of counts above or below the three-year mean, or a noticeable increase or decrease within a short to medium time period (three to six consecutive months) indicate potential special cause (non-random) variation.
     * Sporadic notifications where the condition has not been notified in NEPHU for at least six months are noted.
 
 <div style="height: 0.1em;"></div>
