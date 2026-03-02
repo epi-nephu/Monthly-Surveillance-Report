@@ -340,6 +340,7 @@ ggsave(paste0("../Reports/Images for Comms/",
               " Figure ", figure_number, " ",
               condition_title,
               ".png"),
+       dpi  = 600,
        plot = figure)
 ```
 
@@ -423,6 +424,7 @@ ggsave(paste0("../Reports/Images for Comms/",
               " Figure ", figure_number, " ",
               condition_title,
               ".png"),
+       dpi  = 600,
        plot = figure)
 ```
 
@@ -516,6 +518,7 @@ ggsave(paste0("../Reports/Images for Comms/",
               " Figure ", figure_number, " ",
               condition_title,
               ".png"),
+       dpi  = 600,
        plot = figure)
 ```
 
@@ -605,6 +608,7 @@ ggsave(paste0("../Reports/Images for Comms/",
               " Figure ", figure_number, " ",
               condition_title,
               ".png"),
+       dpi  = 600,
        plot = figure)
 ```
 
@@ -656,6 +660,7 @@ ggsave(paste0("../Reports/Images for Comms/",
               " Figure ", figure_number, " ",
               condition_title,
               ".png"),
+       dpi  = 600,
        plot = figure)
 ```
 
