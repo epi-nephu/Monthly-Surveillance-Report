@@ -14,7 +14,7 @@ source(paste0(here::here(), "/Code", "/01_data_prep_monthly_setup.R"))
 ################################################################################
 # Connect to PHAR
 # Note: useProxy = 1 when in Austin offices, useProxy = 0 when WFH
-con <- DBI::dbConnect(odbc::odbc(), "PHAR", useProxy = 0, EnableQueryResultDownload = 0)
+con <- DBI::dbConnect(odbc::odbc(), "PHAR", useProxy = 1, EnableQueryResultDownload = 0)
 
 # NEPHU cases for entire lookback period
 phar_nephu <- DBI::dbGetQuery(con,
@@ -24,15 +24,6 @@ phar_nephu <- DBI::dbGetQuery(con,
                                           AND (LGA IN ({lga_name_sql})
                                                OR ASSIGNED_LPHU = 'North Eastern')")) %>% 
   janitor::clean_names()
-
-# Risk factor information
-phar_risk <- DBI::dbGetQuery(con,
-                             glue::glue("SELECT * FROM dh_public_health.phess_release.caseexposures")) %>% 
-  janitor::clean_names() %>% 
-  #
-  dplyr::select(event_id,
-                travel_overseas = risk_factors_travel_overseas_country_specify,
-                travel_interstate = risk_factors_travel_within_australia_state)
 
 # VIC cases for reporting month
 phar_vic <- DBI::dbGetQuery(con,
@@ -77,8 +68,6 @@ cases_allnephu <- phar_nephu %>%
       organism_cause == "Legionella longbeachae" ~ "Legionella longbeachae",
       condition == "Legionellosis"               ~ "Legionella pneumophila",
       TRUE ~ condition)) %>%
-  #
-  dplyr::left_join(phar_risk, by = "event_id") %>% 
   #
   dplyr::distinct(event_id, .keep_all = TRUE) %>% 
   #
@@ -181,8 +170,6 @@ cases_allnephu <- cases_allnephu %>%
                 local_government_area,
                 suburb,
                 assigned_lphu,
-                travel_overseas,
-                travel_interstate,
                 condition_label,
                 chart_label,
                 text_label,
