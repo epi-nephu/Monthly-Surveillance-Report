@@ -34,10 +34,6 @@ f_barchart_format_year <- function(data, chart_max_n, chart_title) {
     #
     geom_col(fill = nephu_green) +
     #
-    # scale_y_continuous(limits = c(0, chart_ymax),
-    #                    breaks = scales::breaks_width(chart_ybreaks),
-    #                    expand = expansion(add = c(0, 0))) +
-    #
     scale_y_continuous(limits = c(0, dplyr::case_when(chart_max_n <= 5     ~ 5.125,
                                                       chart_max_n <= 10    ~ (ceiling(chart_max_n / 1) * 1) + (chart_max_n * 0.05),
                                                       chart_max_n <= 50    ~ (ceiling(chart_max_n / 5) * 5) + (chart_max_n * 0.05),
@@ -203,10 +199,6 @@ f_barchart_format_month <- function(data, figure_number, figure_title) {
     scale_x_date(expand      = c(0.025, 0.025),
                  date_labels = "%b %Y", 
                  breaks      = "1 month") +
-    #
-    # scale_y_continuous(limits = c(0, ymax),
-    #                    breaks = scales::breaks_width(ybreaks),
-    #                    expand = expansion(add = c(0, yexpand))) +
     #
     scale_y_continuous(limits = c(0, dplyr::case_when(chart_max_n <= 5     ~ 5.125,
                                                       chart_max_n <= 10    ~ (ceiling(chart_max_n / 1) * 1) + (chart_max_n * 0.05),

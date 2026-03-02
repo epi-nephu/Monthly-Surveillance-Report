@@ -93,9 +93,8 @@ results_month %>%
   #
   dplyr::distinct(condition_label, .keep_all = TRUE) %>% 
   #
-  # f_table_format(data_count = results_month)
-  f_table_format_comms(data_count = results_month,
-                       conditions = conditions,
-                       last_row   = NULL)
+  f_table_format(data_count = results_month,
+                 conditions = conditions,
+                 last_row   = NULL)
 ```
 

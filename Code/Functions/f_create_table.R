@@ -199,57 +199,8 @@ f_table_dataprep_ytd <- function(data, conditions) {
 
 }
 
-# Create and format summary table to display in html ---------------------------
-# f_table_format <- function(data, data_count) {
-#   
-#   data <- data %>%
-#     dplyr::select(-sig_month) %>%
-#     #
-#     dplyr::mutate(mean_month = round(mean_month, digits = 1),
-#                   mean_ytd   = round(mean_ytd, digits = 1),
-#                   #
-#                   rate_nephu = round(rate_nephu, digits = 1),
-#                   rate_vic   = round(rate_vic, digits = 1))
-#   
-#   table <- data %>% 
-#     knitr::kable(format     = "html",
-#                  table.attr = "style = \"color: black;\"",
-#                  align      = "lcrrrcrrcrrr",
-#                  col.names  = tables_colnames,
-#                  escape     = FALSE) %>%
-#     #
-#     kableExtra::kable_styling(full_width = FALSE,
-#                               position   = "left",
-#                               html_font  = "Arial",
-#                               font_size  = 12) %>%
-#     #
-#     kableExtra::column_spec(1,
-#                             width = "2.5in") %>% 
-#     #
-#     kableExtra::column_spec(2:12,
-#                             width = "0.75in") %>%
-#     #
-#     kableExtra::column_spec(6:8,
-#                             background = "seashell") %>% 
-#     #
-#     kableExtra::row_spec(row  = 0,
-#                          bold = TRUE) %>%
-#     #
-#     kableExtra::row_spec(which(data_count$sig_month == "Higher than expected"), bold = TRUE, color = "red") %>% 
-#     #
-#     kableExtra::row_spec(which(data_count$sig_month == "**"), italic = TRUE) %>% 
-#     #
-#     kableExtra::add_header_above(c(" "              = 1, 
-#                                    "Monthly counts" = 4,
-#                                    "Monthly rates"  = 3,
-#                                    "YTD counts"     = 4))
-#   
-#   return(table)
-# 
-# }
-
-# Create and format summary table to save as .png ------------------------------
-f_table_format_comms <- function(data, data_count, conditions, last_row) {
+# Create and format summary table ------------------------------
+f_table_format <- function(data, data_count, conditions, last_row) {
   
   data <- data %>%
     dplyr::select(-sig_month) %>%

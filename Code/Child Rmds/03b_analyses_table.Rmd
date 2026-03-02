@@ -84,18 +84,6 @@ results_ytd <- cases_allnephu %>%
 
 
 ```{r, results = 'asis'}
-# Create, format, and display summary table in html
-# results_month %>%
-#   dplyr::left_join(results_rate, by = "condition_label") %>%
-#   dplyr::left_join(results_ytd, by = "condition_label") %>%
-#   #
-#   dplyr::distinct(condition_label, .keep_all = TRUE) %>%
-#   #
-#   f_table_format(data_count = results_month) %>%
-#   #
-#   kableExtra::pack_rows(conditions, 1, last_row,
-#                         label_row_css = "background-color: #FAF8F6; color: #191D43")
-
 # Create and format summary table
 table_data <- results_month %>%
   dplyr::left_join(results_rate, by = "condition_label") %>%
@@ -104,9 +92,9 @@ table_data <- results_month %>%
   dplyr::distinct(condition_label, .keep_all = TRUE)
 
 table <- table_data %>%
-  f_table_format_comms(data_count = results_month,
-                       conditions = conditions,
-                       last_row   = last_row)
+  f_table_format(data_count = results_month,
+                 conditions = conditions,
+                 last_row   = last_row)
 
 # Display table in html
 table
@@ -116,6 +104,7 @@ gtsave(table,
        paste0("../../Reports/Images for Comms/",
               format(epimonth_current, "%Y-%m"),
               table_number,
-              conditions, ".png"))
+              conditions, ".png"),
+       zoom = 4)
 ```
 

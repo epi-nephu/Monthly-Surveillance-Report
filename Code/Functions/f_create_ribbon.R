@@ -47,38 +47,6 @@ f_ribbon_dataprep_count <- function(data, variable) {
 f_ribbon_dataprep_mean_highvolume <- function(data, variable) {
   
   variable <- rlang::enquo(variable)
-#  var_name <- rlang::as_name(variable)
-  
-  # data_mean <- data %>%
-  #   dplyr::arrange(!!variable, event_yearmonth) %>%
-  #   #
-  #   dplyr::group_by(!!variable, event_yearmonth) %>%
-  #   # 
-  #   dplyr::mutate(
-  #     mean = sapply(seq_along(event_yearmonth), function(i) {
-  #       #
-  #       rolling_months <- event_yearmonth[i] + months(-c(11:13, 23:25, 35:37))
-  #       # 
-  #       rolling_values <- data$n[data$event_yearmonth %in% rolling_months]
-  #       mean(rolling_values, na.rm = TRUE)
-  #       #
-  #       }),
-  #     #
-  #     sd = sapply(seq_along(event_yearmonth), function(i) {
-  #       # 
-  #       rolling_months <- event_yearmonth[i] + months(-c(11:13, 23:25, 35:37))
-  #       #
-  #       rolling_values <- data$n[data$event_yearmonth %in% rolling_months]
-  #       sd(rolling_values, na.rm = TRUE)
-  #       #
-  #     }),
-  #     # 
-  #     limit_sd_upper = mean + (sd * 2),
-  #     limit_sd_lower = mean - (sd * 2)) %>%
-  #   #
-  #   dplyr::ungroup() %>% 
-  #   #
-  #   dplyr::filter(event_yearmonth >= ribbon_start)
   
   data_mean <- data %>%
     dplyr::arrange(!!variable, event_yearmonth) %>%
@@ -88,7 +56,6 @@ f_ribbon_dataprep_mean_highvolume <- function(data, variable) {
     dplyr::mutate(
       mean = sapply(seq_along(event_yearmonth), function(i) {
         #
-        #current_var    <- data[[var_name]][i]
         current_month  <- event_yearmonth[i]
         rolling_months <- event_yearmonth[i] + months(-c(11:13, 23:25, 35:37, 47:49))
         # 
@@ -99,7 +66,6 @@ f_ribbon_dataprep_mean_highvolume <- function(data, variable) {
       #
       sd = sapply(seq_along(event_yearmonth), function(i) {
         # 
-        #current_var    <- data[[var_name]][i]
         current_month  <- event_yearmonth[i]
         rolling_months <- event_yearmonth[i] + months(-c(11:13, 23:25, 35:37, 47:49))
         #
