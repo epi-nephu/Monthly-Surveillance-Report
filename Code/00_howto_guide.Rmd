@@ -1,13 +1,14 @@
 ---
 title: 'NEPHU Monthly Surveillance Report - How-To Guide'
 author_details: "Alana Little, NEPHU (alana.little@austin.org.au)"
-version_details: "v2.0, 31/10/2025"
+version_details: "v3.0, 02/03/2026"
 output: 
   html_document:
     code_folding: none
     toc: true
     toc_depth: 3
-    toc_float: true
+    toc_float:
+      collapsed: false
     self_contained: true
 knit: (function(input, ...) {
   rmarkdown::render(input, output_file = "Monthly Surveillance Report How-To Guide", output_dir = "../") })
@@ -45,15 +46,28 @@ body {
 }
 
 li > ul {
-  margin-bottom: 10px;
+  margin-top: 2pt;
+  margin-bottom: 5pt;
+}
+
+.red-text {
+  color: red;
 }
 ```
 
 
-```{r, echo = FALSE}
-# Change log
-# v1.0: First version
-# v2.0: Updated to reflect sourcing data directly from PHAR
+```{r, echo = FALSE, message = FALSE}
+#
+if (!require("pacman")) install.packages("pacman")
+
+pacman::p_load(tidyverse,
+               glue,
+               here,
+               janitor,
+               lubridate,
+               rmarkdown,
+               knitr,
+               emo)
 ```
 
 
@@ -76,53 +90,47 @@ here::i_am("Code/00_howto_guide.Rmd")
 knitr::include_graphics(here::here("Screenshots", "title_banner.PNG"))
 ```
 
-<!-- # Report Production Overview -->
-
-<!-- > Insert handy flowchart here -->
-
-<!-- *** -->
-
 # Purpose of Monthly Reporting
 
 * The NEPHU Monthly Surveillance Report is a retrospective epidemiological review of notifications received during the previous complete calendar month.
+  * Provide a summary of notification data for all notifiable conditions managed by NEPHU.
+  * Identify and analyse long-term notification trends.
+  * Identify potential special-cause variation.
 
-    * Provide a summary of notification data for all notifiable conditions managed by NEPHU.
-    
-    * Identify and analyse long-term notification trends.
-    
-    * Identify potential special-cause variation.
-    
+<div style="height: 0.1em;"></div>
+
 * Reporting is restricted to confirmed and/or probable cases.
+
+<div style="height: 0.1em;"></div>
 
 * The number of notifications for a condition will fluctuate from month to month and from year to year – this is known as **normal variation**. We can expect, predict, and quantify this variation.
 
+<div style="height: 0.1em;"></div>
+
 * For public health surveillance and monitoring, we are interested in unexpected or unusual variations – this is known as **special cause variation**.
 
-* Special cause variation may be due to:
+<div style="height: 0.1em;"></div>
 
-    * Outbreaks,
-    
-    * Emergence of drug-resistant strains of pathogens,
-    
-    * Mutation of pathogens to be more severe or more transmissible,
-    
-    * Breakdowns in health infrastructure or public health measures.
+* Special cause variation may be due to:
+  * Outbreaks,
+  * Emergence of drug-resistant strains of pathogens,
+  * Mutation of pathogens to be more severe or more transmissible,
+  * Breakdowns in health infrastructure or public health measures.
+
+<div style="height: 0.1em;"></div>
 
 * Special cause variation can be harder to predict, but we can look for signals that it is occurring.
 
+<div style="height: 0.1em;"></div>
+
 * This report uses three methods to identify potential special cause variation:
-
-    * [Modified historical limits method.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4313630/)
-    
-    * [Control charts](https://cran.r-project.org/web/packages/qicharts2/vignettes/qicharts2.html) reviewed using the Western Electric and Anhøj rules.
-    
-    * Identification of rare conditions that have not been notified in NEPHU during the previous 6-12 months.
-
-<br/>
+  * [Modified historical limits method.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC4313630/)
+  * [Control charts](https://cran.r-project.org/web/packages/qicharts2/vignettes/qicharts2.html) reviewed using the Western Electric and Anhøj rules.
+  * Identification of rare conditions that have not been notified in NEPHU during the previous 6-12 months.
 
 ***
 
-# A Step-by-Step Guide to Running the NEPHU Monthly Surveillance Report
+# Step-by-Step Guide
 
 ## Part 1: Setup and Data Prep
 
@@ -135,7 +143,7 @@ Using Windows Explorer, navigate to the **Monthly Surveillance Report folder** o
 knitr::include_graphics(here::here("Screenshots", "folder_shareddrive.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 Open the R Project file **Monthly Surveillance Report.Rproj** from Windows Explorer.
 
@@ -144,7 +152,7 @@ Open the R Project file **Monthly Surveillance Report.Rproj** from Windows Explo
 knitr::include_graphics(here::here("Screenshots", "folder_rproject.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 Open **01_data_prep_monthly_setup.R** using the Files tab in RStudio.
 
@@ -153,45 +161,43 @@ Open **01_data_prep_monthly_setup.R** using the Files tab in RStudio.
 knitr::include_graphics(here::here("Screenshots", "code_dataprepsetup.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ### What does this code do?
 
-* Installs and loads the R packages required to run the Internal and External Reports
+* Installs and loads the R packages required to run the Internal and External Reports.
 
-* Defines the reporting month and year
+* Defines the reporting month and year.
 
-* Calculates all of the month and year related variables required for the Internal and External Reports
+* Calculates all of the month and year related variables required for the Internal and External Reports.
 
-* Reads in and wrangles the reference datasets (see Part 2) required for the Internal and External Reports
-
-<br/>
+* Reads in and wrangles the reference datasets (see Part 2) required for the Internal and External Reports.
 
 ### Updating the data prep code
 
 Update the following parameters in the code:
 
-* epimonth_current = First day of the previous calendar month in the format YYYY-MM-DD
+* epimonth_current = First day of the previous calendar month in the format YYYY-MM-DD.
 
-* extract_date = Date you extracted the data from PHAR in the format YYYY-MM-DD
+* extract_date = Date you extracted the data from PHAR in the format YYYY-MM-DD.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "code_epimonthcurrent.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 The code is clever enough to do all of the other date calculations you need. Nifty!
 
-Save your changes to **01_data_prep_monthly_setup.R**
+Save your changes to **01_data_prep_monthly_setup.R**.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "code_savechanges.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 Open **01_data_prep_monthly_extract.R** using the Files tab in RStudio.
 
@@ -200,21 +206,19 @@ Open **01_data_prep_monthly_extract.R** using the Files tab in RStudio.
 knitr::include_graphics(here::here("Screenshots", "code_dataprepextract.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ### What does this code do?
 
-* Runs the 01_data_prep_monthly_setup.R script
+* Runs the 01_data_prep_monthly_setup.R script.
 
-* Connects to PHAR, runs queries, and wrangles the NEPHU and Victorian data required for the Internal and External Reports
+* Connects to PHAR, runs queries, and wrangles the NEPHU and Victorian data required for the Internal and External Reports.
 
 * Saves two snapshop datasets (one for NEPHU and one for Victoria) in the Data folder that will be read in by the Internal and External Report Rmds.
 
-<br/>
+Run **01_data_prep_monthly_extract.R**.
 
-Run **01_data_prep_monthly_extract.R**
-
-I **strongly** recommend running this code line-by-line until you are familiar with it. 
+I **strongly** recommend running this code line-by-line until you are familiar with it.
 
 You will need to have a PHAR token and the R-PHAR connection set up, and your .Renviron file configured appropriately (with the proxy switched on in the Austin offices or switched off when working from home).
 
@@ -225,7 +229,7 @@ Your .Renviron file should be in your Documents folder, and the http_proxy, http
 knitr::include_graphics(here::here("Screenshots", "code_renviron.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 The only line that may need changing in 01_data_prep_monthly_extract.R relates to, you guessed it, the proxy server.
 
@@ -234,13 +238,13 @@ The only line that may need changing in 01_data_prep_monthly_extract.R relates t
 knitr::include_graphics(here::here("Screenshots", "code_useproxy.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 You only need to run 01_data_prep_monthly_extract.R once per month. The Internal and External Report Rmds will give you a friendly reminder (by telling you the file you are trying to read in doesn't exist) if you've forgotten to run this script.
 
 ***
 
-## Part 2: A Quick Overview of Data Sources
+## Part 2: Data Sources
 
 ### Notifiable diseases data
 
@@ -248,22 +252,22 @@ Prior to September 2025, we would download a series of PHESS extracts each month
 
 ### Reference data
 
-In addition to the PHESS data, there are also three reference documents/files required. These don't need to be updated each month.
+In addition to the PHESS data, there are also three reference documents/files required. These (usually) don't need to be updated each month.
 
 ```{r, out.width = '800px'}
 #
 knitr::include_graphics(here::here("Screenshots", "folder_reference.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ***Conditions reference list***
 
-* This is a manual list maintained by the NEPHU Epidemiology and Intelligence Team
+* This is a manual list maintained by the NEPHU Epidemiology and Intelligence Team.
 
-* Contains information about each notifiable condition
+* Contains information about each notifiable condition.
 
-* This will need to updated if conditions are added/removed from the notifiable diseases list
+* This will need to updated if conditions are added/removed from the notifiable diseases list.
 
 * **../Data/Reference/ConditionsReferenceList.xlsx**
 
@@ -272,13 +276,13 @@ knitr::include_graphics(here::here("Screenshots", "folder_reference.PNG"))
 knitr::include_graphics(here::here("Screenshots", "data_conditions.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ***LGA populations***
 
-* This is a manual list maintained by the NEPHU Epidemiology and Intelligence Team
+* This is a manual list maintained by the NEPHU Epidemiology and Intelligence Team.
 
-* Contains population data for each LGA in Victoria (2021 Census)
+* Contains population data for each LGA in Victoria (2021 Census).
 
 * **../Data/Reference/LGAAllocationLong.xlsx**
 
@@ -287,24 +291,25 @@ knitr::include_graphics(here::here("Screenshots", "data_conditions.PNG"))
 knitr::include_graphics(here::here("Screenshots", "data_population.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ***Shapefiles***
 
-* These files contain digital boundaries for each LGA in Australia, and are used to create maps
+* These files contain digital boundaries for each LGA in Australia, and are used to create maps.
 
-* The shapefiles can be downloaded from the [ABS website](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files)
+* The shapefiles can be downloaded from the [ABS website](https://www.abs.gov.au/statistics/standards/australian-statistical-geography-standard-asgs-edition-3/jul2021-jun2026/access-and-downloads/digital-boundary-files).
 
-* The current file used is "Local Government Areas - 2022 - Shapefile", found in the "Non ABS Structures" section
+<div style="height: 0.1em;"></div>
 
-    * This file has been downloaded and unzipped to the ../Data subfolder
+* The current file used is "Local Government Areas - 2022 - Shapefile", found in the "Non ABS Structures" section.
+  * This file has been downloaded and unzipped to the ../Data subfolder.
+
+<div style="height: 0.1em;"></div>
 
 ```{r, out.width = '800px'}
 #
 knitr::include_graphics(here::here("Screenshots", "data_shapefile.PNG"))
 ```
-
-<br/>
 
 ***
 
@@ -319,7 +324,7 @@ Navigate to the **Monthly Surveillance Report folder** on the shared drive.
 knitr::include_graphics(here::here("Screenshots", "folder_shareddrive.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 If not already done, open the R Project file **Monthly Surveillance Report.Rproj** from Windows Explorer.
 
@@ -328,7 +333,7 @@ If not already done, open the R Project file **Monthly Surveillance Report.Rproj
 knitr::include_graphics(here::here("Screenshots", "folder_rproject.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 Open **02_monthly_surveillance_report_internal.Rmd** using the Files tab in RStudio.
 
@@ -337,69 +342,50 @@ Open **02_monthly_surveillance_report_internal.Rmd** using the Files tab in RStu
 knitr::include_graphics(here::here("Screenshots", "folder_internal.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ### What does this code do?
 
 * Quite a lot honestly!
+  * Reads in and runs 01_data_prep_monthly_setup.R.
+  * Reads in the NEPHU and Victorian data snapshots you created in Part 1.
+  * Runs a standard set of analyses for every condition, and displays the results in a html document.
+  * Uses for loops and conditional logic to read in and run specific child documents (analyses) based on whether there have been any cases of the condition during the lookback period, whether it is a high or low volume condition, and whether we have sufficient historical data available to calculate means and expected case numbers.
+  * Uses functions to apply standard data prep, analysis, and formatting for charts and tables.
 
-* Reads in and runs 01_data_prep_monthly_setup.R
+<div style="height: 0.1em;"></div>
 
-* Reads in the NEPHU and Victorian data snapshots you created in Part 1
-
-* Runs a standard set of analyses for every condition, and displays the results in a html document
-
-* Uses for loops and conditional logic to read in and run specific child documents (analyses) based on whether there have been any cases of the condition during the lookback period, whether it is a high or low volume condition, and whether we have sufficient historical data available to calculate means and expected case numbers
-
-* Uses functions to apply standard data prep, analysis, and formatting for charts and tables
-
-<br/>
-
-The child documents can be found in the **../Child Rmds subfolder**:
-
-* 02a_analyses_dataprep.Rmd = creates lists containing the required variables for each condition in the reporting group
-
-* 02b_analyses_table.Rmd = creates and formats the notification summary table
-
-* 02c_analyses_summary_highvolume.Rmd = creates and formats the summary charts for each high volume condition (for conditions where sufficient historical data are available)
-
-* 02c_analyses_summary_lowvolume.Rmd = creates and formats the summary charts for each low volume condition (for conditions where sufficient historical data are available)
-
-* 02c_analyses_summary_nohistorical.Rmd = creates and formats the summary charts for each condition (for conditions where sufficient historical data are not available)
-
-* 02d_analyses_detailed_highvolume.Rmd = creates and formats the detailed charts for each high volume condition (for conditions where sufficient historical data are available)
-
-* 02d_analyses_detailed_lowvolume.Rmd = creates and formats the detailed charts for each low volume condition (for conditions where sufficient historical data are available)
-
-* 02d_analyses_detailed_nohistorical.Rmd = creates and formats the detailed charts for each condition (for conditions where sufficient historical data are not available)
-
-* 02d_analyses_nocases.Rmd = creates a narrative text statement for conditions where there were no cases during the lookback period
+* The child documents can be found in the **../Child Rmds subfolder**:
+  * 02a_analyses_dataprep.Rmd = creates lists containing the required variables for each condition in the reporting group.
+  * 02b_analyses_table.Rmd = creates and formats the notification summary table.
+  * 02c_analyses_summary_highvolume.Rmd = creates and formats the summary charts for each high volume condition (for conditions where sufficient historical data are available).
+  * 02c_analyses_summary_lowvolume.Rmd = creates and formats the summary charts for each low volume condition (for conditions where sufficient historical data are available).
+  * 02c_analyses_summary_nohistorical.Rmd = creates and formats the summary charts for each condition (for conditions where sufficient historical data are not available).
+  * 02d_analyses_detailed_highvolume.Rmd = creates and formats the detailed charts for each high volume condition (for conditions where sufficient historical data are available).
+  * 02d_analyses_detailed_lowvolume.Rmd = creates and formats the detailed charts for each low volume condition (for conditions where sufficient historical data are available).
+  * 02d_analyses_detailed_nohistorical.Rmd = creates and formats the detailed charts for each condition (for conditions where sufficient historical data are not available).
+  * 02d_analyses_nocases.Rmd = creates a narrative text statement for conditions where there were no cases during the lookback period.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "folder_child.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
-The functions can be found in the **../Functions subfolder**:
-
-* f_create_bar.R = creates and formats bar charts
-
-* f_create_map.R = creates and formats notification rate maps
-
-* f_create_pyramid.R = creates and formats age pyramids
-
-* f_create_ribbon.R = creates and formats ribbon charts
-
-* f_create_table.R = creates and formats notification summary tables
+* The functions can be found in the **../Functions subfolder**:
+  * f_create_bar.R = creates and formats bar charts.
+  * f_create_map.R = creates and formats notification rate maps.
+  * f_create_pyramid.R = creates and formats age pyramids.
+  * f_create_ribbon.R = creates and formats ribbon charts.
+  * f_create_table.R = creates and formats notification summary tables.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "folder_function.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ### Updating and running the code
 
@@ -410,7 +396,7 @@ Update the two circled parameters in the YAML header of the document to the repo
 knitr::include_graphics(here::here("Screenshots", "code_internalyaml.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 Knit the document. Depending on your R installation you may need to select ‘html’ in a dropdown menu that appears when you click on the Knit button. The code should take about 6-8 minutes to run, and the .Rmd will be automatically saved when it is knitted.
 
@@ -419,7 +405,7 @@ Knit the document. Depending on your R installation you may need to select ‘ht
 knitr::include_graphics(here::here("Screenshots", "code_internalknit.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 If everything has worked as intended you should now have a html file in the **../Reports subfolder** titled **Monthly Surveillance Report YYYY MM Internal** (YYYY MM is the reporting month).
 
@@ -427,8 +413,6 @@ If everything has worked as intended you should now have a html file in the **..
 #
 knitr::include_graphics(here::here("Screenshots", "folder_internalreport.PNG"))
 ```
-
-<br/>
 
 ***
 
@@ -438,14 +422,14 @@ knitr::include_graphics(here::here("Screenshots", "folder_internalreport.PNG"))
 
 Review each of the tables in the report, and make a note of the following:
 
-*	Conditions that are higher than expected for this time of year (<span style="color: red;">red</span>)
+*	Conditions that are higher than expected for this time of year ([red]{.red-text}).
 
 ```{r, out.width = '800px'}
 #
 knitr::include_graphics(here::here("Screenshots", "report_higher.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 * Conditions that do not have sufficient historical data for comparison (*italics*) – do they appear to be higher or lower than expected based on the data we do have available?
 
@@ -454,38 +438,38 @@ knitr::include_graphics(here::here("Screenshots", "report_higher.PNG"))
 knitr::include_graphics(here::here("Screenshots", "report_newconditions.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ### Summary charts
 
 Review each of the summary charts, and make a note of the following:
 
-* Data point for the reporting month outside of the expected range (grey area)
+* Data point for the reporting month outside of the expected range (grey area).
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "report_outsiderange.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
-* Sustained runs of data points above the mean
+* Sustained runs of data points above the mean.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "report_sustainabove.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
-* Notifications where the previous notification was more than 6-12 months ago
+* Notifications where the previous notification was more than 6-12 months ago.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "report_rarecondition.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ### What does it all mean?
 
@@ -507,8 +491,6 @@ For each condition you've noted review the tables, summary charts, and detailed 
 
 Note: the detailed analyses charts show the number of notifications for each subgroup over time. Use caution when comparing numbers between different subgroups (e.g. across LGAs) as the population of these subgroups may be different.
 
-<br/>
-
 ***
 
 ## Part 5: Running the External Report
@@ -522,7 +504,7 @@ Navigate to the **Monthly Surveillance Report folder** on the shared drive.
 knitr::include_graphics(here::here("Screenshots", "folder_shareddrive.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 If not already done, open the R Project file **Monthly Surveillance Report.Rproj** from Windows Explorer.
 
@@ -531,7 +513,7 @@ If not already done, open the R Project file **Monthly Surveillance Report.Rproj
 knitr::include_graphics(here::here("Screenshots", "folder_rproject.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 Open **03_monthly_surveillance_report_external.Rmd** using the Files tab in RStudio.
 
@@ -540,45 +522,44 @@ Open **03_monthly_surveillance_report_external.Rmd** using the Files tab in RStu
 knitr::include_graphics(here::here("Screenshots", "folder_external.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ### What does this code do?
 
-* Reads in and runs 01_data_prep_monthly_setup.R
+* Reads in and runs 01_data_prep_monthly_setup.R.
 
-* Reads in the NEPHU and Victorian data snapshots you created in Part 1
+* Reads in the NEPHU and Victorian data snapshots you created in Part 1.
 
-* Uses child documents to create standard bar charts for the conditions in the Epidemiological Highlights section and standard tables for each reporting group in the Notifications Summary Table section
+* Uses child documents to create standard bar charts for the conditions in the Epidemiological Highlights section and standard tables for each reporting group in the Notifications Summary Table section.
 
-* Uses functions to apply standard data prep, analysis, and formatting for charts and tables
+* Uses functions to apply standard data prep, analysis, and formatting for charts and tables.
+
+<div style="height: 0.1em;"></div>
 
 * Creates a html document consisting of the following sections:
+  * Introductory text and Table of Contents
+  * Chief Health Officer Alerts and Advisories
+  * Epidemiological Highlights
+  * Other Conditions of Note
+  * Clinical Feature
+  * Notifications Summary Table for all conditions
+  * Technical Notes
 
-    * Introductory text and Table of Contents
-    * Chief Health Officer Alerts and Advisories
-    * Epidemiological Highlights
-    * Other Conditions of Note
-    * Clinical Feature
-    * Notifications Summary Table for all conditions
-    * Technical Notes
+<div style="height: 0.1em;"></div>
 
-<br/>
+* Creates and outputs .png files for each of the charts and tables in the report.
 
-The child documents can be found in the **../Child Rmds subfolder**:
+<div style="height: 0.1em;"></div>
 
-* 03a_analyses_dataprep.Rmd = creates lists containing the required variables for each condition in the reporting group
+* The child documents can be found in the **../Child Rmds subfolder**:
+  * 03a_analyses_dataprep.Rmd = creates lists containing the required variables for each condition in the reporting group.
+  * 03b_analyses_table.Rmd = creates and formats the notification summary table.
 
-* 03b_analyses_table.Rmd = creates and formats the notification summary table
+<div style="height: 0.1em;"></div>
 
-<br/>
-
-The functions can be found in the **../Functions subfolder**:
-
-* f_create_bar.R = creates and formats bar charts
-
-* f_create_table.R = creates and formats notification summary tables
-
-<br/>
+* The functions can be found in the **../Functions subfolder**:
+  * f_create_bar.R = creates and formats bar charts.
+  * f_create_table.R = creates and formats notification summary tables.
 
 ### Updating the code
 
@@ -589,24 +570,28 @@ Update the two circled parameters in the YAML header of the document to the repo
 knitr::include_graphics(here::here("Screenshots", "code_externalyaml.PNG"))
 ```
 
-<br/>
-
-The NEPHU Medical Team will prepare the content for the Clinical Feature section of the external report and send it through to the Epi Inbox by the 7th of each month. When you know the topic, update the following parameter in the code:
-
-* clinical_feature = title/topic of Clinical Feature
-
-```{r, out.width = '600px'}
-#
-knitr::include_graphics(here::here("Screenshots", "code_clinicalfeature.PNG"))
-```
-
-<br/>
+<div style="height: 1em;"></div>
 
 Much of the standard text in the report (e.g. Technical Notes) will remain the same from month to month, or is automatically updated through the magic of R and RMarkdown.
 
-<br/>
+<div style="height: 1em;"></div>
 
-***Table of contents***
+***Chrome installation check***
+
+Each month we produce .png versions of the charts and tables in the External Report and send these through to the Comms team for incorporation into the Mailchimp newsletter. Converting charts to .png is very easy using the ggsave() function from ggplot2, but converting tables is a bit trickier. In the background as the report is knitted, R will connect to a 'headless' (non-GUI) version of Chrome, display the table in this headless browser, take a screenshot of the table in this browser, and save that screenshot as a .png file.
+
+This will just work when you are working from home, but when you are working at the Austin offices the Austin proxy server blocks these headless connections. In order to get this process working both at home and when working at the Austin, we need to make sure that Chrome is installed on the computer you are using, that R can locate the Chrome installation, and tell R to bypass the proxy server for local connections to Chrome when knitting the report.
+
+This section of the code looks for your Chrome installation and will throw an error if it cannot find Chrome. Follow the instructions in the code to define your Chrome install location if needed.
+
+```{r, out.width = '600px'}
+#
+knitr::include_graphics(here::here("Screenshots", "code_chrome.PNG"))
+```
+
+<div style="height: 1em;"></div>
+
+***Table of Contents***
 
 * Update the content (text inside [] brackets) and links (text inside () brackets) as required. Generally, the only lines that will need updating are the specific conditions you will be including in the Epidemiological Highlights section.
 
@@ -615,90 +600,93 @@ Much of the standard text in the report (e.g. Technical Notes) will remain the s
 knitr::include_graphics(here::here("Screenshots", "external_toc.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ***Chief Health Officer Alerts and Advisories***
 
-* Update the content (text inside [] brackets) and links (text inside () brackets) in this section as required
+* Update the content (text inside [] brackets) and links (text inside () brackets) in this section as required.
 
-* Include CHO Alerts and Advisories issued between the start of the reporting month to the day you are sending the final approved report to Comms
+* Include CHO Alerts and Advisories issued between the start of the reporting month to the day you are sending the final approved report to Comms.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "external_cho.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
+
+***Clinical Feature***
+
+* When applicable, the NEPHU Medical Team will prepare the content for the Clinical Feature section of the report and send it through to the Epi Inbox by the 7th of each month.
+
+* The content will come through as a Word document. Use Markdown syntax to add the content from the Word document into the report - see the existing examples in previous reports for inspiration.
+
+* The Clinical Feature is wrapped in an infobox - content between the **::: infobox** and **:::** will be inside a green bordered box in the external report html.
+
+```{r, out.width = '600px'}
+#
+knitr::include_graphics(here::here("Screenshots", "external_feature.PNG"))
+```
+
+<div style="height: 1em;"></div>
 
 ***Epidemiological Highlights***
 
-* Select conditions to include in this section based on the information you've abstracted from the Internal Report
+* Select conditions to include in this section based on the information you've abstracted from the Internal Report.
 
-* Whether or not to include a condition is a subjective choice - generally if a condition is highlighted in the notification summary table as higher than expected and the control charts suggest possible special cause variation I will include it here or in the Other Conditions of Note section
+* Whether or not to include a condition is a subjective choice - generally if a condition is highlighted in the notification summary table as higher than expected and the control charts suggest possible special cause variation I will include it here or in the Other Conditions of Note section.
 
-* The review process includes asking Epi, Med, and HP TLs whether they agree with the conditions included in this section
+* The review process includes asking Epi, Med, and HP TLs whether they agree with the conditions included in this section.
 
-<br/>
+<div style="height: 0.1em;"></div>
 
-Each condition included in this section gets its own subsection, using a standard format:
+* Each condition included in this section gets its own subsection, using a standard format:
+  * A bar chart of the number of notifications per month for the past 12 months.
+  * Dot points summarising the epidemiology of the condition in NEPHU.
+  * Dot points containing information about the condition, such as national/international trends, diagnosis, testing, or risk factors
+  * Links to additional resources - include the Victorian Department of Health: Control Guidelines and Advice and Better Health Channel links as a minimum.
+
+<div style="height: 0.1em;"></div>
+
+* The review process includes asking Epi, Med, and HP TLs whether they have any suggestions for content/links.
    
-* A bar chart of the number of notifications per month for the past 12 months
-
-* Dot points summarising the epidemiology of the condition in NEPHU
-
-* Dot points containing information about the condition, such as national/international trends, diagnosis, testing, or risk factors
-
-* Links to additional resources - include the Victorian Department of Health: Control Guidelines and Advice and Better Health Channel links as a minimum
-
-* The review process includes asking Epi, Med, and HP TLs whether they have any suggestions for content/links
-   
-<br/>
+<div style="height: 1em;"></div>
 
 Update the following parameters in the code for each condition of interest:
 
-* condition_name = the condition of interest
+* condition_select = the condition of interest (as defined in the condition field in PHESS).
 
-* data_count = leave this as results_count
+* figure_number = hopefully self-explanatory! Start with 1 for Figure 1.
 
-* figure_number = start with Figure 1
-
-* figure_title = can be the same as the condition_name, but allows for abbreviations to be used
-
-* ymax = maximum value for the y-axis (recommend using ymax = 5 for conditions with <5 notifications every month, otherwise use ymax = NA)
-
-* ybreaks = spacing between tick marks on the y-axis
-
-* yexpand = additional white space padding above the y-axis maximum value
-
-ymax, ybreaks, and yexpand values are matters of personal preference. Try different values and see what looks best to you.
+The code has been written to create, display, and save your chart as a png based on the figure_name and condition_select you've set.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "code_barchart.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
-Write the content for the dot points as text outside of a code chunk using Markdown syntax. See the existing examples in previous reports for inspiration.
+Write the content for the dot points as text outside of a code chunk using Markdown syntax. See the existing examples in [previous reports](https://austinhealth.sharepoint.com/:x:/s/NEPHUISDI-Epidemiology/IQDTItuMNg3KQKpLfvsHEf0NATv4v644Y9JXtgfmeitotNU?e=DD2ebu) for inspiration.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "external_text.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 You can add as many conditions as you want/need to this section - copy and modify the code from a previous condition.
 
-<br/>
+<div style="height: 1em;"></div>
 
 ***Other Conditions of Note***
 
-* Select conditions to include in this section based on the information you've abstracted from the Internal Report
+* Select conditions to include in this section based on the information you've abstracted from the Internal Report.
 
-* Each condition in this section is summarised in one dot point (and subpoints if required) - these conditions don't require the same depth of detail or analysis as those included in the Epidemiological Highlights section
+* Each condition in this section is summarised in one dot point (and subpoints if required) - these conditions don't require the same depth of detail or analysis as those included in the Epidemiological Highlights section.
 
-* The review process includes asking Epi, Med, and HP TLs whether they agree with the conditions included in this section
+* The review process includes asking Epi, Med, and HP TLs whether they agree with the conditions included in this section.
 
 Write the content for the dot points as text outside of a code chunk using Markdown syntax. See the existing examples in previous reports for inspiration.
 
@@ -707,52 +695,37 @@ Write the content for the dot points as text outside of a code chunk using Markd
 knitr::include_graphics(here::here("Screenshots", "external_other.PNG"))
 ```
 
-<br/>
-
-***Clinical Feature***
-
-* The NEPHU Medical Team will prepare the content for the Clinical Feature section of the report and send it through to the Epi Inbox by the 7th of each month
-
-* The content will come through as a Word document. Use Markdown syntax to add the content from the Word document into the report - see the existing examples in previous reports for inspiration
-
-* The Clinical Feature is wrapped in an infobox - content between the **::: infobox** and **:::** will be inside a green bordered box in the external report html
-
-```{r, out.width = '600px'}
-#
-knitr::include_graphics(here::here("Screenshots", "external_feature.PNG"))
-```
-
-<br/>
+<div style="height: 1em;"></div>
 
 ***Notifications Summary Table***
 
-* This section should automatically update each month - no additional changes are routinely required
+* This section should automatically update each month - no additional changes are routinely required.
 
-* If needed, write the content for the dot points as text outside of a code chunk using Markdown syntax - see the existing examples in previous reports for inspiration
+* If needed, write the content for the dot points as text outside of a code chunk using Markdown syntax - see the existing examples in previous reports for inspiration.
 
-* The code reads in child documents (03a_analyses_dataprep.Rmd and 03b_analyses_table.Rmd) and produces the notification summary table for each reporting group
+* The code reads in child documents (03a_analyses_dataprep.Rmd and 03b_analyses_table.Rmd) and produces the notification summary table for each reporting group.
 
-* Conditions are only included in these tables if there has been at least one notification in NEPHU during the report lookback period
+* Conditions are only included in these tables if there has been at least one notification in NEPHU during the report lookback period.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "external_table.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ***Technical Notes***
 
-* This section should automatically update each month - no additional changes are routinely required
+* This section should automatically update each month - no additional changes are routinely required.
 
-* If needed, write the content for the dot points as text outside of a code chunk using Markdown syntax - see the existing examples in previous reports for inspiration
+* If needed, write the content for the dot points as text outside of a code chunk using Markdown syntax - see the existing examples in previous reports for inspiration.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "external_technical.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ### Running the code
 
@@ -763,7 +736,7 @@ Knit the document. Depending on your R installation you may need to select ‘ht
 knitr::include_graphics(here::here("Screenshots", "code_externalknit.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 If everything has worked as intended you should now have a html file in the **../Reports subfolder** titled **Monthly Surveillance Report YYYY MM External** (YYYY MM is the reporting month).
 
@@ -772,9 +745,18 @@ If everything has worked as intended you should now have a html file in the **..
 knitr::include_graphics(here::here("Screenshots", "folder_externalreport.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
-## Part 6: Surveillance Meeting Presentation
+You should also have a collection of png files in the **../Reports/Images for Comms subfolder**
+
+```{r, out.width = '800px'}
+#
+knitr::include_graphics(here::here("Screenshots", "folder_externalimages.PNG"))
+```
+
+<div style="height: 1em;"></div>
+
+## Part 6: Surveillance Meeting
 
 We present a Monthly Update at the NEPHU Whole of Team Surveillance and Outbreak Meeting, usually on the second Thursday of each month. The content for this presentation comes from the Epidemiological Highlights and Other Conditions of Note that you've selected for inclusion in the external report.
 
@@ -785,7 +767,7 @@ Slides from previous presentations and a template slide deck can be found in the
 knitr::include_graphics(here::here("Screenshots", "folder_presentation.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 Save a copy of the template in the **../Presentations subfolder**, using the file name **Epi Highlights - YYYY MM**.
 
@@ -794,7 +776,7 @@ Save a copy of the template in the **../Presentations subfolder**, using the fil
 knitr::include_graphics(here::here("Screenshots", "presentation_savelocation.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 Update the highlighted sections in Slides 1 and 3 with the reporting month and date of data extraction from PHESS. 
 
@@ -803,7 +785,7 @@ Update the highlighted sections in Slides 1 and 3 with the reporting month and d
 knitr::include_graphics(here::here("Screenshots", "presentation_date.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 Create a slide for each **Epidemiological Highlight** condition you wish to include. The dot points on the slide will generally be a high level summary of the epidemiology of the condition in NEPHU, any subgroups with higher than expected notifications, how NEPHU compares to Victoria, and contextual information about what is happening statewide/nationally/internationally.
 
@@ -814,7 +796,7 @@ The template contains examples for a high-volume condition (pertussis), a condit
 knitr::include_graphics(here::here("Screenshots", "presentation_highlight.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 The **Other Conditions of Note** are summarised on 1-2 slides. The template contains an example.
 
@@ -823,34 +805,32 @@ The **Other Conditions of Note** are summarised on 1-2 slides. The template cont
 knitr::include_graphics(here::here("Screenshots", "presentation_other.PNG"))
 ```
 
-<br/>
-
 ***
 
-## Part 7: Reviewing and Finalising the Report
+## Part 7: Review and Finalisation
 
 ### Disseminating for feedback
 
 Congratulations! You now have a draft report. The next step is for the draft report to be reviewed and (hopefully) approved. However, while html files look lovely they are not very easy to edit or add comments to. We will create a Word version of the report to allow people to make comments.
 
-* Right-click on **Monthly Surveillance Report YYYY MM External.html** and select Open With > Word
+* Right-click on **Monthly Surveillance Report YYYY MM External.html** and select Open With > Word.
 
-* Turn Track Changes on
+* Turn Track Changes on.
 
-* Select File > Save As
+* Select File > Save As.
 
-* Change the File Type to Word Document (*docx)
+* Change the File Type to Word Document (*docx).
 
-* Change the File Name to **Monthly Surveillance Report YYYY MM External v1**
+* Change the File Name to **Monthly Surveillance Report YYYY MM External v1**.
 
-* Save the file in the **For Review subfolder**
+* Save the file in the **For Review subfolder**.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "review_savelocation.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 Links to the draft report (Word and html versions) are sent via email to the NEPHU Epi Team, NEPHU Med Team, NEPHU HP TLs, HP Senior Manager, and Population Health Senior Manager. We usually give everyone two full business days to provide comments.
 
@@ -859,70 +839,64 @@ Links to the draft report (Word and html versions) are sent via email to the NEP
 knitr::include_graphics(here::here("Screenshots", "review_email.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ### Incorporating feedback
 
 * Review the comments and update **03_monthly_surveillance_report_external.Rmd** accordingly
 
-* Knit the updated .Rmd and save a Word version (v2) in the For Review subfolder
+* Knit the updated .Rmd and save a Word version (v2) in the For Review subfolder.
 
-* Links to the draft report (Word and html versions) are sent via email to the Epi and Intelligence Lead and Med/Epi Senior Manager for approval, and the NEPHU Director and Senior Epidemiologist are cc'd for awareness
+* Links to the draft report (Word and html versions) are sent via email to the Epi and Intelligence Lead and Med/Epi Senior Manager for approval, and the NEPHU Director and Senior Epidemiologist are cc'd for awareness.
 
-* Approval will be received via email from the Med/Epi Senior Manager
+* Approval will be received via email from the Med/Epi Senior Manager.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "review_approval.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 ### Sending the report to Comms
 
 We're almost there! The External Report has now been approved and can be sent out to our stakeholders and published on the NEPHU website. The NEPHU Comms team handle this part of the process for us - we just need to give them files they can work with.
 
-* Previously Comms used a program called Vision6 for newsletter mailouts, they now use a program called Mailchimp
+* Previously Comms used a program called Vision6 for newsletter mailouts, they now use a program called Mailchimp.
 
-* Comms maintain the distribution list for us - the NEPHU website and each edition of the Monthly Surveillance Report contains instructions for signing up to the mailing list
+* Comms maintain the distribution list for us - the NEPHU website and each edition of the Monthly Surveillance Report contains instructions for signing up to the mailing list.
 
-* Mailchimp (and Vision6) emails cannot contain attachments - any information we send out needs to be within the content of the external report (narrative text, charts, tables, hyperlinks)
+* Mailchimp (and Vision6) emails cannot contain attachments - any information we send out needs to be within the content of the external report (narrative text, charts, tables, hyperlinks).
 
-There have been some recent (August/September 2025) changes to how Mailchimp handles images (in summary, it no longer renders them directly from a .txt file), so we now need to send Comms the External Report html along with the .png files for each chart we want to include in the report. Comms will build the report in Mailchimp.
+There have been some recent (August/September 2025) changes to how Mailchimp handles images (in summary, it no longer renders them directly from a .txt file), so we now need to send Comms the External Report html along with the .png files for each chart and table we want to include in the report. Comms will build the report in Mailchimp.
 
-The .pngs can be found in the figure-html subfolder that is created when you knit the report. Each chart is outputted as a separate .png into this folder.
+The .pngs can be found Images for Comms subfolder that is created when you knit the report. Each chart is outputted as a separate .png into this folder. We zip the contents of this folder so that we are not including a dozen loose attachments in the email to Comms.
 
 ```{r, out.width = '600px'}
 #
-knitr::include_graphics(here::here("Screenshots", "comms_charts.PNG"))
+knitr::include_graphics(here::here("Screenshots", "folder_externalzip.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
-The html and png files are sent as attachments via email to the NEPHU Comms Team.
+The html and zipped png files are sent as attachments via email to the NEPHU Comms Team.
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "comms_email.PNG"))
 ```
 
-<br/>
+<div style="height: 1em;"></div>
 
 The Comms Team will usually send through a test email to make sure that everything is displaying correctly. If all goes well, the report will be scheduled to go out in the following few days. Ideally, the report will be sent out on a Monday morning.
 
-The final step is to wait for the report to arrive in your inbox, open it, have a final read through, and admire your hard work.
+The final step is to wait for the report to arrive in your inbox, open it, have a final read through, and admire your hard work. `r emo::ji("tada")`
 
 ```{r, out.width = '600px'}
 #
 knitr::include_graphics(here::here("Screenshots", "comms_finalreport.PNG"))
 ```
 
-<!-- # Appendix 1: Conditional Logic Flowcharts -->
-
-<!-- > Add content here -->
-
-<!-- *** -->
-
-<br/>
+<div style="height: 1em;"></div>
 
 <div class="tocify-extend-page" data-unique="tocify-extend-page" style="height: 0;"></div>
