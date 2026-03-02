@@ -15,7 +15,6 @@ pacman::p_load(tidyverse,
                glue,
                writexl,
                xfun,
-               rmarkdown,
                here,
                readxl,
                janitor,
@@ -31,6 +30,7 @@ pacman::p_load(tidyverse,
                ggthemes,
                ggtext,
                gt,
+               chromote,
                webshot2)
 
 ################################################################################
