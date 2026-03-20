@@ -201,7 +201,7 @@ f_barchart_format_month <- function(data, figure_number, figure_title) {
                  breaks      = "1 month") +
     #
     scale_y_continuous(limits = c(0, dplyr::case_when(chart_max_n <= 5     ~ 5.125,
-                                                      chart_max_n <= 10    ~ (ceiling(chart_max_n / 1) * 1) + (chart_max_n * 0.05),
+                                                      chart_max_n <= 20    ~ (ceiling(chart_max_n / 2) * 2) + (chart_max_n * 0.05),
                                                       chart_max_n <= 50    ~ (ceiling(chart_max_n / 5) * 5) + (chart_max_n * 0.05),
                                                       chart_max_n <= 100   ~ (ceiling(chart_max_n / 10) * 10) + (chart_max_n * 0.05),
                                                       chart_max_n <= 200   ~ (ceiling(chart_max_n / 20) * 20) + (chart_max_n * 0.05),
@@ -215,6 +215,7 @@ f_barchart_format_month <- function(data, figure_number, figure_title) {
                                                       TRUE ~ NA)),
                        #
                        breaks = scales::breaks_width(dplyr::case_when(chart_max_n <= 10    ~ 1,
+                                                                      chart_max_n <= 20    ~ 2,
                                                                       chart_max_n <= 50    ~ 5,
                                                                       chart_max_n <= 100   ~ 10,
                                                                       chart_max_n <= 200   ~ 20,
