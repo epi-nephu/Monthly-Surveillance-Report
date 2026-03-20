@@ -1,11 +1,11 @@
 ---
-title: 'NEPHU Monthly Surveillance Report - External - January 2026'
+title: 'NEPHU Monthly Surveillance Report - External - February 2026'
 output: 
   html_document:
     self_contained: true
     lib_dir: null
 knit: (function(input, ...) {
-  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 01 External", output_dir = "../Reports") })
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 02 External", output_dir = "../Reports") })
 ---
 
 ```{css, echo = FALSE}
@@ -147,7 +147,7 @@ cases_allnephu <- readxl::read_xlsx(paste0(here::here(), "/Data", "/NEPHU_Cases_
                 #
                 sex = factor(sex, levels = c("Male", "Female", "Other", "Not stated")),
                 #
-                local_government_area = factor(local_government_area, levels = lga_name_long)) 
+                local_government_area = factor(local_government_area, levels = lga_name_long))
 
 cases_allvic <- readxl::read_xlsx(paste0(here::here(), "/Data", "/VIC_Cases_", format(epimonth_enddate, format = "%Y%m%d"), ".xlsx"),
                                   sheet     = 1,
@@ -175,16 +175,14 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 * [**Chief Health Officer Alerts and Advisories**](#cho_alerts)
 
-<div style="height: 0.1em;"></div>
-
-* [**Clinical Feature: Nipah Virus**](#clinical_feature)
+* [**Clinical Feature: Think measles protection during flu vaccination season**](#clinical_feature)
 
 <div style="height: 0.1em;"></div>
 
 * [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)
-  * [Invasive Pneumococcal Disease (IPD)](#ipd)
-  * [Shigellosis](#shigella)
-  * [VanA Vancomycin Resistant *Enterococcus* (VRE)](#vre)
+  * [Shiga-toxin producing *E. coli* (STEC)](#STEC)
+  * [Typhoid](#typhoid)
+  * [Measles](#measles)
 
 <div style="height: 0.1em;"></div>
 
@@ -204,101 +202,50 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 This section includes all Chief Health Officer Alerts and Advisories issued between `r format(as.Date(epimonth_current), format = "%d %B %Y")` and `r format(as.Date(Sys.Date()), format = "%d %B %Y")`. Surveillance data for Alerts and Advisories issued after `r format(as.Date(epimonth_enddate), format = "%d %B %Y")` will be included in next month's report.
 
-* 27 January: [Increased heat-related health risks](https://www.health.vic.gov.au/health-advisories/increased-heat-related-health-risks)
-
-* 10 February: [Increased travel-related measles cases in Victoria](https://www.health.vic.gov.au/health-alerts/new-measles-case-in-victoria-4)
+* 22 February: [Increased risk of measles in Victoria](https://www.health.vic.gov.au/health-alerts/new-measles-case-in-victoria-4)
 
 ***
+### Clinical Feature: Think measles protection during flu vaccination season {#clinical_feature}
 
-### Clinical Feature: Nipah Virus in West Bengal, India - What the Headlines Miss {#clinical_feature}
+Measles cases are increasing globally, with increased risk of importation leading to outbreaks and local transmission within Victoria. As we head into flu season, co-administration of MMR with influenza vaccination presents an ideal opportunity to help close Victoria’s measles immunity gap. 
 
-::: {.infobox}
-**Current Situation**
+Vaccination offers the best protection against measles, and two doses of a measles‑containing vaccine are required for immunity. Adults, especially people born between 1966 and 1992, are likely to have only received a single childhood dose and therefore are at risk of measles infection, however, may not be aware of their susceptibility. 
 
-* Two linked cases of Nipah virus were [reported in West Bengal](https://www.cdc.gov.au/resources/publications/nipah-virus-infection-situation-update-1-west-bengal-india-30-january-2026), India on 27 January 2026. Close contacts have been traced and tested, and no further cases have been detected.
+Healthcare providers can support measles vaccination by:
 
-<div style="height: 0.1em;"></div>
+* Opportunistically assessing and offering free state-funded catch-up MMR vaccination to all adults born during or after 1966 who are missing two doses of a measles-containing vaccine or are unsure of immunity. It is safe to give another MMR vaccine if a person has lost their childhood vaccine record. **People presenting for flu vaccination present a timely opportunity to also check measles vaccination status and offer MMR to those eligible.**
 
-* These cases do not represent a change in the epidemiology of Nipah virus, as cases occur almost annually in India and Bangladesh.
+* Adding state-funded MMR vaccine to your next OneLink order.
 
-<div style="height: 0.1em;"></div>
+* Displaying promotional materials at your practice.  Free poster printing and delivery is available to practices located within the NEPHU catchment by ordering [here](https://forms.office.com/r/sMY1c3jtW4). This includes resources designed for **First Nations people**, and posters in **13 additional languages**.
 
-* The risk of spread to other Indian states or internationally is considered to be very low.
+There is no need to check measles serology prior to vaccination. However the live-attenuated MMR vaccine is not recommended during pregnancy or for individuals with severe immunocompromise.
 
-**Interesting Facts**
+This program complements the National Immunisation Program which offers free Commonwealth funded catch up MMR to people aged less than 20 years and refugees and humanitarian entrants of any age who are not fully immunised.
 
-* Nipah virus was first identified and named after the 1998-1999 outbreak amongst pig farmers and pigs in Kampung Sungai Nipah village in Malaysia.
-  * This outbreak resulted in the culling of over 900,000 pigs in affected areas between 28 February 1999 to 26 April 1999 to eradicate the disease.
-  * Cases and outbreaks have since occurred in Bangladesh, India, the Philippines, and Singapore.
+More information:
 
-<div style="height: 0.1em;"></div>
+* Visit [the NEPHU website](https://nephu.org.au/news-and-events/measles-immunisation-program-launched/)
 
-* There is no evidence that Nipah virus has ever circulated in Australian bat populations. However, Hendra virus, a related *Henipavirus*, is found in Australia.
+* Watch Response to measles outbreak: [Adult measles immunisation program webinar, hosted by EMPHN](https://www.youtube.com/watch?si=vFx-Xg4sK_Urpb3x&v=ng5IxVUD7JA&feature=youtu.be). The [slideset](https://nephu.org.au/wp-content/uploads/2025/11/Measles_Immunisation_Program-slides.pdf) is also available. 
 
-**Key Messages**
+* Read the [information sheet](https://nephu.org.au/wp-content/uploads/2025/11/NEPHU_Measles_Info.pdf) and [FAQs](https://nephu.org.au/wp-content/uploads/2025/11/NEPHU_Measles_FAQ.pdf) for clinicians
 
-* Nipah virus is a severe disease, however the disease is not new and there is no recent change to the level of risk in Australia, which remains very low.
+* Email us at healthprotection.nephu@austin.org.au
 
-<div style="height: 0.1em;"></div>
 
-* Nipah virus is transmitted through:
-  * Contact with fruit bats or pigs (including bodily fluids and excreta)
-  * Consumption of raw date palm sap or fruit products potentially contaminated by affected bats
-  * Close contact with an affected person in an outbreak area, particularly in household and healthcare settings
-
-<div style="height: 0.1em;"></div>
-
-* Travelers to areas where Nipah virus has been found are advised to: 
-  * Avoid contact with animals 
-  * Avoid fruits that may have been in contact with an animal or their bodily fluids - clean and peel fruit yourself before eating it
-  * Avoid drinking raw or fermented date palm juice or sap
-  * Practice good hand hygiene 
-  * Avoid contact with anybody who is unwell with Nipah virus symptoms
-
-<div style="height: 0.1em;"></div>
-
-* Symptoms vary from mild flu-like illness to encephalitis, severe respiratory, and neurological illness and can result in death. Some individuals may be asymptomatic.
-
-<div style="height: 0.1em;"></div>
-
-* The incubation period of Nipah virus is usually 4 to 14 days, but rarely can be up to 45 days.
-
-<div style="height: 0.1em;"></div>
-
-* Consider Nipah virus infection in patients with a compatible travel and exposure history PLUS:
-  * Neurological symptoms (e.g. headache, confusion, seizures) OR
-  * Respiratory symptoms (e.g. dyspnoea, cough)
-
-<div style="height: 0.1em;"></div>
-
-* Clinicians are advised to notify suspected cases to NEPHU on 1300 651 160.  
-  * NEPHU will undertake a risk assessment and discuss with the Department of Health any request for testing as part of the testing approval process, and coordinate transfer of samples to Victorian Infectious Diseases Reference Laboratory (VIDRL) for testing using reverse transcription polymerase chain reaction (RT-PCR). 
-  * Further information on recommended specimens is available [here](https://www.health.vic.gov.au/infectious-diseases/nipah-virus-infection).
-
-<div style="height: 0.1em;"></div>
-
-* Although Nipah virus is not currently considered to be airborne, cases should be isolated and managed in a negative pressure room (where available) under standard, contact, droplet, and airborne precautions.
-
-<div style="height: 0.1em;"></div>
-
-* For more information about Nipah virus refer to:
-  * Victorian Department of Health: [Nipah Virus Infection](https://www.health.vic.gov.au/infectious-diseases/nipah-virus-infection)
-  * Better Health Channel: [Nipah Virus Infection](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/nipah-virus-infection)
-
-:::
 
 ***
-
 ### Epidemiological Highlights: `r reporting_month` {#epi_highlights}
 
-#### Invasive Pneumococcal Disease (IPD) {#ipd}
+#### Shiga-toxin producing *E. coli* (STEC) {#STEC}
 
 ```{r}
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 1
 
 # Condition name (from the condition field in PHESS)
-condition_select <- "Pneumococcal infection (IPD)"
+condition_select <- "Shiga-toxin and Vero-toxin producing Escherichia coli"
 
 # The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
 # No additional tweaks required!
@@ -340,49 +287,48 @@ ggsave(paste0("../Reports/Images for Comms/",
               " Figure ", figure_number, " ",
               condition_title,
               ".png"),
-       dpi  = 600,
-       plot = figure)
+       dpi    = 600,
+       width  = 5,
+       height = 3,
+       plot   = figure)
 ```
 
-* Higher than expected notifications of invasive pneumococcal disease (n = 13 vs. mean = 5.9) were received in January 2026. The number of notifications was the same as for December 2025 (n = 13).
+* Higher than expected notifications of STEC (n = 11 vs. mean = 5.0) were received in February 2026. The number of notifications increased from 1 notification in January 2026.
 
 <div style="height: 0.1em;"></div>
 
-* The notification rate in NEPHU was higher than for the rest of Victoria (8.6 vs. 5.9 per 100,000).
+* The notification rate in NEPHU was higher than for the rest of Victoria (7.3 vs. 5.1 per 100,000).
 
 <div style="height: 0.1em;"></div>
 
-* Cases ranged in age from 1 to 81 years, with more than half of the notifications in January being for older people (median age 55 years). There were higher than expected notifications for people aged 65+ years and for people residing in Boroondara, Knox, and Yarra Ranges LGAs.
+* Cases ranged in age from 8 to 87 years. There were higher than expected notifications for people aged 5-14 years and for people residing in the Hume LGA.
+
+* For three notifications received in February, acquisition was overseas. No clear risk factor was identified for the remaining eight notifications. 
 
 <div style="height: 0.1em;"></div>
 
-* IPD is caused by the bacterium *Streptococcus pneumoniae* and high-risk groups include children aged under 5 years and adults aged over 65 years. The disease becomes invasive when bacteria invade sterile areas of the body such as blood, joint fluid, or cerebrospinal fluid leading to severe complications such as meningitis, pneumonia, and bacteraemia.
+* STEC produce toxins that are similar to those produced by *Shigella spp*. Certain serotypes of STEC, particularly O157:H7, may lead to serious complications such as haemolytic uraemic syndrome (HUS) or thrombotic thrombocytopaenia purpura (TTP). Young children, the elderly, and immunocompromised people are at the highest risk of severe disease. 
 
 <div style="height: 0.1em;"></div>
 
-* There are more than 95 recognised strains of *S. pneumoniae* but no vaccine is available that can protect against all of them. Two vaccines (Prevenar 13 and Pneumovax 23) are available under the National Immunisation Program (NIP) for eligible individuals to help prevent against the most common strains.
-  * Prevenar 13 is available under the NIP for infants at 2, 4, and 12 months of age. In addition, an extra pneumococcal vaccine dose is given to children with certain medical risk factors at 6 months, and at 4 to 5 years of age.
-  * Adolescents and adults with specified medical conditions can get additional pneumococcal vaccines as specified in the NIP.
-  * Aboriginal and/or Torres Strait Islander adults aged 50 years and over and non-Indigenous adults aged 70 years and over are also eligible for pneumococcal vaccines funded under the NIP.
-  * See the [Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/pneumococcal-immunisation-service) for eligibility criteria and recommendations for pneumococcal vaccination.
-
+* *E. coli*, including STEC, are a major component of the normal gastrointestinal flora of many mammals, birds, and insects. Common risk factors for STEC include consumption of undercooked meat, exposure to untreated drinking water, contact with farm animals, and foreign travel
+  
 <div style="height: 0.1em;"></div>
 
-* For more information about IPD refer to:
-  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Invasive Pneumococcal Disease](https://www.health.vic.gov.au/infectious-diseases/invasive-pneumococcal-disease)
-  * Better Health Channel: [Pneumococcal Disease](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/pneumococcal-disease)
-  * Australian Immunisation Handbook: [Pneumococcal Disease](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/pneumococcal-disease)
+* For more information about STEC refer to:
+  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Verotoxin-producing E.coli (VTEC)](https://www.health.vic.gov.au/site-4/infectious-diseases/verotoxin-producing-e-coli-vtec)
+  * Better Health Channel: [Shiga toxin-producing *E.coli*](https://www.betterhealth.vic.gov.au/health/ConditionsAndTreatments/Shiga-toxin-producing-Ecoli)
 
 ***
 
-#### Shigellosis {#shigellosis}
-
+#### Typhoid {#typhoid}
 ```{r}
+
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 2
 
 # Condition name (from the condition field in PHESS)
-condition_select <- "Shigellosis"
+condition_select <- "Typhoid"
 
 # The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
 # No additional tweaks required!
@@ -424,59 +370,65 @@ ggsave(paste0("../Reports/Images for Comms/",
               " Figure ", figure_number, " ",
               condition_title,
               ".png"),
-       dpi  = 600,
-       plot = figure)
+       dpi    = 600,
+       width  = 5,
+       height = 3,
+       plot   = figure)
 ```
 
-* While the number of notifications for January 2026 was within the expected range, the number of shigellosis notifications per month has steadily remained above the mean for the past six months. There were 21 shigellosis notifications received in January 2026 compared to a mean of 11.8 for the same time of year over the past four years.
+* Higher than expected notifications for typhoid (n = 8 vs. mean = 2.4) were received in February 2026. The number of notifications increased from 1 notification in January 2026. 
+
+* The notification rate in NEPHU was higher than for the rest of Victoria (5.3 vs. 3.1 per 100,000).
 
 <div style="height: 0.1em;"></div>
 
-* Nearly half of the notifications received in January were associated with travel overseas or contact with a recently returned traveller (9/21, 43%), mostly related to countries in South-East Asia and Central America. Male to male sexual contact was a reported risk factor for a third of notifications (7/21, 33%). 
-
-* The notification rate in NEPHU was slightly higher than for the rest of Victoria (13.9 vs. 11.4 per 100,000).
+* Cases ranged in age from 3 to 32 years. All cases reported recent overseas travel to South Asia.  
 
 <div style="height: 0.1em;"></div>
 
-*	Shigellosis is a type of gastroenteritis caused by bacteria in the genus *Shigella spp.* and is a [leading cause of infectious diarrhoea worldwide](https://www.ncbi.nlm.nih.gov/books/NBK482337/).
+*	Typhoid fever is a bacterial infection of the intestinal tract and bloodstream caused by the *Salmonella* Typhi bacterium.
+
+* The most common symptoms of typhoid infection are fever and diarrhoea. Other symptoms include tiredness, abdominal symptoms, enlarged liver and spleen, and a characteristic skin rash.
+
+* Typhoid is transmitted mainly through faecally contaminated food and water.
 
 <div style="height: 0.1em;"></div>
 
-* There are four serotypes of *Shigella spp.*: *S. dysenteriae*, *S. flexneri*, *S. boydii*, and *S. sonnei*.
-  * *S. flexneri* can cause more severe disease and is more common in low- and middle-income countries while *S. sonnei* causes milder disease and is more common in higher-income countries.
-  * In higher-income countries, shigellosis is generally a self-limiting infection but is highly contagious and can be potentially serious.
+  * Approximately 30 cases of typhoid occur in Victoria each year. Most of these are returned travellers, especially from Southern Asia.
 
 <div style="height: 0.1em;"></div>
 
-* Shigellosis is spread through consuming food or water contaminated with the bacteria, touching objects or surfaces contaminated with the bacteria and then touching your mouth, and/or sexual contact with a person who has shigellosis.
-  * People who have travelled to countries where shigellosis is common, men who have sex with men, children, the elderly, and people with immunocompromising conditions are at an increased risk of infection.
+* Vaccination is recommended for travellers who will be exposed to potentially contaminated food and water in countries such as in Asia, the Middle East, Africa, Latin America, and the Pacific islands.
+
+  * Three typhoid vaccines are currently available in Australia. A combination hepatitis A and typhoid injectable vaccine is also available.
+
+  * All formulations are equally effective.
+
+  * Vaccination does not offer full protection from infection, and travellers should be advised to exercise care in selecting food and drinks and educated about personal hygiene, especially thorough handwashing after toilet use and before food preparation.
 
 <div style="height: 0.1em;"></div>
 
-* People with shigellosis should maintain good hygiene, practice handwashing, avoid preparing food for others, and practice safer sex practices until 48 hours after symptoms resolve.
-  * People with shigellosis who work as food handlers, childcare workers, health care workers, or workers in a residential facility should not return to work until advised by the Local Public Health Unit.
-  * Workers are generally excluded until they have had two consecutive negative faecal specimens, collected a minimum of 24 hours apart and no sooner than 48 hours after cessation of antibiotics (if applicable).
+* Without medical treatment, typhoid fever can be fatal. Typhoid can be treated with antibiotics.
+
+* Food handlers and healthcare workers who are infected with typhoid should be excluded from work and infected children excluded from childcare and school until 48 hours after symptom resolution.
 
 <div style="height: 0.1em;"></div>
 
-* [Increasing antibiotic resistance is being detected](https://pubmed.ncbi.nlm.nih.gov/39455321/) in *Shigella spp.* bacteria. Include a stool culture when testing patients for shigellosis to allow for antibiotic sensitivities to be determined, and reserve the use of antibiotic treatment for severe cases.
-
-<div style="height: 0.1em;"></div>
-
-* For more information about shigellosis refer to:
-  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Shigellosis](https://www.health.vic.gov.au/infectious-diseases/shigellosis)
-  * Better Health Channel: [Gastroenteritis - Shigellosis](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/gastroenteritis-shigella)
+* For more information about typhoid refer to:
+  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Typhoid and paratyphoid](https://www.health.vic.gov.au/infectious-diseases/typhoid-and-paratyphoid)
+  * Better Health Channel: [Typhoid and paratyphoid](https://www.betterhealth.vic.gov.au/health/healthyliving/typhoid-and-paratyphoid)
+  * Australian Immunisation Handbook: [Typhoid fever](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/typhoid-fever)
 
 ***
 
-#### VanA Vancomycin Resistant *Enterococcus* (VRE) {#vre}
+#### Measles {#measles}
 
 ```{r}
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 3
 
 # Condition name (from the condition field in PHESS)
-condition_select <- "VanA Vancomycin resistant enterococcus"
+condition_select <- "Measles"
 
 # The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
 # No additional tweaks required!
@@ -518,44 +470,45 @@ ggsave(paste0("../Reports/Images for Comms/",
               " Figure ", figure_number, " ",
               condition_title,
               ".png"),
-       dpi  = 600,
-       plot = figure)
+       dpi    = 600,
+       width  = 5,
+       height = 3,
+       plot   = figure)
 ```
 
-* Higher than expected notifications for VanA VRE (n = 14 vs. mean = 4.2) were received in January 2026. The number of notifications was nearly three times higher than for December 2025 (n = 5).
+* Two measles notifications were received in February 2026 compared to a mean of 1.5.  The notification rate in NEPHU was lower than the rest of Victoria (1.3 vs. 2.0).
+
+* In Victoria, there were 11 measles notifications in February 2026. As at the 11th March 2026, year-to-date there have been 18 measles notifications in Victoria compared to 8 in 2025 and 6 in 2024.
 
 <div style="height: 0.1em;"></div>
 
-* The notification rate in NEPHU was higher than for the rest of Victoria (9.3 vs. 5.7 per 100,000).
+* There is an ongoing risk of [measles transmission](https://www.health.vic.gov.au/health-alerts/measles-public-exposure-sites-victoria) in Victoria in addition to cases in travellers returning from overseas. There is an increase in [measles cases globally](https://www.thelancet.com/journals/lanmic/article/PIIS2666-5247(26)00002-9/fulltext?rss=yes).
 
 <div style="height: 0.1em;"></div>
 
-* There were higher than expected notifications for both males and females and for people aged 45-64 years.
+* The list of current exposure site for measles is updated regularly and can be found on the [Victoria Department of Health website](https://www.health.vic.gov.au/health-alerts/measles-public-exposure-sites-victoria). 
+
+* Measles is a highly infectious viral illness that can cause serious complications, such as pneumonia and encephalitis.
 
 <div style="height: 0.1em;"></div>
 
-* *Enterococcus spp.* are bacteria that form a [component of normal human microbial flora](https://www.ncbi.nlm.nih.gov/books/NBK567759/), primarily in the gastrointestinal tract for both males and females and the female genital tract.
-  * VRE are strains of *Enterococcus spp.* that have developed resistance to the antibiotic vancomycin.
-  * In Victoria, only the VanA genotype of VRE (high level resistance to both vancomycin and teicoplanin) is notifiable.
+* People who are at higher risk of infection and experiencing serious complications from measles include children younger than 5 years, pregnant women, and people with a weakened immune system.
 
 <div style="height: 0.1em;"></div>
 
-* VRE colonisation and infections can occur in healthcare settings such as hospitals and residential care facilities.
-  * Colonisation occurs when VRE are present on body surfaces, usually the gastrointestinal tract, without causing symptoms or an immune response.
-  * Colonisation often precedes infection, which occurs when VRE invades deeper tissues and causes symptoms such as fever, pain, or sepsis.
+* Symptoms of measles include fever, runny nose, cough and red eyes, followed by a non-itchy rash that typically starts on the face and spreads to the rest of the body. Suspected cases of measles should be tested, isolated and notified immediately to the Department of Health by calling 1300 651 160.
 
 <div style="height: 0.1em;"></div>
 
-* Most notifications of VanA VRE are [associated with invasive device use, long-term antibiotic use](https://pubmed.ncbi.nlm.nih.gov/33359937/), and/or [previous hospitalisations](https://pmc.ncbi.nlm.nih.gov/articles/PMC9495008/), including in overseas facilities.
-  * Consider the possibility of VanA VRE colonisation for patients who have a history of prolonged antibiotic use, invasive device use, or prolonged/recurrent hospitalisations.
+* For more information about measles refer to:
+  * Victorian Department of Health: [Measles](https://www.health.vic.gov.au/infectious-diseases/measles)
+  * Better Health Channel: [Measles](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/measles)
+  * Australian Immunisation Handbook: [Measles](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/measles)
 
 <div style="height: 0.1em;"></div>
 
-* For more information about VanA VRE refer to:
-  * Victorian Department of Health: [Infection Control Guidelines](https://www.health.vic.gov.au/site-4/infectious-diseases/infection-control-guidelines)
-  * Better Health Channel: [Preventing Healthcare Associated Infection](https://www.betterhealth.vic.gov.au/health/ConditionsAndTreatments/infections-in-hospital-reduce-the-risk)
-  * Better Health Channel: [Antimicrobial Resistant Bacteria](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/antibiotic-resistant-bacteria)
-  * Australian Commission on Safety and Quality in Health Care: [Vancomycin Resistant Enterococci (VRE)](https://www.safetyandquality.gov.au/our-work/infection-prevention-and-control/australian-guidelines-prevention-and-control-infection-healthcare/vancomycin-resistant-enterococci-vre)
+* NEPHU in partnership with the Eastern Melbourne PHN (EMPHN) and North Western Melbourne PHN (NWMPHN), have a [measles immunisation drive](https://nephu.org.au/news-and-events/measles-immunisation-program-launched/) to promote the uptake of free measles mumps rubella (MMR) vaccine for under-immunised adult cohorts, as part of a broader statewide initiative.
+
 
 ***
 
@@ -608,80 +561,18 @@ ggsave(paste0("../Reports/Images for Comms/",
               " Figure ", figure_number, " ",
               condition_title,
               ".png"),
-       dpi  = 600,
-       plot = figure)
+       dpi    = 600,
+       width  = 5,
+       height = 3,
+       plot   = figure)
 ```
 
-
-```{r}
-# Define the figure number (e.g. Figure 1, Figure 2)
-figure_number <- 5
-
-# Condition name (from the condition field in PHESS)
-condition_select <- "Novel Coronavirus (2019-nCoV)"
-
-# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
-# No additional tweaks required!
-
-# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
-# You don't need to save the png when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
-
-# Condition information for chart and title
-condition_name <- cases_allnephu %>% 
-  dplyr::filter(condition == condition_select) %>%
-  dplyr::distinct(condition_label) %>% 
-  pull(condition_label)
-
-condition_title <- cases_allnephu %>% 
-  dplyr::filter(condition == condition_select) %>% 
-  dplyr::distinct(chart_label) %>% 
-  pull(chart_label)
-
-# Create and format bar chart
-results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = condition_name)
-
-results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = condition_name,
-                                 data_count     = results_count)
-
-figure <- results_mean %>% 
-  f_barchart_format_month(figure_number = figure_number,
-                          figure_title  = condition_title)
-
-# Display figure in html
-figure
-
-# Save .png to send to Comms team
-# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
-# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
-ggsave(paste0("../Reports/Images for Comms/",
-              format(epimonth_current, format = "%Y-%m"),
-              " Figure ", figure_number, " ",
-              condition_title,
-              ".png"),
-       dpi  = 600,
-       plot = figure)
-```
-
-* The number of **influenza** and **COVID** notifications continued to decrease in January 2026 after remaining at high levels throughout the second half of 2025.
-  * Influenza notifications decreased from 2,869 in December 2025 to 845 in January 2026, and are within the expected range for this time of year for the first time since September 2025.
-  * COVID-19 notifications decreased from 596 in December 2025 to 300 in January 2026. Due to changes in the reporting systems used for COVID-19 data in Victoria, historical data for COVID-19 are not available to calculate the expected number of notifications for this report.
+* The number of **influenza** notifications continued to decrease in February 2026 after remaining at high levels throughout the second half of 2025.
+  * Influenza notifications decreased from 847 in January 2026 to 281 in February 2026.
 
 <div style="height: 0.1em;"></div>
 
-* The number of **infectious syphilis** and **total syphilis** (including infectious, late, congenital, and unspecified) notifications have been steadily trending downwards and have remained below the mean for the past several months.
-  * There were 13 infectious syphilis notifications in January 2026, compared to 21 in December 2025 and a mean of 32.4 for the same time of year over the past four years. This decreasing pattern is seen for males, people aged 25-44 years, and people residing in Yarra LGA. The notification rate in NEPHU was lower than for the rest of Victoria (8.6 vs. 12.6 per 100,000).
-  * There were 38 total syphilis notifications in January 2026, compared to 43 in December 2025 and a mean of 50.3 for the same time of year over the past four years. The notification rate in NEPHU was lower than for the rest of Victoria (25.2 vs. 30.2 per 100,000). 
-
-<div style="height: 0.1em;"></div>
-
-* While the number of notifications for January 2026 was within the expected range, the number of **dengue** notifications has remained above the mean for the past several months. There were 14 notifications in January 2026, compared to 9 in December 2025 and a mean of 6.7 for the same time of year over the past four years.
-  * All NEPHU cases with risk history information available had reported recent international travel, mostly to countries in South-East Asia and the South Pacific, including Indonesia and the Cook Islands.
-
-<div style="height: 0.1em;"></div>
-
-* One notification of **Carbapenemase Producing *Pseudomonas* (CPP)** was received in January 2026. The case had a recent history of hospital admission overseas. This is the first notification of CPP in NEPHU since April 2025.
+* Two notifications of **mpox** were received in February 2026. The last mpox notification in NEPHU was received in November 2025.  Both notifications in February 2026 were among males aged 20-30 years who reported male-to-male sexual contact.  
 
 ***
 
