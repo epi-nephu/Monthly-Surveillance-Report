@@ -119,7 +119,7 @@ f_ribbon_format_historical_yes <- function(data, chart_title) {
   max_sd <- max(data$limit_sd_upper)
   
   max_n <- data %>% 
-    dplyr::filter(event_yearmonth < epimonth_current) %>%
+    dplyr::filter(event_yearmonth <= epimonth_current) %>%
     #
     dplyr::arrange(desc(n)) %>%
     #
@@ -228,7 +228,7 @@ f_ribbon_format_historical_yes <- function(data, chart_title) {
 f_ribbon_format_historical_no <- function(data, chart_title) {
   
   chart_max_n <- data %>% 
-    dplyr::filter(event_yearmonth < epimonth_current) %>%
+    dplyr::filter(event_yearmonth <= epimonth_current) %>%
     #
     dplyr::arrange(desc(n)) %>%
     #
