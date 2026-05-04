@@ -231,14 +231,7 @@ knitr::include_graphics(here::here("Screenshots", "code_renviron.PNG"))
 
 <div style="height: 1em;"></div>
 
-The only line that may need changing in 01_data_prep_monthly_extract.R relates to, you guessed it, the proxy server.
-
-```{r, out.width = '600px'}
-#
-knitr::include_graphics(here::here("Screenshots", "code_useproxy.PNG"))
-```
-
-<div style="height: 1em;"></div>
+You will not need to make any changes to the 01_data_prep_monthly.R script. The code will automatically do a check when you run it and will tell PHAR whether or not you are using the proxy server, pull the data from PHAR, do some data wrangling, and save the data extracts into the Data subfolder.
 
 You only need to run 01_data_prep_monthly_extract.R once per month. The Internal and External Report Rmds will give you a friendly reminder (by telling you the file you are trying to read in doesn't exist) if you've forgotten to run this script.
 
