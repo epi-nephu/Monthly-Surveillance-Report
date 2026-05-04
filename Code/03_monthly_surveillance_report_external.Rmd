@@ -1,11 +1,11 @@
 ---
-title: 'NEPHU Monthly Surveillance Report - External - February 2026'
+title: 'NEPHU Monthly Surveillance Report - External - March 2026'
 output: 
   html_document:
     self_contained: true
     lib_dir: null
 knit: (function(input, ...) {
-  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 02 External", output_dir = "../Reports") })
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 03 External", output_dir = "../Reports") })
 ---
 
 ```{css, echo = FALSE}
@@ -175,14 +175,16 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 * [**Chief Health Officer Alerts and Advisories**](#cho_alerts)
 
-* [**Clinical Feature: Think measles protection during flu vaccination season**](#clinical_feature)
+<div style="height: 0.1em;"></div>
+
+* [**Clinical Feature: Food Safety**](#clinical_feature)
 
 <div style="height: 0.1em;"></div>
 
 * [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)
+  * [Legionellosis](#legionellosis)
+  * [Salmonellosis](#salmonella)
   * [Shiga-toxin producing *E. coli* (STEC)](#STEC)
-  * [Typhoid](#typhoid)
-  * [Measles](#measles)
 
 <div style="height: 0.1em;"></div>
 
@@ -202,47 +204,208 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 This section includes all Chief Health Officer Alerts and Advisories issued between `r format(as.Date(epimonth_current), format = "%d %B %Y")` and `r format(as.Date(Sys.Date()), format = "%d %B %Y")`. Surveillance data for Alerts and Advisories issued after `r format(as.Date(epimonth_enddate), format = "%d %B %Y")` will be included in next month's report.
 
-* 22 February: [Increased risk of measles in Victoria](https://www.health.vic.gov.au/health-alerts/new-measles-case-in-victoria-4)
+* 19 March: [Legionnaires' disease linked to Craigieburn area](https://www.health.vic.gov.au/health-alerts/legionnaires-disease-linked-to-craigieburn-area)
 
-***
-### Clinical Feature: Think measles protection during flu vaccination season {#clinical_feature}
+* 25 March: [Expanded access to the Japanese encephalitis vaccine for people visiting high-risk areas](https://www.health.vic.gov.au/health-advisories/expanded-access-to-the-japanese-encephalitis-vaccine-for-people-visiting-high-risk-areas)
 
-Measles cases are increasing globally, with increased risk of importation leading to outbreaks and local transmission within Victoria. As we head into flu season, co-administration of MMR with influenza vaccination presents an ideal opportunity to help close Victoria’s measles immunity gap. 
+<br/>
 
-Vaccination offers the best protection against measles, and two doses of a measles‑containing vaccine are required for immunity. Adults, especially people born between 1966 and 1992, are likely to have only received a single childhood dose and therefore are at risk of measles infection, however, may not be aware of their susceptibility. 
+:::: {.infobox}
 
-Healthcare providers can support measles vaccination by:
+### Clinical Feature: Food Safety {#clinical_feature}
 
-* Opportunistically assessing and offering free state-funded catch-up MMR vaccination to all adults born during or after 1966 who are missing two doses of a measles-containing vaccine or are unsure of immunity. It is safe to give another MMR vaccine if a person has lost their childhood vaccine record. **People presenting for flu vaccination present a timely opportunity to also check measles vaccination status and offer MMR to those eligible.**
+Food poisoning is often caused by bacteria in food that has been incorrectly stored, prepared, handled or cooked. Bacteria that commonly cause food poisoning include *Salmonella* spp., *E. coli*, *Campylobacter* spp., and *Staphylococcus aureus*.
 
-* Adding state-funded MMR vaccine to your next OneLink order.
+Certain foods such as meats, dairy products, eggs, smallgoods, seafood and pre-prepared fruit and salads are considered at higher risk of containing food poisoning bacteria. Storing food safely is very important, and keeping food out of the high-risk temperature zones (between 5°C and 60°C).
 
-* Displaying promotional materials at your practice.  Free poster printing and delivery is available to practices located within the NEPHU catchment by ordering [here](https://forms.office.com/r/sMY1c3jtW4). This includes resources designed for **First Nations people**, and posters in **13 additional languages**.
+Two or more related cases of suspected food or waterborne illness are considered an urgent notifiable condition. Medical practitioners and pathology services must notify these cases immediately by telephone on 1300 651 160 (24/7), whether the diagnosis is suspected or confirmed.
 
-There is no need to check measles serology prior to vaccination. However the live-attenuated MMR vaccine is not recommended during pregnancy or for individuals with severe immunocompromise.
+People with confirmed or suspected infectious gastroenteritis should be excluded from food handling, schools and children’s services until diarrhoea has stopped, or, depending on the pathogen, until two faecal samples taken at least 24 hours apart return negative results.
 
-This program complements the National Immunisation Program which offers free Commonwealth funded catch up MMR to people aged less than 20 years and refugees and humanitarian entrants of any age who are not fully immunised.
+Healthcare workers employed in areas with high risk patients, such as special care nurseries or residential aged care facilities, should be excluded from work until at least 48 hours after diarrhoea has ceased. 
 
-More information:
+Learn more about Food Safety on our [website](https://nephu.org.au/health-topics/food-safety/).
 
-* Visit [the NEPHU website](https://nephu.org.au/news-and-events/measles-immunisation-program-launched/)
-
-* Watch Response to measles outbreak: [Adult measles immunisation program webinar, hosted by EMPHN](https://www.youtube.com/watch?si=vFx-Xg4sK_Urpb3x&v=ng5IxVUD7JA&feature=youtu.be). The [slideset](https://nephu.org.au/wp-content/uploads/2025/11/Measles_Immunisation_Program-slides.pdf) is also available. 
-
-* Read the [information sheet](https://nephu.org.au/wp-content/uploads/2025/11/NEPHU_Measles_Info.pdf) and [FAQs](https://nephu.org.au/wp-content/uploads/2025/11/NEPHU_Measles_FAQ.pdf) for clinicians
-
-* Email us at healthprotection.nephu@austin.org.au
-
-
+::::
 
 ***
 ### Epidemiological Highlights: `r reporting_month` {#epi_highlights}
+
+#### Legionellosis - *Legionella pneumophila* {#legionellosis}
+
+```{r}
+library(ggtext) # to print in italics in plot title
+
+# Define the figure number (e.g. Figure 1, Figure 2)
+figure_number <- 1
+
+# Condition name (from the condition field in PHESS)
+condition_select <- "Legionella pneumophila"
+
+# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
+# No additional tweaks required!
+
+# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
+# You don't need to save the png when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
+
+# Condition information for chart and title
+condition_name <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>%
+  dplyr::distinct(condition_label) %>% 
+  pull(condition_label)
+
+condition_title <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>% 
+  dplyr::distinct(chart_label) %>% 
+  pull(chart_label)
+condition_title_ital = paste0("*", condition_title, "*")
+
+# Create and format bar chart
+results_count <- cases_allnephu %>%
+  f_barchart_dataprep_month_count(condition_name = condition_name)
+
+results_mean <- cases_allnephu %>% 
+  f_barchart_dataprep_month_mean(condition_name = condition_name,
+                                 data_count     = results_count)
+
+figure <- results_mean %>% 
+  f_barchart_format_month(figure_number = figure_number,
+                          figure_title  = condition_title_ital)
+
+# Display figure in html
+figure
+
+# Save .png to send to Comms team
+# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
+# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
+
+ggsave(paste0("../Reports/Images for Comms/",
+              format(epimonth_current, format = "%Y-%m"),
+              " Figure ", figure_number, " ",
+              condition_title,
+              ".png"),
+       dpi    = 600,
+       width  = 5,
+       height = 3,
+       plot   = figure)
+```
+
+* Eleven notifications of *Legionella pneumophila* were received in March 2026 compared to a mean of 2.5.  The notification rate in NEPHU was higher than the rest of Victoria (7.3 vs. 4.9).
+
+<div style="height: 0.1em;"></div>
+
+* An outbreak of Legionnaires’ disease was declared on the 19 March 2026, following a significant increase in cases notified across the Craigieburn area after 4 March 2026. A Chief Health Officer Alert was issued regarding the outbreak on 19 March 2026.
+
+<div style="height: 0.1em;"></div>
+
+* The higher than expected number of notifications seen in NEPHU in March were predominantly due to cases associated with this outbreak. As of 9 April 2026, there have been 10 confirmed cases notified that are linked to this outbreak, with the majority being in adults aged over 50 years. All cases have required hospitalisation and no deaths have been reported.
+
+<div style="height: 0.1em;"></div>
+
+* For more information about *Legionella pneumophila* and the outbreak, refer to:
+  * CHO Alert: 19 March [Legionnaires' disease linked to Craigieburn area](https://www.health.vic.gov.au/health-alerts/legionnaires-disease-linked-to-craigieburn-area)
+
+  * Victorian Department of Health: [Legionellosis (Legionnaires' Disease)](https://www.health.vic.gov.au/site-4/infectious-diseases/legionellosis-legionnaires-disease)
+
+  * Better Health Channel: [Legionnaires’ Disease](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/legionnaires-disease)
+
+
+
+***
+
+#### Salmonellosis {#salmonella}
+```{r}
+
+# Define the figure number (e.g. Figure 1, Figure 2)
+figure_number <- 2
+
+# Condition name (from the condition field in PHESS)
+condition_select <- "Salmonellosis"
+
+# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
+# No additional tweaks required!
+
+# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
+# You don't need to save the png when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
+
+# Condition information for chart and title
+condition_name <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>%
+  dplyr::distinct(condition_label) %>% 
+  pull(condition_label)
+
+condition_title <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>% 
+  dplyr::distinct(chart_label) %>% 
+  pull(chart_label)
+
+# Create and format bar chart
+results_count <- cases_allnephu %>%
+  f_barchart_dataprep_month_count(condition_name = condition_name)
+
+results_mean <- cases_allnephu %>% 
+  f_barchart_dataprep_month_mean(condition_name = condition_name,
+                                 data_count     = results_count)
+
+figure <- results_mean %>% 
+  f_barchart_format_month(figure_number = figure_number,
+                          figure_title  = condition_title)
+
+# Display figure in html
+figure
+
+# Save .png to send to Comms team
+# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
+# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
+ggsave(paste0("../Reports/Images for Comms/",
+              format(epimonth_current, format = "%Y-%m"),
+              " Figure ", figure_number, " ",
+              condition_title,
+              ".png"),
+       dpi    = 600,
+       width  = 5,
+       height = 3,
+       plot   = figure)
+```
+
+* Higher than expected notifications for salmonellosis (n = 59 vs. mean = 38.2) were received in March 2026. The number of notifications increased from 47 notifications in February 2026. 
+
+<div style="height: 0.1em;"></div>
+
+* The notification rate in NEPHU was higher than for the rest of Victoria (39.1 vs. 36.1 per 100,000).
+
+<div style="height: 0.1em;"></div>
+
+* There were higher than expected notifications for people living in the Manningham LGA.
+
+<div style="height: 0.1em;"></div>
+
+*	*Salmonella* spp. bacteria are part of the normal gut microbiota of many mammals, birds, and reptiles. Consumption of undercooked meat especially poultry, and raw eggs are a common source of *Salmonella* infection in humans. Other possible sources of infection include cross-contamination from raw food such as when food comes into contact with contaminated kitchen surfaces like chopping boards, knives, serving spoons, and other utensils that were used with the raw food.
+
+<div style="height: 0.1em;"></div>
+
+* Hand washing before preparing or consuming food and after contact with animals, including pets, can also prevent the spread of salmonellosis.
+
+<div style="height: 0.1em;"></div>
+
+* Salmonellosis can be detected from a faecal sample using culture or PCR. Requesting faecal MCS (microscopy, culture, and sensitivity) allows for the differentiation of different *Salmonella* species and antibiotic sensitivity testing to be performed.
+
+<div style="height: 0.1em;"></div>
+
+
+* For more information about salmonellosis refer to:
+  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Salmonellosis](https://www.health.vic.gov.au/infectious-diseases/salmonellosis)
+  * Better Health Channel: [Salmonellosis](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/gastroenteritis-salmonellosis)
+  * NEPHU: [Food Safety](https://nephu.org.au/health-topics/food-safety/)
+  
+
+***
 
 #### Shiga-toxin producing *E. coli* (STEC) {#STEC}
 
 ```{r}
 # Define the figure number (e.g. Figure 1, Figure 2)
-figure_number <- 1
+figure_number <- 3
 
 # Condition name (from the condition field in PHESS)
 condition_select <- "Shiga-toxin and Vero-toxin producing Escherichia coli"
@@ -293,17 +456,15 @@ ggsave(paste0("../Reports/Images for Comms/",
        plot   = figure)
 ```
 
-* Higher than expected notifications of STEC (n = 11 vs. mean = 5.0) were received in February 2026. The number of notifications increased from 1 notification in January 2026.
+* The number of notifications of STEC remained higher than expected in March 2026 and unchanged from February 2026 (n = 11 vs. mean = 4.8). 
 
 <div style="height: 0.1em;"></div>
 
-* The notification rate in NEPHU was higher than for the rest of Victoria (7.3 vs. 5.1 per 100,000).
+* The notification rate in NEPHU was slightly higher than for the rest of Victoria (7.3 vs. 7.0 per 100,000).
 
 <div style="height: 0.1em;"></div>
 
-* Cases ranged in age from 8 to 87 years. There were higher than expected notifications for people aged 5-14 years and for people residing in the Hume LGA.
-
-* For three notifications received in February, acquisition was overseas. No clear risk factor was identified for the remaining eight notifications. 
+* Cases ranged in age from 5 to 87 years. There were higher than expected notifications for people aged 44-64 years and for people residing in the Whitehorse or Yarra Ranges LGAs.
 
 <div style="height: 0.1em;"></div>
 
@@ -311,268 +472,33 @@ ggsave(paste0("../Reports/Images for Comms/",
 
 <div style="height: 0.1em;"></div>
 
-* *E. coli*, including STEC, are a major component of the normal gastrointestinal flora of many mammals, birds, and insects. Common risk factors for STEC include consumption of undercooked meat, exposure to untreated drinking water, contact with farm animals, and foreign travel
+* *E. coli*, including STEC, are a major component of the normal gastrointestinal flora of many mammals, birds, and insects. Common risk factors for STEC include consumption of undercooked meat, exposure to untreated drinking water, contact with farm animals, and overseas travel.
   
 <div style="height: 0.1em;"></div>
 
 * For more information about STEC refer to:
   * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Verotoxin-producing E.coli (VTEC)](https://www.health.vic.gov.au/site-4/infectious-diseases/verotoxin-producing-e-coli-vtec)
   * Better Health Channel: [Shiga toxin-producing *E.coli*](https://www.betterhealth.vic.gov.au/health/ConditionsAndTreatments/Shiga-toxin-producing-Ecoli)
-
-***
-
-#### Typhoid {#typhoid}
-```{r}
-
-# Define the figure number (e.g. Figure 1, Figure 2)
-figure_number <- 2
-
-# Condition name (from the condition field in PHESS)
-condition_select <- "Typhoid"
-
-# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
-# No additional tweaks required!
-
-# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
-# You don't need to save the png when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
-
-# Condition information for chart and title
-condition_name <- cases_allnephu %>% 
-  dplyr::filter(condition == condition_select) %>%
-  dplyr::distinct(condition_label) %>% 
-  pull(condition_label)
-
-condition_title <- cases_allnephu %>% 
-  dplyr::filter(condition == condition_select) %>% 
-  dplyr::distinct(chart_label) %>% 
-  pull(chart_label)
-
-# Create and format bar chart
-results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = condition_name)
-
-results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = condition_name,
-                                 data_count     = results_count)
-
-figure <- results_mean %>% 
-  f_barchart_format_month(figure_number = figure_number,
-                          figure_title  = condition_title)
-
-# Display figure in html
-figure
-
-# Save .png to send to Comms team
-# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
-# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
-ggsave(paste0("../Reports/Images for Comms/",
-              format(epimonth_current, format = "%Y-%m"),
-              " Figure ", figure_number, " ",
-              condition_title,
-              ".png"),
-       dpi    = 600,
-       width  = 5,
-       height = 3,
-       plot   = figure)
-```
-
-* Higher than expected notifications for typhoid (n = 8 vs. mean = 2.4) were received in February 2026. The number of notifications increased from 1 notification in January 2026. 
-
-* The notification rate in NEPHU was higher than for the rest of Victoria (5.3 vs. 3.1 per 100,000).
-
-<div style="height: 0.1em;"></div>
-
-* Cases ranged in age from 3 to 32 years. All cases reported recent overseas travel to South Asia.  
-
-<div style="height: 0.1em;"></div>
-
-*	Typhoid fever is a bacterial infection of the intestinal tract and bloodstream caused by the *Salmonella* Typhi bacterium.
-
-* The most common symptoms of typhoid infection are fever and diarrhoea. Other symptoms include tiredness, abdominal symptoms, enlarged liver and spleen, and a characteristic skin rash.
-
-* Typhoid is transmitted mainly through faecally contaminated food and water.
-
-<div style="height: 0.1em;"></div>
-
-  * Approximately 30 cases of typhoid occur in Victoria each year. Most of these are returned travellers, especially from Southern Asia.
-
-<div style="height: 0.1em;"></div>
-
-* Vaccination is recommended for travellers who will be exposed to potentially contaminated food and water in countries such as in Asia, the Middle East, Africa, Latin America, and the Pacific islands.
-
-  * Three typhoid vaccines are currently available in Australia. A combination hepatitis A and typhoid injectable vaccine is also available.
-
-  * All formulations are equally effective.
-
-  * Vaccination does not offer full protection from infection, and travellers should be advised to exercise care in selecting food and drinks and educated about personal hygiene, especially thorough handwashing after toilet use and before food preparation.
-
-<div style="height: 0.1em;"></div>
-
-* Without medical treatment, typhoid fever can be fatal. Typhoid can be treated with antibiotics.
-
-* Food handlers and healthcare workers who are infected with typhoid should be excluded from work and infected children excluded from childcare and school until 48 hours after symptom resolution.
-
-<div style="height: 0.1em;"></div>
-
-* For more information about typhoid refer to:
-  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Typhoid and paratyphoid](https://www.health.vic.gov.au/infectious-diseases/typhoid-and-paratyphoid)
-  * Better Health Channel: [Typhoid and paratyphoid](https://www.betterhealth.vic.gov.au/health/healthyliving/typhoid-and-paratyphoid)
-  * Australian Immunisation Handbook: [Typhoid fever](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/typhoid-fever)
-
-***
-
-#### Measles {#measles}
-
-```{r}
-# Define the figure number (e.g. Figure 1, Figure 2)
-figure_number <- 3
-
-# Condition name (from the condition field in PHESS)
-condition_select <- "Measles"
-
-# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
-# No additional tweaks required!
-
-# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
-# You don't need to save the png when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
-
-# Condition information for chart and title
-condition_name <- cases_allnephu %>% 
-  dplyr::filter(condition == condition_select) %>%
-  dplyr::distinct(condition_label) %>% 
-  pull(condition_label)
-
-condition_title <- cases_allnephu %>% 
-  dplyr::filter(condition == condition_select) %>% 
-  dplyr::distinct(chart_label) %>% 
-  pull(chart_label)
-
-# Create and format bar chart
-results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = condition_name)
-
-results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = condition_name,
-                                 data_count     = results_count)
-
-figure <- results_mean %>% 
-  f_barchart_format_month(figure_number = figure_number,
-                          figure_title  = condition_title)
-
-# Display figure in html
-figure
-
-# Save .png to send to Comms team
-# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
-# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
-ggsave(paste0("../Reports/Images for Comms/",
-              format(epimonth_current, format = "%Y-%m"),
-              " Figure ", figure_number, " ",
-              condition_title,
-              ".png"),
-       dpi    = 600,
-       width  = 5,
-       height = 3,
-       plot   = figure)
-```
-
-* Two measles notifications were received in February 2026 compared to a mean of 1.5.  The notification rate in NEPHU was lower than the rest of Victoria (1.3 vs. 2.0).
-
-* In Victoria, there were 11 measles notifications in February 2026. As at the 11th March 2026, year-to-date there have been 18 measles notifications in Victoria compared to 8 in 2025 and 6 in 2024.
-
-<div style="height: 0.1em;"></div>
-
-* There is an ongoing risk of [measles transmission](https://www.health.vic.gov.au/health-alerts/measles-public-exposure-sites-victoria) in Victoria in addition to cases in travellers returning from overseas. There is an increase in [measles cases globally](https://www.thelancet.com/journals/lanmic/article/PIIS2666-5247(26)00002-9/fulltext?rss=yes).
-
-<div style="height: 0.1em;"></div>
-
-* The list of current exposure site for measles is updated regularly and can be found on the [Victoria Department of Health website](https://www.health.vic.gov.au/health-alerts/measles-public-exposure-sites-victoria). 
-
-* Measles is a highly infectious viral illness that can cause serious complications, such as pneumonia and encephalitis.
-
-<div style="height: 0.1em;"></div>
-
-* People who are at higher risk of infection and experiencing serious complications from measles include children younger than 5 years, pregnant women, and people with a weakened immune system.
-
-<div style="height: 0.1em;"></div>
-
-* Symptoms of measles include fever, runny nose, cough and red eyes, followed by a non-itchy rash that typically starts on the face and spreads to the rest of the body. Suspected cases of measles should be tested, isolated and notified immediately to the Department of Health by calling 1300 651 160.
-
-<div style="height: 0.1em;"></div>
-
-* For more information about measles refer to:
-  * Victorian Department of Health: [Measles](https://www.health.vic.gov.au/infectious-diseases/measles)
-  * Better Health Channel: [Measles](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/measles)
-  * Australian Immunisation Handbook: [Measles](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/measles)
-
-<div style="height: 0.1em;"></div>
-
-* NEPHU in partnership with the Eastern Melbourne PHN (EMPHN) and North Western Melbourne PHN (NWMPHN), have a [measles immunisation drive](https://nephu.org.au/news-and-events/measles-immunisation-program-launched/) to promote the uptake of free measles mumps rubella (MMR) vaccine for under-immunised adult cohorts, as part of a broader statewide initiative.
+  * NEPHU: [Food Safety](https://nephu.org.au/health-topics/food-safety/)
 
 
 ***
 
 ### Other Conditions of Note: `r reporting_month` {#other_tonote}
 
-```{r}
-# Define the figure number (e.g. Figure 1, Figure 2)
-figure_number <- 4
+* There were three notifications of **listeriosis** received in March 2026, two of which were in a perinatal pair. The last listeriosis notification in NEPHU was received in January 2026. Listeria infection is normally transmitted through contaminated food and can have severe consequences for certain populations including pregnant women, the elderly and people with lowered immunity, while healthy adults may experience transient, mild to moderate flu-like symptoms or self-limited gastroenteritis.
 
-# Condition name (from the condition field in PHESS)
-condition_select <- "Influenza"
+  * For pregnant women, the infection can be transmitted to the fetus through the placenta, which can result in stillbirth or premature birth. Babies may be severely affected with conditions such as bacteraemia or meningitis (early-onset neonatal listeriosis).
 
-# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
-# No additional tweaks required!
+  * *Listeria* bacteria is commonly found in the environment. Infection can be prevented with proper food handling and preparation as well as ensuring that consumed food is cooked thoroughly. At-risk people including pregnant women should avoid consuming raw fruits and vegetables where the washing procedure is unknown, cold meat products and ready-to-eat foods and leftovers that are not further cooked.
 
-# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
-# You don't need to save the png when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
+  * For more information on listeriosis:
 
-# Condition information for chart and title
-condition_name <- cases_allnephu %>% 
-  dplyr::filter(condition == condition_select) %>%
-  dplyr::distinct(condition_label) %>% 
-  pull(condition_label)
+    * Victorian Department of Health: [Listeriosis](https://www.health.vic.gov.au/infectious-diseases/listeriosis)
 
-condition_title <- cases_allnephu %>% 
-  dplyr::filter(condition == condition_select) %>% 
-  dplyr::distinct(chart_label) %>% 
-  pull(chart_label)
-
-# Create and format bar chart
-results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = condition_name)
-
-results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = condition_name,
-                                 data_count     = results_count)
-
-figure <- results_mean %>% 
-  f_barchart_format_month(figure_number = figure_number,
-                          figure_title  = condition_title)
-
-# Display figure in html
-figure
-
-# Save .png to send to Comms team
-# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
-# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
-ggsave(paste0("../Reports/Images for Comms/",
-              format(epimonth_current, format = "%Y-%m"),
-              " Figure ", figure_number, " ",
-              condition_title,
-              ".png"),
-       dpi    = 600,
-       width  = 5,
-       height = 3,
-       plot   = figure)
-```
-
-* The number of **influenza** notifications continued to decrease in February 2026 after remaining at high levels throughout the second half of 2025.
-  * Influenza notifications decreased from 847 in January 2026 to 281 in February 2026.
-
-<div style="height: 0.1em;"></div>
-
-* Two notifications of **mpox** were received in February 2026. The last mpox notification in NEPHU was received in November 2025.  Both notifications in February 2026 were among males aged 20-30 years who reported male-to-male sexual contact.  
+    * Better Health Channel: [Food poisoning - Listeria infection](https://www.betterhealth.vic.gov.au/health/healthyliving/food-poisoning-listeria)
+    
+    * NEPHU: [Food Safety](https://nephu.org.au/health-topics/food-safety/)
 
 ***
 
