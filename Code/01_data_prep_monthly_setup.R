@@ -37,24 +37,24 @@ pacman::p_load(tidyverse,
 # Colours
 ################################################################################
 # NEPHU colour palette
-nephu_blue   <- "#191d43"
-nephu_green  <- "#5bc788"
-nephu_grey   <- "#eae5e0"
-nephu_peach  <- "#ffa78c"
-nephu_white  <- "#ffffff"
-nephu_yellow <- "#fff694"
+nephu_blue   <- "#191D43"
+nephu_green  <- "#5BC788"
+nephu_grey   <- "#EAE5E0"
+nephu_peach  <- "#FFA78C"
+nephu_white  <- "#FFFFFF"
+nephu_yellow <- "#FFF694"
 
 ################################################################################
 # Definitions and constants
 ################################################################################
 # Start and end dates for current reporting month
-epimonth_current <- as.Date("2026-03-01")
+epimonth_current <- as.Date("2026-04-01")
 epimonth_enddate <- ceiling_date(epimonth_current, "month") - days(1)
 
 reporting_month <- format(epimonth_current, format = "%B %Y")
 
 # Date of PHAR data extract
-extract_date <- as.Date("2026-04-07")
+extract_date <- as.Date("2026-05-04")
 
 # Year to date
 month_number <- month(epimonth_current)

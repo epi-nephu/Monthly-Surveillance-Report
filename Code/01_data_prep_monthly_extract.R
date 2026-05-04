@@ -14,7 +14,10 @@ source(paste0(here::here(), "/Code", "/01_data_prep_monthly_setup.R"))
 ################################################################################
 # Connect to PHAR
 # Note: useProxy = 1 when in Austin offices, useProxy = 0 when WFH
-con <- DBI::dbConnect(odbc::odbc(), "PHAR", useProxy = 0, EnableQueryResultDownload = 0)
+proxy_status <- dplyr::case_when(Sys.getenv("http_proxy") == "http://server340v.armc.org.au:8080" ~ 1,
+                                 TRUE ~ 0)
+
+con <- DBI::dbConnect(odbc::odbc(), "PHAR", useProxy = proxy_status, EnableQueryResultDownload = 0)
 
 # NEPHU cases for entire lookback period
 phar_nephu <- DBI::dbGetQuery(con,
