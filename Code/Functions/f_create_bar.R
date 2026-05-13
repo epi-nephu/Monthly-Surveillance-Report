@@ -113,7 +113,7 @@ f_barchart_dataprep_month_mean <- function(data, data_count, condition_name) {
   
   four_years_data <- data %>% 
     dplyr::filter(condition_label == condition_name) %>% 
-    dplyr::select(four_years_data) %>% 
+    dplyr::pull(four_years_data) %>% 
     unique()
   
   volume <- data %>% 
@@ -124,9 +124,7 @@ f_barchart_dataprep_month_mean <- function(data, data_count, condition_name) {
     #
     dplyr::mutate(mean = n / 4) %>% 
     #
-    dplyr::mutate(volume = dplyr::case_when(
-      mean < high_volume ~ "Low volume",
-      TRUE ~ "High volume")) %>%
+    dplyr::mutate(volume = if (mean < high_volume) "Low volume" else "High volume") %>%
     #
     pull(volume)
   
@@ -165,7 +163,11 @@ f_barchart_dataprep_month_mean <- function(data, data_count, condition_name) {
       dplyr::distinct(event_month, .keep_all = TRUE) %>% 
       #
       dplyr::select(-event_yearmonth,
-                    -n)
+                    -n) %>% 
+      #
+      dplyr::mutate(mean = dplyr::case_when(
+        four_years_data == "No" ~ NA_integer_,
+        TRUE ~ mean))
     
     data_mean <- data_count %>% 
       dplyr::left_join(data_mean, by = "event_month") %>% 
