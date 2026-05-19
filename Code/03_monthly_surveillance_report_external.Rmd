@@ -167,7 +167,7 @@ This report is a retrospective review of communicable disease notifications made
 
 Counts and rates are based on the date that the Victorian Department of Health was first notified of a case by a laboratory or medical practitioner and includes all data entered into the Public Health Event Surveillance System (PHESS) as of `r format(as.Date(extract_date), format = "%d %B %Y")`. Counts and rates are likely to be an underestimate of true disease incidence, are accurate only at the time the data were extracted from PHESS, and are subject to change due to reporting delays and exclusions following further case investigation.
 
-The full list of notifiable conditions in Victoria can be found [here](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms). The data required for this report and other public health surveillance at NEPHU relies on timely and complete notification from clinicians and laboratories. Medical practitioners and laboratories should notify urgent conditions on suspicion by calling 1300 651 160 and routine notifications can be made via this [form](https://www.health.vic.gov.au/publications/notifiable-conditions-form-routine-condition).
+The full list of notifiable conditions in Victoria can be found [here](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms). The data required for this report and other public health surveillance at NEPHU relies on timely and complete notification from clinicians and laboratories. Medical practitioners and laboratories should notify urgent conditions on suspicion by calling 1300 651 160 and routine notifications can be made via this [form](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms#notify-an-infectious-disease-or-medical-condition).
 
 The [Technical Notes](#technical_notes) contains more information about the data sources and methods used in this report. This report is best viewed on a computer rather than on mobile.
 
@@ -215,7 +215,9 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 
 ### Clinical Feature: Winter Vaccinations {#clinical_feature}
 
-Vaccination is the most effective way to protect against winter respiratory viruses, including influenza, respiratory syncytial virus (RSV), and COVID-19. Here are some highlights for the 2026 winter season. See our [news article](https://nephu.org.au/news-and-events/clinical-feature-winter-vaccinations/) for more information.
+Vaccination is the most effective way to protect against winter respiratory viruses, including influenza, respiratory syncytial virus (RSV), and COVID-19. Here are some highlights and new updates for the 2026 winter season. See our [news article](https://nephu.org.au/news-and-events/clinical-feature-winter-vaccinations/) for more information.
+
+<div style="height: 0.5em;"></div>
 
 **Influenza**
 
@@ -228,7 +230,7 @@ Vaccination is the most effective way to protect against winter respiratory viru
 <div style="height: 0.1em;"></div>
 
 * Changes to the 2026 influenza vaccine program include:
-  * Intranasally administered live attenuated influenza vaccine (LAIV; FluMist®) is now available on the private market for children aged 2–17 years. LAIV is as effective as inactivated influenza vaccines, and is just as safe. LAIV is contraindicated for people who are moderately or severely immunocompromised.
+  * Intranasally administered live attenuated influenza vaccine (LAIV; FluMist®) is now available on the private market for children aged 2–17 years. LAIV is as effective as inactivated influenza vaccines and is just as safe. LAIV is contraindicated for people who are moderately or severely immunocompromised.
   * Adjuvanted influenza vaccine (Fluad®) now available for people aged 50 years or older. Fluad® is free for people aged 65 years or older and is available on the private market for people aged 50-64 years.
   * A primary course of two influenza vaccine doses is recommended for children aged between 6 months and 2 years, or aged between 6 months and 9 years with a medical risk condition.
 
@@ -236,7 +238,7 @@ Vaccination is the most effective way to protect against winter respiratory viru
 
 **RSV**
 
-* For older persons, the RSV vaccine Arexvy® is free for adults aged 75 years or older, and for Aboriginal and/or Torres Strait Islander people aged 60 years or older. The RSV vaccines Arexvy® and Abrysvo® are recommended, but not funded, for people aged between 60 and 74 years with medical risk factors. 
+* For older persons, the RSV vaccine Arexvy® is now free for adults aged 75 years or older, and for Aboriginal and/or Torres Strait Islander people aged 60 years or older. The RSV vaccines Arexvy® and Abrysvo® are recommended, but not funded, for people aged between 60 and 74 years with medical risk factors. 
 
 <div style="height: 0.1em;"></div>
 
@@ -263,8 +265,10 @@ Vaccination is the most effective way to protect against winter respiratory viru
 **Check if up to date with other vaccines**
 
 * *When giving winter vaccines, it is an ideal opportunity to also check that adults aged less than 60 years have also had TWO measles vaccines!*
+  * Adults, particularly those born between 1966 and 1992, may have received only one childhood dose. It is safe to give another MMR vaccine if a person has lost their childhood vaccine record, and this can be co-administered with winter respiratory vaccines.
+  * For more information in NEPHU's measles immunisation program, please refer to our [webpage](https://nephu.org.au/news-and-events/measles-immunisation-program-launched/).
 
-* Adults, particularly those born between 1966 and 1992, may have received only one childhood dose. It is safe to give another MMR vaccine if a person has lost their childhood vaccine record, and this can be co-administered with winter respiratory vaccines.
+<div style="height: 0.1em;"></div>
 
 * Remember to also check if due for pneumococcal and pertussis vaccines.
 
@@ -358,9 +362,9 @@ ggsave(paste0("../Reports/Images for Comms/",
 
 * The higher than expected number of notifications seen in NEPHU in March and April 2026 were predominantly due to cases associated with an outbreak of Legionnaires’ disease in the northern suburbs of Melbourne (Craigieburn and surrounding suburbs).
   * A [Chief Health Officer Alert](https://www.health.vic.gov.au/health-alerts/legionnaires-disease-linked-to-craigieburn-area) was issued regarding the outbreak on 19 March 2026.
-  * There were 12 confirmed cases linked to this outbreak, and the outbreak was declared closed on 21 April 2026.
-  * The majority of cases associated with this outbreak were adults aged 50 years and over.
+  * There were 12 confirmed cases linked to this outbreak, and the majority of cases were adults aged 50 years and over.
   * All cases required hospitalisation and no deaths were reported.
+  * The outbreak was declared over on 21 April 2026. We are no longer seeing increased numbers of legionellosis notifications in the region.
 
 <div style="height: 0.1em;"></div>
 
@@ -372,8 +376,9 @@ ggsave(paste0("../Reports/Images for Comms/",
 
 <div style="height: 0.1em;"></div>
 
-* For more information about *Legionella pneumophila* and the outbreak, refer to:
-  * CHO Alert: 19 March [Legionnaires' disease linked to Craigieburn area](https://www.health.vic.gov.au/health-alerts/legionnaires-disease-linked-to-craigieburn-area)
+* For more information about legionellosis (*Legionella pneumophila*) and the recent outbreak, refer to:
+  * CHO Alert: [Legionnaires' disease linked to Craigieburn area](https://www.health.vic.gov.au/health-alerts/legionnaires-disease-linked-to-craigieburn-area)
+  * NEPHU: [Legionnaires’ Disease](https://nephu.org.au/health-topics/legionnaires-disease/)
   * Victorian Department of Health: [Legionellosis (Legionnaires' Disease)](https://www.health.vic.gov.au/site-4/infectious-diseases/legionellosis-legionnaires-disease)
   * Better Health Channel: [Legionnaires’ Disease](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/legionnaires-disease)
 
@@ -473,21 +478,20 @@ ggsave(paste0("../Reports/Images for Comms/",
 
 <div style="height: 0.1em;"></div>
 
-* Free mpox vaccine is available for eligible people through a wide range of providers for both prevention and post exposure prophylaxis.
-
-<div style="height: 0.1em;"></div>
-
-* Vaccination is recommended for people of all ages who are at risk of exposure to mpox. For more information on where to get an mpox vaccine, refer to:
+* Vaccination is recommended for people of all ages who are at risk of exposure to mpox.
+  * Free mpox vaccine is available for eligible people through a [wide range of providers](https://www.betterhealth.vic.gov.au/mpox-immunisation-providers) for both prevention and post exposure prophylaxis.
+  * Two doses of mpox vaccine, given at least 28 days apart, are required for optimal protection.
 
 <div style="height: 0.1em;"></div>
 
 * If you require more information on mpox refer to:
-  * [Victorian Department of Health: Mpox](https://www.health.vic.gov.au/infectious-diseases/mpox-monkeypox)
-  * [Better Health Channel: Mpox signs, symptoms, and treatment](https://www.betterhealth.vic.gov.au/mpox)
-  * [Better Health Channel: Advice for people with mpox](https://www.betterhealth.vic.gov.au/mpox-advice-for-cases)
-  * [Thorne Harbour Health: Mpox (Monkeypox)](https://thorneharbour.org/sexual-health/mpox/)
-  * [Better Health Channel : Mpox immunisation providers](https://www.betterhealth.vic.gov.au/mpox-immunisation-providers)
-  * [Australian Immunisation Handbook: Mpox (previously known as monkeypox)](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/mpox-previously-known-as-monkeypox)
+  * NEPHU: [Mpox (monkeypox)](https://nephu.org.au/health-topics/mpox/)
+  * Victorian Department of Health: [Mpox](https://www.health.vic.gov.au/infectious-diseases/mpox-monkeypox)
+  * Better Health Channel: [Mpox signs, symptoms, and treatment](https://www.betterhealth.vic.gov.au/mpox)
+  * Better Health Channel: [Advice for people with mpox](https://www.betterhealth.vic.gov.au/mpox-advice-for-cases)
+  * Thorne Harbour Health: [Mpox (Monkeypox)](https://thorneharbour.org/sexual-health/mpox/)
+  * Better Health Channel: [Mpox immunisation providers](https://www.betterhealth.vic.gov.au/mpox-immunisation-providers)
+  * Australian Immunisation Handbook: [Mpox (previously known as monkeypox)](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/mpox-previously-known-as-monkeypox)
 
 ***
 
@@ -499,7 +503,7 @@ ggsave(paste0("../Reports/Images for Comms/",
 
 <div style="height: 0.1em;"></div>
 
-* The number of **COVID**, **influenza**, and **Respiratory Syncytial Virus (RSV)** notifications received in April 2026 have all increased compared to March 2026, but remain lower than expected for April.
+* The number of **COVID**, **influenza**, and **Respiratory Syncytial Virus (RSV)** notifications received in April 2026 have all increased compared to March 2026 but remain lower than expected for April.
   * COVID (371 notifications in April compared to 331 in March).
   * Influenza (325 notifications in April compared to 222 in March).
   * RSV (423 notifications in April compared to 297 in March).
