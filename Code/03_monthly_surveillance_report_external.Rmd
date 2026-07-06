@@ -1,11 +1,11 @@
 ---
-title: 'NEPHU Monthly Surveillance Report - External - April 2026'
+title: 'NEPHU Monthly Surveillance Report - External - May 2026'
 output: 
   html_document:
     self_contained: true
     lib_dir: null
 knit: (function(input, ...) {
-  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 04 External", output_dir = "../Reports") })
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 05 External", output_dir = "../Reports") })
 ---
 
 ```{css, echo = FALSE}
@@ -177,13 +177,13 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 <div style="height: 0.1em;"></div>
 
-* [**Clinical Feature: Winter Vaccinations**](#clinical_feature)
+* [**Clinical Feature: Diphtheria Outbreak in Australia**](#clinical_feature)
 
 <div style="height: 0.1em;"></div>
 
 * [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)
-  * [Legionellosis](#legionellosis)
-  * [Mpox](#mpox)
+  * [Typhoid](#typhoid)
+  * [VanA Vancomycin Resistant *Enterococcus*](#VRE)
 
 <div style="height: 0.1em;"></div>
 
@@ -203,98 +203,113 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 This section includes all Chief Health Officer Alerts and Advisories issued between `r format(as.Date(epimonth_current), format = "%d %B %Y")` and `r format(as.Date(Sys.Date()), format = "%d %B %Y")`. Surveillance data for Alerts and Advisories issued after `r format(as.Date(epimonth_enddate), format = "%d %B %Y")` will be included in next month's report.
 
-* 20 April: [Poisonous mushrooms growing in Victoria](https://www.health.vic.gov.au/health-advisories/poisonous-mushrooms-growing-victoria)
-
-* 22 April: [Clinician Alert – Diphtheria](https://www.health.vic.gov.au/health-alerts/clinician-alert-diphtheria)
-
 * 07 May: [Japanese encephalitis vaccine eligibility update](https://www.health.vic.gov.au/health-advisories/japanese-encephalitis-vaccine-eligibility-update)
+
+* 29 May: [Outbreak of Ebola Disease in the Democratic Republic of the Congo and Uganda](https://www.health.vic.gov.au/health-advisories/clinican-alert-outbreak-of-ebola-disease-drc-and-uganda)
+
+* 04 June: [Diphtheria booster vaccination campaign](https://www.health.vic.gov.au/health-advisories/diphtheria-booster-vaccination-campaign)
+
+* 05 June: [Notification of hantavirus infection](https://www.health.vic.gov.au/health-advisories/notification-of-hantavirus-infection)
 
 <br/>
 
 ::: {.infobox}
 
-### Clinical Feature: Winter Vaccinations {#clinical_feature}
+### Clinical Feature: Diphtheria Outbreak in Australia {#clinical_feature}
 
-Vaccination is the most effective way to protect against winter respiratory viruses, including influenza, respiratory syncytial virus (RSV), and COVID-19. Here are some highlights and new updates for the 2026 winter season. See our [news article](https://nephu.org.au/news-and-events/clinical-feature-winter-vaccinations/) for more information.
+**Current situation:**
 
-<div style="height: 0.5em;"></div>
+* There is currently an outbreak of diphtheria in northern and central Australia. Areas considered higher risk for diphtheria currently include:
+  * any location in the Northern Territory
+  * the Kimberley, Goldfields, and Pilbara regions in Western Australia
+  * the far northwest of South Australia
 
-**Influenza**
+* The outbreak is characterised by a high proportion of cutaneous diphtheria, with about 30% of cases classified as respiratory diphtheria. Most cases have been relatively mild, likely reflecting the protective effect of prior vaccination.
 
-* Influenza vaccination continues to be recommended for everyone aged 6 months or older and is free for:
-  * Children aged between 6 months and 5 years
-  * Pregnant women
-  * Aboriginal and/or Torres Strait Islander peoples aged 6 months or older
-  * People aged 6 months or older with specific high-risk medical conditions
+* Aboriginal and/or Torres Strait Islander people and in outer regional and remote areas have been more impacted.
 
-<div style="height: 0.1em;"></div>
+* The risk of diphtheria spreading in Victoria remains very low. Cases are likely to occur in people who have lived or worked in areas at higher risk for diphtheria.  
 
-* Changes to the 2026 influenza vaccine program include:
-  * Intranasally administered live attenuated influenza vaccine (LAIV; FluMist®) is now available on the private market for children aged 2–17 years. LAIV is as effective as inactivated influenza vaccines and is just as safe. LAIV is contraindicated for people who are moderately or severely immunocompromised.
-  * Adjuvanted influenza vaccine (Fluad®) now available for people aged 50 years or older. Fluad® is free for people aged 65 years or older and is available on the private market for people aged 50-64 years.
-  * A primary course of two influenza vaccine doses is recommended for children aged between 6 months and 2 years, or aged between 6 months and 9 years with a medical risk condition.
-
-<div style="height: 0.5em;"></div>
-
-**RSV**
-
-* For older persons, the RSV vaccine Arexvy® is now free for adults aged 75 years or older, and for Aboriginal and/or Torres Strait Islander people aged 60 years or older. The RSV vaccines Arexvy® and Abrysvo® are recommended, but not funded, for people aged between 60 and 74 years with medical risk factors. 
+* To prevent further spread, people with diphtheria are isolated and treated with antibiotics, and their contacts offered preventative antibiotics and vaccination.
 
 <div style="height: 0.1em;"></div>
 
-* The maternal RSV vaccine (Abrysvo®) is free for pregnant women for every pregnancy. Abrysvo® can be administered at the same time as other vaccines (i.e. pertussis and influenza). 
+**What is diphtheria:**
+
+* Diphtheria is a bacterial infection caused by toxigenic strains of *Corynebacterium diphtheriae* (*C. diphtheriae*), or sometimes, *C. ulcerans*.  
+
+* *C. diphtheriae* spreads from person to person, usually after close or prolonged contact. Transmission can occur through respiratory droplets, direct contact with cutaneous lesions and less commonly via fomites. The incubation period is usually 2–5 days but may be longer. 
+
+* Clinical illness is mediated by the toxin which causes local tissue necrosis.  
+
+  * Respiratory diphtheria commonly presents with sore throat, low‑grade fever, malaise, and cervical lymphadenopathy, followed by development of a white exudate and adherent grey pseudomembrane, which can lead to airway obstruction.  
+
+  * Cutaneous diphtheria typically presents as a shallow skin ulcer with a grey membrane. 
+
+* Asymptomatic cases or cases with mild respiratory infection (without a pseudomembrane) are common in vaccinated persons as the vaccine is protective against the effects of the toxin. 
 
 <div style="height: 0.1em;"></div>
 
-* Nirsevimab (Beyfortus®), a long-acting monoclonal antibody, is free for eligible infants and young children during the RSV season (mid-March to September). Nirsevimab is recommended:
-  * At birth to up to 8 months of age if the mother did not receive the RSV vaccine at least 2 weeks before birth
-  * For infants from 8 months up to 24 months of age who meet one of the following criteria:
-    * Aboriginal and/or Torres Strait Islander children
-    * Young children with conditions associated with increased risk of severe RSV disease
+**When to consider diphtheria:**
+
+* Clinicians should consider diphtheria in patients with compatible respiratory or cutaneous illness, particularly those with recent travel to, or contact with people from areas at higher risk for diphtheria. As well as the current Australian outbreak, diphtheria also remains endemic in many lower income countries. 
+
+* If diphtheria is suspected: 
+
+  * Collect a throat swab for diphtheria culture.  
+    * Use a bacterial swab (without viral transport medium) and note on the request slip that diphtheria is suspected. This is because the laboratory uses selective media to culture *C. diphtheriae*.  
+    * Swab beneath part of the pseudomembrane if one is present. 
+    * If also testing for respiratory pathogens, collect an additional sample dedicated to respiratory pathogen testing. 
+
+  * For cutaneous diphtheria, also collect a swab of the lesion.  
+
+  * Notify your Local Public Health Unit by calling 1300 651 160. 
 
 <div style="height: 0.5em;"></div>
 
-**COVID-19**
+**How to prevent diphtheria:**
 
-* COVID-19 vaccinations remain free for everyone.
+* Vaccination is the best way to protect against illness and severe complications from diphtheria. 
 
-* There are no changes to eligibility criteria in 2026.
+* Diphtheria-toxoid containing vaccines (dTpa, DTPa, and dT vaccines) protect against illness and severe toxin-mediated disease. 
+
+* Vaccinated people can still carry toxigenic bacteria and transmit to others, but transmission is reduced.  
+
+* Clinicians are recommended to check that people are up-to-date with diphtheria vaccines, especially if travelling to areas at higher risk for diphtheria. 
+
+  * Diphtheria vaccination is part of routine vaccination in infants, children, and adolescents.
+  * Diphtheria vaccination is recommended for pregnant women in each pregnancy.
+  * Booster diphtheria vaccination is recommended:
+    * every 5 years for people living in or travelling to higher risk areas.
+    * for all adults if their last dose was more than 10 years ago.
+
+* In addition to free diphtheria vaccination as part of the National Immunisation Program (NIP), as of June 2026 the Victorian Department of Health has expanded eligibility for free diphtheria toxoid containing vaccines (Boostrix®) campaign to provide additional protection during this outbreak. Check the [CHO advisory](https://www.health.vic.gov.au/health-advisories/diphtheria-booster-vaccination-campaign) for eligibility criteria.
+
+* Other prevention methods include good hygiene, including hand washing especially around preparing or eating food, and keeping skin wounds covered.  
 
 <div style="height: 0.5em;"></div>
 
-**Check if up to date with other vaccines**
+**Resources:**
 
-* *When giving winter vaccines, it is an ideal opportunity to also check that adults aged less than 60 years have also had TWO measles vaccines!*
-  * Adults, particularly those born between 1966 and 1992, may have received only one childhood dose. It is safe to give another MMR vaccine if a person has lost their childhood vaccine record, and this can be co-administered with winter respiratory vaccines.
-  * For more information in NEPHU's measles immunisation program, please refer to our [webpage](https://nephu.org.au/news-and-events/measles-immunisation-program-launched/).
-
-<div style="height: 0.1em;"></div>
-
-* Remember to also check if due for pneumococcal and pertussis vaccines.
-
-<div style="height: 0.5em;"></div>
-
-**Further information on winter vaccines:**
-
-* [Victorian Department of Health – RSV immunisation](https://www.health.vic.gov.au/immunisation/respiratory-syncytial-virus-immunisation)  
-* [Victorian Department of Health – Seasonal influenza vaccine](https://www.health.vic.gov.au/immunisation/seasonal-influenza-vaccine) 
-* [Victorian Department of Health – COVID-19 immunisation](https://www.health.vic.gov.au/immunisation/covid-19-vaccine)  
-* [Australian Immunisation Handbook](https://immunisationhandbook.health.gov.au/) 
-* [NCIRS - Immunisation information and resources](https://www.ncirs.org.au/) 
-* [Get ready for winter – First Nations fact sheet](https://www.health.gov.au/winter-vaccinations/resources/publications/get-ready-for-winter-first-nations-fact-sheet?language=en)
+* [CHO Advisory - Diphtheria booster vaccination campaign](https://www.health.vic.gov.au/health-advisories/diphtheria-booster-vaccination-campaign)  
+* [Victorian Department of Health – Diphtheria](https://www.health.vic.gov.au/infectious-diseases/diphtheria) 
+* [Australian CDC - Diphtheria](https://www.cdc.gov.au/diseases/diphtheria#current-status)  
+* [Australian Immunisation Handbook - Diphtheria](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/diphtheria) 
+* [Better Health Channel - Diphtheria](https://www.betterhealth.vic.gov.au/health/healthyliving/diphtheria)
+* [NEPHU - Diphtheria booster vaccinations](https://nephu.org.au/news-and-events/diphtheria-booster-vaccinations/)
 
 :::
 
 ### Epidemiological Highlights: `r reporting_month` {#epi_highlights}
 
-#### Legionellosis - *Legionella pneumophila* {#legionellosis}
+#### Typhoid {#typhoid}
 
 ```{r}
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 1
 
 # Condition name (from the condition field in PHESS)
-condition_select <- "Legionella pneumophila"
+condition_select <- "Typhoid"
 
 # The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
 # No additional tweaks required!
@@ -352,46 +367,62 @@ ggsave(paste0("../Reports/Images for Comms/",
        plot   = figure)
 ```
 
-* Higher than expected notifications for legionellosis due to *Legionella pneumophila* were received in April 2026 (n = 6 vs. mean = 2.2). The number of notifications was lower than for March 2026 (n = 11).
+* Higher than expected notifications for typhoid were received in May 2026 (n = 6 vs. mean = 1.2). The number of notifications increased from 1 notification in April 2026.
 
 <div style="height: 0.1em;"></div>
 
-* The notification rate in NEPHU was higher than for the rest of Victoria (4.0 vs. 3.1).
+* The monthly notification rate in NEPHU was higher than for the rest of Victoria (4.0 vs. 1.6 per 100,000).
 
 <div style="height: 0.1em;"></div>
 
-* The higher than expected number of notifications seen in NEPHU in March and April 2026 were predominantly due to cases associated with an outbreak of Legionnaires’ disease in the northern suburbs of Melbourne (Craigieburn and surrounding suburbs).
-  * A [Chief Health Officer Alert](https://www.health.vic.gov.au/health-alerts/legionnaires-disease-linked-to-craigieburn-area) was issued regarding the outbreak on 19 March 2026.
-  * There were 12 confirmed cases linked to this outbreak, and the majority of cases were adults aged 50 years and over.
-  * All cases required hospitalisation and no deaths were reported.
-  * The outbreak was declared over on 21 April 2026. We are no longer seeing increased numbers of legionellosis notifications in the region.
+* Cases ranged in age from 10 to 37 years. All cases reported recent overseas travel including to countries in South Asia and Latin America.
 
 <div style="height: 0.1em;"></div>
 
-* Infection with *Legionella pneumophila* can cause a mild self-limiting upper respiratory tract infection (Pontiac fever) or severe community-acquired pneumonia (Legionnaires’ disease).
-  * *Legionella spp.* bacteria are commonly found in aquatic environments and soil. Sporadic cases occur throughout the year, with the number of cases increasing in the spring and summer months.
-  * Infection occurs through the inhalation of contaminated aerosolised water or soil. There is no confirmed evidence of person-to-person transmission.
-  * Risk factors for Legionnaires’ disease include male sex, older age, being a current or former smoker, and immunocompromising conditions.
-  * Man-made water sources such as cooling towers, spas, misting machines, fountains, and humidifiers have been associated with Legionnaires’ disease outbreaks.
+* Typhoid fever is a bacterial infection of the intestinal tract and bloodstream caused by the *Salmonella* Typhi bacterium and is mainly transmitted through faecally contaminated food and water.
 
 <div style="height: 0.1em;"></div>
 
-* For more information about legionellosis (*Legionella pneumophila*) and the recent outbreak, refer to:
-  * CHO Alert: [Legionnaires' disease linked to Craigieburn area](https://www.health.vic.gov.au/health-alerts/legionnaires-disease-linked-to-craigieburn-area)
-  * NEPHU: [Legionnaires’ Disease](https://nephu.org.au/health-topics/legionnaires-disease/)
-  * Victorian Department of Health: [Legionellosis (Legionnaires' Disease)](https://www.health.vic.gov.au/site-4/infectious-diseases/legionellosis-legionnaires-disease)
-  * Better Health Channel: [Legionnaires’ Disease](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/legionnaires-disease)
+* The most common symptoms of typhoid infection are fever and diarrhoea. Other symptoms include tiredness, abdominal symptoms, enlarged liver and spleen, and a characteristic skin rash.
+
+<div style="height: 0.1em;"></div>
+
+* Approximately 30 cases of typhoid occur in Victoria each year. Most of these are in returned travellers, especially from Southern Asia.
+
+<div style="height: 0.1em;"></div>
+
+* Vaccination is recommended for travellers who will be exposed to potentially contaminated food and water in countries such as in Asia, the Middle East, Africa, Latin America, and the Pacific Islands.
+
+  * Three types of typhoid vaccines are currently available in Australia. A combination hepatitis A and typhoid injectable vaccine is also available. All formulations are equally effective.
+
+  * Vaccination does not offer full protection from infection, and travellers should be advised to exercise care in selecting food and drinks and educated about personal hygiene, especially thorough handwashing after toilet use and before food preparation.  
+
+<div style="height: 0.1em;"></div>
+
+* Without medical treatment, typhoid fever can be fatal. Typhoid can be treated with antibiotics.
+
+<div style="height: 0.1em;"></div>
+
+* Food handlers and healthcare workers who are infected with typhoid should be excluded from work and infected children excluded from childcare and school until 48 hours after symptom resolution.
+
+<div style="height: 0.1em;"></div>
+
+* For more information about typhoid, refer to:
+  * Victorian Department of Health: [Typhoid and paratyphoid](https://www.health.vic.gov.au/infectious-diseases/typhoid-and-paratyphoid)
+  * Better Health Channel: [Typhoid and paratyphoid](https://www.betterhealth.vic.gov.au/health/healthyliving/typhoid-and-paratyphoid)
+  * Australian Immunisation Handbook: [Typhoid fever](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/typhoid-fever)
+
 
 ***
 
-#### Mpox {#mpox}
+#### VanA Vancomycin Resistant *Enterococcus* (VRE) {#VRE}
 
 ```{r}
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 2
 
 # Condition name (from the condition field in PHESS)
-condition_select <- "Mpox"
+condition_select <- "VanA Vancomycin resistant enterococcus"
 
 # The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
 # No additional tweaks required!
@@ -449,68 +480,58 @@ ggsave(paste0("../Reports/Images for Comms/",
        plot   = figure)
 ```
 
-* There were 12 mpox notifications in April 2026, increasing from five notifications in March 2026.
-  * The mean and expected number of notifications per month are unable to be calculated, because mpox became notifiable in Victoria in May 2022 after emerging as a disease of concern and four years of historic data are not yet available.
+* Higher than expected notifications for VanA VRE (n = 19 vs. mean = 6.4) were received in May 2026. The number of notifications was nearly double that for April 2026 (n = 10).
 
 <div style="height: 0.1em;"></div>
 
-* The notification rate in NEPHU was higher than for the rest of Victoria (7.9 vs. 5.3).
+* The notification rate in NEPHU was higher than for the rest of Victoria (12.6 vs. 9.9 per 100,000).
 
 <div style="height: 0.1em;"></div>
 
-* Mpox can spread through close, intimate contact, including:
-  * Direct skin-to-skin contact with mpox rash, lesions, sores, or scabs.
-  * Contact with saliva, upper respiratory secretions, and bodily fluids.
-  * The virus can also be spread through contact with objects, fabrics, and surfaces that have not been disinfected after being used by someone with mpox.
+* There were higher than expected notifications in males and for people aged 65 years and above.
 
 <div style="height: 0.1em;"></div>
 
-* The majority of mpox notifications in NEPHU since mpox became notifiable have been in people assigned male sex at birth or people who have had sexual contact with a partner who reported recent MSM contact.
+* *Enterococcus spp.* are bacteria that form a component of normal human microbial flora, primarily in the gastrointestinal tract and the female genital tract.
+  * VRE are strains of *Enterococcus spp.* that have developed resistance to the antibiotic vancomycin.
+  * In Victoria, only the VanA genotype of VRE (high level resistance to both vancomycin and teicoplanin) is notifiable.
 
 <div style="height: 0.1em;"></div>
 
-* The infectious period lasts from four days prior to first symptom onset until all lesions have developed scabs and fallen off.
+* VRE colonisation and infections can occur in healthcare settings such as hospitals and residential care facilities.
+  * Colonisation occurs when VRE are present on body surfaces, usually the gastrointestinal tract, without causing symptoms or an immune response.
+  * Colonisation often precedes infection, which occurs when VRE invades deeper tissues and causes symptoms such as fever, pain, or sepsis.
 
 <div style="height: 0.1em;"></div>
 
-* Mpox usually results in mild illness with most symptoms resolving within a few weeks. However, severe disease requiring hospitalisation may occur.
-  * Symptoms may resemble sexually transmissible infections (e.g. syphilis) and coinfections can occur.
+* Most notifications of VanA VRE are associated with invasive device use, long-term antibiotic use, and/or previous hospitalisations, including in overseas facilities. Consider the possibility of VanA VRE colonisation for patients who have a history of prolonged antibiotic use, invasive device use, or prolonged/recurrent hospitalisations.
 
 <div style="height: 0.1em;"></div>
 
-* Vaccination is recommended for people of all ages who are at risk of exposure to mpox.
-  * Free mpox vaccine is available for eligible people through a [wide range of providers](https://www.betterhealth.vic.gov.au/mpox-immunisation-providers) for both prevention and post exposure prophylaxis.
-  * Two doses of mpox vaccine, given at least 28 days apart, are required for optimal protection.
-
-<div style="height: 0.1em;"></div>
-
-* If you require more information on mpox refer to:
-  * NEPHU: [Mpox (monkeypox)](https://nephu.org.au/health-topics/mpox/)
-  * Victorian Department of Health: [Mpox](https://www.health.vic.gov.au/infectious-diseases/mpox-monkeypox)
-  * Better Health Channel: [Mpox signs, symptoms, and treatment](https://www.betterhealth.vic.gov.au/mpox)
-  * Better Health Channel: [Advice for people with mpox](https://www.betterhealth.vic.gov.au/mpox-advice-for-cases)
-  * Thorne Harbour Health: [Mpox (Monkeypox)](https://thorneharbour.org/sexual-health/mpox/)
-  * Better Health Channel: [Mpox immunisation providers](https://www.betterhealth.vic.gov.au/mpox-immunisation-providers)
-  * Australian Immunisation Handbook: [Mpox (previously known as monkeypox)](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/mpox-previously-known-as-monkeypox)
+* For more information on VanA VRE refer to:
+  * Victorian Department of Health: [Infection Control Guidelines](https://www.health.vic.gov.au/site-4/infectious-diseases/infection-control-guidelines)
+  * Better Health Channel: [Preventing Healthcare Associated Infection](https://www.betterhealth.vic.gov.au/health/ConditionsAndTreatments/infections-in-hospital-reduce-the-risk)
+  * Better Health Channel: [Antimicrobial Resistant Bacteria](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/antibiotic-resistant-bacteria)
+  * Australian Commission on Safety and Quality in Health Care: [Vancomycin Resistant *Enterococci* (VRE)](https://www.safetyandquality.gov.au/our-work/infection-prevention-and-control/australian-guidelines-prevention-and-control-infection-healthcare/vancomycin-resistant-enterococci-vre)
 
 ***
 
 ### Other Conditions of Note: `r reporting_month` {#other_tonote}
 
-* Three notifications of ***Vibrio parahaemolyticus*** were received in April 2026, with two cases reporting recent overseas or interstate travel.
-  * *V. parahaemolyticus* became notifiable in Victoria in April 2025, and four years of historical data are not yet available.
-  * The last notification in a resident of NEPHU was in November 2025.
+* One notification of **listeriosis** was received in May 2026. Listeria infection is normally transmitted through contaminated food and can have severe consequences for certain populations including pregnant women, the elderly, and people with lowered immunity, while healthy adults may experience transient, mild to moderate flu-like symptoms or self-limited gastroenteritis.
 
-<div style="height: 0.1em;"></div>
+  * For pregnant women, the infection can be transmitted to the fetus through the placenta, which can result in stillbirth or premature birth. Babies may be severely affected with conditions such as bacteraemia or meningitis (early-onset neonatal listeriosis).
 
-* The number of **COVID**, **influenza**, and **Respiratory Syncytial Virus (RSV)** notifications received in April 2026 have all increased compared to March 2026 but remain lower than expected for April.
-  * COVID (371 notifications in April compared to 331 in March).
-  * Influenza (325 notifications in April compared to 222 in March).
-  * RSV (423 notifications in April compared to 297 in March).
+  * *Listeria spp.* bacteria are commonly found in the environment. Infection can be prevented with proper food handling and preparation as well as ensuring that consumed food is cooked thoroughly. At-risk people including pregnant women should avoid consuming raw fruits and vegetables where the washing procedure is unknown, cold meat products and ready-to-eat foods and leftovers that are not further cooked.
 
-<div style="height: 0.1em;"></div>
+  * For more information on listeriosis:
 
-* The number of **infectious and total syphilis** notifications have been trending downwards each month since October 2025.
+      * Victorian Department of Health: [Listeriosis](https://www.health.vic.gov.au/infectious-diseases/listeriosis)
+
+      * Better Health Channel: [Food poisoning - Listeria infection](https://www.betterhealth.vic.gov.au/health/healthyliving/food-poisoning-listeria)
+
+      * NEPHU: [Food Safety](https://nephu.org.au/health-topics/food-safety/)
+
 
 ***
 
