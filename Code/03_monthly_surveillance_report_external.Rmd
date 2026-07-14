@@ -1,11 +1,11 @@
 ---
-title: 'NEPHU Monthly Surveillance Report - External - May 2026'
+title: 'NEPHU Monthly Surveillance Report - External - June 2026'
 output: 
   html_document:
     self_contained: true
     lib_dir: null
 knit: (function(input, ...) {
-  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 05 External", output_dir = "../Reports") })
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 06 External", output_dir = "../Reports") })
 ---
 
 ```{css, echo = FALSE}
@@ -65,7 +65,9 @@ li > ul {
 }
 
 .infobox {
-  padding: 10px;
+  padding-top: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
   background: white;
   color: black;
   border: 2px solid #5BC788;
@@ -177,13 +179,16 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 <div style="height: 0.1em;"></div>
 
-* [**Clinical Feature: Diphtheria Outbreak in Australia**](#clinical_feature)
+* [**Upcoming NEPHU Events**](#events)
+
+<div style="height: 0.1em;"></div>
+
+* [**Clinical Feature: Ebola Outbreak in Democratic Republic of the Congo and Uganda**](#clinical_feature)
 
 <div style="height: 0.1em;"></div>
 
 * [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)
-  * [Typhoid](#typhoid)
-  * [VanA Vancomycin Resistant *Enterococcus*](#VRE)
+  * [Shigellosis](#shigella)
 
 <div style="height: 0.1em;"></div>
 
@@ -203,113 +208,199 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 This section includes all Chief Health Officer Alerts and Advisories issued between `r format(as.Date(epimonth_current), format = "%d %B %Y")` and `r format(as.Date(Sys.Date()), format = "%d %B %Y")`. Surveillance data for Alerts and Advisories issued after `r format(as.Date(epimonth_enddate), format = "%d %B %Y")` will be included in next month's report.
 
-* 07 May: [Japanese encephalitis vaccine eligibility update](https://www.health.vic.gov.au/health-advisories/japanese-encephalitis-vaccine-eligibility-update)
-
-* 29 May: [Outbreak of Ebola Disease in the Democratic Republic of the Congo and Uganda](https://www.health.vic.gov.au/health-advisories/clinican-alert-outbreak-of-ebola-disease-drc-and-uganda)
-
 * 04 June: [Diphtheria booster vaccination campaign](https://www.health.vic.gov.au/health-advisories/diphtheria-booster-vaccination-campaign)
 
 * 05 June: [Notification of hantavirus infection](https://www.health.vic.gov.au/health-advisories/notification-of-hantavirus-infection)
 
-<br/>
+* 19 June: [Toxicity linked to unapproved peptide product labelled *Retatrutide*](https://www.health.vic.gov.au/health-alerts/toxicity-linked-to-unapproved-peptide-retatrutide)
 
-::: {.infobox}
+* 24 June: [Carbon monoxide poisoning](https://www.health.vic.gov.au/health-advisories/carbon-monoxide-poisoning-1)
 
-### Clinical Feature: Diphtheria Outbreak in Australia {#clinical_feature}
+* 07 July: [Measles public exposure sites in Victoria](https://www.health.vic.gov.au/health-alerts/measles-public-exposure-sites-victoria)
 
-**Current situation:**
+***
 
-* There is currently an outbreak of diphtheria in northern and central Australia. Areas considered higher risk for diphtheria currently include:
-  * any location in the Northern Territory
-  * the Kimberley, Goldfields, and Pilbara regions in Western Australia
-  * the far northwest of South Australia
+### Upcoming NEPHU Events {#events}
 
-* The outbreak is characterised by a high proportion of cutaneous diphtheria, with about 30% of cases classified as respiratory diphtheria. Most cases have been relatively mild, likely reflecting the protective effect of prior vaccination.
+[**Webinar - Measles and Winter Health: Arabic Online Session**](https://events.teams.microsoft.com/event/10829cfe-a13b-4f0b-a6dd-bfdbbc997447@680ffb06-000e-46a1-a455-ab68252c398d)
 
-* Aboriginal and/or Torres Strait Islander people and in outer regional and remote areas have been more impacted.
-
-* The risk of diphtheria spreading in Victoria remains very low. Cases are likely to occur in people who have lived or worked in areas at higher risk for diphtheria.  
-
-* To prevent further spread, people with diphtheria are isolated and treated with antibiotics, and their contacts offered preventative antibiotics and vaccination.
+* Wednesday 15 July, 7pm - 8pm
 
 <div style="height: 0.1em;"></div>
 
-**What is diphtheria:**
-
-* Diphtheria is a bacterial infection caused by toxigenic strains of *Corynebacterium diphtheriae* (*C. diphtheriae*), or sometimes, *C. ulcerans*.  
-
-* *C. diphtheriae* spreads from person to person, usually after close or prolonged contact. Transmission can occur through respiratory droplets, direct contact with cutaneous lesions and less commonly via fomites. The incubation period is usually 2–5 days but may be longer. 
-
-* Clinical illness is mediated by the toxin which causes local tissue necrosis.  
-
-  * Respiratory diphtheria commonly presents with sore throat, low‑grade fever, malaise, and cervical lymphadenopathy, followed by development of a white exudate and adherent grey pseudomembrane, which can lead to airway obstruction.  
-
-  * Cutaneous diphtheria typically presents as a shallow skin ulcer with a grey membrane. 
-
-* Asymptomatic cases or cases with mild respiratory infection (without a pseudomembrane) are common in vaccinated persons as the vaccine is protective against the effects of the toxin. 
+* Free online information session in Arabic about measles protection and winter preparedness.
 
 <div style="height: 0.1em;"></div>
 
-**When to consider diphtheria:**
+* This session will cover: 
+  * Measles risk and protection 
+  * Where to access MMR vaccines  
+  * Influenza vaccination 
+  * Practical winter health tips 
+  * Live Q&A with a clinical speaker and interpreter
 
-* Clinicians should consider diphtheria in patients with compatible respiratory or cutaneous illness, particularly those with recent travel to, or contact with people from areas at higher risk for diphtheria. As well as the current Australian outbreak, diphtheria also remains endemic in many lower income countries. 
+<div style="height: 0.1em;"></div>
 
-* If diphtheria is suspected: 
+* The session will be delivered in Arabic with an accredited interpreter and will be recorded for community use. Recording will stop before Q&A at the end.
 
-  * Collect a throat swab for diphtheria culture.  
-    * Use a bacterial swab (without viral transport medium) and note on the request slip that diphtheria is suspected. This is because the laboratory uses selective media to culture *C. diphtheriae*.  
-    * Swab beneath part of the pseudomembrane if one is present. 
-    * If also testing for respiratory pathogens, collect an additional sample dedicated to respiratory pathogen testing. 
+<div style="height: 0.1em;"></div>
 
-  * For cutaneous diphtheria, also collect a swab of the lesion.  
+* تستضيف NEPHU - وحدة الصحة العامة في North Eastern جلسة معلومات مجّانية عبر الإنترنت باللغة العربية حول الوقاية من الحصبة والاستعداد لفصل الشتاء. 
 
-  * Notify your Local Public Health Unit by calling 1300 651 160. 
+<div style="height: 0.1em;"></div>
+
+* ستتناول هذه الجلسة المواضيع التالية:
+  * خطر الإصابة بالحصبة والوقاية منها
+  * أين يمكنكم الحصول على لقاحات الحصبة والنكاف والحصبة الألمانية (MMR)  
+  * لقاح الإنفلونزا
+  * نصائح عملية للصحة في فصل الشتاء
+  * جلسة أسئلة وأجوبة مباشرة مع متحدث مختص بالشؤون السريرية ومترجم شفوي
+
+<div style="height: 0.1em;"></div>
+
+* التاريخ: الأربعاء 15 يوليو/تموز
+
+<div style="height: 0.1em;"></div>
+
+* الساعة: 7 مساءً
+
+<div style="height: 0.1em;"></div>
+
+* الصيغة: ندوة عبر الإنترنت على تطبيق Teams
+
+<div style="height: 0.1em;"></div>
+
+* سيتم تقديم الجلسة باللغة العربية مع مترجم شفوي معتمد وسيتم تسجيلها لاستخدامها في المجتمع. *سيتوقف التسجيل قبل فترة الأسئلة والأجوبة في النهاية.
 
 <div style="height: 0.5em;"></div>
 
-**How to prevent diphtheria:**
+[**NEPHU Public Health Clinical Series Webinar - Towards Elimination of Hepatitis B as a Public Health Concern**](https://forms.office.com/Pages/ResponsePage.aspx?id=BvsPaA4AoUakVatoJSw5jSs-W12LSglFv-AgX2uMv99UNlRTUVBGSFpWSFc2V00wMkY0TUY0SU9KUiQlQCN0PWcu)
 
-* Vaccination is the best way to protect against illness and severe complications from diphtheria. 
+* Tuesday 21 July, 12:30pm - 1:30pm
 
-* Diphtheria-toxoid containing vaccines (dTpa, DTPa, and dT vaccines) protect against illness and severe toxin-mediated disease. 
+* This online webinar will provide information that will describe the epidemiology and impact of Hepatitis B within Victoria, and support clinicians to diagnose, test for, treat, and prevent Hepatitis B.
 
-* Vaccinated people can still carry toxigenic bacteria and transmit to others, but transmission is reduced.  
+* The webinar will feature guest speakers Prof Ben Cowie and Dr Storm Holwill from the WHO Collaborating Centre for Viral Hepatitis.
 
-* Clinicians are recommended to check that people are up-to-date with diphtheria vaccines, especially if travelling to areas at higher risk for diphtheria. 
+* Sign up for the webinar by choosing the *Health Protection NEPHN* option in the [subscription form](https://forms.office.com/Pages/ResponsePage.aspx?id=BvsPaA4AoUakVatoJSw5jSs-W12LSglFv-AgX2uMv99UNlRTUVBGSFpWSFc2V00wMkY0TUY0SU9KUiQlQCN0PWcu).
 
-  * Diphtheria vaccination is part of routine vaccination in infants, children, and adolescents.
-  * Diphtheria vaccination is recommended for pregnant women in each pregnancy.
-  * Booster diphtheria vaccination is recommended:
-    * every 5 years for people living in or travelling to higher risk areas.
-    * for all adults if their last dose was more than 10 years ago.
+<div style="height: 0.5em;"></div>
 
-* In addition to free diphtheria vaccination as part of the National Immunisation Program (NIP), as of June 2026 the Victorian Department of Health has expanded eligibility for free diphtheria toxoid containing vaccines (Boostrix®) campaign to provide additional protection during this outbreak. Check the [CHO advisory](https://www.health.vic.gov.au/health-advisories/diphtheria-booster-vaccination-campaign) for eligibility criteria.
+::: {.infobox}
 
-* Other prevention methods include good hygiene, including hand washing especially around preparing or eating food, and keeping skin wounds covered.  
+### Clinical Feature: Ebola Outbreak in Democratic Republic of the Congo and Uganda {#clinical_feature}
+
+<div style="height: 0.5em;"></div>
+
+**Current situation:**
+
+* There is a currently an outbreak of Ebola Disease (Bundibugyo ebolavirus disease) in the Democratic Republic of the Congo (DRC) and Uganda. 
+
+* In DRC as of 10 July 2026, there have been 1,759 confirmed cases, including 600 deaths.
+
+* In Uganda as of 10 July 2026, there have been 21 confirmed cases, including 3 deaths. All cases in Uganda have been in people with a travel history to the DRC or their contacts. There is no current evidence of community transmission in Uganda. 
+
+* The outbreak remains geographically concentrated in eastern DRC but is occurring in a complex epidemiological and humanitarian context.  
+
+* Transmission requires contact with infected body fluids, reducing likelihood of casual importation into Australia.  
+
+* The risk to Australia remains low. Returned travellers from affected areas with fever are more likely to have other diagnoses, particularly malaria. 
+
+* Visit the [WHO webpage](https://www.afro.who.int/health-topics/ebola-disease/outbreak-drc-26) for current information.
+
+<div style="height: 0.5em;"></div>
+
+**What is Ebola Disease:**
+
+* Ebola Disease is caused by infection with an orthoebolavirus (i.e. Ebola virus, Sudan virus, Bundibugyo virus, Taï Forest virus, Reston virus, or Bombali virus). 
+
+<div style="height: 0.1em;"></div>
+
+* Ebola Disease is a type of viral haemorrhagic fever (VHF), which are potentially life threatening infections. The death rate of Ebola Disease depends on the species of orthoebolavirus and the socioeconomic setting where disease has occurred.
+
+<div style="height: 0.1em;"></div>
+
+* Treatment for Ebola Disease is supportive care. There are currently no specific treatments or vaccines for Bundibugyo virus disease, although [trials are underway](https://www.who.int/news/item/28-05-2026-experts-convened-by-who-advise-on-candidate-treatments-and-vaccines-for-ebola-disease-caused-by-bundibugyo-virus).
+
+<div style="height: 0.1em;"></div>
+
+* Ebola virus can spread from person-to-person through: 
+  * Contact with the blood, bodily fluids, or organs of a person with Ebola Disease, including after death.
+  * Contact with objects and surfaces that have been contaminated with infectious bodily fluids.
+  * Sexual contact.
+
+<div style="height: 0.1em;"></div>
+
+* Ebola viruses can also spread through contact with the blood or body fluids of an infected animal, including after death. 
+
+<div style="height: 0.1em;"></div>
+
+* Symptoms usually develop 8 to 10 days (range 2 to 21 days) after exposure.  
+  * Symptoms progress in distinct phases from “dry” symptoms to severe “wet” symptoms. 
+  * Early “dry” symptoms include fever, muscle and joint pain, headache, sore throat, and weakness.
+  * Late “wet” symptoms include vomiting, diarrhoea, abdominal pain, rash, and in some cases bleeding.  
+  * Some cases may progress to multi-organ failure and death.
+
+<div style="height: 0.1em;"></div>
+
+* The infectious period starts with the onset of symptoms.
+  * People are infectious while their blood and body fluids contain the virus, including after death.
+
+<div style="height: 0.5em;"></div>
+
+**What to do if you suspect Ebola Disease:**
+
+<div style="height: 0.1em;"></div>
+
+* Clinicians should consider Ebola Disease in a patient with:
+  * A clinically compatible illness AND
+  * Epidemiological risk (i.e. travel to an endemic area or contact with someone with Ebola Disease or their bodily fluids) within 21 days of illness onset.
+
+<div style="height: 0.1em;"></div>
+
+* If Ebola Disease is suspected: 
+  * Place the patient in a single room and restrict entry.
+  * Implement standard, contact, and airborne precautions,
+  * Obtain a full travel and exposure history, including symptoms, illness onset, travel dates and locations, and activities undertaken.
+  * Immediately notify your Local Public Health Unit (LPHU) by calling 1300 651 160.
+  * Do not collect pathology specimens.
+
+<div style="height: 0.1em;"></div>
+
+* Your LPHU will work through risk assessment, and if indicated, testing, management, and transfer with the treating team and the Department of Health.
+
+<div style="height: 0.1em;"></div>
+
+* Health services may have local guidelines for viral haemorrhagic fever (VHF) management and staff should also follow their local guidelines.
 
 <div style="height: 0.5em;"></div>
 
 **Resources:**
 
-* [CHO Advisory - Diphtheria booster vaccination campaign](https://www.health.vic.gov.au/health-advisories/diphtheria-booster-vaccination-campaign)  
-* [Victorian Department of Health – Diphtheria](https://www.health.vic.gov.au/infectious-diseases/diphtheria) 
-* [Australian CDC - Diphtheria](https://www.cdc.gov.au/diseases/diphtheria#current-status)  
-* [Australian Immunisation Handbook - Diphtheria](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/diphtheria) 
-* [Better Health Channel - Diphtheria](https://www.betterhealth.vic.gov.au/health/healthyliving/diphtheria)
-* [NEPHU - Diphtheria booster vaccinations](https://nephu.org.au/news-and-events/diphtheria-booster-vaccinations/)
+* WHO: [Bundibugyo Virus Disease Outbreak in DRC](https://www.afro.who.int/health-topics/ebola-disease/outbreak-drc-26)
+
+* Victorian Department of Health: [CHO Advisory - Ebola Disease](https://www.health.vic.gov.au/health-advisories/clinican-alert-outbreak-of-ebola-disease-drc-and-uganda) 
+
+* Australian Centre for Disease Control: [Ebola Disease Situation Reports](https://www.cdc.gov.au/resources/collections/ebola-disease-situation-reports) 
+
+* Victorian Department of Health: [Victorian Guideline on Viral Haemorrhagic Fevers for Health Services](https://www.health.vic.gov.au/victorian-guideline-on-viral-haemorrhagic-fevers) 
+
+* Australian Centre for Disease Control: [Infection Prevention and Control Principles and Recommendations for Ebola Virus Disease](https://www.cdc.gov.au/resources/publications/infection-prevention-and-control-principles-and-recommendations-ebola-virus-disease) 
+
+* Better Health Channel: [Ebola Disease](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/ebola-disease)
 
 :::
 
 ### Epidemiological Highlights: `r reporting_month` {#epi_highlights}
 
-#### Typhoid {#typhoid}
+#### Shigellosis {#shigella}
 
 ```{r}
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 1
 
 # Condition name (from the condition field in PHESS)
-condition_select <- "Typhoid"
+condition_select <- "Shigellosis"
 
 # The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
 # No additional tweaks required!
@@ -367,171 +458,48 @@ ggsave(paste0("../Reports/Images for Comms/",
        plot   = figure)
 ```
 
-* Higher than expected notifications for typhoid were received in May 2026 (n = 6 vs. mean = 1.2). The number of notifications increased from 1 notification in April 2026.
+* There were 12 notifications for shigellosis received in June 2026.
 
 <div style="height: 0.1em;"></div>
 
-* The monthly notification rate in NEPHU was higher than for the rest of Victoria (4.0 vs. 1.6 per 100,000).
+* While the number of notifications was within the expected range, the number of notifications for shigellosis have been above the mean each month for the past 12 months.
 
 <div style="height: 0.1em;"></div>
 
-* Cases ranged in age from 10 to 37 years. All cases reported recent overseas travel including to countries in South Asia and Latin America.
+* The monthly notification rate in NEPHU was slightly lower than for the rest of Victoria (7.9 vs. 8.1 per 100,000).
 
 <div style="height: 0.1em;"></div>
 
-* Typhoid fever is a bacterial infection of the intestinal tract and bloodstream caused by the *Salmonella* Typhi bacterium and is mainly transmitted through faecally contaminated food and water.
+* More than half of the notifications received in June were associated with recent overseas travel (7/12, 58%), mostly related to countries in Asia and Central America.
 
 <div style="height: 0.1em;"></div>
 
-* The most common symptoms of typhoid infection are fever and diarrhoea. Other symptoms include tiredness, abdominal symptoms, enlarged liver and spleen, and a characteristic skin rash.
+* Shigellosis is a type of gastroenteritis caused by bacteria in the genus *Shigella spp.* and is a [leading cause of infectious diarrhoea worldwide](https://www.ncbi.nlm.nih.gov/books/NBK482337/).
 
-<div style="height: 0.1em;"></div>
+* There are four serotypes of *Shigella spp.*: *S. dysenteriae*, *S. flexneri*, *S. boydii*, and *S. sonnei*.
+  * *S. flexneri* can cause more severe disease and is more common in low- and middle-income countries while *S. sonnei* causes milder disease and is more common in higher-income countries.
+  * In higher-income countries, shigellosis is generally a self-limiting infection but is highly contagious and can be potentially serious.
 
-* Approximately 30 cases of typhoid occur in Victoria each year. Most of these are in returned travellers, especially from Southern Asia.
+* Shigellosis is spread through consuming food or water contaminated with the bacteria, touching objects or surfaces contaminated with the bacteria and then touching your mouth, and/or sexual contact with a person who has shigellosis.
+  * People who have travelled to countries where shigellosis is common, men who have sex with men, children, the elderly, and people with immunocompromising conditions are at an increased risk of infection.
 
-<div style="height: 0.1em;"></div>
+* People with shigellosis should maintain good hygiene, practice handwashing, avoid preparing food for others, and practice safer sex practices until 48 hours after symptoms resolve.
+  * People with shigellosis who work as food handlers, childcare workers, health care workers, or workers in a residential facility should not return to work until advised by the Local Public Health Unit.
+  * Workers are generally excluded until they have had two consecutive negative faecal specimens, collected a minimum of 24 hours apart and no sooner than 48 hours after cessation of antibiotics (if applicable).
 
-* Vaccination is recommended for travellers who will be exposed to potentially contaminated food and water in countries such as in Asia, the Middle East, Africa, Latin America, and the Pacific Islands.
+* [Increasing antibiotic resistance is being detected](https://pubmed.ncbi.nlm.nih.gov/39455321/) in *Shigella spp.* bacteria. Include a stool culture when testing patients for shigellosis to allow for antibiotic sensitivities to be determined, and reserve the use of antibiotic treatment for severe cases.
 
-  * Three types of typhoid vaccines are currently available in Australia. A combination hepatitis A and typhoid injectable vaccine is also available. All formulations are equally effective.
-
-  * Vaccination does not offer full protection from infection, and travellers should be advised to exercise care in selecting food and drinks and educated about personal hygiene, especially thorough handwashing after toilet use and before food preparation.  
-
-<div style="height: 0.1em;"></div>
-
-* Without medical treatment, typhoid fever can be fatal. Typhoid can be treated with antibiotics.
-
-<div style="height: 0.1em;"></div>
-
-* Food handlers and healthcare workers who are infected with typhoid should be excluded from work and infected children excluded from childcare and school until 48 hours after symptom resolution.
-
-<div style="height: 0.1em;"></div>
-
-* For more information about typhoid, refer to:
-  * Victorian Department of Health: [Typhoid and paratyphoid](https://www.health.vic.gov.au/infectious-diseases/typhoid-and-paratyphoid)
-  * Better Health Channel: [Typhoid and paratyphoid](https://www.betterhealth.vic.gov.au/health/healthyliving/typhoid-and-paratyphoid)
-  * Australian Immunisation Handbook: [Typhoid fever](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/typhoid-fever)
-
-
-***
-
-#### VanA Vancomycin Resistant *Enterococcus* (VRE) {#VRE}
-
-```{r}
-# Define the figure number (e.g. Figure 1, Figure 2)
-figure_number <- 2
-
-# Condition name (from the condition field in PHESS)
-condition_select <- "VanA Vancomycin resistant enterococcus"
-
-# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
-# No additional tweaks required!
-
-# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
-# You don't need to save the png when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
-
-# Condition information for chart and title
-condition_name <- cases_allnephu %>% 
-  dplyr::filter(condition == condition_select) %>%
-  dplyr::distinct(condition_label) %>% 
-  pull(condition_label)
-
-condition_title <- cases_allnephu %>% 
-  dplyr::filter(condition == condition_select) %>% 
-  dplyr::distinct(chart_label) %>% 
-  pull(chart_label)
-
-# Italics for chart title (if needed)
-condition_title <- dplyr::case_when(
-  condition_title %in% c("Candida auris",
-                         "L. pneumophila",
-                         "L. longbeachae",
-                         "M. ulcerans",
-                         "Vibrio parahaemolyticus") ~ paste0("*", condition_title, "*"),
-  TRUE ~ condition_title)
-
-# Create and format bar chart
-results_count <- cases_allnephu %>%
-  f_barchart_dataprep_month_count(condition_name = condition_name)
-
-results_mean <- cases_allnephu %>% 
-  f_barchart_dataprep_month_mean(condition_name = condition_name,
-                                 data_count     = results_count)
-
-figure <- results_mean %>% 
-  f_barchart_format_month(figure_number = figure_number,
-                          figure_title  = condition_title)
-
-# Display figure in html
-figure
-
-# Save .png to send to Comms team
-# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
-# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
-
-ggsave(paste0("../Reports/Images for Comms/",
-              format(epimonth_current, format = "%Y-%m"),
-              " Figure ", figure_number, " ",
-              condition_title,
-              ".png"),
-       dpi    = 600,
-       width  = 5,
-       height = 3,
-       plot   = figure)
-```
-
-* Higher than expected notifications for VanA VRE (n = 19 vs. mean = 6.4) were received in May 2026. The number of notifications was nearly double that for April 2026 (n = 10).
-
-<div style="height: 0.1em;"></div>
-
-* The notification rate in NEPHU was higher than for the rest of Victoria (12.6 vs. 9.9 per 100,000).
-
-<div style="height: 0.1em;"></div>
-
-* There were higher than expected notifications in males and for people aged 65 years and above.
-
-<div style="height: 0.1em;"></div>
-
-* *Enterococcus spp.* are bacteria that form a component of normal human microbial flora, primarily in the gastrointestinal tract and the female genital tract.
-  * VRE are strains of *Enterococcus spp.* that have developed resistance to the antibiotic vancomycin.
-  * In Victoria, only the VanA genotype of VRE (high level resistance to both vancomycin and teicoplanin) is notifiable.
-
-<div style="height: 0.1em;"></div>
-
-* VRE colonisation and infections can occur in healthcare settings such as hospitals and residential care facilities.
-  * Colonisation occurs when VRE are present on body surfaces, usually the gastrointestinal tract, without causing symptoms or an immune response.
-  * Colonisation often precedes infection, which occurs when VRE invades deeper tissues and causes symptoms such as fever, pain, or sepsis.
-
-<div style="height: 0.1em;"></div>
-
-* Most notifications of VanA VRE are associated with invasive device use, long-term antibiotic use, and/or previous hospitalisations, including in overseas facilities. Consider the possibility of VanA VRE colonisation for patients who have a history of prolonged antibiotic use, invasive device use, or prolonged/recurrent hospitalisations.
-
-<div style="height: 0.1em;"></div>
-
-* For more information on VanA VRE refer to:
-  * Victorian Department of Health: [Infection Control Guidelines](https://www.health.vic.gov.au/site-4/infectious-diseases/infection-control-guidelines)
-  * Better Health Channel: [Preventing Healthcare Associated Infection](https://www.betterhealth.vic.gov.au/health/ConditionsAndTreatments/infections-in-hospital-reduce-the-risk)
-  * Better Health Channel: [Antimicrobial Resistant Bacteria](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/antibiotic-resistant-bacteria)
-  * Australian Commission on Safety and Quality in Health Care: [Vancomycin Resistant *Enterococci* (VRE)](https://www.safetyandquality.gov.au/our-work/infection-prevention-and-control/australian-guidelines-prevention-and-control-infection-healthcare/vancomycin-resistant-enterococci-vre)
+* For more information about shigellosis refer to:
+  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Shigellosis](https://www.health.vic.gov.au/infectious-diseases/shigellosis)
+  * Better Health Channel: [Gastroenteritis - Shigellosis](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/gastroenteritis-shigella)
 
 ***
 
 ### Other Conditions of Note: `r reporting_month` {#other_tonote}
 
-* One notification of **listeriosis** was received in May 2026. Listeria infection is normally transmitted through contaminated food and can have severe consequences for certain populations including pregnant women, the elderly, and people with lowered immunity, while healthy adults may experience transient, mild to moderate flu-like symptoms or self-limited gastroenteritis.
+* One notification of **listeriosis** was received in June 2026. Listeriosis is normally transmitted through contaminated food and can cause severe illness in pregnant women, the elderly, and people with lowered immunity. Most people may experience transient, mild to moderate flu-like symptoms or self-limited gastroenteritis.
 
-  * For pregnant women, the infection can be transmitted to the fetus through the placenta, which can result in stillbirth or premature birth. Babies may be severely affected with conditions such as bacteraemia or meningitis (early-onset neonatal listeriosis).
-
-  * *Listeria spp.* bacteria are commonly found in the environment. Infection can be prevented with proper food handling and preparation as well as ensuring that consumed food is cooked thoroughly. At-risk people including pregnant women should avoid consuming raw fruits and vegetables where the washing procedure is unknown, cold meat products and ready-to-eat foods and leftovers that are not further cooked.
-
-  * For more information on listeriosis:
-
-      * Victorian Department of Health: [Listeriosis](https://www.health.vic.gov.au/infectious-diseases/listeriosis)
-
-      * Better Health Channel: [Food poisoning - Listeria infection](https://www.betterhealth.vic.gov.au/health/healthyliving/food-poisoning-listeria)
-
-      * NEPHU: [Food Safety](https://nephu.org.au/health-topics/food-safety/)
-
+* One notification of ***Vibrio parahaemolyticus*** was received in June 2026. This case reported recent travel to South East Asia and consumption of raw seafood while overseas.
 
 ***
 
@@ -547,7 +515,7 @@ Notes on interpreting this table:
 
 * The trend columns indicate whether the monthly or YTD counts were higher (↑) or lower (↓) than in the previous month or year.
 
-* Monthly and YTD counts are compared to a historical four year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
+* Monthly and YTD counts are compared to a historical four-year post COVID-19 pandemic period and assessed for potential increases or decreases above the expected number of notifications for the reporting month.
 
 * The mean YTD column shows the average number of cases reported for the year to date across the past four years.
 
