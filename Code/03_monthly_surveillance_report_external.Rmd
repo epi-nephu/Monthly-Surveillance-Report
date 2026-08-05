@@ -1,11 +1,11 @@
 ---
-title: 'NEPHU Monthly Surveillance Report - External - June 2026'
+title: 'NEPHU Monthly Surveillance Report - External - July 2026'
 output: 
   html_document:
     self_contained: true
     lib_dir: null
 knit: (function(input, ...) {
-  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 06 External", output_dir = "../Reports") })
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 07 External", output_dir = "../Reports") })
 ---
 
 ```{css, echo = FALSE}
@@ -179,16 +179,12 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 <div style="height: 0.1em;"></div>
 
-* [**Upcoming NEPHU Events**](#events)
-
-<div style="height: 0.1em;"></div>
-
-* [**Clinical Feature: Ebola Outbreak in Democratic Republic of the Congo and Uganda**](#clinical_feature)
+* [**Clinical Feature: H5N1 avian influenza**](#clinical_feature)
 
 <div style="height: 0.1em;"></div>
 
 * [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)
-  * [Shigellosis](#shigella)
+  * [Invasive Pneumococcal Disease (IPD)](#ipd)
 
 <div style="height: 0.1em;"></div>
 
@@ -208,199 +204,174 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 This section includes all Chief Health Officer Alerts and Advisories issued between `r format(as.Date(epimonth_current), format = "%d %B %Y")` and `r format(as.Date(Sys.Date()), format = "%d %B %Y")`. Surveillance data for Alerts and Advisories issued after `r format(as.Date(epimonth_enddate), format = "%d %B %Y")` will be included in next month's report.
 
-* 04 June: [Diphtheria booster vaccination campaign](https://www.health.vic.gov.au/health-advisories/diphtheria-booster-vaccination-campaign)
-
-* 05 June: [Notification of hantavirus infection](https://www.health.vic.gov.au/health-advisories/notification-of-hantavirus-infection)
-
-* 19 June: [Toxicity linked to unapproved peptide product labelled *Retatrutide*](https://www.health.vic.gov.au/health-alerts/toxicity-linked-to-unapproved-peptide-retatrutide)
-
-* 24 June: [Carbon monoxide poisoning](https://www.health.vic.gov.au/health-advisories/carbon-monoxide-poisoning-1)
-
-* 07 July: [Measles public exposure sites in Victoria](https://www.health.vic.gov.au/health-alerts/measles-public-exposure-sites-victoria)
+* 31 July: [Avian influenza found in birds in Victoria](https://www.health.vic.gov.au/health-alerts/avian-influenza-found-in-birds-in-victoria)
 
 ***
-
-### Upcoming NEPHU Events {#events}
-
-[**Webinar - Measles and Winter Health: Arabic Online Session**](https://events.teams.microsoft.com/event/10829cfe-a13b-4f0b-a6dd-bfdbbc997447@680ffb06-000e-46a1-a455-ab68252c398d)
-
-* Wednesday 15 July, 7pm - 8pm
-
-<div style="height: 0.1em;"></div>
-
-* Free online information session in Arabic about measles protection and winter preparedness.
-
-<div style="height: 0.1em;"></div>
-
-* This session will cover: 
-  * Measles risk and protection 
-  * Where to access MMR vaccines  
-  * Influenza vaccination 
-  * Practical winter health tips 
-  * Live Q&A with a clinical speaker and interpreter
-
-<div style="height: 0.1em;"></div>
-
-* The session will be delivered in Arabic with an accredited interpreter and will be recorded for community use. Recording will stop before Q&A at the end.
-
-<div style="height: 0.1em;"></div>
-
-* تستضيف NEPHU - وحدة الصحة العامة في North Eastern جلسة معلومات مجّانية عبر الإنترنت باللغة العربية حول الوقاية من الحصبة والاستعداد لفصل الشتاء. 
-
-<div style="height: 0.1em;"></div>
-
-* ستتناول هذه الجلسة المواضيع التالية:
-  * خطر الإصابة بالحصبة والوقاية منها
-  * أين يمكنكم الحصول على لقاحات الحصبة والنكاف والحصبة الألمانية (MMR)  
-  * لقاح الإنفلونزا
-  * نصائح عملية للصحة في فصل الشتاء
-  * جلسة أسئلة وأجوبة مباشرة مع متحدث مختص بالشؤون السريرية ومترجم شفوي
-
-<div style="height: 0.1em;"></div>
-
-* التاريخ: الأربعاء 15 يوليو/تموز
-
-<div style="height: 0.1em;"></div>
-
-* الساعة: 7 مساءً
-
-<div style="height: 0.1em;"></div>
-
-* الصيغة: ندوة عبر الإنترنت على تطبيق Teams
-
-<div style="height: 0.1em;"></div>
-
-* سيتم تقديم الجلسة باللغة العربية مع مترجم شفوي معتمد وسيتم تسجيلها لاستخدامها في المجتمع. *سيتوقف التسجيل قبل فترة الأسئلة والأجوبة في النهاية.
-
-<div style="height: 0.5em;"></div>
-
-[**NEPHU Public Health Clinical Series Webinar - Towards Elimination of Hepatitis B as a Public Health Concern**](https://forms.office.com/Pages/ResponsePage.aspx?id=BvsPaA4AoUakVatoJSw5jSs-W12LSglFv-AgX2uMv99UNlRTUVBGSFpWSFc2V00wMkY0TUY0SU9KUiQlQCN0PWcu)
-
-* Tuesday 21 July, 12:30pm - 1:30pm
-
-* This online webinar will provide information that will describe the epidemiology and impact of Hepatitis B within Victoria, and support clinicians to diagnose, test for, treat, and prevent Hepatitis B.
-
-* The webinar will feature guest speakers Prof Ben Cowie and Dr Storm Holwill from the WHO Collaborating Centre for Viral Hepatitis.
-
-* Sign up for the webinar by choosing the *Health Protection NEPHN* option in the [subscription form](https://forms.office.com/Pages/ResponsePage.aspx?id=BvsPaA4AoUakVatoJSw5jSs-W12LSglFv-AgX2uMv99UNlRTUVBGSFpWSFc2V00wMkY0TUY0SU9KUiQlQCN0PWcu).
 
 <div style="height: 0.5em;"></div>
 
 ::: {.infobox}
 
-### Clinical Feature: Ebola Outbreak in Democratic Republic of the Congo and Uganda {#clinical_feature}
+### Clinical Feature: H5N1 avian influenza {#clinical_feature}
 
 <div style="height: 0.5em;"></div>
 
 **Current situation:**
 
-* There is a currently an outbreak of Ebola Disease (Bundibugyo ebolavirus disease) in the Democratic Republic of the Congo (DRC) and Uganda. 
+* H5N1 avian influenza (H5N1 clade 2.3.4.4b) has been detected in wild sea birds across Australia.  
 
-* In DRC as of 10 July 2026, there have been 1,759 confirmed cases, including 600 deaths.
+<div style="height: 0.1em;"></div>
 
-* In Uganda as of 10 July 2026, there have been 21 confirmed cases, including 3 deaths. All cases in Uganda have been in people with a travel history to the DRC or their contacts. There is no current evidence of community transmission in Uganda. 
+* To date there have been no detections in poultry in Australia and no signs of mass wildlife deaths. 
 
-* The outbreak remains geographically concentrated in eastern DRC but is occurring in a complex epidemiological and humanitarian context.  
+<div style="height: 0.1em;"></div>
 
-* Transmission requires contact with infected body fluids, reducing likelihood of casual importation into Australia.  
-
-* The risk to Australia remains low. Returned travellers from affected areas with fever are more likely to have other diagnoses, particularly malaria. 
-
-* Visit the [WHO webpage](https://www.afro.who.int/health-topics/ebola-disease/outbreak-drc-26) for current information.
+* State and national animal and health authorities are closely monitoring the situation. For the latest information, visit the Australian Government's [bird flu (avian influenza)](https://www.agriculture.gov.au/campaigns/birdflu) page.  
 
 <div style="height: 0.5em;"></div>
 
-**What is Ebola Disease:**
+**What is avian influenza:**
 
-* Ebola Disease is caused by infection with an orthoebolavirus (i.e. Ebola virus, Sudan virus, Bundibugyo virus, Taï Forest virus, Reston virus, or Bombali virus). 
-
-<div style="height: 0.1em;"></div>
-
-* Ebola Disease is a type of viral haemorrhagic fever (VHF), which are potentially life threatening infections. The death rate of Ebola Disease depends on the species of orthoebolavirus and the socioeconomic setting where disease has occurred.
+* Avian influenza is a strain of influenza virus that mainly affects wild birds,  particularly aquatic birds, as well as domestic and farmed birds such as chickens and ducks. It can also affect other animals and, on rare occasions, humans. 
 
 <div style="height: 0.1em;"></div>
 
-* Treatment for Ebola Disease is supportive care. There are currently no specific treatments or vaccines for Bundibugyo virus disease, although [trials are underway](https://www.who.int/news/item/28-05-2026-experts-convened-by-who-advise-on-candidate-treatments-and-vaccines-for-ebola-disease-caused-by-bundibugyo-virus).
+* Avian influenza poses a risk to human health due to its potential to cause severe disease and outbreaks or possible pandemics if strains mutate and adapt to spread easily from person-to-person. 
 
 <div style="height: 0.1em;"></div>
 
-* Ebola virus can spread from person-to-person through: 
-  * Contact with the blood, bodily fluids, or organs of a person with Ebola Disease, including after death.
-  * Contact with objects and surfaces that have been contaminated with infectious bodily fluids.
-  * Sexual contact.
+* Animal-to-human transmission of H5N1 avian influenza is rare and usually occurs in people with close contact with sick birds and livestock, their respiratory secretions, faeces and other body fluids, or contaminated environments. Person-to person transmission is extremely rare and has only been reported with prolonged close contact while caring for an infected person. 
 
 <div style="height: 0.1em;"></div>
 
-* Ebola viruses can also spread through contact with the blood or body fluids of an infected animal, including after death. 
+* Symptoms can vary from being asymptomatic or mild, to severe. Symptoms can include fever, cough, sore throat, runny nose, conjunctivitis, muscle aches and pains, headache, fatigue and gastrointestinal symptoms. 
 
 <div style="height: 0.1em;"></div>
 
-* Symptoms usually develop 8 to 10 days (range 2 to 21 days) after exposure.  
-  * Symptoms progress in distinct phases from “dry” symptoms to severe “wet” symptoms. 
-  * Early “dry” symptoms include fever, muscle and joint pain, headache, sore throat, and weakness.
-  * Late “wet” symptoms include vomiting, diarrhoea, abdominal pain, rash, and in some cases bleeding.  
-  * Some cases may progress to multi-organ failure and death.
-
-<div style="height: 0.1em;"></div>
-
-* The infectious period starts with the onset of symptoms.
-  * People are infectious while their blood and body fluids contain the virus, including after death.
+* The incubation period is 1 to 10 days (usually 3 to 5 days). 
 
 <div style="height: 0.5em;"></div>
 
-**What to do if you suspect Ebola Disease:**
+**How to minimise the risk of human infection and transmission:**
 
 <div style="height: 0.1em;"></div>
 
-* Clinicians should consider Ebola Disease in a patient with:
-  * A clinically compatible illness AND
-  * Epidemiological risk (i.e. travel to an endemic area or contact with someone with Ebola Disease or their bodily fluids) within 21 days of illness onset.
+* People should avoid contact with sick or dead birds or other wildlife. Sick or dead birds or animals can be reported to Emergency Animal Disease Hotline on 1800 675 888 or though an [online form](https://forms.bio.vic.gov.au/wildlife-influenza-investigation).  
 
 <div style="height: 0.1em;"></div>
 
-* If Ebola Disease is suspected: 
-  * Place the patient in a single room and restrict entry.
-  * Implement standard, contact, and airborne precautions,
-  * Obtain a full travel and exposure history, including symptoms, illness onset, travel dates and locations, and activities undertaken.
-  * Immediately notify your Local Public Health Unit (LPHU) by calling 1300 651 160.
-  * Do not collect pathology specimens.
+* People who work with birds, poultry or wildlife may have a higher chance of encountering avian influenza. Workers are advised to get the seasonal flu vaccine each year and to practise good hygiene and wear appropriate personal protective equipment. For more information, see the Australian Centre for Disease Control’s [toolkit for people who work with birds](https://www.cdc.gov.au/resources/publications/bird-flu-toolkit-people-who-work-birds).
 
 <div style="height: 0.1em;"></div>
 
-* Your LPHU will work through risk assessment, and if indicated, testing, management, and transfer with the treating team and the Department of Health.
+* Local public health units conduct contact tracing to identify and assess people who may have been exposed to avian influenza, such as those who have visited or worked on an affected poultry farm. 
 
 <div style="height: 0.1em;"></div>
 
-* Health services may have local guidelines for viral haemorrhagic fever (VHF) management and staff should also follow their local guidelines.
+* People travelling to countries or areas affected by avian influenza can reduce their risk by:  
+
+  * Avoiding poultry farms and live bird markets. 
+
+  * Avoiding contact with wild and domestic birds. 
+
+  * Washing hands well after touching birds, raw poultry, eggs or poultry products. 
+
+  * Cleaning kitchen surfaces and utensils after preparing raw poultry. 
+
+  * Cooking poultry, meat and eggs thoroughly before eating. 
+
+  * Avoiding raw or unpasteurised milk and dairy products. 
+
+<div style="height: 0.1em;"></div>
+
+* There is no evidence that people can become infected with avian influenza by eating fully-cooked meat or eggs (even from areas with an avian influenza outbreak). 
+
+<div style="height: 0.1em;"></div>
+
+* Seasonal influenza vaccination for all people aged 6 months and over is recommended to minimise the risk that people become unwell with both seasonal and bird viruses at the same time 
+
+<div style="height: 0.5em;"></div>
+
+**What to do if you suspect avian influenza:**
+
+<div style="height: 0.1em;"></div>
+
+* Clinicians should consider avian influenza in patients with compatible symptoms and at least one epidemiological risk factor within the previous 19 days, such as:  
+
+  * Exposure to sick or dead birds. 
+
+  * Exposure to infected poultry or livestock. 
+
+  * Exposure to contaminated environments (for example, affected poultry farms). 
+
+  * Travel to areas with known avian influenza activity. 
+
+<div style="height: 0.1em;"></div>
+
+* Implement airborne and contact precautions, and use a negative pressure room if available. 
+
+<div style="height: 0.1em;"></div>
+
+* Notify NEPHU by calling 1300 651 160. NEPHU can undertake a risk assessment and assist with testing arrangements. 
+
+<div style="height: 0.1em;"></div>
+
+* Collect a nasopharyngeal swab for avian influenza PCR testing.  
+
+  * Clearly state “**Avian Influenza Testing – Urgent to VIDRL / WHOCCRRI**” on the request form. 
+
+  * Testing is performed at Victorian Infectious Diseases Reference Laboratory (VIDRL).  
+
+  * As H5N1 avian influenza is a Risk Group 3 and Security Sensitive Biological Agent Tier 1 organism, appropriate specimen handling, transport and laboratory processes are required.  
+
+<div style="height: 0.1em;"></div>
+
+* Collect an additional nasopharyngeal swab for routine respiratory virus testing. 
+
+<div style="height: 0.1em;"></div>
+
+* If conjunctivitis is present, collect a conjunctival swab. 
+
+<div style="height: 0.1em;"></div>
+
+* Advise the patient to isolate while awaiting test results. 
+
+<div style="height: 0.1em;"></div>
+
+* Consider commencing oseltamivir treatment without waiting for test results if clinically indicated. 
 
 <div style="height: 0.5em;"></div>
 
 **Resources:**
 
-* WHO: [Bundibugyo Virus Disease Outbreak in DRC](https://www.afro.who.int/health-topics/ebola-disease/outbreak-drc-26)
+* Better Health Channel: [Bird flu (avian influenza)](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/bird-flu-avian-influenza)
 
-* Victorian Department of Health: [CHO Advisory - Ebola Disease](https://www.health.vic.gov.au/health-advisories/clinican-alert-outbreak-of-ebola-disease-drc-and-uganda) 
+* Chief Health Officer Alert: [Avian influenza found in birds in Victoria](https://www.health.vic.gov.au/health-alerts/avian-influenza-found-in-birds-in-victoria) 
 
-* Australian Centre for Disease Control: [Ebola Disease Situation Reports](https://www.cdc.gov.au/resources/collections/ebola-disease-situation-reports) 
+* Victorian Department of Health: [Avian influenza (bird flu)](https://www.health.vic.gov.au/infectious-diseases/avian-influenza-bird-flu) 
 
-* Victorian Department of Health: [Victorian Guideline on Viral Haemorrhagic Fevers for Health Services](https://www.health.vic.gov.au/victorian-guideline-on-viral-haemorrhagic-fevers) 
+* Australian Centre for Disease Control: [Bird flu (avian influenza)](https://www.cdc.gov.au/diseases/bird-flu-avian-influenza) 
 
-* Australian Centre for Disease Control: [Infection Prevention and Control Principles and Recommendations for Ebola Virus Disease](https://www.cdc.gov.au/resources/publications/infection-prevention-and-control-principles-and-recommendations-ebola-virus-disease) 
+* Australian Centre for Disease Control: [Bird flu toolkit for people who work with birds](http://cdc.gov.au/resources/publications/bird-flu-toolkit-people-who-work-birds) 
 
-* Better Health Channel: [Ebola Disease](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/ebola-disease)
+* Agriculture Victoria: [H5N1 avian influenza](https://agriculture.vic.gov.au/biosecurity/animal-diseases/poultry-diseases/H5N1-avian-influenza-H5-bird-flu) (includes how to report sick or dead birds)
+
+* Agriculture Victoria: [H5N1 avian influenza strain detected in Victoria](https://agriculture.vic.gov.au/about/media-centre/media-releases/2026-releases/h5n1-avian-influenza-strain-detected-in-victoria)
+
+* Australian Government: [Bird flu (avian influenza)](https://www.agriculture.gov.au/campaigns/birdflu)
 
 :::
 
 ### Epidemiological Highlights: `r reporting_month` {#epi_highlights}
 
-#### Shigellosis {#shigella}
+#### Invasive Pneumococcal Disease (IPD) {#ipd}
 
 ```{r}
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 1
 
 # Condition name (from the condition field in PHESS)
-condition_select <- "Shigellosis"
+condition_select <- "Pneumococcal infection (IPD)"
 
 # The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
 # No additional tweaks required!
@@ -458,48 +429,63 @@ ggsave(paste0("../Reports/Images for Comms/",
        plot   = figure)
 ```
 
-* There were 12 notifications for shigellosis received in June 2026.
+* There were 17 notifications for IPD received in July 2026 which is greater than the monthly mean of 13.9 notifications.
 
 <div style="height: 0.1em;"></div>
 
-* While the number of notifications was within the expected range, the number of notifications for shigellosis have been above the mean each month for the past 12 months.
+* While the number of notifications was within the expected range, the number of notifications for IPD has been generally increasing since February this year.
 
 <div style="height: 0.1em;"></div>
 
-* The monthly notification rate in NEPHU was slightly lower than for the rest of Victoria (7.9 vs. 8.1 per 100,000).
+* The monthly notification rate in NEPHU was higher than for the rest of Victoria (11.3 vs. 9.3 per 100,000).
 
 <div style="height: 0.1em;"></div>
 
-* More than half of the notifications received in June were associated with recent overseas travel (7/12, 58%), mostly related to countries in Asia and Central America.
+* The age of cases in July 2026 ranged from 12 to 97 years with median age of 58.5 years.  There were higher than expected notifications for people aged 45-64 years.
 
 <div style="height: 0.1em;"></div>
 
-* Shigellosis is a type of gastroenteritis caused by bacteria in the genus *Shigella spp.* and is a [leading cause of infectious diarrhoea worldwide](https://www.ncbi.nlm.nih.gov/books/NBK482337/).
+* IPD is caused by the bacterium *Streptococcus pneumoniae* and high-risk groups include children aged under 5 years and adults aged over 65 years. The disease becomes invasive when bacteria invade sterile areas of the body such as blood, joint fluid, or cerebrospinal fluid leading to severe complications such as meningitis, pneumonia, and bacteraemia.
 
-* There are four serotypes of *Shigella spp.*: *S. dysenteriae*, *S. flexneri*, *S. boydii*, and *S. sonnei*.
-  * *S. flexneri* can cause more severe disease and is more common in low- and middle-income countries while *S. sonnei* causes milder disease and is more common in higher-income countries.
-  * In higher-income countries, shigellosis is generally a self-limiting infection but is highly contagious and can be potentially serious.
+* There are more than 95 recognised strains of *S. pneumoniae* but no vaccine is available that can protect against all of them. There have been recent changes to the IPD vaccines that are available under the National Immunisation Program (NIP) for eligible individuals to help prevent against the most common strains.
 
-* Shigellosis is spread through consuming food or water contaminated with the bacteria, touching objects or surfaces contaminated with the bacteria and then touching your mouth, and/or sexual contact with a person who has shigellosis.
-  * People who have travelled to countries where shigellosis is common, men who have sex with men, children, the elderly, and people with immunocompromising conditions are at an increased risk of infection.
+* The 20-valent conjugate vaccine, Prevenar 20, is available under the NIP for infants at 2, 4, and 12 months of age. 
 
-* People with shigellosis should maintain good hygiene, practice handwashing, avoid preparing food for others, and practice safer sex practices until 48 hours after symptoms resolve.
-  * People with shigellosis who work as food handlers, childcare workers, health care workers, or workers in a residential facility should not return to work until advised by the Local Public Health Unit.
-  * Workers are generally excluded until they have had two consecutive negative faecal specimens, collected a minimum of 24 hours apart and no sooner than 48 hours after cessation of antibiotics (if applicable).
+  * In addition, an extra pneumococcal vaccine dose is given to children with certain medical risk factors at 6 months as well as all Aboriginal and Torres Strait Islander infants.
 
-* [Increasing antibiotic resistance is being detected](https://pubmed.ncbi.nlm.nih.gov/39455321/) in *Shigella spp.* bacteria. Include a stool culture when testing patients for shigellosis to allow for antibiotic sensitivities to be determined, and reserve the use of antibiotic treatment for severe cases.
+  * Children and adolescents aged between over 12 months and under 18 years who have a specified medical risk condition are also eligible for a dose of Prevenar 20 at diagnosis.
 
-* For more information about shigellosis refer to:
-  * Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Shigellosis](https://www.health.vic.gov.au/infectious-diseases/shigellosis)
-  * Better Health Channel: [Gastroenteritis - Shigellosis](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/gastroenteritis-shigella)
+
+* From 1 July 2026, the 21-valent conjugate vaccine Capvaxive was introduced on the NIP and will replace Prevenar 13 and Pneumovax 23 (used previously) for adults. The change of vaccine also lowers the age of adults who are recommended for pneumococcal vaccination.  A dose of Capvaxive is recommended for:
+
+  * Adults aged 65 years and over
+
+  * Aboriginal and/or Torres Strait Islander adults aged 25 years and over
+
+  * Adolescents and adults with specified medical conditions that increase their risk of severe disease can get additional pneumococcal vaccines as specified in the NIP.
+
+  * Eligible adults who have previously received a dose of any other pneumococcal vaccine are recommended and eligible to receive a dose of Capvaxive at least 12 months after their last dose for free under the NIP.
+
+* See the [Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/pneumococcal-immunisation-service) for eligibility criteria and recommendations for pneumococcal vaccination.
+
+<div style="height: 0.1em;"></div>
+
+For more information about IPD refer to:
+
+Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Invasive Pneumococcal Disease](https://www.health.vic.gov.au/infectious-diseases/invasive-pneumococcal-disease)
+
+Better Health Channel: [Pneumococcal Disease](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/pneumococcal-disease)
+
+Australian Immunisation Handbook: [Pneumococcal Disease](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/pneumococcal-disease)
+
 
 ***
 
 ### Other Conditions of Note: `r reporting_month` {#other_tonote}
 
-* One notification of **listeriosis** was received in June 2026. Listeriosis is normally transmitted through contaminated food and can cause severe illness in pregnant women, the elderly, and people with lowered immunity. Most people may experience transient, mild to moderate flu-like symptoms or self-limited gastroenteritis.
+* One notification of **Hepatitis E** in a male aged 60-65 years was received in July 2026. This case reported travel to Northern Territories as the likely exposure to contaminated food. 
 
-* One notification of ***Vibrio parahaemolyticus*** was received in June 2026. This case reported recent travel to South East Asia and consumption of raw seafood while overseas.
+* Notifications of **influenza** have more than doubled in July 2026 increasing from 207 to 448 notifications. However, this is still below the monthly mean of 3396 cases.
 
 ***
 
