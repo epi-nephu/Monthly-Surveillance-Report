@@ -222,7 +222,7 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 
 <div style="height: 0.1em;"></div>
 
-* To date there have been no detections in poultry in Australia and no signs of mass wildlife deaths. 
+* To date there have been no detections in poultry or the wilder agriculture industry in Australia. 
 
 <div style="height: 0.1em;"></div>
 
@@ -268,11 +268,11 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 
 <div style="height: 0.1em;"></div>
 
-* People travelling to countries or areas affected by avian influenza can reduce their risk by:  
+* People can reduce their risk of being exposed to avian influenza by:  
 
-  * Avoiding poultry farms and live bird markets. 
+  * Minimising contact at poultry farms and live bird markets. 
 
-  * Avoiding contact with wild and domestic birds. 
+  * Minimising contact with wild and domestic birds. 
 
   * Washing hands well after touching birds, raw poultry, eggs or poultry products. 
 
@@ -318,9 +318,11 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 
 * Collect a nasopharyngeal swab for avian influenza PCR testing.  
 
-  * Clearly state “**Avian Influenza Testing – Urgent to VIDRL / WHOCCRRI**” on the request form. 
+  * Avian influenza may be detected as influenza A in first line respiratory tests performed by primary laboratories.
 
-  * Testing is performed at Victorian Infectious Diseases Reference Laboratory (VIDRL).  
+  * H5N1 subtyping is performed at Victorian  Infectious Diseases Reference Laboratory (VIDRL).
+  
+  * Request forms for samples sent to VIDRL for subtyping should clearly state “**Avian Influenza Testing – Urgent to VIDRL / WHOCCRRI**”. 
 
   * As H5N1 avian influenza is a Risk Group 3 and Security Sensitive Biological Agent Tier 1 organism, appropriate specimen handling, transport and laboratory processes are required.  
 
@@ -343,6 +345,8 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 <div style="height: 0.5em;"></div>
 
 **Resources:**
+
+* NEPHU: [NEPHN-HP Public Health Clinical Series: Avian Influenza](https://nephu.org.au/news-and-events/nephn-hp-public-health-clinical-series-avian-influenza/)
 
 * Better Health Channel: [Bird flu (avian influenza)](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/bird-flu-avian-influenza)
 
