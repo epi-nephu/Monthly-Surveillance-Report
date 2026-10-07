@@ -193,7 +193,7 @@ f_barchart_format_month <- function(data, figure_number, figure_title) {
     #
     scale_fill_manual(values = nephu_green) +
     #
-    geom_line(aes(y = mean, colour = "Mean number of cases"),
+    geom_line(aes(y = mean, colour = "Mean number of cases (4-year historic period)"),
               linewidth = 1) +
     #
     scale_color_manual(values = nephu_blue) +

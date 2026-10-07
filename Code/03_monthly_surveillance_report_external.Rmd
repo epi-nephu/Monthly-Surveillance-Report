@@ -1,11 +1,11 @@
 ---
-title: 'NEPHU Monthly Surveillance Report - External - July 2026'
+title: 'NEPHU Monthly Surveillance Report - External - August 2026'
 output: 
   html_document:
     self_contained: true
     lib_dir: null
 knit: (function(input, ...) {
-  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 07 External", output_dir = "../Reports") })
+  rmarkdown::render(input, output_file = "Monthly Surveillance Report 2026 08 External", output_dir = "../Reports") })
 ---
 
 ```{css, echo = FALSE}
@@ -167,11 +167,7 @@ cases_allvic <- readxl::read_xlsx(paste0(here::here(), "/Data", "/VIC_Cases_", f
 
 This report is a retrospective review of communicable disease notifications made to the North Eastern Public Health Unit (NEPHU) for the calendar month of `r reporting_month`.
 
-Counts and rates are based on the date that the Victorian Department of Health was first notified of a case by a laboratory or medical practitioner and includes all data entered into the Public Health Event Surveillance System (PHESS) as of `r format(as.Date(extract_date), format = "%d %B %Y")`. Counts and rates are likely to be an underestimate of true disease incidence, are accurate only at the time the data were extracted from PHESS, and are subject to change due to reporting delays and exclusions following further case investigation.
 
-The full list of notifiable conditions in Victoria can be found [here](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms). The data required for this report and other public health surveillance at NEPHU relies on timely and complete notification from clinicians and laboratories. Medical practitioners and laboratories should notify urgent conditions on suspicion by calling 1300 651 160 and routine notifications can be made via this [form](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms#notify-an-infectious-disease-or-medical-condition).
-
-The [Technical Notes](#technical_notes) contains more information about the data sources and methods used in this report. This report is best viewed on a computer rather than on mobile.
 
 ### Contents
 
@@ -179,12 +175,15 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 <div style="height: 0.1em;"></div>
 
-* [**Clinical Feature: H5N1 avian influenza**](#clinical_feature)
+* [**Clinical Feature: Changes to Hepatitis B prescribing accreditation **](#clinical_feature)
 
 <div style="height: 0.1em;"></div>
 
 * [**Epidemiological Highlights: `r reporting_month`**](#epi_highlights)
-  * [Invasive Pneumococcal Disease (IPD)](#ipd)
+  
+  * [Influenza](#influenza)
+  
+  * [Mpox](#mpox)
 
 <div style="height: 0.1em;"></div>
 
@@ -204,7 +203,7 @@ The [Technical Notes](#technical_notes) contains more information about the data
 
 This section includes all Chief Health Officer Alerts and Advisories issued between `r format(as.Date(epimonth_current), format = "%d %B %Y")` and `r format(as.Date(Sys.Date()), format = "%d %B %Y")`. Surveillance data for Alerts and Advisories issued after `r format(as.Date(epimonth_enddate), format = "%d %B %Y")` will be included in next month's report.
 
-* 31 July: [Avian influenza found in birds in Victoria](https://www.health.vic.gov.au/health-alerts/avian-influenza-found-in-birds-in-victoria)
+* 31 July: [Increasing respiratory infections in Victoria](https://www.health.vic.gov.au/health-alerts/increasing-respiratory-infections-in-victoria)
 
 ***
 
@@ -212,170 +211,79 @@ This section includes all Chief Health Officer Alerts and Advisories issued betw
 
 ::: {.infobox}
 
-### Clinical Feature: H5N1 avian influenza {#clinical_feature}
+### Clinical Feature: Changes to hepatitis B prescribing accreditation {#clinical_feature}
 
 <div style="height: 0.5em;"></div>
 
-**Current situation:**
+**What has changed:**
 
-* H5N1 avian influenza (H5N1 clade 2.3.4.4b) has been detected in wild sea birds across Australia.  
-
-<div style="height: 0.1em;"></div>
-
-* To date there have been no detections in poultry or the wilder agriculture industry in Australia. 
-
-<div style="height: 0.1em;"></div>
-
-* State and national animal and health authorities are closely monitoring the situation. For the latest information, visit the Australian Government's [bird flu (avian influenza)](https://www.agriculture.gov.au/campaigns/birdflu) page.  
+* In a step towards removing barriers to treatment, the prescriber accreditation requirement for hepatitis B medicines under the PBS Section 100 (s100) Highly Specialised Drugs (HSD) Program was removed from 1 September 2026. 
 
 <div style="height: 0.5em;"></div>
 
-**What is avian influenza:**
-
-* Avian influenza is a strain of influenza virus that mainly affects wild birds,  particularly aquatic birds, as well as domestic and farmed birds such as chickens and ducks. It can also affect other animals and, on rare occasions, humans. 
-
-<div style="height: 0.1em;"></div>
-
-* Avian influenza poses a risk to human health due to its potential to cause severe disease and outbreaks or possible pandemics if strains mutate and adapt to spread easily from person-to-person. 
-
-<div style="height: 0.1em;"></div>
-
-* Animal-to-human transmission of H5N1 avian influenza is rare and usually occurs in people with close contact with sick birds and livestock, their respiratory secretions, faeces and other body fluids, or contaminated environments. Person-to person transmission is extremely rare and has only been reported with prolonged close contact while caring for an infected person. 
-
-<div style="height: 0.1em;"></div>
-
-* Symptoms can vary from being asymptomatic or mild, to severe. Symptoms can include fever, cough, sore throat, runny nose, conjunctivitis, muscle aches and pains, headache, fatigue and gastrointestinal symptoms. 
-
-<div style="height: 0.1em;"></div>
-
-* The incubation period is 1 to 10 days (usually 3 to 5 days). 
+* As a result, all medical and authorised nurse practitioners can now prescribe hepatitis B antiviral treatments without additional accreditation requirements. 
 
 <div style="height: 0.5em;"></div>
 
-**How to minimise the risk of human infection and transmission:**
-
-<div style="height: 0.1em;"></div>
-
-* People should avoid contact with sick or dead birds or other wildlife. Sick or dead birds or animals can be reported to Emergency Animal Disease Hotline on 1800 675 888 or though an [online form](https://forms.bio.vic.gov.au/wildlife-influenza-investigation).  
-
-<div style="height: 0.1em;"></div>
-
-* People who work with birds, poultry or wildlife may have a higher chance of encountering avian influenza. Workers are advised to get the seasonal flu vaccine each year and to practise good hygiene and wear appropriate personal protective equipment. For more information, see the Australian Centre for Disease Control’s [toolkit for people who work with birds](https://www.cdc.gov.au/resources/publications/bird-flu-toolkit-people-who-work-birds).
-
-<div style="height: 0.1em;"></div>
-
-* Local public health units conduct contact tracing to identify and assess people who may have been exposed to avian influenza, such as those who have visited or worked on an affected poultry farm. 
-
-<div style="height: 0.1em;"></div>
-
-* People can reduce their risk of being exposed to avian influenza by:  
-
-  * Minimising contact at poultry farms and live bird markets. 
-
-  * Minimising contact with wild and domestic birds. 
-
-  * Washing hands well after touching birds, raw poultry, eggs or poultry products. 
-
-  * Cleaning kitchen surfaces and utensils after preparing raw poultry. 
-
-  * Cooking poultry, meat and eggs thoroughly before eating. 
-
-  * Avoiding raw or unpasteurised milk and dairy products. 
-
-<div style="height: 0.1em;"></div>
-
-* There is no evidence that people can become infected with avian influenza by eating fully-cooked meat or eggs (even from areas with an avian influenza outbreak). 
-
-<div style="height: 0.1em;"></div>
-
-* Seasonal influenza vaccination for all people aged 6 months and over is recommended to minimise the risk that people become unwell with both seasonal and bird viruses at the same time 
+* This will improve access to life-saving care and support Australia's efforts to achieve the 2030 hepatitis B elimination targets. 
 
 <div style="height: 0.5em;"></div>
 
-**What to do if you suspect avian influenza:**
+* For further information please visit: (https://ashm.org.au/initiatives/hbv-prescriber-changes-sept-2026/)
+
+<div style="height: 0.5em;"></div>
+
+**More Hepatitis B prescribers are needed in North Eastern Melbourne:**
 
 <div style="height: 0.1em;"></div>
 
-* Clinicians should consider avian influenza in patients with compatible symptoms and at least one epidemiological risk factor within the previous 19 days, such as:  
+* A review by NEPHU has identified a significant geographic mismatch between where people living with hepatitis B reside and where S100-credentialled prescribers are available.
 
-  * Exposure to sick or dead birds. 
+<div style="height: 0.5em;"></div>
 
-  * Exposure to infected poultry or livestock. 
+* The local government areas of Whittlesea, Darebin, Banyule, Nillumbik, and Maroondah are particularly affected. 
 
-  * Exposure to contaminated environments (for example, affected poultry farms). 
+<div style="height: 0.5em;"></div>
 
-  * Travel to areas with known avian influenza activity. 
-
-<div style="height: 0.1em;"></div>
-
-* Implement airborne and contact precautions, and use a negative pressure room if available. 
+**How to start prescribing**
 
 <div style="height: 0.1em;"></div>
 
-* Notify NEPHU by calling 1300 651 160. NEPHU can undertake a risk assessment and assist with testing arrangements. 
+* For clinicians who are new to prescribing hepatitis B treatment, the Australasian Society for HIV, Viral Hepatitis and Sexual Health Medicine (ASHM) offers clinical support and expert guidance to build confidence and capability. No clinician is expected to navigate these changes alone and ASHM is able to provide support. 
 
-<div style="height: 0.1em;"></div>
+<div style="height: 0.5em;"></div>
 
-* Collect a nasopharyngeal swab for avian influenza PCR testing.  
-
-  * Avian influenza may be detected as influenza A in first line respiratory tests performed by primary laboratories.
-
-  * H5N1 subtyping is performed at Victorian  Infectious Diseases Reference Laboratory (VIDRL).
-  
-  * Request forms for samples sent to VIDRL for subtyping should clearly state “**Avian Influenza Testing – Urgent to VIDRL / WHOCCRRI**”. 
-
-  * As H5N1 avian influenza is a Risk Group 3 and Security Sensitive Biological Agent Tier 1 organism, appropriate specimen handling, transport and laboratory processes are required.  
-
-<div style="height: 0.1em;"></div>
-
-* Collect an additional nasopharyngeal swab for routine respiratory virus testing. 
-
-<div style="height: 0.1em;"></div>
-
-* If conjunctivitis is present, collect a conjunctival swab. 
-
-<div style="height: 0.1em;"></div>
-
-* Advise the patient to isolate while awaiting test results. 
-
-<div style="height: 0.1em;"></div>
-
-* Consider commencing oseltamivir treatment without waiting for test results if clinically indicated. 
+* To register for an upcoming training, or to further enhance your knowledge on hepatitis B, please visit [this website.](https://ashm.org.au/learning-hubs/hepatitis-b/)
 
 <div style="height: 0.5em;"></div>
 
 **Resources:**
 
-* NEPHU: [NEPHN-HP Public Health Clinical Series: Avian Influenza](https://nephu.org.au/news-and-events/nephn-hp-public-health-clinical-series-avian-influenza/)
+* ASHM: [Important changes to Hepatitits B s100 prescriber accreditation](https://ashm.org.au/initiatives/hbv-prescriber-changes-sept-2026/?utm_medium=email&utm_campaign=Hepatitis%20B%20-%20Broader%20HCP%20list&utm_content=Hepatitis%20B%20-%20Broader%20HCP%20list+CID_7272f00342a2b375f6a44f51310b5e32&utm_source=Email%20marketing%20software&utm_term=httpsashmorgauinitiativeshbv-prescriber-changes-sept-2026)
 
-* Better Health Channel: [Bird flu (avian influenza)](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/bird-flu-avian-influenza)
-
-* Chief Health Officer Alert: [Avian influenza found in birds in Victoria](https://www.health.vic.gov.au/health-alerts/avian-influenza-found-in-birds-in-victoria) 
-
-* Victorian Department of Health: [Avian influenza (bird flu)](https://www.health.vic.gov.au/infectious-diseases/avian-influenza-bird-flu) 
-
-* Australian Centre for Disease Control: [Bird flu (avian influenza)](https://www.cdc.gov.au/diseases/bird-flu-avian-influenza) 
-
-* Australian Centre for Disease Control: [Bird flu toolkit for people who work with birds](http://cdc.gov.au/resources/publications/bird-flu-toolkit-people-who-work-birds) 
-
-* Agriculture Victoria: [H5N1 avian influenza](https://agriculture.vic.gov.au/biosecurity/animal-diseases/poultry-diseases/H5N1-avian-influenza-H5-bird-flu) (includes how to report sick or dead birds)
-
-* Agriculture Victoria: [H5N1 avian influenza strain detected in Victoria](https://agriculture.vic.gov.au/about/media-centre/media-releases/2026-releases/h5n1-avian-influenza-strain-detected-in-victoria)
-
-* Australian Government: [Bird flu (avian influenza)](https://www.agriculture.gov.au/campaigns/birdflu)
+* ASHM: [Our work in Hepatitis B](https://ashm.org.au/learning-hubs/hepatitis-b/)
 
 :::
 
 ### Epidemiological Highlights: `r reporting_month` {#epi_highlights}
 
-#### Invasive Pneumococcal Disease (IPD) {#ipd}
+Data presented are based on communicable disease notifications made to the North Eastern Public Health Unit (NEPHU) for the calendar month of August 2026. 
+
+Counts and rates are based on the date that the Victorian Department of Health was first notified of a case by a laboratory or medical practitioner and includes all data entered into the Public Health Event Surveillance System (PHESS) as of `r format(as.Date(extract_date), format = "%d %B %Y")`. Counts and rates are likely to be an underestimate of true disease incidence, are accurate only at the time the data were extracted from PHESS, and are subject to change due to reporting delays and exclusions following further case investigation.
+
+The full list of notifiable conditions in Victoria can be found [here](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms). The data required for this report and other public health surveillance at NEPHU relies on timely and complete notification from clinicians and laboratories. Medical practitioners and laboratories should notify urgent conditions on suspicion by calling 1300 651 160 and routine notifications can be made via this [form](https://www.health.vic.gov.au/infectious-diseases/notifiable-infectious-diseases-conditions-and-micro-organisms#notify-an-infectious-disease-or-medical-condition).
+
+The [Technical Notes](#technical_notes) contains more information about the data sources and methods used in this report. This report is best viewed on a computer rather than on mobile.
+
+
+#### Influenza {#influenza}
 
 ```{r}
 # Define the figure number (e.g. Figure 1, Figure 2)
 figure_number <- 1
 
 # Condition name (from the condition field in PHESS)
-condition_select <- "Pneumococcal infection (IPD)"
+condition_select <- "Influenza"
 
 # The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
 # No additional tweaks required!
@@ -433,63 +341,189 @@ ggsave(paste0("../Reports/Images for Comms/",
        plot   = figure)
 ```
 
-* There were 17 notifications for IPD received in July 2026 which is greater than the monthly mean of 13.9 notifications.
+* The number of influenza notifications received in August was higher than in July (n = 2003 vs. n = 452). The notification rate in NEPHU was lower than the rest of Victoria (1326 vs. 1616 per 100,000).
 
 <div style="height: 0.1em;"></div>
 
-* While the number of notifications was within the expected range, the number of notifications for IPD has been generally increasing since February this year.
+
+* The number of influenza notifications was higher in all age groups and across all NEPHU LGAs in August compared to July. 
 
 <div style="height: 0.1em;"></div>
 
-* The monthly notification rate in NEPHU was higher than for the rest of Victoria (11.3 vs. 9.3 per 100,000).
+
+* Influenza typically follows a seasonal pattern, with case numbers peaking during the winter months. However, influenza activity remained low throughout early winter this year, before increasing from July onwards, suggesting a later than usual influenza season. Therefore, influenza cases are currently increasing and the community remains at risk.
 
 <div style="height: 0.1em;"></div>
 
-* The age of cases in July 2026 ranged from 12 to 97 years with median age of 58.5 years.  There were higher than expected notifications for people aged 45-64 years.
+
+* Symptoms of influenza include cough, headache, myalgia, lethargy, coryza, sore throat and cough. Symptoms mostly resolve within 2 to 7 days.
+
+  - Exclusion from primary school and childcare is required until symptoms resolve.
+  
+<div style="height: 0.1em;"></div>
+
+
+* Annual influenza vaccination is recommended for everyone above 6 months of age and is free for high-risk groups. It is not too late to vaccinate for this season.
+
+  - See [The Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/influenza-flu-vaccine)
 
 <div style="height: 0.1em;"></div>
 
-* IPD is caused by the bacterium *Streptococcus pneumoniae* and high-risk groups include children aged under 5 years and adults aged over 65 years. The disease becomes invasive when bacteria invade sterile areas of the body such as blood, joint fluid, or cerebrospinal fluid leading to severe complications such as meningitis, pneumonia, and bacteraemia.
 
-* There are more than 95 recognised strains of *S. pneumoniae* but no vaccine is available that can protect against all of them. There have been recent changes to the IPD vaccines that are available under the National Immunisation Program (NIP) for eligible individuals to help prevent against the most common strains.
+* If you require more information on influenza refer to:
 
-* The 20-valent conjugate vaccine, Prevenar 20, is available under the NIP for infants at 2, 4, and 12 months of age. 
+  -   Victorian Department of Health: [Infectious Disease Guidelines and Advice - Influenza](https://www.health.vic.gov.au/infectious-diseases/influenza)
+  
+  -   NEPHU: [Winter respiratory illnesses](https://nephu.org.au/health-topics/winter-respiratory-illnesses/)
 
-  * In addition, an extra pneumococcal vaccine dose is given to children with certain medical risk factors at 6 months as well as all Aboriginal and Torres Strait Islander infants.
+  -   Better Health Channel: [Influenza](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/flu-influenza)
 
-  * Children and adolescents aged between over 12 months and under 18 years who have a specified medical risk condition are also eligible for a dose of Prevenar 20 at diagnosis.
-
-
-* From 1 July 2026, the 21-valent conjugate vaccine Capvaxive was introduced on the NIP and will replace Prevenar 13 and Pneumovax 23 (used previously) for adults. The change of vaccine also lowers the age of adults who are recommended for pneumococcal vaccination.  A dose of Capvaxive is recommended for:
-
-  * Adults aged 65 years and over
-
-  * Aboriginal and/or Torres Strait Islander adults aged 25 years and over
-
-  * Adolescents and adults with specified medical conditions that increase their risk of severe disease can get additional pneumococcal vaccines as specified in the NIP.
-
-  * Eligible adults who have previously received a dose of any other pneumococcal vaccine are recommended and eligible to receive a dose of Capvaxive at least 12 months after their last dose for free under the NIP.
-
-* See the [Australian Government Department of Health and Aged Care website](https://www.health.gov.au/topics/immunisation/vaccines/pneumococcal-immunisation-service) for eligibility criteria and recommendations for pneumococcal vaccination.
+  -   Australian Immunization Handbook: [Influenza](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/influenza-flu)
 
 <div style="height: 0.1em;"></div>
 
-For more information about IPD refer to:
 
-Victorian Department of Health: [Infectious Diseases Guidelines and Advice - Invasive Pneumococcal Disease](https://www.health.vic.gov.au/infectious-diseases/invasive-pneumococcal-disease)
 
-Better Health Channel: [Pneumococcal Disease](https://www.betterhealth.vic.gov.au/health/conditionsandtreatments/pneumococcal-disease)
+#### Mpox {#mpox}
 
-Australian Immunisation Handbook: [Pneumococcal Disease](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/pneumococcal-disease)
+```{r}
+# Define the figure number (e.g. Figure 1, Figure 2)
+figure_number <- 2
+
+# Condition name (from the condition field in PHESS)
+condition_select <- "Mpox"
+
+# The rest of this chunk will create, display, and save your chart as a png based on the figure_name and condition_select you've set
+# No additional tweaks required!
+
+# Note: If you are running the code line-by-line, you will be asked whether you want to create a new directory if you try to save the png.
+# You don't need to save the png when running line by line - the file path in the code is set up so that it will save the pngs into the correct folder when the report is knitted.
+
+# Condition information for chart and title
+condition_name <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>%
+  dplyr::distinct(condition_label) %>% 
+  pull(condition_label)
+
+condition_title <- cases_allnephu %>% 
+  dplyr::filter(condition == condition_select) %>% 
+  dplyr::distinct(chart_label) %>% 
+  pull(chart_label)
+
+# Italics for chart title (if needed)
+condition_title <- dplyr::case_when(
+  condition_title %in% c("Candida auris",
+                         "L. pneumophila",
+                         "L. longbeachae",
+                         "M. ulcerans",
+                         "Vibrio parahaemolyticus") ~ paste0("*", condition_title, "*"),
+  TRUE ~ condition_title)
+
+# Create and format bar chart
+results_count <- cases_allnephu %>%
+  f_barchart_dataprep_month_count(condition_name = condition_name)
+
+results_mean <- cases_allnephu %>% 
+  f_barchart_dataprep_month_mean(condition_name = condition_name,
+                                 data_count     = results_count)
+
+figure <- results_mean %>% 
+  f_barchart_format_month(figure_number = figure_number,
+                          figure_title  = condition_title)
+
+# Display figure in html
+figure
+
+# Save .png to send to Comms team
+# If you want to test this when running the code line-by line, change "../Reports/Images for Comms/" to "Reports/Images for Comms/"
+# And don't forget to change it back to "../Reports/Images for Comms/" before knitting!
+
+ggsave(paste0("../Reports/Images for Comms/",
+              format(epimonth_current, format = "%Y-%m"),
+              " Figure ", figure_number, " ",
+              condition_title,
+              ".png"),
+       dpi    = 600,
+       width  = 5,
+       height = 3,
+       plot   = figure)
+```
+
+
+<div style="height: 0.1em;"></div>
+
+* The number of mpox notifications received in August was higher than in July (n = 6 vs. n = 0). The notification rate in NEPHU was lower than the rest of Victoria (4 vs. 5 per 100,000).
+
+<div style="height: 0.1em;"></div>
+
+
+* While the number of notifications was within the expected range, the number of notifications for mpox has been generally increasing in recent months.
+
+<div style="height: 0.1em;"></div>
+
+
+* The age of cases in August 2026 ranged from 26 to 53 years with median age of 35 years. 
+
+<div style="height: 0.1em;"></div>
+
+
+*	The majority of mpox notifications in NEPHU have been in people assigned male sex at birth or people who have had sexual contact with a partner who reported recent MSM contact.
+
+<div style="height: 0.1em;"></div>
+
+*	Mpox can spread through close, intimate contact, including:
+  
+    - Direct skin-to-skin contact with mpox rash, lesions, sores, or scabs
+  
+    - Contact with saliva, upper respiratory secretions, and bodily fluids
+ 
+* The virus can also be spread through contact with objects, fabrics, and surfaces that have not been disinfected after being used by someone with mpox.
+  
+<div style="height: 0.1em;"></div>
+
+*	The infectious period lasts from four days prior to first symptom onset until all lesions have developed scabs and fallen off.
+
+<div style="height: 0.1em;"></div>
+
+
+*	Mpox usually results in mild illness with most symptoms resolving within a few weeks. However, severe disease requiring hospitalisation may occur.
+  
+  -	Symptoms may resemble other sexually transmissible infections (e.g. syphilis) and coinfections can occur.
+
+<div style="height: 0.1em;"></div>
+
+
+*	Mpox has two distinct genetic clades. Clade one (I) is endemic in central Africa and is known to cause severe mpox disease, Clade two (II) is endemic to west Africa and is associated with a milder infection.
+
+  - Due to the rapid international spread of Clade Ib mpox, WHO declared the outbreak a Public Health Emergency of International Concern (PHEIC) on 14 August 2024. The PHEIC was ended in September 2025 following declines in cases, however mpox remains a global public health concern.
+
+<div style="height: 0.1em;"></div>
+
+* Globally, MPXV clades Ia, Ib, IIa and IIb continue to circulate across multiple WHO regions. Clade IIb remains widely distributed, while clade Ib continues
+to expand geographically.
+
+*	Free mpox vaccine is available for eligible people through a wide range of providers for both prevention and post exposure prophylaxis.
+
+*	Vaccination is recommended for people of all ages who are at risk of exposure to mpox. For more information regarding the use of mpox vaccinations, refer to the [Australian Immunisation Handbook.](https://immunisationhandbook.health.gov.au/contents/vaccine-preventable-diseases/mpox-previously-known-as-monkeypox) 
+
+* If you require more information on mpox refer to:
+  
+  -	Victorian Department of Health: [Control Guidelines and Advice - Mpox (monkeypox)](https://www.health.vic.gov.au/infectious-diseases/mpox-monkeypox)
+  
+  - NEPHU: [Mpox](https://nephu.org.au/health-topics/mpox/)
+  
+  -	Better Health Channel: [Mpox](https://www.betterhealth.vic.gov.au/mpox)
+ 
+  -	Thorne Harbour Health: [Mpox](https://www.thorneharbour.org/sexual-health/mpox)
+
 
 
 ***
 
 ### Other Conditions of Note: `r reporting_month` {#other_tonote}
 
-* One notification of **Hepatitis E** in a male aged 60-65 years was received in July 2026. This case reported travel to Northern Territories as the likely exposure to contaminated food. 
+* One notification of **malaria** in a female aged 20-30 years was received in August 2026. This case reported recent travel to India. 
 
-* Notifications of **influenza** have more than doubled in July 2026 increasing from 207 to 448 notifications. However, this is still below the monthly mean of 3396 cases.
 
 ***
 
